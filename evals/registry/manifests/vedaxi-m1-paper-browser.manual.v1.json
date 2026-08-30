@@ -1,0 +1,51 @@
+{
+  "id": "vedaxi.m1-paper-browser.manual.v1",
+  "version": 1,
+  "module": "m1-paper",
+  "dataset": "evals/registry/data/vedaxi/m1-paper-browser-manual-v1.jsonl",
+  "execution": {
+    "kind": "manual-in-app-browser-evidence",
+    "executable": false,
+    "model_grader": false,
+    "command": null,
+    "note": "This manifest indexes retained production Codex In-app Browser observations and preserves blocked evidence without synthetic grading."
+  },
+  "run": {
+    "utc": "2026-08-30T21:25:53.4867712Z",
+    "local": "2026-08-31T02:55:53.4867712+05:30",
+    "base_commit": "06a9512c3e30672556d6eb524ac7d5d97221001a",
+    "tree_state": "immutable source commit; evidence/eval files added later",
+    "os": "Windows",
+    "client": "Codex In-app Browser",
+    "build_flavor": "Vite production preview",
+    "exact_version_build": null,
+    "exact_version_build_status": "BLOCKED"
+  },
+  "allowed_statuses": ["PASS", "FAIL", "BLOCKED"],
+  "evidence": [
+    "docs/evidence/M1/M1_BROWSER_MATRIX.md",
+    "docs/evidence/M1/raw/2026-08-30T21-25-53Z-production-browser.json",
+    "docs/evidence/M1/raw/2026-08-30T21-25-53Z-lifecycle.json",
+    "docs/evidence/M1/raw/2026-08-30T21-25-53Z-responsive.json",
+    "docs/evidence/M1/raw/2026-08-30T21-25-53Z-browser-limitations.json",
+    "docs/evidence/M1/raw/desktop-production.jpg",
+    "docs/evidence/M1/raw/mobile-390-requested.jpg"
+  ],
+  "cases": [
+    "m1-paper-native-production",
+    "m1-paper-human-search-ablation",
+    "m1-paper-native-lifecycle",
+    "m1-paper-responsive-production",
+    "m1-paper-keyboard-traversal",
+    "m1-paper-unsupported-error-native",
+    "m1-paper-client-identity"
+  ],
+  "limitations": [
+    "Real keyboard traversal was blocked by the browser automation surface.",
+    "The exact target browser supports WebMCP, so a real unsupported run was unavailable.",
+    "No natural native registration error occurred.",
+    "Exact client version/build was unavailable.",
+    "This local run does not prove deployed-client parity."
+  ],
+  "validation_command": "node evals/validate-manual.mjs evals/registry/manifests/vedaxi-m1-paper-browser.manual.v1.json"
+}

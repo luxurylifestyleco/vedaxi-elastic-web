@@ -1,0 +1,23 @@
+{
+  "module": "M1 Paper Origin",
+  "source_commit": "06a9512c3e30672556d6eb524ac7d5d97221001a",
+  "keyboard": {
+    "status": "BLOCKED",
+    "before": { "active_element": "BODY" },
+    "after_real_cua_tab": { "active_element": "BODY" },
+    "after_two_page_driver_tabs": { "active_element": "BODY" },
+    "note": "The browser harness reported successful key dispatch but did not move focus. Static semantics, focus styles, target sizing, and a focusable skip target pass; real traversal is not claimed."
+  },
+  "unsupported_state": {
+    "status": "BLOCKED",
+    "note": "The exact target browser exposes native WebMCP. A browser-policy-blocked data-URL harness was not retried or bypassed. Deterministic controller/render coverage passes, but no real unsupported-browser run is claimed."
+  },
+  "error_state": {
+    "status": "BLOCKED",
+    "note": "No natural native registration error occurred. Deterministic rejection/status coverage passes, but no injected result is mislabeled as a native failure."
+  },
+  "exact_client_version_build": {
+    "status": "BLOCKED",
+    "note": "The runtime did not expose an exact version/build."
+  }
+}

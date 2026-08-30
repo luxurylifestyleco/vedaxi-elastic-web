@@ -1,0 +1,26 @@
+{
+  "module": "M1 Paper Origin",
+  "source_commit": "06a9512c3e30672556d6eb524ac7d5d97221001a",
+  "sequence": [
+    {
+      "state": "active",
+      "status": "Native paper evidence tool active",
+      "tool_count": 1,
+      "exact_call_passed": true
+    },
+    {
+      "state": "disabled",
+      "status": "Agent tools off",
+      "fresh_inventory": "No WebMCP tools are available in this document.",
+      "call_error": "WebMCP tool search_paper_evidence is not available in this snapshot.",
+      "paper_present": true,
+      "human_search_result_present": true
+    },
+    {
+      "state": "re-enabled",
+      "status": "Native paper evidence tool active",
+      "tool_count": 1,
+      "exact_call_passed": true
+    }
+  ]
+}

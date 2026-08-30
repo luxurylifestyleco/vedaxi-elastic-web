@@ -1,0 +1,53 @@
+{
+  "module": "M1 Paper Origin",
+  "source_commit": "06a9512c3e30672556d6eb524ac7d5d97221001a",
+  "run_utc": "2026-08-30T21:25:53.4867712Z",
+  "client": "Codex In-app Browser",
+  "build_flavor": "Vite production preview",
+  "url": "http://localhost:4173/",
+  "production_script": "http://localhost:4173/assets/index-BQyKP_0H.js",
+  "protocol_status": "Native paper evidence tool active",
+  "inventory": {
+    "count": 1,
+    "name": "search_paper_evidence",
+    "origin": "http://localhost:4173",
+    "input_schema": {
+      "type": "object",
+      "properties": { "query": { "type": "string", "maxLength": 160, "pattern": "\\S" } },
+      "required": ["query"],
+      "additionalProperties": false
+    },
+    "annotations": { "readOnlyHint": true, "untrustedContentHint": true }
+  },
+  "call": {
+    "input": { "query": "final analyzed sample" },
+    "output": [{
+      "evidence": {
+        "assetType": "paper-passage",
+        "excerpt": "Forty participants completed the study and were included in the final analysis.",
+        "id": "paper.methods.final-analysis",
+        "keywords": ["participants", "final", "analysis", "analyzed", "sample"],
+        "locator": "Methods, participants",
+        "provenance": "VEDAXI controlled paper fixture — Methods, participants",
+        "sourceOrigin": "http://localhost:4173",
+        "title": "Final analysis cohort"
+      },
+      "score": 3
+    }]
+  },
+  "origin_equality": {
+    "page": "http://localhost:4173",
+    "visible_provenance": "http://localhost:4173",
+    "tool_result": "http://localhost:4173",
+    "equal": true
+  },
+  "human_search": {
+    "input": "final analyzed sample",
+    "message": "1 matching paper passage found.",
+    "result": "Final analysis cohort — Methods, participants — 3 exact query terms"
+  },
+  "console": {
+    "production_reload_new_error_count": 0,
+    "note": "The tab log buffer retained earlier development-server messages; the production reload emitted no new entries. The loaded script URL proves the production bundle."
+  }
+}

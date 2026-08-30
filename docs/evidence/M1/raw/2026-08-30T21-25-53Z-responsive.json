@@ -1,0 +1,21 @@
+{
+  "module": "M1 Paper Origin",
+  "source_commit": "06a9512c3e30672556d6eb524ac7d5d97221001a",
+  "desktop_screenshot": {
+    "path": "docs/evidence/M1/raw/desktop-production.jpg",
+    "sha256": "2B1C7FBAA01EEC2DFEF33B9698523EF625CDC638384FF8B4FB66C1805E35062A"
+  },
+  "mobile_screenshot": {
+    "path": "docs/evidence/M1/raw/mobile-390-requested.jpg",
+    "sha256": "F5DB754A6ED5424BA3CBEF33D1E46DCB562184933BB8A41833CA8594CB638A33",
+    "requested_viewport": { "width": 390, "height": 844 },
+    "captured_bitmap": { "width": 375, "height": 812 },
+    "layout_client_width": 375,
+    "layout_scroll_width": 375,
+    "horizontal_overflow": false,
+    "title_lines": 3,
+    "desktop_outline_display": "none",
+    "mobile_outline_display": "block",
+    "button_heights_px": [44, 56]
+  }
+}
