@@ -8,7 +8,7 @@
 | Contract eval | `vedaxi.contracts.dev.v3` (v2 preserved unchanged) |
 | Browser evidence eval | `vedaxi.m0b-browser.manual.v1` |
 | Source artifact | `93bb80fe9d66c4232c2b96fbb298241c1260d6b3` on `codex/phase-0-webmcp` |
-| Exit-bundle tree | Uncommitted evidence/eval/docs tree pending independent approval and checkpoint commit |
+| Exit-bundle checkpoint | `632ad09cc3e7dfb64846427e361f3837ea69ca3d`; this record's metadata finalization follows in the next commit |
 | Recorded | `2026-08-30T20:51:55.4380289Z` / `2026-08-31T02:21:55.4385430+05:30` |
 | Status | `APPROVED — local sequential M0` |
 | Topology decision | `sequential` |
