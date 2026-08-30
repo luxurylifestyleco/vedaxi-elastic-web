@@ -151,7 +151,7 @@ for (const [index, record] of records.entries()) {
   if (!Array.isArray(record.hard_gates)) fail(`${record.id}.hard_gates must be an array`);
   const gates = new Set();
   for (const gate of record.hard_gates) {
-    if (typeof gate !== "string" || !/^H[1-9]$/.test(gate)) {
+    if (typeof gate !== "string" || !/^H(?:[1-9]|1[0-2])$/.test(gate)) {
       fail(`${record.id}.hard_gates contains invalid gate: ${JSON.stringify(gate)}`);
     }
     if (gates.has(gate)) fail(`${record.id} has duplicate hard gate: ${gate}`);
@@ -177,4 +177,4 @@ for (const [index, evidence] of manifest.evidence.entries()) {
   }
 }
 
-console.log(`M0B manual registry valid (${records.length} cases)`);
+console.log(`${manifest.id} manual registry valid (${records.length} cases)`);

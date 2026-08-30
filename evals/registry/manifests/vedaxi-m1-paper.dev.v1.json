@@ -1,0 +1,18 @@
+{
+  "id": "vedaxi.m1-paper.dev.v1",
+  "runner": {
+    "kind": "vitest",
+    "command": "npm test -- apps/paper/src/paper/m1-evals.test.ts"
+  },
+  "dataset": "evals/registry/data/vedaxi/m1-paper-dev-v1.jsonl",
+  "bindings": [
+    { "case_id": "m1-paper-fixture", "evaluator": "fixture" },
+    { "case_id": "m1-paper-search", "evaluator": "search" },
+    { "case_id": "m1-paper-empty-search", "evaluator": "empty-search" },
+    { "case_id": "m1-paper-tool-schema", "evaluator": "tool-schema" },
+    { "case_id": "m1-paper-reasoning-boundary", "evaluator": "reasoning-boundary" },
+    { "case_id": "m1-paper-status-truth", "evaluator": "status-truth" },
+    { "case_id": "m1-paper-render-precursor", "evaluator": "render-precursor" },
+    { "case_id": "m1-paper-scope-boundary", "evaluator": "scope-boundary" }
+  ]
+}

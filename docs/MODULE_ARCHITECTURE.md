@@ -172,7 +172,7 @@ M0 has two inseparable sub-gates. M0A proves source contracts. M0B proves the ex
 | Field | Definition |
 | --- | --- |
 | Claim | A complete human paper workspace remains useful in every protocol state and exposes exact paper evidence without performing cross-source reasoning. |
-| Owned files | `apps/paper/src/paper/**`, paper fixture/content, paper-only tool definitions, paper app shell/config, `evals/registry/data/vedaxi/m1-paper.*.jsonl`, `docs/evidence/M1/**`. M4 owns `apps/paper/src/stage/**`; M5 owns `apps/paper/src/webmcp/**`. |
+| Owned files | `apps/paper/src/paper/**`, paper fixture/content, paper-only tool definitions, paper app shell/config, paper-scoped foundation tokens, and the local same-origin evidence-tool registration bridge required by S1/S2; `evals/registry/data/vedaxi/m1-paper.*.jsonl`; `docs/evidence/M1/**`. M4 owns stage-specific tokens/components/motion under `apps/paper/src/stage/**`; M5 owns deployed two-origin, mutation, and end-to-end registration adapters under `apps/paper/src/webmcp/**`. |
 | Typed public contract | Paper module barrel exports its fixture/service to its own app shell: stable evidence ID `paper.methods.final-analysis`, evidence search/read results conforming to `EvidenceObject`, and a tool factory that receives dependencies rather than importing UI. The app is not a package for other apps to import. |
 | Allowed dependencies | M0 package-root contracts; React/Vite chosen for the app; browser DOM. No video-app import, shared-state internals, contradiction calculator, persistence implementation, 3D library, or copied reference assets. |
 | Devpost/hard gates | H1 truthful support surface, H3 evidence only, H10 no false tool success. |
@@ -182,7 +182,7 @@ M0 has two inseparable sub-gates. M0A proves source contracts. M0B proves the ex
 | Browser evidence | Readable exact methods passage; functional human navigation when active/disabled/unsupported/error; keyboard access; zero fallback executions. |
 | Entry gate | M0 `PASS`, final browser topology recorded, C01 contract check passing. |
 | Exit gate | S1–S3 pass; no-reasoning inspection passes; browser support state is truthful; paper remains useful with registrations absent. |
-| Connection point | C03 passes stable paper evidence ID into M3; C05 registers the paper-owned tools. |
+| Connection point | C03 passes the stable paper evidence ID into M3. M1 locally registers only its read-only evidence tool; C05 extends registration with deployed two-origin and mutation adapters without replacing the M1 fixture/service/tool contract. |
 | Rollback/repair boundary | Repair paper fixture, paper UI, and paper tool factory only. Do not change the shared contract or video origin without reopening their owning module. |
 | Judge dimensions | E and I primary; W secondary. |
 
