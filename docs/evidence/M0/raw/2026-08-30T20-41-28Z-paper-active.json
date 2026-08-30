@@ -1,0 +1,41 @@
+{
+  "artifact": "paper-active",
+  "sourceCommit": "93bb80fe9d66c4232c2b96fbb298241c1260d6b3",
+  "url": "http://localhost:4173/",
+  "dom": "- main:\n  - article:\n    - heading \"VEDAXI paper protocol probe\" [level=1]\n    - paragraph: \"Publisher origin: http://localhost:4173. Runtime origin: http://localhost:4173.\"\n    - paragraph: \"window.isSecureContext: true\"\n    - paragraph: \"Registration/UI state: active\"\n    - paragraph: \"Native registration error: none\"\n    - paragraph:\n      - button \"Enable native tool\" [disabled]\n      - button \"Disable native tool\"\n    - heading \"Methods evidence\" [level=2]\n    - paragraph: Forty participants completed the study and were included in the final analysis.\n    - paragraph: \"Provenance: Methods, participants — Protocol probe paper methods passage\"\n    - heading \"Independent video publisher\" [level=2]\n    - iframe:\n      - main:\n        - article:\n          - heading \"VEDAXI video protocol probe\" [level=1]\n          - paragraph: \"Publisher origin: http://localhost:4174. Runtime origin: http://localhost:4174.\"\n          - paragraph: \"window.isSecureContext: true\"\n          - paragraph: \"Registration/UI state: unsupported\"\n          - paragraph: \"Native registration error: none\"\n          - paragraph:\n            - button \"Enable native tool\"\n            - button \"Disable native tool\" [disabled]\n          - heading \"Transcript evidence\" [level=2]\n          - paragraph: We recruited forty participants. Six sessions had calibration drift, so we removed them before modeling and did not replace them.\n          - paragraph: \"Provenance: 00:03:12 — Protocol probe video transcript at 00:03:12\"",
+  "toolInventory": [
+    {
+      "name": "read_paper_probe_evidence",
+      "title": "Read paper evidence",
+      "description": "Search the paper publisher's methods evidence by query. Returns publisher evidence only.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": { "query": { "maxLength": 160, "pattern": "\\S", "type": "string" } },
+        "required": ["query"],
+        "type": "object"
+      },
+      "annotations": { "readOnlyHint": true, "untrustedContentHint": true },
+      "origin": "http://localhost:4173",
+      "pageUrl": "http://localhost:4173/"
+    }
+  ],
+  "call": {
+    "name": "read_paper_probe_evidence",
+    "input": { "query": "final analyzed sample" },
+    "output": [
+      {
+        "evidence": {
+          "assetType": "paper-passage",
+          "excerpt": "Forty participants completed the study and were included in the final analysis.",
+          "id": "probe.paper.methods.final-analysis",
+          "keywords": ["participants", "final", "analysis", "analyzed", "sample"],
+          "locator": "Methods, participants",
+          "provenance": "Protocol probe paper methods passage",
+          "sourceOrigin": "http://localhost:4173",
+          "title": "Final analysis cohort"
+        },
+        "score": 3
+      }
+    ]
+  }
+}

@@ -5,6 +5,8 @@
 **Input status:** Node A and Node B read only after both declared `FROZEN`  
 **Decision:** **Select A1 as the immediate implementation-local experiment; retain `INSUFFICIENT EVIDENCE` for topology and experience selection.**
 
+> **Historical scoring notice — 2026-08-31:** This frozen arbiter used the superseded `30/30/20/20` project weighting. Current [Official Rules](https://webmcp.devpost.com/rules) define `WebMCP Leverage`, `Execution`, `Potential Impact`, and `Creativity & Ambition` as equally weighted. The frozen decision and board content remain historical evidence, but all numerical scores below are stale until recomputed under `25/25/25/25`. Official rules prevail.
+
 ## 1. Neutrality and no-rewrite attestation
 
 The arbiter read the frozen artifacts:
@@ -22,7 +24,7 @@ The following artifacts were admitted only as current evidence, not as authority
 - current contracts source/tests under `VEDAXI - Elastic WEB/packages/contracts`
 - fresh `npm test` and `npx tsc --noEmit` results recorded by the red-team pass
 
-The official weights are `WebMCP Leverage 30 / Execution 30 / Potential Impact 20 / Creativity & Ambition 20`, with the seven professional lenses, hard gates, 60-point ceiling, WebMCP ablation, collaboration deduction, and measurement cap from `elastic-web-judge-evaluation.md`.
+At the time of this frozen run, the local project rubric incorrectly used `WebMCP Leverage 30 / Execution 30 / Potential Impact 20 / Creativity & Ambition 20`. Those historical calculations are preserved below for provenance, alongside the seven professional lenses, hard gates, 60-point ceiling, WebMCP ablation, collaboration deduction, and measurement cap used in that run. They are not the active official weighting.
 
 ## 2. Current evidence added after board freeze
 
@@ -82,7 +84,7 @@ The arbiter preserves the boards' evidence-bounded dimension ratings. It applies
 
 No additional `-15` ablation deduction is applied yet because the exact no-tools agent behavior is unknown. The risk is load-bearing and must be tested immediately: the human page remains usable, so the agent may complete through ordinary browser interaction even when publisher tools are absent.
 
-| Frozen concept | WebMCP /30 | Execution /30 | Impact /20 | Creativity /20 | Raw | Ceiling | Ablation | Collaboration | Current total | Confidence |
+| Frozen concept | Historical WebMCP /30 | Historical Execution /30 | Historical Impact /20 | Historical Creativity /20 | Historical raw | Ceiling | Ablation | Collaboration | Stale total | Confidence |
 | --- | ---: | ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: | --- |
 | A1 — Native Gate Ladder | `2/5 = 12` | `1/5 = 6` | `1/5 = 4` | `1/5 = 4` | 26 | Active; no effect | `0`, unknown | `-10` | **16** | low (`0.42`) |
 | A2 — Sequential Provenance Relay | `1/5 = 6` | `1/5 = 6` | `1/5 = 4` | `1/5 = 4` | 20 | Active; no effect | `0`, unknown | `-10` | **10** | low (`0.35`) |

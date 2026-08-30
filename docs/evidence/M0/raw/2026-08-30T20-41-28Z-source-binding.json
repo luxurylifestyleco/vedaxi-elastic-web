@@ -1,0 +1,29 @@
+{
+  "artifact": "m0b-source-binding",
+  "sourceCommit": "93bb80fe9d66c4232c2b96fbb298241c1260d6b3",
+  "sourceCommitTime": "2026-08-31T02:06:37+05:30",
+  "browserRunUtc": "2026-08-30T20:41:28.2260985Z",
+  "browserRunLocal": "2026-08-31T02:11:28.2308970+05:30",
+  "branch": "codex/phase-0-webmcp",
+  "client": "Codex In-app Browser",
+  "clientType": "iab",
+  "buildFlavor": "production",
+  "exactClientVersion": null,
+  "exactClientVersionStatus": "BLOCKED",
+  "screenshotsCaptured": false,
+  "screenshotStatus": "BLOCKED",
+  "sourceFiles": [
+    {
+      "path": "VEDAXI - Elastic WEB/apps/protocol-probe/paper/src/main.ts",
+      "sha256": "92D068274DD282AE49D38B9DC8D75E3A7AC309E8B68468708BB9252F4E8CD57C"
+    },
+    {
+      "path": "VEDAXI - Elastic WEB/apps/protocol-probe/video/src/main.ts",
+      "sha256": "1D78BDBF834194605044CB3B6AAD0AA32B855F13AB01EB93BB1CD906C3BDD160"
+    },
+    {
+      "path": "VEDAXI - Elastic WEB/packages/contracts/src/webmcp.ts",
+      "sha256": "95E524057662DEBE175FD7A1942046A6ED370C669EBC28354FC45FB69F1059CD"
+    }
+  ]
+}

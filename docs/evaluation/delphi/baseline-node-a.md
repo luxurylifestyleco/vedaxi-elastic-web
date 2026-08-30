@@ -5,6 +5,8 @@
 **Freeze status:** `FROZEN`  
 **Question:** How can the proof become easier to reproduce, harder to fake, safer to operate, and faster for a judge to understand?
 
+> **Historical scoring notice — 2026-08-31:** This frozen board was scored with the superseded `30/30/20/20` project weighting. Current [Official Rules](https://webmcp.devpost.com/rules) define `WebMCP Leverage`, `Execution`, `Potential Impact`, and `Creativity & Ambition` as equally weighted. Preserve the strategy output as historical evidence, but treat every numerical score below as stale until recomputed under `25/25/25/25`. Official rules prevail.
+
 ## Goal Command
 
 | Field | Value | Provenance |
@@ -76,7 +78,7 @@
 
 The scores below evaluate what the authorized current evidence proves, not what each strategy promises to build. The 0–5 official scale is weighted as `score / 5 × weight`. Execution is below the 3/5 measurement cap because no reproducible browser evidence was available. No hard fail is asserted from missing evidence alone, but every unevidenced hard gate remains open.
 
-| Strategy | WebMCP leverage /30 | Execution /30 | Potential impact /20 | Creativity & ambition /20 | Adversarial adjustment | Current total | Confidence |
+| Strategy | Historical WebMCP /30 | Historical Execution /30 | Historical Impact /20 | Historical Creativity /20 | Adversarial adjustment | Stale total | Confidence |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | A1 — Native Gate Ladder | 2/5 = 12 | 1/5 = 6 | 1/5 = 4 | 1/5 = 4 | 0; the ablation and collaboration are designed in but not yet demonstrated | **26/100** | low |
 | A2 — Sequential Provenance Relay | 1/5 = 6 | 1/5 = 6 | 1/5 = 4 | 1/5 = 4 | 0; sequential native behavior and retained context are unverified | **20/100** | low |

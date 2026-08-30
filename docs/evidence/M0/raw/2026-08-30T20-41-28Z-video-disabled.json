@@ -1,0 +1,11 @@
+{
+  "artifact": "video-disabled",
+  "sourceCommit": "93bb80fe9d66c4232c2b96fbb298241c1260d6b3",
+  "url": "http://localhost:4174/",
+  "dom": "- main:\n  - article:\n    - heading \"VEDAXI video protocol probe\" [level=1]\n    - paragraph: \"Publisher origin: http://localhost:4174. Runtime origin: http://localhost:4174.\"\n    - paragraph: \"window.isSecureContext: true\"\n    - paragraph: \"Registration/UI state: disabled\"\n    - paragraph: \"Native registration error: none\"\n    - paragraph:\n      - button \"Enable native tool\"\n      - button \"Disable native tool\" [disabled]\n    - heading \"Transcript evidence\" [level=2]\n    - paragraph: We recruited forty participants. Six sessions had calibration drift, so we removed them before modeling and did not replace them.\n    - paragraph: \"Provenance: 00:03:12 — Protocol probe video transcript at 00:03:12\"",
+  "toolInventory": [],
+  "inventoryDescription": "No WebMCP tools are available in this document.",
+  "postDisableCall": {
+    "error": "Error: WebMCP tool \"read_video_probe_evidence\" is not available in this snapshot. Call fetchTools() again."
+  }
+}

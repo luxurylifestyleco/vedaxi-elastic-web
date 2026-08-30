@@ -113,10 +113,12 @@ The official submission requirements are represented explicitly so they cannot d
 
 Every module identifies its contribution to the official score:
 
-- **W — WebMCP Leverage (30):** native discovery, schemas, origins, provenance, lifecycle, and indispensable protocol use.
-- **E — Execution (30):** coherent runnable product, correctness, persistence, failure recovery, accessibility, and deployment.
-- **I — Potential Impact (20):** a consequential research-integrity job whose value is visible in product behavior.
-- **C — Creativity & Ambition (20):** an original Semantic Focus Shift that preserves context and is difficult to reduce to a generic dashboard.
+- **W — WebMCP Leverage (25):** native discovery, schemas, origins, provenance, lifecycle, and indispensable protocol use.
+- **E — Execution (25):** coherent runnable product, correctness, persistence, failure recovery, accessibility, and deployment.
+- **I — Potential Impact (25):** a consequential research-integrity job whose value is visible in product behavior.
+- **C — Creativity & Ambition (25):** an original Semantic Focus Shift that preserves context and is difficult to reduce to a generic dashboard.
+
+These equal weights were verified on **2026-08-31** against the [WebMCP Challenge Official Rules](https://webmcp.devpost.com/rules). The Official Rules and current Hackathon Website prevail over this architecture if they change; recheck before each new Dual Delphi score.
 
 Hard gates pass before scoring. Dual Delphi reviews the completed evidence at the declared cadence; it does not rescue a failed deterministic or browser gate. Official criteria and the seven recorded judge lenses form the arbiter rubric.
 
@@ -148,22 +150,22 @@ M0 has two inseparable sub-gates. M0A proves source contracts. M0B proves the ex
 
 | Field | Definition |
 | --- | --- |
-| Claim | VEDAXI has a minimal typed evidence/action/registration vocabulary, and the exact target browser can natively register, discover, invoke, attribute, and remove publisher tools without a silent fallback. |
+| Claim | VEDAXI has a minimal typed evidence/search/registration vocabulary, and the exact target browser can natively register, discover, invoke, attribute, and remove publisher tools without a silent fallback. Shared publisher actions and audit vocabulary are owned by M3. |
 | Owned files | `VEDAXI - Elastic WEB/package.json`, lockfile, `tsconfig.json`; `packages/contracts/**`; minimal protocol probe under `apps/protocol-probe/**`; `evals/registry/data/vedaxi/m0-protocol.*.jsonl`; `docs/evidence/M0/**`. |
-| Typed public contract | Package-root exports for `EvidenceObject`, `EvidenceSearchResult`, `WebMcpTool`, `WebMcpRegistration`, support state including `active | disabled | unsupported | error`, action/result envelopes, audit-event vocabulary, and registration lifecycle. Current `evidence.ts` and `webmcp.ts` are partial source evidence, not a completed M0 contract. |
+| Typed public contract | Package-root exports for `EvidenceObject`, `EvidenceSearchResult`, `WebMcpTool`, `WebMcpRegistration`, support/registration status including `registered | unsupported | empty | error | cancelled`, runtime result validation, lifecycle cancellation, and live UI status. Action/result envelopes and audit-event vocabulary are intentionally deferred to M3. |
 | Allowed dependencies | Browser APIs, TypeScript/JavaScript, Vitest already present. No React, app import, storage library, WebMCP polyfill, OpenAI Evals runtime, or Ponytail runtime. |
-| Devpost/hard gates | H1, H2 topology feasibility, H3 result boundary, H9 removal feasibility; D1 remains provisional until deployment. |
-| Eval cases | Add M0-specific contract cases; reuse S2 for unsupported truthfulness and a protocol-probe precursor to M1/C3. Existing test-set IDs do not currently cover M0 adequately. |
-| Unit evidence | Contract typecheck; exact evidence-shape/search tests; unsupported/error/abort lifecycle tests; action/audit type tests; import-boundary check. |
+| Devpost/hard gates | H1, H2 topology feasibility, H3 result boundary. M0 records an H9 removal-feasibility precursor only; full H9 remains not evaluated until M5 because no persisted note exists yet. D1 remains provisional until deployment. |
+| Eval cases | `vedaxi.contracts.dev.v3` covers deterministic evidence/search/registration/cancellation contracts; `vedaxi.m0b-browser.manual.v1` indexes exact-browser observations. |
+| Unit evidence | Contract typecheck; exact evidence-shape/search tests; unsupported/error/abort/cancellation lifecycle tests; import-boundary check. Action/audit tests begin in M3. |
 | Integration evidence | Probe tool uses the public contract and native registration path; no direct handler fallback. |
-| Browser evidence | Exact product/build, support state, same-origin discovery/invocation, second-origin/frame experiment, provenance observation, abort, `toolchange`/fresh observation behavior, and sequential fallback experiment only if simultaneous discovery fails. |
+| Browser evidence | Exact source commit and available environment identity, support state, same-origin discovery/invocation, second-origin/frame experiment, provenance observation, abort, fresh capability observation, and sequential fallback experiment only if simultaneous discovery fails. Unavailable exact client version and screenshots may remain explicitly `BLOCKED`. |
 | Entry gate | Approved design, official API source recorded, exact target browser and host named. |
 | Exit gate | M0A unit/type checks pass and source review finds no reasoning leak; M0B browser matrix is fully `pass/fail/blocked`; native viability is proven; final topology is `simultaneous` or evidence-backed `sequential`, never simulated. |
 | Connection point | C01 and C02 through package-root exports; registration lifecycle reused by C05. |
 | Rollback/repair boundary | Repair contracts/probe only. Failure of simultaneous cross-origin discovery may select the documented sequential topology. Failure of native WebMCP blocks product implementation; it does not authorize a polyfill or fake direct call. |
 | Judge dimensions | W primary; E secondary. |
 
-**Current evidence:** `[verified]` seven Vitest tests pass for the existing evidence search and native registration wrapper. `[unknown]` exact-browser support, action/audit contracts, disabled status, package-root exports, origin proof, and fresh-observation behavior. Therefore M0 is `IN PROGRESS`, not `PASS`.
+**Current evidence:** `[verified]` the current full suite passes `37/37` tests across contracts and the protocol probe. Contract eval `vedaxi.contracts.dev.v3` adds executable cancellation/lifecycle cases without mutating v2. The artifact-bound in-app-browser M0B run against immutable source commit `93bb80f` proved the paper top-level native path, exact paper and direct-video results, a clean-room one-agent sequential two-origin route, and abort-driven fresh zero inventories with human content intact. Simultaneous frame discovery was tested and `FAILED`: the secure video frame reported `unsupported` and only the paper tool was inventoried. The selected topology is therefore `sequential`. Full H9, exact client version/build, screenshots, and deployment parity remain not evaluated or `[blocked]` as stated in the matrix. Evidence: `docs/evidence/M0/M0B_BROWSER_MATRIX.md`, `docs/evidence/M0/raw/**`, `vedaxi.contracts.dev.v3`, and `vedaxi.m0b-browser.manual.v1`.
 
 ### M1 — Paper Origin
 
@@ -302,19 +304,19 @@ No files below are changed by this architecture task. These are the smallest fol
 
 | Priority | Gap or contradiction | Minimal patch |
 | --- | --- | --- |
-| Critical | The approved spec requires exact-browser feasibility first, while `MODULE_GATES.md` makes M0 contracts-only and postpones native proof to M5. | Change M0 to M0A contracts + M0B exact-browser feasibility; keep M5 as deployed end-to-end re-verification. Block M1 until both M0 sub-gates pass. |
-| Critical | `VEDAXI_BUILD_SCOPE.md` uses M0–M4 as release milestones while `MODULE_GATES.md` uses M0–M6 for different units. The same label can mean two things. | Rename Build Scope milestones to R0–R4 (release stages) and reserve M0–M6 for code/eval modules. |
-| Critical | The eval registry routes every case through `ModelBasedClassify`, contradicting `OPENAI_EVALS_ADAPTATION.md`, which requires deterministic and trace assertions before model grading. | Split deterministic/trace/browser/model-graded evaluators; never use the model grader as the executor of exact assertions. |
-| High | No M0-specific eval cases exist even though every module must have versioned OpenAI-Evals-style records. | Add contract, unsupported, registration, origin, and unregister cases under `vedaxi.m0-protocol.*.v1`. |
-| High | All JSONL records share `vedaxi.module-gates.dev.v1`, contradicting the declared `vedaxi.<module>.<split>.<version>` identity. | Split the registry by module identity; keep an aggregate suite that references them. |
+| Resolved 2026-08-31 | The approved spec requires exact-browser feasibility before product implementation. | `MODULE_GATES.md` now separates M0A contracts, M0B native preflight, and M5 deployed re-verification. M0B selected the evidence-backed sequential topology after simultaneous frame discovery failed. |
+| Resolved 2026-08-31 | Build Scope and code/eval modules formerly reused ambiguous M labels. | Build Scope now uses R0–R4 release stages; M0–M6 are reserved for code/eval modules. |
+| Resolved 2026-08-31 | The original aggregate eval registry routed cases through a model classifier. | M0 uses executable deterministic contract evals and a separately labeled non-executable browser-evidence registry. Later module registries must preserve this evaluator separation. |
+| Resolved 2026-08-31 | M0 originally lacked versioned eval records and later added public cancellation semantics. | `vedaxi.contracts.dev.v2` remains immutable; `vedaxi.contracts.dev.v3` adds executable cancellation/lifecycle cases. M0B remains indexed by `vedaxi.m0b-browser.manual.v1`. |
+| High | The legacy aggregate `evals/registry/data/vedaxi/module-gates.jsonl` still shares `vedaxi.module-gates.dev.v1`; M0 has already moved to module-specific v2/v3/manual identities. | Migrate each later module to its own versioned identity while retaining the aggregate only as an explicit suite index. |
 | High | Eval ID `M3` is labeled `shared-actions` in JSONL but tests Semantic Stage behavior. `OPENAI_EVALS_ADAPTATION.md` also uses an `M2` example labeled shared actions while the live test set's M2 is native derivation. | Map test-set M3 to `m4-stage`; replace ambiguous example IDs with module-qualified IDs such as `M4-STAGE-FOCUS-001`. |
-| High | H11/H12 do not explicitly cover Devpost text explanation or the required named tested agents/clients. | Add D1–D5 submission gates to `VEDAXI_RUBRIC.md`, `MODULE_GATES.md`, test set, and registry. |
+| Resolved 2026-08-31 | H11/H12 did not explicitly cover Devpost text explanation or named tested agents/clients. | D1–D5 submission gates now separate those requirements from product scoring; M6 must add their concrete records. |
 | High | `.devpost-hackathon-state.json` still says `rules_acknowledged: false` while requirements are treated as verified in build docs. | Keep requirements recorded, but do not change acknowledgement on the user's behalf; require explicit user acknowledgement before the submission stage exits. |
-| High | M0 source contracts currently lack package-root exports, shared action/audit result contracts, runtime boundary validation, and the `disabled` support state named in Build Scope. | Finish these within M0 before declaring its source contract stable; do not scatter replacements across apps. |
+| Resolved 2026-08-31 | M0 and M3 both claimed ownership of shared action/audit contracts; the older gap row also incorrectly said package exports, runtime validation, and truthful lifecycle status were absent. | M0 owns evidence/search/native-registration contracts and now exports/validates them; M3 exclusively owns shared action/result/audit contracts and tests. |
 | Medium | `VEDAXI_TEST_SET.md` and JSONL duplicate case meaning and can drift. | Make versioned JSONL the machine source and generate/review the Markdown as its human projection; record one provenance link rather than manually redefining behavior twice. |
-| Medium | Inspiration/firewall rules are repeated across the spec, Build Scope, and ledger but have no module exit artifact. | Add one `inspiration-review` field to each exit record instead of adding another prose rule or lint dependency. |
+| Resolved for M0; required for later exits | Inspiration/firewall rules were repeated without a module exit artifact. | M0 now records one bounded inspiration/minimalism review in its exit record. M1–M6 must repeat that field rather than add another prose rule or lint dependency. |
 | Medium | Accessibility, performance, import boundaries, and copied-content checks constrain Execution but lack explicit deterministic gate IDs. | Add module-scoped assertions and artifacts first; promote only genuinely release-blocking failures to new H IDs after the first real run. |
-| Medium | The current test command passes seven contract tests, but this can be mistaken for a protocol pass. | Label it `M0A source evidence only` in the exit record and keep M0 `IN PROGRESS` until M0B browser evidence exists. |
+| Resolved 2026-08-31 | Source tests alone could be mistaken for native protocol proof. | The current `37/37` passing suite is labeled deterministic source evidence, while the strict-validated M0B registry points to raw browser artifacts, records `PASS`, `FAIL`, and `BLOCKED`, and selects the sequential topology. |
 
 ## Definition of architectural completion
 

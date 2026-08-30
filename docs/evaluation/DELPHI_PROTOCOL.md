@@ -14,8 +14,8 @@ Use the exact Dual Delphi structure to challenge consequential product and imple
 | Desired outcome | A reproducible, browser-native golden workflow that is useful to humans, meaningfully better with WebMCP, and strong enough to be a finalist. | provided |
 | Stage | Pre-launch build. | verified from repository state |
 | Channel | Deployed website, native WebMCP agent run, public repository, and sub-three-minute demo video. | verified from challenge requirements |
-| Current bottleneck | Native two-origin proof and a coherent end-to-end vertical slice do not yet exist. | verified from repository state |
-| Proof available | Approved design, typed contracts/tests, official challenge criteria, prior judge analysis, and browser-reference observations. | verified |
+| Current bottleneck | The exact-browser sequential topology is proven locally, but a coherent publisher UI vertical slice and deployed parity do not yet exist. | verified from repository state |
+| Proof available | Approved design, typed contracts/tests, official challenge criteria, prior judge analysis, and artifact-bound native browser observations. | verified |
 | Constraints | No publisher-side contradiction arithmetic; no fake fallback; human confirmation for consequential mutation; persistence; kill switch; accessibility; submission deadline. | provided / verified |
 
 Confidence begins at `medium`: the product decision and challenge criteria are known, but real-browser protocol support and deployment remain unverified.
@@ -64,12 +64,14 @@ A concept fails before scoring if it breaks an applicable hard gate in `VEDAXI_R
 
 Use the shared 0–5 scale: `0 missing`, `1 claimed`, `2 prototype`, `3 credible end-to-end`, `4 strong/polished/measurable/WebMCP-native`, `5 exceptional/memorable/rigorous/difficult without WebMCP`.
 
+Source check: the [WebMCP Challenge Official Rules](https://webmcp.devpost.com/rules), verified **2026-08-31**, define these four criteria as equally weighted. The Official Rules and current Hackathon Website prevail over this protocol if they change. Re-verify before each new score.
+
 | Dimension | Weight |
 | --- | ---: |
-| WebMCP Leverage | 30 |
-| Execution | 30 |
-| Potential Impact | 20 |
-| Creativity & Ambition | 20 |
+| WebMCP Leverage | 25 |
+| Execution | 25 |
+| Potential Impact | 25 |
+| Creativity & Ambition | 25 |
 
 Evidence and trust are not bonus dimensions; they constrain the official score. Unsupported claims are `N/E`, not an assumed midpoint. When evidence is insufficient, report a provisional interval and confidence (`high`, `medium`, or `low`).
 
@@ -94,10 +96,12 @@ For every finalist state the strongest evidence, decisive assumption, most impor
 ## Review cadence
 
 - Baseline: scope and architecture.
-- M0: native protocol contract.
-- M1: judgeable vertical slice.
-- M2: trust, accessibility, and experience.
-- M3: deployed clean-session proof.
-- M4: video and submission package.
+- M0: contracts and native protocol topology.
+- M1/M2: independent paper and video publisher modules.
+- M3/M4: shared-action vertical slice, trust, accessibility, and experience.
+- M5: deployed clean-session proof and first hard `85/100` release threshold.
+- M6: video and submission package, with the threshold rerun against public artifacts.
+
+Scores before M5 are diagnostic intervals only. The arbiter evaluates what the current module owns and records later-module criteria as `N/E`; it does not turn unfinished downstream scope into an early-module failure or an inflated midpoint.
 
 Each completed round is stored under `docs/evaluation/delphi/` with the Goal Command, frozen A concepts, frozen B concepts, isolation statement, arbiter scorecard, confidence, failure claims, and decision.

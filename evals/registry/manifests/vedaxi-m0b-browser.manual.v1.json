@@ -1,0 +1,57 @@
+{
+  "id": "vedaxi.m0b-browser.manual.v1",
+  "version": 1,
+  "module": "m0b-native-preflight",
+  "dataset": "evals/registry/data/vedaxi/m0b-browser-manual-v1.jsonl",
+  "execution": {
+    "kind": "manual-in-app-browser-evidence",
+    "executable": false,
+    "model_grader": false,
+    "command": null,
+    "note": "This manifest indexes retained manual Codex In-app Browser observations. It does not execute a browser, replay an agent, or grade missing evidence."
+  },
+  "run": {
+    "utc": "2026-08-30T20:41:28.2260985Z",
+    "local": "2026-08-31T02:11:28.2308970+05:30",
+    "base_commit": "93bb80fe9d66c4232c2b96fbb298241c1260d6b3",
+    "tree_state": "immutable source commit; evidence/eval files added later",
+    "os": "Windows",
+    "client": "Codex In-app Browser",
+    "build_flavor": "production",
+    "exact_version_build": null,
+    "exact_version_build_status": "BLOCKED",
+    "ephemeral_session_ids_retained": false
+  },
+  "allowed_statuses": ["PASS", "FAIL", "BLOCKED"],
+  "evidence": [
+    "docs/evidence/M0/M0B_BROWSER_MATRIX.md",
+    "docs/evidence/M0/M0B_RUN_2026-08-30T20-18-06Z.md",
+    "docs/evidence/M0/raw/2026-08-30T20-41-28Z-source-binding.json",
+    "docs/evidence/M0/raw/2026-08-30T20-41-28Z-paper-active.json",
+    "docs/evidence/M0/raw/2026-08-30T20-41-28Z-paper-disabled.json",
+    "docs/evidence/M0/raw/2026-08-30T20-41-28Z-video-active.json",
+    "docs/evidence/M0/raw/2026-08-30T20-41-28Z-video-disabled.json",
+    "docs/evidence/M0/raw/2026-08-30T20-41-28Z-video-reenabled.json",
+    "docs/evidence/M0/raw/2026-08-30T20-41-28Z-clean-room-replay.md"
+  ],
+  "cases": [
+    "m0b-paper-native",
+    "m0b-simultaneous-frame",
+    "m0b-sequential-clean-room",
+    "m0b-video-lifecycle",
+    "m0b-paper-lifecycle",
+    "m0b-toolchange-observation",
+    "m0b-client-build-identity",
+    "m0b-screenshot-evidence"
+  ],
+  "topology_decision": "sequential",
+  "limitations": [
+    "Simultaneous cross-origin-frame discovery failed.",
+    "Exact client version/build was unavailable from the runtime.",
+    "Screenshots were not captured.",
+    "Raw DOM, capability-inventory, call-input, and call-output exports are retained; screenshots are not.",
+    "M0 lifecycle cases prove an H9 removal-feasibility precursor only; persisted-note survival remains not evaluated until M5.",
+    "The local run does not prove deployed-client parity."
+  ],
+  "validation_command": "node evals/validate-manual.mjs evals/registry/manifests/vedaxi-m0b-browser.manual.v1.json"
+}

@@ -2,9 +2,15 @@
 
 This rubric challenges each milestone against deterministic product truth before any subjective quality score is accepted. It combines the live Devpost criteria, the approved protocol-proof design, the installed evaluation method, and the project’s visual/accessibility constraints.
 
-## Release rule
+## Official judging source
 
-A milestone passes only when:
+Verified on **2026-08-31** against the [WebMCP Challenge Official Rules](https://webmcp.devpost.com/rules). Stage Two defines the four criteria below as **equally weighted**, so each contributes `25%`. If this rubric conflicts with the Official Rules or another Hackathon Website update, the official source prevails. Recheck it before every new Dual Delphi score and before submission.
+
+## Release rule and foundation gates
+
+The official weighted score is meaningful only once a judge can exercise a coherent end-to-end product. It is therefore a hard release gate at M5 and M6, and a diagnostic interval before then. M0–M4 exit on their applicable hard gates and module evidence; they must not be failed or score-inflated for capabilities owned by later modules.
+
+A judgeable release passes only when:
 
 1. Every applicable hard gate passes.
 2. Official weighted quality score is at least `85/100`.
@@ -44,9 +50,9 @@ These gates are independent of the product score and must all pass before submis
 
 No score can compensate for a failed D gate. Final submission remains a user-authorized external action.
 
-## Weighted quality dimensions
+## Equally weighted quality dimensions
 
-### 1. WebMCP leverage — 30%
+### 1. WebMCP Leverage — 25%
 
 | Score | Description |
 | --- | --- |
@@ -56,7 +62,7 @@ No score can compensate for a failed D gate. Final submission remains a user-aut
 | 0.30 | Tools exist but the demonstrated outcome primarily uses direct internal calls. |
 | 0.00 | No native working WebMCP route. |
 
-### 2. Product execution — 30%
+### 2. Execution — 25%
 
 | Score | Description |
 | --- | --- |
@@ -66,7 +72,7 @@ No score can compensate for a failed D gate. Final submission remains a user-aut
 | 0.30 | Mostly static mockup or scripted animation. |
 | 0.00 | Not runnable. |
 
-### 3. Potential impact — 20%
+### 3. Potential Impact — 25%
 
 | Score | Description |
 | --- | --- |
@@ -76,7 +82,7 @@ No score can compensate for a failed D gate. Final submission remains a user-aut
 | 0.30 | Generic “agent-ready web” claim without demonstrated user value. |
 | 0.00 | No credible problem/solution connection. |
 
-### 4. Creativity and ambition — 20%
+### 4. Creativity & Ambition — 25%
 
 | Score | Description |
 | --- | --- |

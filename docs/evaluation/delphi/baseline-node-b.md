@@ -6,6 +6,8 @@
 **Decision status:** `WEAK FINALIST` and `INSUFFICIENT EVIDENCE`  
 **Confidence:** low
 
+> **Historical scoring notice — 2026-08-31:** This frozen board was scored with the superseded `30/30/20/20` project weighting. Current [Official Rules](https://webmcp.devpost.com/rules) define `WebMCP Leverage`, `Execution`, `Potential Impact`, and `Creativity & Ambition` as equally weighted. Preserve the strategy output as historical evidence, but treat every numerical score below as stale until recomputed under `25/25/25/25`. Official rules prevail.
+
 ## Goal Command
 
 Select or reject an experience-frame strategy for VEDAXI's browser-native, publisher-side research-integrity proof. The target is a reproducible golden workflow across paper and video origins in which an external agent retrieves exact evidence, derives `40 - 6 = 34`, asks a human to make the consequential decision, persists a publisher-owned discrepancy note, and proves the agent route disappears when WebMCP is disabled while the human route remains useful. The immediate audience is Elastic Web judges; the demonstrated ecosystem includes researchers, reviewers, and research publishers. `[provided]`
@@ -89,7 +91,7 @@ No strategy currently passes the release gate. H1 has source-level support but l
 
 The scores evaluate what is evidenced now, not the concepts' promised upside. Each concept shares the same evidence floor because no concept-specific experience exists in the permitted source. The dimensions use the protocol's 0–5 scale and official weights.
 
-| Concept | WebMCP leverage 30 | Execution 30 | Potential impact 20 | Creativity & ambition 20 | Raw | Collaboration adjustment | Current total | Confidence |
+| Concept | Historical WebMCP /30 | Historical Execution /30 | Historical Impact /20 | Historical Creativity /20 | Historical raw | Collaboration adjustment | Stale total | Confidence |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | B1 — Evidence Hearing | 2/5 = 12 | 1/5 = 6 | 2/5 = 8 | 1/5 = 4 | 30 | -10 | **20/100** | low |
 | B2 — Reproducibility Receipt | 2/5 = 12 | 1/5 = 6 | 2/5 = 8 | 1/5 = 4 | 30 | -10 | **20/100** | low |

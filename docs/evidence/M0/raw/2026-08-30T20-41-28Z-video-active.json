@@ -1,0 +1,41 @@
+{
+  "artifact": "video-active",
+  "sourceCommit": "93bb80fe9d66c4232c2b96fbb298241c1260d6b3",
+  "url": "http://localhost:4174/",
+  "dom": "- main:\n  - article:\n    - heading \"VEDAXI video protocol probe\" [level=1]\n    - paragraph: \"Publisher origin: http://localhost:4174. Runtime origin: http://localhost:4174.\"\n    - paragraph: \"window.isSecureContext: true\"\n    - paragraph: \"Registration/UI state: active\"\n    - paragraph: \"Native registration error: none\"\n    - paragraph:\n      - button \"Enable native tool\" [disabled]\n      - button \"Disable native tool\"\n    - heading \"Transcript evidence\" [level=2]\n    - paragraph: We recruited forty participants. Six sessions had calibration drift, so we removed them before modeling and did not replace them.\n    - paragraph: \"Provenance: 00:03:12 — Protocol probe video transcript at 00:03:12\"",
+  "toolInventory": [
+    {
+      "name": "read_video_probe_evidence",
+      "title": "Read video evidence",
+      "description": "Search the video publisher's transcript evidence by query. Returns publisher evidence only.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": { "query": { "maxLength": 160, "pattern": "\\S", "type": "string" } },
+        "required": ["query"],
+        "type": "object"
+      },
+      "annotations": { "readOnlyHint": true, "untrustedContentHint": true },
+      "origin": "http://localhost:4174",
+      "pageUrl": "http://localhost:4174/"
+    }
+  ],
+  "call": {
+    "name": "read_video_probe_evidence",
+    "input": { "query": "calibration exclusion" },
+    "output": [
+      {
+        "evidence": {
+          "assetType": "video-transcript",
+          "excerpt": "We recruited forty participants. Six sessions had calibration drift, so we removed them before modeling and did not replace them.",
+          "id": "probe.video.transcript.calibration-drift",
+          "keywords": ["calibration", "drift", "removed", "replace"],
+          "locator": "00:03:12",
+          "provenance": "Protocol probe video transcript at 00:03:12",
+          "sourceOrigin": "http://localhost:4174",
+          "title": "Calibration-drift exclusion"
+        },
+        "score": 2
+      }
+    ]
+  }
+}

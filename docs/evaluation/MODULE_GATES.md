@@ -30,6 +30,19 @@ Targets and scores are never backfilled after results are visible. Qualitative j
 | M5 Native Reverification | Deployed clean-session, two-origin discovery, derivation, kill switch, and fair ablation. | Deployable M4 and recorded P0 topology. | In-app-browser trace, fresh tool inventory, ablation and collaboration checks; any P0-to-deployment drift blocks release. |
 | M6 Submission | Public repo, license, instructions, demo video, Devpost package. | M5 hard gates pass. | Public URLs, clean reproduction, duration/audio checklist, final Delphi scorecard. |
 
+## Current M0B topology decision
+
+The artifact-bound in-app-browser rerun recorded at `2026-08-30T20:41:28.2260985Z` against source commit `93bb80f` is indexed by `vedaxi.m0b-browser.manual.v1` and documented under `docs/evidence/M0/`.
+
+- Paper top-level native registration, discovery, invocation, and abort/fresh-inventory behavior: `PASS`.
+- Simultaneous paper plus cross-origin-frame inventory: `FAIL`; the secure video frame reported `unsupported` and only the paper tool was inventoried.
+- Clean-room one-agent sequential paper-to-video discovery and invocation: `PASS`; no DOM substitution or publisher-side comparison occurred.
+- Selected implementation topology: `sequential`.
+- H9 removal feasibility: precursor `PASS`; full H9 is not evaluated until M5 because M0 has no persisted note.
+- Exact client version/build and screenshot evidence: `BLOCKED` and explicitly carried as evidence limitations, not converted into failures or passes.
+
+This is an M0B feasibility result, not evidence for final product derivation, shared mutation, persistence, Semantic Stage, deployment, or submission behavior. M5 must reverify the selected topology in the deployed target environment.
+
 ## Exit rule
 
 A module exits only when:
