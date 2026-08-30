@@ -1,0 +1,6 @@
+.superpowers/
+.devpost-hackathon-state.json
+node_modules/
+dist/
+.DS_Store
+*.log

@@ -1,0 +1,42 @@
+{
+  "id": "vedaxi.contracts.dev.v2",
+  "runner": {
+    "kind": "vitest",
+    "command": "npm test -- packages/contracts/src/m0-evals.test.ts"
+  },
+  "dataset": "evals/registry/data/vedaxi/contracts-dev-v2.jsonl",
+  "bindings": [
+    {
+      "case_id": "m0-evidence-paper",
+      "evaluator": "paper-evidence"
+    },
+    {
+      "case_id": "m0-evidence-video",
+      "evaluator": "video-evidence"
+    },
+    {
+      "case_id": "m0-evidence-unrelated-question",
+      "evaluator": "unrelated-evidence"
+    },
+    {
+      "case_id": "m0-evidence-no-publisher-reasoning",
+      "evaluator": "no-publisher-reasoning"
+    },
+    {
+      "case_id": "m0-webmcp-unsupported",
+      "evaluator": "unsupported"
+    },
+    {
+      "case_id": "m0-webmcp-empty",
+      "evaluator": "empty"
+    },
+    {
+      "case_id": "m0-webmcp-rejection-cleanup",
+      "evaluator": "rejection-cleanup"
+    },
+    {
+      "case_id": "m0-webmcp-abort-removal",
+      "evaluator": "abort-removal"
+    }
+  ]
+}
