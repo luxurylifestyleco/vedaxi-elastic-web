@@ -1,10 +1,6 @@
 export {};
 
 declare global {
-  interface ToolExecuteCallbackOptions {
-    signal: AbortSignal;
-  }
-
   interface ModelContextTool {
     name: string;
     description: string;
@@ -14,10 +10,7 @@ declare global {
       readOnlyHint?: boolean;
       untrustedContentHint?: boolean;
     };
-    execute: (
-      input: Record<string, unknown>,
-      options: ToolExecuteCallbackOptions
-    ) => Promise<unknown> | unknown;
+    execute: (input: Record<string, unknown>) => Promise<unknown> | unknown;
   }
 
   interface ModelContextRegisterToolOptions {

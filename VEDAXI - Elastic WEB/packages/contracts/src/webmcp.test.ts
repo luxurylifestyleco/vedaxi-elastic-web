@@ -6,7 +6,20 @@ import {
 } from "./webmcp";
 import { FakeModelContext } from "./webmcp-test-harness";
 
+type Assert<T extends true> = T;
+type WebMcpExecuteUsesOneInput = Assert<
+  Parameters<WebMcpTool["execute"]> extends [Record<string, unknown>] ? true : false
+>;
+
 const originalDocument = globalThis.document;
+
+function deferred<T>() {
+  let resolve!: (value: T | PromiseLike<T>) => void;
+  const promise = new Promise<T>((finish) => {
+    resolve = finish;
+  });
+  return { promise, resolve };
+}
 
 afterEach(() => {
   Object.defineProperty(globalThis, "document", {
@@ -16,6 +29,88 @@ afterEach(() => {
 });
 
 describe("registerWebMcpTools", () => {
+  it("aborts a pending native registration immediately when its lifecycle signal aborts", async () => {
+    const registrationPromise = deferred<void>();
+    const signals: AbortSignal[] = [];
+    const registered: Array<{ signal: AbortSignal }> = [];
+    const lifecycle = new AbortController();
+    Object.defineProperty(globalThis, "document", {
+      configurable: true,
+      value: {
+        modelContext: {
+          registerTool: (_tool: unknown, options: { signal: AbortSignal }) => {
+            signals.push(options.signal);
+            registered.push(options);
+            options.signal.addEventListener("abort", () => registered.splice(0, 1), { once: true });
+            return registrationPromise.promise;
+          }
+        }
+      }
+    });
+
+    const pending = registerWebMcpTools(
+      [{ name: "search_paper_evidence", description: "Search paper evidence.", execute: async () => [] }],
+      [],
+      { lifecycleSignal: lifecycle.signal }
+    );
+    expect(signals).toHaveLength(1);
+    expect(signals[0].aborted).toBe(false);
+
+    lifecycle.abort();
+
+    expect(signals[0].aborted).toBe(true);
+    expect(registered).toEqual([]);
+    registrationPromise.resolve();
+
+    await expect(pending).resolves.toMatchObject({ registrationStatus: "cancelled", uiStatus: "disabled" });
+  });
+
+  it("short-circuits an already aborted lifecycle signal without retaining a native tool", async () => {
+    const modelContext = new FakeModelContext();
+    const lifecycle = new AbortController();
+    lifecycle.abort();
+    Object.defineProperty(globalThis, "document", {
+      configurable: true,
+      value: { modelContext }
+    });
+
+    const registration = await registerWebMcpTools(
+      [{ name: "search_paper_evidence", description: "Search paper evidence.", execute: async () => [] }],
+      [],
+      { lifecycleSignal: lifecycle.signal }
+    );
+
+    expect(modelContext.attempted).toEqual([]);
+    expect(modelContext.registered).toEqual([]);
+    expect(registration.registrationStatus).toBe("cancelled");
+    expect(registration.uiStatus).toBe("disabled");
+  });
+
+  it("keeps an active registration linked to its lifecycle signal", async () => {
+    const modelContext = new FakeModelContext();
+    const lifecycle = new AbortController();
+    Object.defineProperty(globalThis, "document", {
+      configurable: true,
+      value: { modelContext }
+    });
+
+    const registration = await registerWebMcpTools(
+      [{ name: "search_paper_evidence", description: "Search paper evidence.", execute: async () => [] }],
+      [],
+      { lifecycleSignal: lifecycle.signal }
+    );
+    expect(registration.registrationStatus).toBe("registered");
+    expect(registration.uiStatus).toBe("active");
+    expect(modelContext.registered).toHaveLength(1);
+
+    lifecycle.abort();
+
+    expect(modelContext.attempted[0].options.signal?.aborted).toBe(true);
+    expect(modelContext.registered).toEqual([]);
+    expect(registration.registrationStatus).toBe("registered");
+    expect(registration.uiStatus).toBe("disabled");
+  });
+
   it("reports unsupported without invoking a publisher tool", async () => {
     let calls = 0;
     Object.defineProperty(globalThis, "document", { configurable: true, value: {} });

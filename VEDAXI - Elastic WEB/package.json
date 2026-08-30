@@ -7,11 +7,15 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "vitest run"
+    "test": "vitest run",
+    "dev:probe:paper": "vite apps/protocol-probe/paper --port 4173 --strictPort",
+    "dev:probe:video": "vite apps/protocol-probe/video --port 4174 --strictPort",
+    "build:probe": "vite build apps/protocol-probe/paper && vite build apps/protocol-probe/video"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
     "typescript": "^5.8.0",
+    "vite": "^7.0.0",
     "vitest": "^3.2.0"
   }
 }

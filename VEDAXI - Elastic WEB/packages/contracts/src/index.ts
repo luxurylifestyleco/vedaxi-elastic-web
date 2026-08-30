@@ -5,6 +5,7 @@ export { registerWebMcpTools } from "./webmcp";
 export type {
   ModelContextRegisterToolOptions,
   WebMcpRegistration,
+  WebMcpRegistrationOptions,
   WebMcpRegistrationStatus,
   WebMcpTool,
   WebMcpUiStatus

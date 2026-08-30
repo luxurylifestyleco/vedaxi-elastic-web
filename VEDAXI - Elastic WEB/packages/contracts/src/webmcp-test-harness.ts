@@ -29,7 +29,7 @@ export class FakeModelContext {
     const entry = this.registered.find((registered) => registered.tool.name === name);
     if (!entry) throw new Error(`Tool ${name} is not registered`);
 
-    const value = await entry.tool.execute(input, { signal: new AbortController().signal });
+    const value = await entry.tool.execute(input);
     return JSON.stringify(value);
   }
 }
