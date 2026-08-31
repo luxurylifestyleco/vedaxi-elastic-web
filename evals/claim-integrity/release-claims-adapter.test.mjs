@@ -7,7 +7,9 @@ import { evaluateReleaseClaimsInventory, loadAndEvaluateReleaseClaims } from "./
 const repoRoot = resolve(fileURLToPath(new URL("../..", import.meta.url)));
 const inventoryPath = resolve(repoRoot, "evals/claim-integrity/current-release-claims.v1.json");
 const inventory = JSON.parse(readFileSync(inventoryPath, "utf8"));
-const now = new Date("2026-08-31T12:50:00.000Z");
+const observedTimes = inventory.claims.map((claim) => Date.parse(claim.source.observed_at));
+assert.ok(observedTimes.every(Number.isFinite), "inventory source timestamps must be valid");
+const now = new Date(Math.max(...observedTimes));
 
 const current = loadAndEvaluateReleaseClaims(inventoryPath, { repoRoot, now });
 assert.equal(current.passed, true, JSON.stringify(current, null, 2));
@@ -15,6 +17,24 @@ assert.equal(current.decision, "HOLD");
 assert.equal(current.release_action, "NONE");
 assert.equal(current.release_authority, "HUMAN_REQUIRED");
 assert.equal(current.devpost_copy_status, "ABSENT");
+
+const expiries = inventory.claims.map((claim) => (
+  Date.parse(claim.source.observed_at) + claim.source.max_age_seconds * 1000
+));
+assert.ok(expiries.every(Number.isFinite), "inventory source expiries must be valid");
+const earliestExpiry = Math.min(...expiries);
+const earliestClaimIndex = expiries.indexOf(earliestExpiry);
+const boundary = evaluateReleaseClaimsInventory(inventory, { repoRoot, now: new Date(earliestExpiry) });
+assert.ok(!boundary.claim_gate.results[earliestClaimIndex].vetoes.some(({ code }) => code === "STALE_EVIDENCE"));
+const justExpired = evaluateReleaseClaimsInventory(inventory, { repoRoot, now: new Date(earliestExpiry + 1) });
+assert.ok(justExpired.claim_gate.results[earliestClaimIndex].vetoes.some(({ code }) => code === "STALE_EVIDENCE"));
+
+const staleAt = new Date(Math.max(...inventory.claims.map((claim) => (
+  Date.parse(claim.source.observed_at) + claim.source.max_age_seconds * 1000
+))) + 1);
+const stale = evaluateReleaseClaimsInventory(inventory, { repoRoot, now: staleAt });
+assert.equal(stale.passed, false);
+assert.ok(stale.claim_gate.results.every(({ vetoes }) => vetoes.some(({ code }) => code === "STALE_EVIDENCE")));
 
 assert.throws(() => evaluateReleaseClaimsInventory({ ...inventory, claims: [] }, { repoRoot, now }), /missing or empty/);
 assert.throws(() => evaluateReleaseClaimsInventory({ ...inventory, claims: [inventory.claims[0], inventory.claims[0]] }, { repoRoot, now }), /unique/);
@@ -33,4 +53,4 @@ const statusResult = evaluateReleaseClaimsInventory(statusLaundered, { repoRoot,
 assert.equal(statusResult.passed, false);
 assert.ok(statusResult.semantic_vetoes.some(({ code }) => code === "RELEASE_INVENTORY_CLAIM_NOT_VERIFIED"));
 
-console.log("PASS release-claims adapter: current HOLD inventory + 5 fail-closed cases");
+console.log("PASS release-claims adapter: current HOLD inventory + deterministic later-clock stale case + 5 fail-closed cases");

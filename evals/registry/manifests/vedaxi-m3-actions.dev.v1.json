@@ -1,0 +1,21 @@
+{
+  "id": "vedaxi.m3-shared-actions.dev.v1",
+  "runner": {
+    "kind": "vitest",
+    "command": "npm test -- apps/paper/src/actions/m3-evals.test.ts"
+  },
+  "dataset": "evals/registry/data/vedaxi/m3-actions-dev-v1.jsonl",
+  "unproven": [
+    "Browser reload and rendered UI evidence are unproven."
+  ],
+  "bindings": [
+    { "case_id": "m3-actions-request-reject", "evaluator": "request-reject" },
+    { "case_id": "m3-actions-human-confirm", "evaluator": "human-confirm" },
+    { "case_id": "m3-actions-atomic-note", "evaluator": "atomic-note" },
+    { "case_id": "m3-actions-persistence-rollback", "evaluator": "persistence-rollback" },
+    { "case_id": "m3-actions-rehydration", "evaluator": "rehydration" },
+    { "case_id": "m3-actions-reset", "evaluator": "reset" },
+    { "case_id": "m3-actions-defensive-cloning", "evaluator": "defensive-cloning" },
+    { "case_id": "m3-actions-request-parity", "evaluator": "request-parity" }
+  ]
+}

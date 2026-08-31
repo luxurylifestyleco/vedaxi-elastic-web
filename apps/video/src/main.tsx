@@ -1,15 +1,21 @@
 import { createRoot } from "react-dom/client";
-import { createVideoEvidenceService, createVideoFixture, createVideoSearchTool, createVideoTranscriptTool, resolveVideoRuntimeConfig } from "./video";
+import { createVideoEvidenceService, createVideoFixture, createVideoSearchTool, createVideoTranscriptTool, resolveConfiguredPaperOrigin, resolveVideoRuntimeConfig } from "./video";
 import { VideoApp } from "./video/VideoApp";
 import type { VideoFixture } from "./video";
 import { useVideoRegistration } from "./video/use-video-registration";
+import { installVideoReadinessResponder } from "./video/readiness";
 import "./styles.css";
 const root = document.querySelector<HTMLElement>("#root"); if (!root) throw new Error("Video application root is missing");
 let runtimeError: string | null = null;
 let fixture: VideoFixture | null = null;
+let paperOrigin: string | null = null;
 try {
-  const config = resolveVideoRuntimeConfig(window.location.origin, import.meta.env.VITE_PAPER_ORIGIN);
+  const config = resolveVideoRuntimeConfig(
+    window.location.origin,
+    resolveConfiguredPaperOrigin(import.meta.env.VITE_PAPER_ORIGIN, import.meta.env.DEV)
+  );
   fixture = createVideoFixture(config.videoOrigin);
+  paperOrigin = config.paperOrigin;
 } catch (error) {
   runtimeError = error instanceof Error ? error.message : "Video origin configuration is invalid";
 }
@@ -19,4 +25,5 @@ if (runtimeError) {
   const service = createVideoEvidenceService(fixture!); const tools = [createVideoSearchTool(service), createVideoTranscriptTool(service)];
   function VideoRoot() { const protocol = useVideoRegistration(tools); return <VideoApp fixture={fixture!} service={service} protocol={protocol} />; }
   createRoot(root).render(<VideoRoot />);
+  installVideoReadinessResponder(paperOrigin!);
 }

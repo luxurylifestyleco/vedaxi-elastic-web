@@ -1,0 +1,21 @@
+{
+  "id": "vedaxi.m2-video.dev.v1",
+  "runner": {
+    "kind": "vitest",
+    "command": "npm test -- apps/video/src/video/m2-evals.test.ts"
+  },
+  "dataset": "evals/registry/data/vedaxi/m2-video-dev-v1.jsonl",
+  "unproven": [
+    "S5 keyboard/browser proof is unproven; it requires fresh manual target-browser evidence.",
+    "Real MP4/VTT media availability and alignment are unproven; validate them with evals/validate-m2-media-slot.mjs."
+  ],
+  "bindings": [
+    { "case_id": "m2-video-s4-evidence", "evaluator": "s4-evidence" },
+    { "case_id": "m2-video-search", "evaluator": "search" },
+    { "case_id": "m2-video-tool-contract", "evaluator": "tool-contract" },
+    { "case_id": "m2-video-independent-origin", "evaluator": "independent-origin" },
+    { "case_id": "m2-video-reasoning-boundary", "evaluator": "reasoning-boundary" },
+    { "case_id": "m2-video-media-unloaded-state", "evaluator": "media-unloaded-state" },
+    { "case_id": "m2-video-seek-precursor", "evaluator": "seek-precursor" }
+  ]
+}

@@ -13,11 +13,20 @@ interface ChapterPosition {
   top: number;
 }
 
+interface ChapterFocusTarget {
+  tabIndex?: number;
+  addEventListener?(type: "blur", listener: () => void, options?: { once: boolean }): void;
+  focus(options?: FocusOptions): void;
+  scrollIntoView(options?: ScrollIntoViewOptions): void;
+}
+
 interface ChapterFocusDocument {
-  getElementById(id: string): {
-    focus(options?: FocusOptions): void;
-    scrollIntoView(options?: ScrollIntoViewOptions): void;
-  } | null;
+  getElementById(id: string): ChapterFocusTarget | null;
+}
+
+export function stageChapterFromHash(hash: string): StageChapterId {
+  const id = hash.startsWith("#") ? hash.slice(1) : hash;
+  return STAGE_CHAPTERS.find((chapter) => chapter.id === id)?.id ?? "paper-top";
 }
 
 export function handleStageChapterActivation(
@@ -32,6 +41,10 @@ export function handleStageChapterActivation(
   if (!target) return;
 
   documentRef.getElementById(id)?.scrollIntoView({ block: "start" });
+  target.tabIndex = 0;
+  target.addEventListener?.("blur", () => {
+    target.tabIndex = -1;
+  }, { once: true });
   target.focus({ preventScroll: true });
 }
 

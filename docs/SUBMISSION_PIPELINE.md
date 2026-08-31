@@ -10,7 +10,7 @@ This is the master execution and submission checklist for VEDAXI. It reports rep
 | --- | ---: | ---: | --- |
 | Release milestones | 1 of 5 | **20%** | R0 complete; R1–R4 have not met their stop conditions. |
 | Module exits | 1 of 7 | **14%** | M0 exited; M1 is blocked; M2–M6 have not started. |
-| Source modules implemented | 2 of 7 | **29%** | M0 and the M1 source are built and pushed; this does not convert M1's blocked browser exit into a pass. |
+| Source modules implemented | 5 of 7 | **71%** | M0–M4 source exists locally; M5 has local predeployment adapters only. Source presence does not convert blocked or unevaluated release gates into passes. |
 | Devpost submission gates | 0 of 8 | **0%** | D1–D8 require the deployed product, M6 submission assets, access/rights evidence, and a current live-rules recheck. |
 
 These are count-based progress indicators, not time estimates. Later modules—especially M5 deployment proof and M6 media/submission—carry more risk than their item count suggests.
@@ -44,11 +44,15 @@ R0 COMPLETE → R1 IN PROGRESS [M1 BLOCKED] → R2 → R3 → R4 → USER-APPROV
 
 | Workstream | State | Evidence / next decision |
 | --- | --- | --- |
-| GitHub | **CURRENT** | Branch `codex/phase-0-webmcp`; latest pushed checkpoint `617c475`. |
+| GitHub | **CURRENT** | Branch `codex/phase-0-webmcp`; latest pushed checkpoint `cc685c6`. |
 | M0 Protocol Foundation | **COMPLETE** | Sequential two-origin topology selected and approved. See `docs/evidence/M0/exit-record.md`. |
-| M1 Paper Origin source | **COMPLETE** | Source commit `06a9512`; 69/69 full tests; three independent source approvals. |
+| M1 Paper Origin source | **RECORDED BASELINE COMPLETE; CURRENT INTEGRATED WORKTREE UNEXITED** | Recorded baseline source commit `06a9512` passed 69/69 tests and three independent source reviews. Later integrated Paper/M3/M4 worktree changes have not received a current-source exit decision. |
 | M1 Paper Origin exit | **BLOCKED** | Browser keyboard traversal and real unsupported/error-state evidence remain blocked. See `docs/evidence/M1/exit-record.md`. |
-| M2–M6 | **NOT STARTED** | Entry gates are not yet satisfied. |
+| M2 Video Origin source | **IMPLEMENTED LOCALLY; EXIT NOT RECORDED** | Deterministic fixture, tools, seek behavior, readiness contract, and M2 evals exist; physical media and required browser evidence remain open. |
+| M3 Shared Actions source | **IMPLEMENTED LOCALLY; EXIT NOT RECORDED** | Shared state, parity, persistence, rollback, reset, and deterministic evals exist; module review/browser evidence remain open. |
+| M4 Semantic Stage source | **IMPLEMENTED LOCALLY; EXIT NOT RECORDED** | Stage, mobile/reduced-motion behavior, reachability, and source tests exist; current rendered/browser review remains open. |
+| M5 Native Proof source | **PARTIAL — LOCAL PREDEPLOYMENT ONLY** | Per-origin adapters and ordered-trace validation exist locally; public origins, clean target-browser trace, and kill-switch browser evidence remain open. |
+| M6 Submission/Reproduction | **NOT STARTED** | Requires verified M5 evidence and human-selected/public release inputs. |
 | Official rules acknowledgment | **USER ACTION REQUIRED** | `.devpost-hackathon-state.json` records `rules_acknowledged: false`; never change this on the user's behalf. |
 | Devpost submission | **NOT SUBMITTED** | Nothing has been sent to Devpost. |
 
@@ -63,11 +67,11 @@ R0 COMPLETE → R1 IN PROGRESS [M1 BLOCKED] → R2 → R3 → R4 → USER-APPROV
 
 - [ ] **2. Close the Paper Origin exit — M1**
   Spec ref: `docs/MODULE_ARCHITECTURE.md > M1 — Paper Origin`
-  What is built: Complete editorial paper, exact publisher evidence, human search, one read-only native tool, lifecycle controller, responsive layouts, deterministic evals, screenshots, and production browser evidence.
+  Recorded baseline: Complete editorial paper, exact publisher evidence, human search, one read-only native tool, lifecycle controller, responsive layouts, deterministic evals, screenshots, and production browser evidence. The current integrated worktree extends that baseline and remains unexited and unverified in a current browser.
   Remaining: Obtain permitted real keyboard traversal evidence and real unsupported-browser evidence where possible; retain a truthful error-state limitation if no natural native error can be produced. The repository browser policy requires explicit approval before switching from Vercel Agent Browser to Chrome.
   Acceptance: S1–S3 pass; support state is truthful; human paper remains useful with registrations absent; keyboard evidence is retained or an explicitly approved limitation decision is recorded.
   Verify: `npm test -- apps/paper/src/paper`; `npm run build:paper`; validate `vedaxi.m1-paper-browser.manual.v1`; independent exit review.
-  Git: Source `06a9512` and current evidence checkpoint `617c475` pushed; final exit checkpoint pending.
+  Git: Recorded baseline source `06a9512` and historical evidence checkpoint `617c475` pushed; a current integrated-source exit checkpoint remains pending.
 
 - [ ] **3. Build independent Video Origin — M2**
   Spec ref: `docs/MODULE_ARCHITECTURE.md > M2 — Video Origin`
@@ -163,10 +167,11 @@ This is provisional until the complete M5 run exists. Submission copy and demo n
 
 ## Immediate next actions
 
-1. Obtain explicit approval for Chrome verification or an explicit decision to accept M1's blocked browser-evidence limitation.
-2. Close and push the M1 exit checkpoint.
-3. Re-fetch the current official rules and submission fields to pass D8, then present the result at the separate Human Gate for explicit user acknowledgment.
-4. Start M2 only after M1 is recorded `PASS`.
+1. Freeze the integrated M0–M5-predeployment source in an immutable candidate after the local code-quality gate passes while retaining the expected release `HOLD`/`BLOCKED` markers.
+2. Retain M1–M4 as blocked/not evaluated until their required current-source browser and independent-review evidence exists; do not infer exits from source tests.
+3. Supply and validate the distinct controlled M2 media asset without substituting the `<180s` submission demo.
+4. Create the public two-origin deployment and run the clean target-browser M5 trace.
+5. Re-fetch the current official rules and submission fields for D8, then present them at the separate Human Gate for explicit user acknowledgment.
 
 ## Source of truth
 

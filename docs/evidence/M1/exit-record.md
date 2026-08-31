@@ -7,12 +7,12 @@
 | Module | M1 — Paper Origin / Paper Integrity Desk |
 | Deterministic eval | `vedaxi.m1-paper.dev.v1` |
 | Browser evidence eval | `vedaxi.m1-paper-browser.manual.v3` (v1/v2 retained unchanged) |
-| Source artifact | `85e139735da224f16985be1aeb11152dce4d20f4` (current Paper runtime; HEAD `e6c440f` is Board-only) |
+| Source artifact | `85e139735da224f16985be1aeb11152dce4d20f4` (Paper runtime); v3 recorded repository HEAD `e6c440f` at capture time, not as the current repository HEAD; that commit did not change Paper sources |
 | Recorded | `2026-08-31T08:12:19.575Z` / `2026-08-31T13:42:19.5757937+05:30` |
 | Source review | Sub Agent 14 // Paper Plan — APPROVED; Sub Agent 15 // Paper Red Team — APPROVED; Sub Agent 16 // Paper Experience — APPROVED |
-| Status | `CURRENT PAPER RUNTIME PARTIALLY VERIFIED; FRESH NARROW AND KEYBOARD BROWSER TRACES REQUIRED` |
+| Status | `RECORDED V3 PAPER RUNTIME PARTIALLY VERIFIED; CURRENT INTEGRATED WORKTREE UNEXITED AND UNVERIFIED` |
 
-The original in-app-browser evidence is retained as v1 and the earlier Chrome follow-up as v2. Fresh v3 evidence is bound to the current Paper runtime `85e1397`: native discovery/call, exact human-search navigation, lifecycle, source identity, origins, and logs pass. The browser service then failed to attach a fresh local page for the narrow run; in-app CUA Tab remained on `BODY` and Chrome local-preview navigation timed out. v3 marks those observations `BLOCKED`; it does not inherit v2 keyboard or responsive results as current-runtime passes. M5 still owns public deployment parity and final end-to-end re-verification.
+The original in-app-browser evidence is retained as v1 and the earlier Chrome follow-up as v2. The recorded v3 evidence is bound to Paper runtime `85e1397`: native discovery/call, exact human-search navigation, lifecycle, source identity, origins, and logs pass for that captured runtime. The browser service then failed to attach a fresh local page for the narrow run; in-app CUA Tab remained on `BODY` and Chrome local-preview navigation timed out. v3 marks those observations `BLOCKED`; it does not inherit v2 keyboard or responsive results as passes for either v3 or the later integrated worktree. The current integrated Paper/M3/M4 worktree remains unexited and unverified in a current browser. M5 still owns public deployment parity and final end-to-end re-verification.
 
 ## Expected and observed
 
@@ -23,15 +23,15 @@ The original in-app-browser evidence is retained as v1 and the earlier Chrome fo
 | Native evidence route | One strict read-only tool in production; exact result; page, visible provenance, inventory, and result origins equal. | PASS |
 | No publisher reasoning | No video evidence, subtraction, `34`, contradiction judgment, mutation, persistence, or recommendation in output/runtime. | PASS |
 | Human route survives kill switch | Fresh inventory changed one → zero → one; disabled call rejected; full paper and human search remained. | PASS |
-| Responsive experience | The recorded source baseline passed narrow layout. Fresh v3 could not attach a page for the requested 390 × 844 measurement, so it does not claim that result for the current runtime. | BLOCKED — current-runtime browser limitation |
-| Real keyboard traversal | The recorded source baseline passed in Chrome. Fresh v3 in-app CUA Tab stayed on `BODY`, and Chrome local-preview navigation timed out; it does not claim that pass for the current runtime. | BLOCKED — current-runtime browser limitation |
+| Responsive experience | The recorded source baseline passed narrow layout. V3 could not attach a page for the requested 390 × 844 measurement, so it does not claim that result for the recorded v3 runtime or the later integrated worktree. | BLOCKED — current-source browser evidence missing |
+| Real keyboard traversal | The recorded source baseline passed in Chrome. V3 in-app CUA Tab stayed on `BODY`, and Chrome local-preview navigation timed out; it does not claim that pass for the recorded v3 runtime or the later integrated worktree. | BLOCKED — current-source browser evidence missing |
 | Real unsupported browser state | Both approved clients expose native WebMCP; a natural unsupported-client observation was unavailable. Deterministic truthful-state/controller coverage passes separately. | BLOCKED — non-gating environment limitation |
 | Natural native registration error | No natural native rejection occurred; deterministic rejection/status tests pass separately. | BLOCKED — non-gating environment limitation |
 | Exact client version/build | Exact browser builds were not exposed; Chrome extension version `1.2.27268.51612_0` is retained. | BLOCKED — non-gating environment limitation |
 
 ## Verification
 
-### Current v3 validation
+### Recorded v3 validation
 
 ```text
 npm run build:paper
@@ -120,7 +120,7 @@ The adversarial reviewer's fresh sandboxed Vite development start on another por
 
 | Dimension | Current evidence | Status |
 | --- | --- | --- |
-| Working | Current native discovery/call, exact search navigation, and ablation pass; current keyboard and narrow-layout browser observations remain explicit blocks. | PARTIAL — current runtime cannot exit |
+| Working | Recorded v3 native discovery/call, exact search navigation, and ablation pass; keyboard and narrow-layout browser observations remain explicit blocks, and the later integrated worktree is unverified. | PARTIAL — current integrated runtime cannot exit |
 | Execution | Complete editorial paper, provenance, responsive layouts, tests, lifecycle safety, and no fallback. | PASS at source/observed surfaces |
 | Impact | Makes publisher evidence visible and usable before later cross-source citation work. | PROVISIONAL — M3–M5 own end-to-end user outcome |
 | Creativity | Protocol status, evidence provenance, and human/agent parity are integrated into an editorial research artifact. | PROVISIONAL — no final judge score invented |
@@ -136,4 +136,4 @@ The adversarial reviewer's fresh sandboxed Vite development start on another por
 
 The user approved Chrome only after the in-app browser automation surface could not yield a real Tab trace. Chrome resolved the keyboard acceptance criterion for the recorded source. It could not manufacture an unsupported WebMCP client or a natural registration rejection, so those observations remain `BLOCKED`, not synthetic passes. They do not prevent the bounded source-baseline exit because deterministic injected-state/controller tests prove the required truthful non-success behavior and the real production lifecycle proves registrations can be removed without damaging the human route.
 
-The current production proof still needs a fresh 390 × 844 browser measurement and a real keyboard trace after browser attachment is available. M5 must also repeat the native route from the deployed public client and may only promote deployment parity if that fresh evidence exists.
+The current integrated worktree still needs a fresh 390 × 844 browser measurement and a real keyboard trace after browser attachment is available. M5 must also repeat the native route from the deployed public client and may only promote deployment parity if that fresh evidence exists.

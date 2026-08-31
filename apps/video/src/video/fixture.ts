@@ -8,6 +8,9 @@ export function assertIndependentVideoOrigin(videoOrigin: string, paperOrigin: s
 }
 
 export interface VideoRuntimeConfig { videoOrigin: string; paperOrigin: string; }
+export function resolveConfiguredPaperOrigin(value: unknown, isDevelopment: boolean): unknown {
+  return value ?? (isDevelopment ? "http://localhost:4173" : undefined);
+}
 export function resolveVideoRuntimeConfig(videoOrigin: string, paperOrigin: unknown): VideoRuntimeConfig {
   if (typeof paperOrigin !== "string" || !paperOrigin.trim()) throw new Error("Paper origin configuration is missing");
   const video = originOf(videoOrigin);

@@ -18,7 +18,9 @@ import {
 const sourceRepoRoot = resolve(fileURLToPath(new URL("../..", import.meta.url)));
 const inventoryPath = resolve(sourceRepoRoot, "evals/claim-integrity/current-release-claims.v1.json");
 const inventory = JSON.parse(readFileSync(inventoryPath, "utf8"));
-const now = new Date("2026-08-31T12:50:00.000Z");
+const observedTimes = inventory.claims.map((claim) => Date.parse(claim.source.observed_at));
+assert.ok(observedTimes.every(Number.isFinite), "inventory source timestamps must be valid");
+const now = new Date(Math.max(...observedTimes));
 const fixtureRoot = mkdtempSync(join(tmpdir(), "vedaxi-claim-mutation-"));
 
 const boundPaths = [
@@ -106,8 +108,14 @@ try {
   expectVeto(circular, "CIRCULAR_SELF_REPORT");
 
   const predated = clone();
-  predated.claims[0].independent_check.checked_at = "2026-08-31T12:44:59.000Z";
+  predated.claims[0].independent_check.checked_at = new Date(
+    Date.parse(predated.claims[0].source.observed_at) - 1,
+  ).toISOString();
   expectVeto(predated, "CHECK_PREDATES_SOURCE");
+
+  const futureCheck = clone();
+  futureCheck.claims[0].independent_check.checked_at = new Date(now.getTime() + 60_001).toISOString();
+  expectVeto(futureCheck, "INVALID_CHECK_TIME");
 
   const unsupportedMetric = clone();
   unsupportedMetric.claims[0].claim_kind = "metric";
@@ -120,7 +128,7 @@ try {
   absentMedia.claims[0].source.path = "fixtures/absent.mp4";
   expectVeto(absentMedia, "ABSENT_MEDIA_CLAIM");
 
-  console.log("PASS release adapter mutation suite: 8 adversarial classes + every bound source hash");
+  console.log("PASS release adapter mutation suite: 9 adversarial classes + every bound source hash");
 } finally {
   const relToTemp = relative(tmpdir(), fixtureRoot);
   assert.ok(relToTemp.startsWith("vedaxi-claim-mutation-"));

@@ -1,4 +1,4 @@
-export { VIDEO_EVIDENCE_ID, VIDEO_EVIDENCE_SECONDS, VIDEO_EVIDENCE_TIMESTAMP, assertIndependentVideoOrigin, createVideoFixture, resolveVideoRuntimeConfig } from "./fixture";
+export { VIDEO_EVIDENCE_ID, VIDEO_EVIDENCE_SECONDS, VIDEO_EVIDENCE_TIMESTAMP, assertIndependentVideoOrigin, createVideoFixture, resolveConfiguredPaperOrigin, resolveVideoRuntimeConfig } from "./fixture";
 export type { VideoRuntimeConfig } from "./fixture";
 export type { VideoFixture, VideoTranscriptCue } from "./fixture";
 export { createVideoEvidenceService } from "./service";

@@ -12,9 +12,16 @@ import {
   STAGE_CHAPTERS,
   StageNavigation,
   selectActiveChapter,
+  stageChapterFromHash,
   type StageChapterId
 } from "../stage/StageNavigation";
 
+import {
+  confirmFocusAction,
+  rejectFocusAction,
+  requestFocusAction,
+  resetPublisherAction
+} from "../actions";
 import type { PaperFixture } from "./fixture";
 import { protocolStatusCopy } from "./protocol-status";
 import type { PaperEvidenceService } from "./service";
@@ -30,16 +37,135 @@ export interface PaperAppProps {
   videoOrigin?: string;
 }
 
-export async function probeVideoOrigin(
-  origin: string,
-  fetchRef: typeof fetch = fetch
-): Promise<boolean> {
+const VIDEO_READY_REQUEST = { type: "vedaxi:video-readiness-request", version: 1 } as const;
+const VIDEO_READY_RESPONSE = { type: "vedaxi:video-readiness", version: 1 } as const;
+const VIDEO_READY_TIMEOUT_MS = 5_000;
+
+function normalizedHttpOrigin(value: string): string | null {
   try {
-    await fetchRef(origin, { mode: "no-cors" });
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:" ? url.origin : null;
+  } catch {
+    return null;
+  }
+}
+
+export function normalizedIndependentVideoOrigin(videoOrigin: string, paperOrigin: string | null): string | null {
+  const normalizedVideo = normalizedHttpOrigin(videoOrigin);
+  if (!normalizedVideo) return null;
+  if (paperOrigin === null) return normalizedVideo;
+  const normalizedPaper = normalizedHttpOrigin(paperOrigin);
+  return normalizedPaper && normalizedPaper !== normalizedVideo ? normalizedVideo : null;
+}
+
+function exactReadyPayload(value: unknown): boolean {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const fields = value as Record<string, unknown>;
+  return Object.keys(fields).length === 2 &&
+    fields.type === VIDEO_READY_RESPONSE.type &&
+    fields.version === VIDEO_READY_RESPONSE.version;
+}
+
+export function monitorVideoReadiness(
+  windowRef: Window,
+  videoOrigin: string,
+  videoWindow: MessageEventSource,
+  onResult: (available: boolean) => void,
+  timeoutMs = VIDEO_READY_TIMEOUT_MS
+): () => void {
+  const expectedOrigin = normalizedIndependentVideoOrigin(videoOrigin, windowRef.location.origin);
+  if (!expectedOrigin) {
+    onResult(false);
+    return () => undefined;
+  }
+
+  let settled = false;
+  let timer = 0;
+  const remove = () => {
+    windowRef.removeEventListener("message", onMessage);
+    windowRef.clearTimeout(timer);
+  };
+  const finish = (available: boolean) => {
+    if (settled) return;
+    settled = true;
+    remove();
+    onResult(available);
+  };
+  const onMessage = (event: MessageEvent) => {
+    if (event.origin !== expectedOrigin || event.source !== videoWindow || !exactReadyPayload(event.data)) return;
+    finish(true);
+  };
+
+  windowRef.addEventListener("message", onMessage);
+  timer = windowRef.setTimeout(() => finish(false), timeoutMs);
+  return () => {
+    settled = true;
+    remove();
+  };
+}
+
+export function requestVideoReadiness(videoWindow: Window, videoOrigin: string): boolean {
+  const targetOrigin = normalizedHttpOrigin(videoOrigin);
+  if (!targetOrigin) return false;
+  try {
+    videoWindow.postMessage(VIDEO_READY_REQUEST, targetOrigin);
     return true;
   } catch {
     return false;
   }
+}
+
+export function startVideoReadinessAttempt(
+  windowRef: Window,
+  videoOrigin: string,
+  videoWindow: Window,
+  onResult: (available: boolean) => void,
+  timeoutMs = VIDEO_READY_TIMEOUT_MS
+): () => void {
+  const expectedOrigin = normalizedIndependentVideoOrigin(videoOrigin, windowRef.location.origin);
+  if (!expectedOrigin) {
+    onResult(false);
+    return () => undefined;
+  }
+  const cleanup = monitorVideoReadiness(windowRef, expectedOrigin, videoWindow, onResult, timeoutMs);
+  if (!requestVideoReadiness(videoWindow, expectedOrigin)) {
+    cleanup();
+    onResult(false);
+  }
+  return cleanup;
+}
+
+interface VideoReadinessState {
+  origin: string | null;
+  available: boolean | null;
+}
+
+interface VideoReadinessAttempt {
+  origin: string;
+  generation: number;
+  cleanup: () => void;
+}
+
+interface VideoReadinessAttemptRef {
+  current: VideoReadinessAttempt | null;
+}
+
+export function cleanupVideoReadinessAttempt(
+  attemptRef: VideoReadinessAttemptRef,
+  origin?: string
+): void {
+  const attempt = attemptRef.current;
+  if (!attempt || (origin !== undefined && attempt.origin !== origin)) return;
+  attemptRef.current = null;
+  attempt.cleanup();
+}
+
+export function videoAvailabilityForOrigin(
+  readiness: VideoReadinessState,
+  currentOrigin: string | null
+): boolean | null {
+  if (!currentOrigin) return false;
+  return readiness.origin === currentOrigin ? readiness.available : null;
 }
 
 export const CONTROLLED_FOCUS_REQUEST: FocusRequest = {
@@ -219,8 +345,21 @@ export function PaperApp({
 }: PaperAppProps) {
   const paper = fixture.document;
   const evidence = fixture.evidence;
-  const [activeStageChapter, setActiveStageChapter] = useState<StageChapterId>("paper-top");
-  const [videoAvailable, setVideoAvailable] = useState<boolean | null>(null);
+  const normalizedVideoOrigin = normalizedIndependentVideoOrigin(
+    videoOrigin,
+    typeof window === "undefined" ? null : window.location.origin
+  );
+  const [activeStageChapter, setActiveStageChapter] = useState<StageChapterId>(() =>
+    stageChapterFromHash(typeof window === "undefined" ? "" : window.location.hash)
+  );
+  const [videoReadiness, setVideoReadiness] = useState<VideoReadinessState>({
+    origin: normalizedVideoOrigin,
+    available: normalizedVideoOrigin ? null : false
+  });
+  const videoAvailable = videoAvailabilityForOrigin(videoReadiness, normalizedVideoOrigin);
+  const videoFrameRef = useRef<HTMLIFrameElement>(null);
+  const readinessAttemptRef = useRef<VideoReadinessAttempt | null>(null);
+  const readinessGenerationRef = useRef(0);
   const [stageRestored, setStageRestored] = useState(false);
   const focus = publisherState.focusProposal ?? publisherState.discrepancyNote;
   const hasFocus = focus !== null;
@@ -253,13 +392,19 @@ export function PaperApp({
   }, []);
 
   useEffect(() => {
-    let current = true;
-    setVideoAvailable(null);
-    void probeVideoOrigin(videoOrigin).then((available) => {
-      if (current) setVideoAvailable(available);
-    });
-    return () => { current = false; };
-  }, [videoOrigin]);
+    const effectOrigin = normalizedVideoOrigin;
+    const currentAttempt = readinessAttemptRef.current;
+    if (!effectOrigin) {
+      cleanupVideoReadinessAttempt(readinessAttemptRef);
+      setVideoReadiness({ origin: null, available: false });
+    } else if (!currentAttempt || currentAttempt.origin !== effectOrigin) {
+      cleanupVideoReadinessAttempt(readinessAttemptRef);
+      setVideoReadiness({ origin: effectOrigin, available: null });
+    }
+    return () => {
+      if (effectOrigin) cleanupVideoReadinessAttempt(readinessAttemptRef, effectOrigin);
+    };
+  }, [normalizedVideoOrigin]);
 
   useEffect(() => {
     setStageRestored(false);
@@ -289,7 +434,7 @@ export function PaperApp({
           <button
             type="button"
             disabled={hasFocus}
-            onClick={() => dispatchPublisher({ type: "request-focus", request: CONTROLLED_FOCUS_REQUEST })}
+            onClick={() => dispatchPublisher(requestFocusAction(CONTROLLED_FOCUS_REQUEST))}
           >
             {hasFocus ? "Focus review active" : "Run deterministic focus preview"}
           </button>
@@ -297,7 +442,7 @@ export function PaperApp({
         {publisherError && (
           <div className="publisher-error" role="alert">
             <p>{publisherError}</p>
-            <button type="button" onClick={() => dispatchPublisher({ type: "reset" })}>
+            <button type="button" onClick={() => dispatchPublisher(resetPublisherAction())}>
               Reset failed review
             </button>
           </div>
@@ -403,19 +548,48 @@ export function PaperApp({
               <div>
                 <p className="section-kicker">Independent publisher surface</p>
                 <h2 id="video-title" tabIndex={-1}>Video transcript evidence</h2>
-                <p>The Video publisher is hosted independently and appears here only after its origin responds.</p>
+                <p>The Video publisher is hosted independently and appears here only after it confirms readiness.</p>
               </div>
-              {videoAvailable === true ? (
+              {normalizedVideoOrigin && (
                 <iframe
                   className="video-publisher"
-                  src={videoOrigin}
+                  hidden={videoAvailable !== true}
+                  onLoad={() => {
+                    const attemptOrigin = normalizedVideoOrigin;
+                    const generation = ++readinessGenerationRef.current;
+                    cleanupVideoReadinessAttempt(readinessAttemptRef);
+                    setVideoReadiness({ origin: attemptOrigin, available: null });
+                    const videoWindow = videoFrameRef.current?.contentWindow;
+                    if (!videoWindow) {
+                      setVideoReadiness({ origin: attemptOrigin, available: false });
+                      return;
+                    }
+                    const attempt: VideoReadinessAttempt = {
+                      origin: attemptOrigin,
+                      generation,
+                      cleanup: () => undefined
+                    };
+                    readinessAttemptRef.current = attempt;
+                    attempt.cleanup = startVideoReadinessAttempt(
+                      window,
+                      attemptOrigin,
+                      videoWindow,
+                      (available) => {
+                        if (readinessAttemptRef.current !== attempt) return;
+                        setVideoReadiness({ origin: attemptOrigin, available });
+                      }
+                    );
+                  }}
+                  ref={videoFrameRef}
+                  src={normalizedVideoOrigin}
                   title="Independent Video publisher evidence"
                 />
-              ) : (
+              )}
+              {videoAvailable !== true && (
                 <p role="status">
                   {videoAvailable === null
                     ? "Checking whether the independent Video publisher is available."
-                    : "Independent Video publisher unavailable. No embedded evidence is shown."}
+                    : "Independent Video publisher could not be verified or is unavailable. No embedded evidence is shown."}
                 </p>
               )}
             </section>
@@ -462,12 +636,9 @@ export function PaperApp({
                     <div className="focus-actions">
                       <button
                         type="button"
-                        onClick={() => dispatchPublisher({
-                          type: "confirm-focus",
-                          confirmation: { confirmedBy: "human" }
-                        })}
+                        onClick={() => dispatchPublisher(confirmFocusAction({ confirmedBy: "human" }))}
                       >Confirm focus</button>
-                      <button type="button" onClick={() => dispatchPublisher({ type: "reject-focus" })}>
+                      <button type="button" onClick={() => dispatchPublisher(rejectFocusAction())}>
                         Reject focus
                       </button>
                     </div>
@@ -485,7 +656,7 @@ export function PaperApp({
                       <div><dt>Paper provenance</dt><dd>{publisherState.discrepancyNote.provenance.paper}</dd></div>
                       <div><dt>Video provenance</dt><dd>{publisherState.discrepancyNote.provenance.video}</dd></div>
                     </dl>
-                    <button type="button" onClick={() => dispatchPublisher({ type: "reset" })}>
+                    <button type="button" onClick={() => dispatchPublisher(resetPublisherAction())}>
                       Reset focus review
                     </button>
                   </aside>

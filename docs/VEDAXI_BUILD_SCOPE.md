@@ -19,6 +19,13 @@ The live Devpost criteria are the product rubric:
 
 ## Product slice
 
+### Authoritative surface inventory
+
+- `apps/paper` is the required human product and Paper WebMCP origin.
+- `apps/video` is the required independent Video WebMCP origin.
+- `apps/protocol-probe` is the required narrow protocol-validation harness; it is not a third product surface.
+- The former operational Board is retired and is not a required WebMCP, product, evaluation, or release surface. Any residual Board files are non-authoritative, and restoring an operations utility requires a separate human decision.
+
 ### Human starting state
 
 - Light, editorial paper workspace with a real title, abstract, methods passage, figure, citations, and provenance.

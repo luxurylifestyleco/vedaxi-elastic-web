@@ -6,6 +6,8 @@ import type {
   PublisherResult
 } from "@vedaxi/state";
 
+import { requestFocusAction } from "../actions";
+
 const MAX_TEXT_LENGTH = 280;
 const REQUEST_KEYS = [
   "paperEvidenceId",
@@ -150,7 +152,7 @@ export function createDiscrepancyFocusTool(dispatch: PublisherDispatch): WebMcpT
     },
     annotations: { readOnlyHint: false, untrustedContentHint: true },
     execute: async (input) => {
-      const result = dispatch({ type: "request-focus", request: validateInput(input) });
+      const result = dispatch(requestFocusAction(validateInput(input)));
       if (!result.ok) throw new Error(failureMessage(result.code));
       return {
         status: "pending-human-confirmation",

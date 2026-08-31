@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { assertIndependentVideoOrigin, createVideoFixture, resolveVideoRuntimeConfig, VIDEO_EVIDENCE_ID } from "./fixture";
+import { assertIndependentVideoOrigin, createVideoFixture, resolveConfiguredPaperOrigin, resolveVideoRuntimeConfig, VIDEO_EVIDENCE_ID } from "./fixture";
 import { createVideoEvidenceService } from "./service";
 import { createVideoSearchTool, createVideoTranscriptTool } from "./tool";
 import { seekVideo } from "./seek";
@@ -39,6 +39,11 @@ describe("M2 video origin evidence boundary", () => {
     expect(() => resolveVideoRuntimeConfig("https://video.example.test", "not a URL")).toThrow("valid URL");
     expect(() => resolveVideoRuntimeConfig("https://video.example.test", "https://video.example.test")).toThrow("differ");
     expect(resolveVideoRuntimeConfig("https://video.example.test/path", "https://paper.example.test")).toEqual({ videoOrigin: "https://video.example.test", paperOrigin: "https://paper.example.test" });
+  });
+  it("uses the documented localhost Paper origin only in development", () => {
+    expect(resolveConfiguredPaperOrigin(undefined, true)).toBe("http://localhost:4173");
+    expect(resolveConfiguredPaperOrigin(undefined, false)).toBeUndefined();
+    expect(resolveConfiguredPaperOrigin("https://paper.example.test", true)).toBe("https://paper.example.test");
   });
   it("never reports seek success without loaded media", async () => {
     await expect(seekVideo(null, { seconds: 192 })).resolves.toMatchObject({ ok: false, reason: "media-unavailable" });

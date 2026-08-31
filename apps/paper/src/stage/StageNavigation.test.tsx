@@ -9,12 +9,16 @@ import {
   StageNavigation,
   handleStageChapterActivation,
   handleStageChapterKeyDown,
-  selectActiveChapter
+  selectActiveChapter,
+  stageChapterFromHash
 } from "./StageNavigation";
 
 const styles = readFileSync(new URL("../styles.css", import.meta.url), "utf8");
 
-afterEach(() => vi.useRealTimers());
+afterEach(() => {
+  vi.useRealTimers();
+  vi.unstubAllGlobals();
+});
 
 const navigationPair = (activeChapter: "paper-top" | "chapter-method" = "paper-top") => (
   <>
@@ -132,21 +136,27 @@ describe("Semantic Stage navigation", () => {
     expect(styles).toMatch(/@media \(max-width: 900px\)[\s\S]*\.stage-navigation-desktop-shell\s*\{\s*display:\s*none/);
   });
 
-  it("focuses the permanent programmatic destination without mutating its tab state", () => {
+  it("temporarily joins the focused destination to the Tab order, then restores it on blur", () => {
     let focusedId = "mobile-chapter-link";
     let focusOptions: FocusOptions | undefined;
     let scrolledId = "";
+    let blur: (() => void) | undefined;
+    const methodTarget = {
+      tabIndex: -1,
+      addEventListener: (_type: string, listener: () => void) => { blur = listener; },
+      focus: (options?: FocusOptions) => {
+        focusedId = "methods-title";
+        focusOptions = options;
+      },
+      scrollIntoView: () => {
+        scrolledId = "chapter-method";
+      }
+    };
     const targets = new Map([
-      ["methods-title", {
-        focus: (options?: FocusOptions) => {
-          focusedId = "methods-title";
-          focusOptions = options;
-        },
-        scrollIntoView: () => {
-          scrolledId = "chapter-method";
-        }
-      }],
+      ["methods-title", methodTarget],
       ["chapter-method", {
+        tabIndex: -1,
+        addEventListener: () => undefined,
         focus: () => undefined,
         scrollIntoView: () => {
           scrolledId = "chapter-method";
@@ -161,10 +171,39 @@ describe("Semantic Stage navigation", () => {
     expect(focusedId).toBe("methods-title");
     expect(focusOptions).toEqual({ preventScroll: true });
     expect(scrolledId).toBe("chapter-method");
+    expect(methodTarget.tabIndex).toBe(0);
+
+    blur?.();
+    expect(methodTarget.tabIndex).toBe(-1);
 
     focusedId = "mobile-chapter-link";
     handleStageChapterActivation("chapter-method", 1, documentRef);
     expect(focusedId).toBe("mobile-chapter-link");
+  });
+
+  it("derives the initial controlled chapter from a valid URL hash", () => {
+    expect(stageChapterFromHash("#chapter-method")).toBe("chapter-method");
+    expect(stageChapterFromHash("#chapter-video")).toBe("chapter-video");
+    expect(stageChapterFromHash("#missing")).toBe("paper-top");
+    expect(stageChapterFromHash("")).toBe("paper-top");
+  });
+
+  it("initializes both chapter views and the single announcement from the URL hash", () => {
+    vi.stubGlobal("window", {
+      location: { hash: "#chapter-method", origin: "https://paper.example.test" }
+    });
+    const fixture = createPaperFixture("https://paper.example.test/workspace");
+    const markup = renderToStaticMarkup(
+      <PaperApp
+        fixture={fixture}
+        service={createPaperEvidenceService(fixture.evidence)}
+        protocol={{ status: "unsupported", enable: () => undefined, disable: () => undefined }}
+      />
+    );
+
+    expect(markup.match(/href="#chapter-method" aria-current="location"/g)).toHaveLength(2);
+    expect(markup.match(/Chapter 2 of 5: Method/g)).toHaveLength(1);
+    expect(markup).not.toContain("Chapter 1 of 5: Paper");
   });
 
   it("commits the keyboard hash before handing focus to the destination", () => {
