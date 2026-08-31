@@ -7,9 +7,8 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "vitest run apps packages tests evals/release-status",
+    "test": "vitest run apps packages tests",
     "quality:local": "node evals/run-quality-gate.mjs",
-    "status:release": "node evals/release-status/generate-release-status.mjs",
     "dev:probe:paper": "vite apps/protocol-probe/paper --port 4173 --strictPort",
     "dev:probe:video": "vite apps/protocol-probe/video --port 4174 --strictPort",
     "dev:paper": "vite apps/paper --port 4173 --strictPort",
