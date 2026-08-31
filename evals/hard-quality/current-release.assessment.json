@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "assessment_id": "vedaxi.current-release.2026-08-31",
+  "release_identity": {
+    "source_commit": "0b7431f56691e487fa7bb37e5ae427a9a81b4ee5",
+    "evaluated_source_commit": null,
+    "worktree_clean": false
+  },
+  "module_gates": [
+    { "id": "M0", "status": "PASS", "evidence": ["docs/evidence/M0/exit-record.md"] },
+    { "id": "M1", "status": "BLOCKED", "evidence": ["docs/evidence/M1/exit-record.md", "docs/pipeline/release-registry.v1.json"] },
+    { "id": "M2", "status": "NOT_STARTED", "evidence": ["docs/assets/M2/media-manifest.json"] },
+    { "id": "M3", "status": "NOT_STARTED", "evidence": [] },
+    { "id": "M4", "status": "NOT_STARTED", "evidence": [] },
+    { "id": "M5", "status": "NOT_STARTED", "evidence": [] },
+    { "id": "M6", "status": "NOT_STARTED", "evidence": [] }
+  ],
+  "deterministic_prerequisites": {
+    "schema_and_registry_valid": "PASS",
+    "required_artifacts_exist": "BLOCKED",
+    "tests_types_and_builds_pass": "NOT_EVALUATED",
+    "no_stale_or_contradictory_evidence": "BLOCKED",
+    "applicable_module_and_release_gates_pass": "BLOCKED"
+  },
+  "automatic_failures": {
+    "native_protocol_bypass": { "status": "NOT_EVALUATED", "evidence": [] },
+    "false_or_stale_evidence": { "status": "BLOCKED", "evidence": ["Current worktree is dirty and has no immutable evaluated source identity."] },
+    "incomplete_golden_workflow": { "status": "BLOCKED", "evidence": ["M1 is BLOCKED; M2-M6 are not complete."] },
+    "generic_html_dashboard_quality": { "status": "NOT_EVALUATED", "evidence": [] },
+    "decorative_or_inaccessible_motion": { "status": "NOT_EVALUATED", "evidence": [] },
+    "critical_accessibility_failure": { "status": "NOT_EVALUATED", "evidence": [] },
+    "regression_or_build_failure": { "status": "NOT_EVALUATED", "evidence": [] },
+    "non_reproducible_release": { "status": "BLOCKED", "evidence": ["No clean-source current-release reproduction has been run."] },
+    "unreviewed_high_stakes_judgment": { "status": "BLOCKED", "evidence": ["Independent rendered desktop/mobile judgment is not attached for the current source."] }
+  },
+  "dimensions": {
+    "protocol_truth": { "status": "NOT_EVALUATED", "score": null, "evidence": [] },
+    "evidence_integrity": { "status": "BLOCKED", "score": null, "evidence": ["Current source identity is not immutable."] },
+    "functional_completeness": { "status": "BLOCKED", "score": null, "evidence": ["Module gates M1-M6 are incomplete."] },
+    "visual_direction": { "status": "NOT_EVALUATED", "score": null, "evidence": [] },
+    "interaction_motion_quality": { "status": "NOT_EVALUATED", "score": null, "evidence": [] },
+    "accessibility_responsiveness": { "status": "BLOCKED", "score": null, "evidence": ["Fresh current-source mobile and keyboard evidence is not complete."] },
+    "regression_safety": { "status": "NOT_EVALUATED", "score": null, "evidence": [] },
+    "release_reproducibility": { "status": "BLOCKED", "score": null, "evidence": ["Current source has not been reproduced from a clean checkout."] }
+  }
+}

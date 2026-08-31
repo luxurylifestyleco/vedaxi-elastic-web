@@ -48,6 +48,6 @@ The early build uses 20 outcome-based cases across four complexity strata. Paths
 | --- | --- | --- |
 | D1 | Open the submitted live URL in a clean target in-app-browser session. | Native WebMCP golden path is reproducible from public URLs. |
 | D2 | Clone the submitted public repository without private context. | License, setup instructions, complete source, tests, and local reproduction succeed. |
-| D3 | Inspect the public demo video artifact. | Duration is under three minutes, audio is present, and no cut hides a load-bearing protocol step. |
+| D3 | Open the submitted YouTube demo in a logged-out session and inspect the video artifact. | The video is publicly viewable without authentication, duration is under three minutes, audio is present, and no cut hides a load-bearing protocol step. |
 | D4 | Compare submission explanation with the claims ledger and trace. | Every product/WebMCP claim is accurate, supported, and understandable. |
 | D5 | Compare the submitted tested-agent/client list with the browser matrix. | Every named client has a recorded version/build and result; no untested client is claimed. |

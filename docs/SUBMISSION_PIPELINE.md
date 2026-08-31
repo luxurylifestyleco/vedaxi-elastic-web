@@ -36,6 +36,9 @@ R0 COMPLETE → R1 IN PROGRESS [M1 BLOCKED] → R2 → R3 → R4 → USER-APPROV
 - **Evaluation:** Versioned deterministic evals and separately labeled manual browser evidence. Dual Delphi is mandatory at M0, the M3/M4 vertical-slice connection, M5, and M6.
 - **Inspiration firewall:** External sites, Drive documents, repositories, papers, OpenAI Evals, and Ponytail may influence structure and evaluation only. No copied runtime source, assets, branding, or text.
 - **Submission authority:** Preparing assets is autonomous. The final Devpost submission requires explicit user confirmation.
+- **Official-rule recheck:** The live [Official Rules](https://webmcp.devpost.com/rules) and current [Challenge page](https://webmcp.devpost.com/) must be re-fetched immediately before the Human Gate. Cached local requirements cannot authorize submission.
+- **Two-video boundary:** Controlled in-product evidence and the submission demo are distinct artifacts. The controlled evidence asset must extend beyond `00:03:12` (`>192s`); the public YouTube submission demo must be strictly `<180s`, include audio, and show the real working project. Neither artifact may be substituted for the other.
+- **Rights and access:** Third-party SDKs, APIs, data, trademarks, music, media, and other protected material require a recorded authorization or rights basis. Judge access must remain free and usable through the end of judging.
 
 ## Current status
 
@@ -96,23 +99,23 @@ R0 COMPLETE → R1 IN PROGRESS [M1 BLOCKED] → R2 → R3 → R4 → USER-APPROV
 
 - [ ] **7. Complete reviewable shipping documentation — M6 foundation**
   Spec ref: `docs/MODULE_ARCHITECTURE.md > M6 — Submission and Reproduction`
-  What to build: Public `README.md`, visible open-source `LICENSE`, install/run/test/reproduction instructions, and concise `documentation/` artifacts: architecture, load-bearing flows/trust boundaries, permissions/no-auth truth, variables/secrets, existing/proposed test coverage, and WebMCP automation/tool guardrails. State explicitly that no email, cron, or backend exists if still true.
-  Acceptance: A reviewer can understand intent, trust boundaries, configuration, exact tool surfaces, side effects, kill switch, and verified/unverified tests without private context. No secret is bundled client-side.
+  What to build: Public `README.md`, human-selected visible open-source `LICENSE`, install/run/test/reproduction instructions, and concise `documentation/` artifacts: architecture, load-bearing flows/trust boundaries, permissions/no-auth truth, variables/secrets, existing/proposed test coverage, and WebMCP automation/tool guardrails. Include a dated prior-versus-new-work boundary and a rights ledger for third-party SDKs, APIs, data, marks, music, media, and assistance. State explicitly that no email, cron, or backend exists if still true.
+  Acceptance: The current public repository contains every source file, asset, and instruction required to run the submitted project; its license is visible on the public repository page. A reviewer can understand intent, trust boundaries, configuration, exact tool surfaces, side effects, kill switch, verified/unverified tests, and which work predates the challenge without private context. Every third-party component has a recorded authorization/license basis. No secret is bundled client-side.
   Verify: Clean clone/install/test/build; link and file checks; documentation-to-code intended-vs-implemented review; public repository access.
   Git: Push the documentation/reproduction checkpoint before recording the demo.
 
 - [ ] **8. Produce the real demo package — M6 media**
   Spec ref: `docs/VEDAXI_BUILD_SCOPE.md > R4 — Submission assets`
-  What to build: A continuous real-run recording showing dynamic discovery, paper evidence, independent video evidence, external derivation, Semantic Focus Shift, human confirmation, persistence after reload, and kill-switch ablation. Add audio and captions only after the real recording exists.
-  Acceptance: Public video is under 180 seconds, includes audio, names only tested clients, and contains no cut that hides discovery, persistence, or removal. Target pacing is approximately 154 seconds.
-  Verify: Measured duration/audio, public accessibility, shot checklist, trace-to-video comparison, independent reviewer playback.
+  What to build: A continuous real-run recording showing dynamic discovery, paper evidence, independent video evidence, external derivation, Semantic Focus Shift, human confirmation, persistence after reload, and kill-switch ablation. This submission demo is separate from the `>192s` controlled evidence asset. Add audio and captions only after the real recording exists.
+  Acceptance: The demo is publicly and anonymously viewable on YouTube, is strictly under 180 seconds, includes audio, names only tested clients, and contains no cut that hides discovery, persistence, or removal. Every third-party mark, image, clip, voice, music track, and other protected material has a recorded rights basis. Target pacing is approximately 154 seconds.
+  Verify: Measured duration/audio, logged-out public YouTube playback, rights-ledger review, shot checklist, trace-to-video comparison, independent reviewer playback, and an explicit check that the `>192s` controlled evidence asset was not used as the submission demo.
   Git: Push shot list, timing record, transcript/caption source, and public video URL evidence; do not commit fabricated media proof.
 
 - [ ] **9. Prepare and audit the Devpost package — M6 submission**
   Spec ref: `docs/evaluation/VEDAXI_RUBRIC.md > Devpost submission gates`
-  What to build: `devpost-submission.md`, concise project/WebMCP explanation, public live URL, public repository URL, public video URL, tested-client matrix, claims ledger, AI/Codex usage disclosure, screenshots/thumbnail, and D1–D5 eval records.
-  Acceptance: Every submission claim points to M5/M6 evidence; official rules and requirements are re-fetched and explicitly acknowledged by the user; no blocked or provisional fact is presented as verified.
-  Verify: H11–H12 and D1–D5; final Intended-vs-Implemented review; final Dual Delphi; independent clean reproduction at the submitted SHA.
+  What to build: `devpost-submission.md`, concise project/WebMCP explanation, public live URL, public repository URL, public video URL, tested-client matrix, claims ledger, AI/Codex usage disclosure, screenshots/thumbnail, and D1–D8 eval records.
+  Acceptance: Every submission claim points to M5/M6 evidence; live official rules and submission fields are re-fetched immediately before the Human Gate and explicitly acknowledged by the user; free judge access is scheduled and verified through the published end of judging; no blocked or provisional fact is presented as verified.
+  Verify: H11–H14 and D1–D8; final Intended-vs-Implemented review; final Dual Delphi; independent clean reproduction at the submitted SHA.
   Git: Push the submission-candidate checkpoint. Submission itself remains unperformed.
 
 - [ ] **10. Explicit final approval and Devpost handoff**
@@ -136,16 +139,16 @@ R0 COMPLETE → R1 IN PROGRESS [M1 BLOCKED] → R2 → R3 → R4 → USER-APPROV
 | H8 Agent-free persistence | **PENDING** | M3 local and M5 deployed reload. |
 | H9 Kill switch preserves site and persisted note | **PRECURSOR PASS** | M0/M1 removal works; M5 must retain the persisted note. |
 | H10 No false saved/blocked state | **PARTIAL PASS** | M1 status/controller pass; M3–M5 negative browser paths pending. |
-| H11 Public URL/repo/license/instructions | **PENDING** | M5 deployment and M6 reproduction package. |
-| H12 Real demo under three minutes with audio | **PENDING** | M6 media package. |
+| H11 Public URL/repo/license/instructions | **PENDING** | M5 deployment and M6 reproduction package; verify free judge access through judging end and a current public repo containing all source/assets/instructions plus a visible human-selected open-source license. |
+| H12 Real public YouTube demo under three minutes with audio | **PENDING** | M6 media package; verify `<180s`, logged-out YouTube playback, rights clearance, and separation from the `>192s` controlled evidence artifact. |
 
 ## Devpost-gate status
 
 | Gate | Current state | Required artifact |
 | --- | --- | --- |
 | D1 Working public native URL | **PENDING** | M5 public URL plus clean-session trace. |
-| D2 Public complete source, instructions, license | **PENDING** | M6 repository/reproduction checkpoint. |
-| D3 Public sub-three-minute video with audio | **PENDING** | M6 media URL and measured checks. |
+| D2 Public complete source, assets, instructions, visible license | **PENDING** | Current public repository, clean-clone reproduction, visible human-selected license, dated prior-versus-new-work evidence, and third-party authorization ledger. |
+| D3 Public YouTube demo `<180s` with audio | **PENDING** | Logged-out YouTube URL, measured duration/audio checks, protected-material rights review, and proof it is distinct from the `>192s` controlled evidence asset. |
 | D4 Concise project and WebMCP explanation | **PENDING** | Evidence-backed `devpost-submission.md`. |
 | D5 Only actually tested agents/clients named | **PENDING** | Tested-client matrix with version/build or explicit blocked value. |
 
@@ -159,7 +162,7 @@ This is provisional until the complete M5 run exists. Submission copy and demo n
 
 1. Obtain explicit approval for Chrome verification or an explicit decision to accept M1's blocked browser-evidence limitation.
 2. Close and push the M1 exit checkpoint.
-3. Obtain explicit user acknowledgment of the current official Devpost rules before M6 exits.
+3. Re-fetch the current official rules and submission fields immediately before the Human Gate, then obtain explicit user acknowledgment before M6 exits.
 4. Start M2 only after M1 is recorded `PASS`.
 
 ## Source of truth

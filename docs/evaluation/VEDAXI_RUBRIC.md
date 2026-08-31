@@ -4,7 +4,7 @@ This rubric challenges each milestone against deterministic product truth before
 
 ## Official judging source
 
-Verified on **2026-08-31** against the [WebMCP Challenge Official Rules](https://webmcp.devpost.com/rules). Stage Two defines the four criteria below as **equally weighted**, so each contributes `25%`. If this rubric conflicts with the Official Rules or another Hackathon Website update, the official source prevails. Recheck it before every new Dual Delphi score and before submission.
+Verified on **2026-08-31** against the [WebMCP Challenge Official Rules](https://webmcp.devpost.com/rules). Stage Two defines the four criteria below as **equally weighted**, so each contributes `25%`. If this rubric conflicts with the Official Rules or another Hackathon Website update, the official source prevails. Recheck the live rules and [Challenge page](https://webmcp.devpost.com/) before every new Dual Delphi score and again immediately before the Human Gate.
 
 ## Release rule and foundation gates
 
@@ -33,8 +33,10 @@ An attractive screenshot cannot compensate for a failed protocol gate. A passing
 | H8 | Citation status and discrepancy note survive an agent-free reload. | Browser reload observation. |
 | H9 | Kill switch unregisters tools under a fresh observation while the human page and persisted note remain usable. | Before/after tool inventory and UI observation. |
 | H10 | Failure states never display saved/blocked success when persistence or tool execution fails. | Negative tests and browser observation. |
-| H11 | Live URL works in ChatGPT’s in-app browser, and public repository contains complete source, instructions, and visible open-source license. | Fresh-session check and public URLs. |
-| H12 | Public demo video is under three minutes, includes audio, and shows the real successful run without cuts hiding protocol or persistence. | Final video duration and shot checklist. |
+| H11 | Live URL works in ChatGPT’s in-app browser; judge access stays free through the end of judging; and the current public repository contains all source, assets, instructions, and a human-selected open-source license visible on the repository page. | Fresh-session and logged-out checks, availability plan through judging end, public URLs, clean clone, and public license visibility. |
+| H12 | A public YouTube demo is strictly under three minutes, includes audio, and shows the real successful run without cuts hiding protocol or persistence. It is distinct from the controlled evidence video, which must extend beyond `00:03:12` (`>192s`). All third-party marks, music, media, and protected material are rights-cleared. | Logged-out YouTube playback, measured `<180s` duration/audio, shot checklist, controlled-evidence identity/duration check, and rights ledger. |
+| H13 | Prior work and challenge-period work are clearly separated with dated evidence; every third-party SDK, API, dataset, asset, and technical contribution has a recorded authorization or license basis. | Dated commit boundary/prior-vs-new statement plus dependency, data, asset, and assistance rights ledger. |
+| H14 | The current official rules and submission fields are rechecked immediately before submission; the Human Gate remains closed until the user acknowledges the current rules and separately authorizes submission. | Timestamped live-rule snapshot/diff and explicit user-owned acknowledgment/authorization records. |
 
 ## Devpost submission gates
 
@@ -43,10 +45,13 @@ These gates are independent of the product score and must all pass before submis
 | ID | Requirement | Evidence required |
 | --- | --- | --- |
 | D1 | Working live URL exposes the real native WebMCP experience in the target in-app browser. | Public URL plus clean-session trace. |
-| D2 | Public repository contains complete source, reproduction instructions, and a visible open-source license. | Public repository URL and clean-clone reproduction. |
-| D3 | Public demo video is under three minutes and contains audio. | Public video URL, measured duration, and audio check. |
+| D2 | Current public repository contains all source, assets, reproduction instructions, and a visible human-selected open-source license, with a clear prior-versus-new-work boundary. | Public repository URL, logged-out visibility, clean-clone reproduction, license detection, and dated work-boundary evidence. |
+| D3 | Public YouTube demo is `<180s`, contains audio, is rights-cleared, and is not the separate `>192s` controlled evidence artifact. | Logged-out YouTube URL, measured duration/audio, artifact identity check, and rights ledger. |
 | D4 | Submission includes a concise text explanation of the project and how WebMCP is used. | Draft cross-checked against the verified claims ledger. |
 | D5 | Submission names only agents/clients in which the project was actually tested. | Tested-client matrix with version/build, result, date, and evidence path. |
+| D6 | Live app/test build remains free and accessible to judges through the end of judging; credentials and instructions are supplied if access is private. | Clean-session access record, credential/instruction review if applicable, and availability owner/end date. |
+| D7 | Third-party SDKs, APIs, data, marks, music, media, and other protected material are authorized and license-compliant. | Dependency/data/asset rights ledger with source, terms/license, authorization basis, and reviewer. |
+| D8 | Live official rules and submission fields were rechecked immediately before the Human Gate. | Timestamped official-link fetch/diff and unresolved-change record. |
 
 No score can compensate for a failed D gate. Final submission remains a user-authorized external action.
 

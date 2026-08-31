@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "vedaxi.hard-quality.seed.v1",
+  "maturity": "representative_seed_not_statistically_reliable",
+  "case_count": 16,
+  "target_case_count": 50,
+  "coverage_note": "This first matrix establishes gate semantics and complexity coverage. It must not be reported as a mature benchmark until it reaches at least 50 independently reviewed cases.",
+  "strata": {
+    "simple": 4,
+    "medium": 4,
+    "complex": 4,
+    "very_complex": 4
+  },
+  "cases": [
+    {"id":"HQ-S01","complexity":"simple","dimensions":["protocol_truth","evidence_integrity"],"scenario":"Inspect one publisher tool result.","assertions":["Contains exact evidence and provenance","Contains no discrepancy conclusion or derived n=34"]},
+    {"id":"HQ-S02","complexity":"simple","dimensions":["visual_direction"],"scenario":"Judge the initial desktop viewport without narration.","assertions":["Purpose and hierarchy are legible within 30 seconds","Does not trigger generic_html_dashboard_quality"]},
+    {"id":"HQ-S03","complexity":"simple","dimensions":["interaction_motion_quality","accessibility_responsiveness"],"scenario":"Traverse every visible primary control by keyboard.","assertions":["Focus is visible and ordered","Pressed and disabled states remain truthful"]},
+    {"id":"HQ-S04","complexity":"simple","dimensions":["regression_safety"],"scenario":"Run the isolated hard-gate validator self-test.","assertions":["Rejects aggregate score laundering","Rejects a generic-quality automatic failure"]},
+
+    {"id":"HQ-M01","complexity":"medium","dimensions":["protocol_truth","functional_completeness"],"scenario":"Discover and retrieve paper then video evidence without tool names.","assertions":["Discovery follows schemas/descriptions","Agent derives 40 - 6 only after both results"]},
+    {"id":"HQ-M02","complexity":"medium","dimensions":["visual_direction","interaction_motion_quality"],"scenario":"Move from ordinary evidence browsing into Semantic Focus Shift.","assertions":["Transformation makes relationships clearer","Context remains reachable and motion is not decorative"]},
+    {"id":"HQ-M03","complexity":"medium","dimensions":["accessibility_responsiveness","visual_direction"],"scenario":"Repeat core paper/video inspection at mobile and tablet widths.","assertions":["No essential clipping or horizontal overflow","Hierarchy remains intentional rather than collapsing into stacked generic cards"]},
+    {"id":"HQ-M04","complexity":"medium","dimensions":["evidence_integrity","release_reproducibility"],"scenario":"Resolve a scored claim back to source identity and retained artifact.","assertions":["Evidence exists and matches evaluated source","Unknowns remain non-pass rather than inferred"]},
+
+    {"id":"HQ-C01","complexity":"complex","dimensions":["functional_completeness","evidence_integrity"],"scenario":"Confirm, reload without an agent, then reset.","assertions":["Confirmed mutation persists","Reset restores the exact clean fixture without erasing protocol truth"]},
+    {"id":"HQ-C02","complexity":"complex","dimensions":["functional_completeness","regression_safety"],"scenario":"Inject tool and persistence failures during consequential actions.","assertions":["No false success or partial mutation","Failure remains recoverable and protected by negative tests"]},
+    {"id":"HQ-C03","complexity":"complex","dimensions":["protocol_truth","accessibility_responsiveness"],"scenario":"Disable registrations, request fresh inventory, and continue as a human.","assertions":["VEDAXI tools disappear honestly","Human content, keyboard route, and persisted state remain usable"]},
+    {"id":"HQ-C04","complexity":"complex","dimensions":["visual_direction","interaction_motion_quality","accessibility_responsiveness"],"scenario":"Independent rendered review across desktop, mobile, reduced motion, empty, loading, and error states.","assertions":["No generic pattern veto triggers","Each state is composed, distinct, accessible, and visually coherent"]},
+
+    {"id":"HQ-V01","complexity":"very_complex","dimensions":["protocol_truth","functional_completeness","release_reproducibility"],"scenario":"Run the full golden workflow in a clean deployed target-client session.","assertions":["Two-origin sequential proof and agent derivation are real","A second reviewer can reproduce it without private context"]},
+    {"id":"HQ-V02","complexity":"very_complex","dimensions":["evidence_integrity","regression_safety","release_reproducibility"],"scenario":"Compare evaluated commit, built artifacts, public deployment, traces, screenshots, and claims ledger.","assertions":["All identities agree","No stale evidence or unevaluated release delta exists"]},
+    {"id":"HQ-V03","complexity":"very_complex","dimensions":["visual_direction","interaction_motion_quality","accessibility_responsiveness"],"scenario":"Skeptical independent judge completes the task across desktop/mobile and normal/reduced motion.","assertions":["Experience is distinct and premium without narration","Meaning and completion survive all presentation modes"]},
+    {"id":"HQ-V04","complexity":"very_complex","dimensions":["regression_safety","release_reproducibility","functional_completeness"],"scenario":"Clean-clone build, test, deploy rehearsal, and continuous demo choreography.","assertions":["All gates run from documented commands","Real workflow fits the release package without hidden operator steps"]}
+  ]
+}

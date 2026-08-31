@@ -40,13 +40,12 @@ const formatUpdatedAt = (value: string) =>
   }).format(new Date(value));
 
 function render(status: BoardStatus) {
-  const attentionCount = status.attention.length;
   app.innerHTML = `
     <main>
       <header class="topbar">
         <div>
-          <p class="brand">VEDAXI · DELIVERY CONTROL</p>
-          <p class="release-line">${escapeHtml(status.release.label)} · ${status.release.progress}%</p>
+          <p class="brand">VEDAXI · EVIDENCE CONTROL</p>
+          <p class="release-line">${escapeHtml(status.release.label)}</p>
         </div>
         <div class="top-actions">
           <span class="freshness" id="freshness">Updated ${escapeHtml(formatUpdatedAt(status.updatedAt))}</span>
@@ -54,21 +53,40 @@ function render(status: BoardStatus) {
         </div>
       </header>
 
-      <section class="focus" id="attention" tabindex="-1" aria-labelledby="attention-title">
-        <p class="section-kicker">HUMAN ATTENTION · ${attentionCount} OPEN</p>
-        <h1 id="attention-title">${attentionCount === 0 ? "Nothing needs you right now." : attentionCount === 1 ? "One decision needs you." : `${attentionCount} decisions need you.`}</h1>
-        <p class="mobile-guidance">Phone check-in: open the highlighted action when you have a decision. Reply <strong>accept</strong> or <strong>report defect</strong> in the Codex mobile chat after reviewing it.</p>
-        <div class="attention-grid">
-          ${status.attention.map((item) => renderItem(item, "attention-card")).join("")}
+      <section class="status-hero" id="attention" tabindex="-1" aria-labelledby="attention-title">
+        <div class="progress-block">
+          <p class="section-kicker">EVIDENCE-BASED RELEASE PROGRESS</p>
+          <p class="progress-number">${status.release.progress}<span>%</span></p>
+          <p class="progress-basis">1 of 5 release milestones has met its stop condition.</p>
         </div>
+        <div class="status-story">
+          <p class="risk-line">AT RISK · DEVPOST CLOSES 03 SEP · 20:00 UTC</p>
+          <h1 id="attention-title">Protocol proven.<br />Release not ready.</h1>
+          <p class="status-summary">${escapeHtml(status.release.summary)}</p>
+          <div class="metric-grid" aria-label="Current project metrics">
+            <div><strong>1 / 7</strong><span>formal module exits</span></div>
+            <div><strong>110 / 110</strong><span>tests passing</span></div>
+            <div><strong>${status.agents.filter((agent) => agent.state === "working").length}</strong><span>active agent</span></div>
+            <div><strong>15</strong><span>changed paths</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="gate-rail" aria-label="Module gate status">
+        ${status.drawer.milestones.map((item) => `<article class="gate ${item.eyebrow.includes("PASS") ? "pass" : item.eyebrow.includes("BLOCKED") ? "blocked" : "pending"}"><span>${escapeHtml(item.id.replace("module.", "").toUpperCase())}</span><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.eyebrow.split(" · ").at(-1) ?? "")}</small></article>`).join("")}
+      </section>
+
+      <section class="current-gate" aria-label="Current critical path">
+        <div><p class="section-kicker">CURRENT GATE</p><h2>M1 · Paper browser evidence</h2></div>
+        <p>Paper source works. Fresh keyboard traversal and a 390 × 844 observation are still required. M2 code exists ahead of the formal gate, but real media is missing.</p>
       </section>
 
       <section class="workbench" aria-label="Delivery status">
         <div class="panel">
           <div class="panel-heading">
             <div>
-              <p class="section-kicker">FOR LOOKING</p>
-              <h2>Agents working</h2>
+              <p class="section-kicker">LIVE ROSTER</p>
+              <h2>Agents working now</h2>
             </div>
             <span class="count">${status.agents.filter((agent) => agent.state === "working").length} active</span>
           </div>
@@ -91,7 +109,7 @@ function render(status: BoardStatus) {
 
         <div class="panel watch-panel">
           <div class="panel-heading">
-            <div><p class="section-kicker">NO ACTION YET</p><h2>Check up on</h2></div>
+            <div><p class="section-kicker">RELEASE VETOES</p><h2>What blocks us</h2></div>
             <span class="count">${status.watch.length}</span>
           </div>
           <div class="watch-list">${status.watch.map((item) => renderItem(item, "watch-card")).join("")}</div>

@@ -1,0 +1,30 @@
+{
+  "dataset_id": "vedaxi-claim-integrity-seed",
+  "version": "1.0.0",
+  "sample_size": 20,
+  "maturity": "development_seed_only",
+  "warning": "Twenty synthetic cases exercise deterministic veto logic; this is not a statistically reliable quality benchmark.",
+  "complexity_distribution": { "simple": 6, "medium": 9, "complex": 5 },
+  "cases": [
+    { "id": "verified-repo", "complexity": "simple", "mutation": "none", "expect_pass": true },
+    { "id": "inferred-nondecision", "complexity": "simple", "mutation": "inferred_nondecision", "expect_pass": true, "expect_release": false },
+    { "id": "unknown-decision", "complexity": "simple", "mutation": "status_unknown", "expect_veto": "DECISION_CLAIM_NOT_VERIFIED" },
+    { "id": "missing-source", "complexity": "simple", "mutation": "missing_source", "expect_veto": "EVIDENCE_NOT_FOUND" },
+    { "id": "out-of-repo", "complexity": "simple", "mutation": "out_of_repo", "expect_veto": "OUT_OF_REPO_EVIDENCE" },
+    { "id": "stale-evidence", "complexity": "medium", "mutation": "stale", "expect_veto": "STALE_EVIDENCE" },
+    { "id": "stale-identity", "complexity": "medium", "mutation": "bad_hash", "expect_veto": "STALE_SOURCE_IDENTITY" },
+    { "id": "circular-report", "complexity": "medium", "mutation": "self_report", "expect_veto": "CIRCULAR_SELF_REPORT" },
+    { "id": "unsupported-metric", "complexity": "medium", "mutation": "unsupported_metric", "expect_veto": "UNSUPPORTED_METRIC" },
+    { "id": "verified-command", "complexity": "medium", "mutation": "valid_command", "expect_pass": true },
+    { "id": "absent-media", "complexity": "medium", "mutation": "absent_media", "expect_veto": "ABSENT_MEDIA_CLAIM" },
+    { "id": "test-without-command", "complexity": "complex", "mutation": "test_without_command", "expect_veto": "CURRENT_COMMAND_EVIDENCE_REQUIRED" },
+    { "id": "contradicted-ground-truth", "complexity": "complex", "mutation": "contradiction", "expect_veto": "CONTRADICTED_BY_GROUND_TRUTH" },
+    { "id": "tampered-check", "complexity": "complex", "mutation": "bad_check_hash", "expect_veto": "CHECK_EVIDENCE_HASH_MISMATCH" }
+    ,{ "id": "verified-url-snapshot", "complexity": "complex", "mutation": "valid_external", "expect_pass": true },
+    { "id": "missing-producer", "complexity": "simple", "mutation": "missing_producer", "expect_veto": "MISSING_FIELD" },
+    { "id": "same-source-check", "complexity": "medium", "mutation": "same_source_check", "expect_veto": "CIRCULAR_EVIDENCE_ARTIFACT" },
+    { "id": "check-predates-source", "complexity": "medium", "mutation": "check_predates_source", "expect_veto": "CHECK_PREDATES_SOURCE" },
+    { "id": "git-head-file-laundering", "complexity": "complex", "mutation": "git_head_identity", "expect_veto": "FILE_IDENTITY_REQUIRES_SHA256" },
+    { "id": "checker-alias-laundering", "complexity": "medium", "mutation": "checker_alias", "expect_veto": "CIRCULAR_SELF_REPORT" }
+  ]
+}

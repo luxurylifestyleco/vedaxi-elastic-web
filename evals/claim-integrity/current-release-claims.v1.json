@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "dataset_id": "vedaxi-current-release-claims-v1",
+  "release_authority": "HUMAN_REQUIRED",
+  "requested_action": "NONE",
+  "devpost_copy": {
+    "status": "ABSENT",
+    "expected_path": "devpost-submission.md",
+    "reason": "The configured draft has not been created and submission remains not-started."
+  },
+  "claims": [
+    {
+      "claim_id": "m1-remains-blocked",
+      "text": "M1 remains BLOCKED in the current release registry.",
+      "claim_kind": "repository_state",
+      "decision_bearing": true,
+      "status": "VERIFIED",
+      "produced_by": "release-registry-v1",
+      "source": {
+        "type": "repository_file",
+        "path": "docs/pipeline/release-registry.v1.json",
+        "identity": { "kind": "sha256", "value": "0e5d2c3a4adf26c7c7683ce170ebcaaca739bf464e66b00178a775c864ad5ce8" },
+        "observed_at": "2026-08-31T12:45:00.000Z",
+        "max_age_seconds": 86400,
+        "scope": "current repository release registry only",
+        "representation": "paraphrased"
+      },
+      "assertion": { "json_pointer": "/modules/1/status", "equals": "BLOCKED" },
+      "independent_check": {
+        "checker_id": "hard-quality-current-assessment",
+        "checked_at": "2026-08-31T12:46:00.000Z",
+        "method": "cross_artifact_json_assertion",
+        "evidence_path": "evals/hard-quality/current-release.assessment.json",
+        "evidence_sha256": "f7bfadb4ec7ba2c42363ee16c96f13e949b79bc6537f252d44d219bc266c2c6e"
+      }
+    },
+    {
+      "claim_id": "release-identity-not-evaluated",
+      "text": "The current release assessment has no evaluated source commit and records a dirty worktree.",
+      "claim_kind": "repository_state",
+      "decision_bearing": true,
+      "status": "VERIFIED",
+      "produced_by": "hard-quality-current-assessment",
+      "source": {
+        "type": "repository_file",
+        "path": "evals/hard-quality/current-release.assessment.json",
+        "identity": { "kind": "sha256", "value": "f7bfadb4ec7ba2c42363ee16c96f13e949b79bc6537f252d44d219bc266c2c6e" },
+        "observed_at": "2026-08-31T12:45:00.000Z",
+        "max_age_seconds": 86400,
+        "scope": "current hard-quality assessment only",
+        "representation": "paraphrased"
+      },
+      "assertion": { "json_pointer": "/release_identity/worktree_clean", "equals": false },
+      "independent_check": {
+        "checker_id": "release-registry-v1",
+        "checked_at": "2026-08-31T12:46:00.000Z",
+        "method": "cross_artifact_release_hold_check",
+        "evidence_path": "docs/pipeline/release-registry.v1.json",
+        "evidence_sha256": "0e5d2c3a4adf26c7c7683ce170ebcaaca739bf464e66b00178a775c864ad5ce8"
+      }
+    },
+    {
+      "claim_id": "devpost-copy-not-started",
+      "text": "Devpost copy is absent and submission status remains not-started.",
+      "claim_kind": "repository_state",
+      "decision_bearing": true,
+      "status": "VERIFIED",
+      "produced_by": "devpost-hackathon-state-v2",
+      "source": {
+        "type": "repository_file",
+        "path": ".devpost-hackathon-state.json",
+        "identity": { "kind": "sha256", "value": "ea93dcafa0960a64060489c1b7ae3b9eb7cac53e25aa1ca85468fb4b00f4d08e" },
+        "observed_at": "2026-08-31T12:45:00.000Z",
+        "max_age_seconds": 86400,
+        "scope": "configured local Devpost handoff state and expected draft path",
+        "representation": "paraphrased"
+      },
+      "assertion": { "json_pointer": "/submission/status", "equals": "not-started" },
+      "independent_check": {
+        "checker_id": "release-registry-v1",
+        "checked_at": "2026-08-31T12:46:00.000Z",
+        "method": "registry_and_filesystem_absence_check",
+        "evidence_path": "docs/pipeline/release-registry.v1.json",
+        "evidence_sha256": "0e5d2c3a4adf26c7c7683ce170ebcaaca739bf464e66b00178a775c864ad5ce8"
+      }
+    }
+  ]
+}

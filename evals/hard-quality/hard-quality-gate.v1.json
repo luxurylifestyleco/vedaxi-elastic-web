@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "id": "vedaxi.hard-quality.release.v1",
+  "intent": "A release veto for product truth and premium experience. Aggregate quality can never compensate for a critical failure.",
+  "overall_floor": 0.9,
+  "score_scale": {
+    "min": 0,
+    "max": 1,
+    "anchors": {
+      "1.0": "Release-grade: complete, independently evidenced, and robust under adverse cases.",
+      "0.9": "Strong: only minor, non-load-bearing polish gaps remain.",
+      "0.75": "Material weakness: credible work exists, but the dimension is not release-grade.",
+      "0.5": "Prototype quality: important paths or qualities are incomplete.",
+      "0.0": "Missing, misleading, broken, or unevidenced."
+    }
+  },
+  "dimensions": {
+    "protocol_truth": {
+      "weight": 0.16,
+      "floor": 0.95,
+      "critical": true,
+      "evidence_minimum": 2,
+      "release_grade": "Native document.modelContext behavior, honest origin/lifecycle state, evidence-only publisher tools, and agent-side derivation are proved in the target browser."
+    },
+    "evidence_integrity": {
+      "weight": 0.14,
+      "floor": 0.95,
+      "critical": true,
+      "evidence_minimum": 2,
+      "release_grade": "Every consequential claim resolves to immutable, current-source evidence with provenance; unknowns and blocked checks remain explicit."
+    },
+    "functional_completeness": {
+      "weight": 0.15,
+      "floor": 0.9,
+      "critical": true,
+      "evidence_minimum": 2,
+      "release_grade": "The clean-session golden workflow, confirmation/rejection, persistence, reset, errors, and agent-free human path all work end to end."
+    },
+    "visual_direction": {
+      "weight": 0.15,
+      "floor": 0.9,
+      "critical": true,
+      "evidence_minimum": 3,
+      "release_grade": "The rendered product has a distinct editorial system, intentional typography, depth, hierarchy, and Semantic Focus Shift; it does not read as generic HTML or a routine dashboard."
+    },
+    "interaction_motion_quality": {
+      "weight": 0.11,
+      "floor": 0.88,
+      "critical": true,
+      "evidence_minimum": 2,
+      "release_grade": "All important controls expose hover, pressed, focus, loading, empty, error, and transition states; motion explains state and remains smooth and reversible."
+    },
+    "accessibility_responsiveness": {
+      "weight": 0.11,
+      "floor": 0.92,
+      "critical": true,
+      "evidence_minimum": 3,
+      "release_grade": "Keyboard, focus, semantics, contrast, reduced motion, and representative mobile/tablet/desktop layouts preserve the complete task without clipping or hidden controls."
+    },
+    "regression_safety": {
+      "weight": 0.1,
+      "floor": 0.92,
+      "critical": true,
+      "evidence_minimum": 2,
+      "release_grade": "Unit, integration, negative-path, build, type, and targeted visual checks protect the golden path and fail when load-bearing behavior is removed."
+    },
+    "release_reproducibility": {
+      "weight": 0.08,
+      "floor": 0.9,
+      "critical": true,
+      "evidence_minimum": 2,
+      "release_grade": "A clean public checkout and deployed target-client session reproduce the verified result using complete instructions, pinned artifacts, and an auditable release identity."
+    }
+  },
+  "deterministic_prerequisites": [
+    "schema_and_registry_valid",
+    "required_artifacts_exist",
+    "tests_types_and_builds_pass",
+    "no_stale_or_contradictory_evidence",
+    "applicable_module_and_release_gates_pass"
+  ],
+  "automatic_failures": {
+    "native_protocol_bypass": "Any silent WebMCP polyfill, direct-call demo fallback, publisher-side conclusion, or hardcoded tool-name coupling.",
+    "false_or_stale_evidence": "Any release claim backed by missing, contradictory, fabricated, stale-source, or wrong-environment evidence.",
+    "incomplete_golden_workflow": "Any load-bearing golden-path step is absent, operator-faked, non-reproducible, or reports success after failure.",
+    "generic_html_dashboard_quality": "Independent desktop and mobile review finds the product reads as ordinary HTML/admin UI: weak hierarchy plus routine card/sidebar structure plus absent distinctive depth, typography, or semantic transformation. Three or more of those pattern clusters trigger this veto.",
+    "decorative_or_inaccessible_motion": "Motion obscures state, breaks reduced-motion meaning, causes unreachable controls, or animates layout properties on a load-bearing interaction.",
+    "critical_accessibility_failure": "The golden task cannot be completed by keyboard, focus becomes lost/hidden, meaningful content lacks semantics, or a representative viewport clips an essential control.",
+    "regression_or_build_failure": "A required test/type/build/negative-path check fails, or a known load-bearing regression has no protective test.",
+    "non_reproducible_release": "The public release cannot be reproduced from a clean checkout/session, or shipped source/artifacts differ from evaluated identity.",
+    "unreviewed_high_stakes_judgment": "A qualitative critical-dimension score lacks independent rendered-product review and attached evidence."
+  },
+  "decision_order": [
+    "validate_assessment_structure",
+    "reject_non_pass_deterministic_prerequisites",
+    "reject_triggered_automatic_failures",
+    "reject_any_dimension_below_its_floor",
+    "reject_weighted_overall_below_overall_floor",
+    "pass"
+  ]
+}

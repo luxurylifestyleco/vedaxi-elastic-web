@@ -113,7 +113,7 @@
       "classification": "AGENT_EXECUTABLE",
       "dependencies": ["M5", "M6"],
       "evidence_paths": ["docs/VEDAXI_BUILD_SCOPE.md", "docs/evaluation/VEDAXI_RUBRIC.md"],
-      "exit_criteria": ["Public continuous real-run video is under 180 seconds, has audio, and shows discovery, persistence, and ablation."],
+      "exit_criteria": ["The submitted YouTube demo URL plays publicly in a logged-out/anonymous session, is under 180 seconds, has audio, and truthfully shows the working discovery, persistence, and ablation workflow."],
       "risk": "A demo cannot substitute for M5 evidence or hide load-bearing steps."
     },
     {
