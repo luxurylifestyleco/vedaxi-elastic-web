@@ -1,0 +1,2 @@
+export type VideoProtocolStatus = "checking" | "active" | "disabled" | "unsupported" | "error";
+export function protocolStatusCopy(status: VideoProtocolStatus): string { return ({ checking: "Checking native agent capabilities", active: "Native video evidence tools active", disabled: "Agent tools off", unsupported: "This browser does not expose native agent tools", error: "Native agent tools unavailable" })[status]; }

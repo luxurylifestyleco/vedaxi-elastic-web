@@ -1,0 +1,22 @@
+import { createRoot } from "react-dom/client";
+import { createVideoEvidenceService, createVideoFixture, createVideoSearchTool, createVideoTranscriptTool, resolveVideoRuntimeConfig } from "./video";
+import { VideoApp } from "./video/VideoApp";
+import type { VideoFixture } from "./video";
+import { useVideoRegistration } from "./video/use-video-registration";
+import "./styles.css";
+const root = document.querySelector<HTMLElement>("#root"); if (!root) throw new Error("Video application root is missing");
+let runtimeError: string | null = null;
+let fixture: VideoFixture | null = null;
+try {
+  const config = resolveVideoRuntimeConfig(window.location.origin, import.meta.env.VITE_PAPER_ORIGIN);
+  fixture = createVideoFixture(config.videoOrigin);
+} catch (error) {
+  runtimeError = error instanceof Error ? error.message : "Video origin configuration is invalid";
+}
+if (runtimeError) {
+  root.innerHTML = `<main role="alert"><h1>Video origin unavailable</h1><p>${runtimeError}. Transcript tools are not registered.</p></main>`;
+} else {
+  const service = createVideoEvidenceService(fixture!); const tools = [createVideoSearchTool(service), createVideoTranscriptTool(service)];
+  function VideoRoot() { const protocol = useVideoRegistration(tools); return <VideoApp fixture={fixture!} service={service} protocol={protocol} />; }
+  createRoot(root).render(<VideoRoot />);
+}

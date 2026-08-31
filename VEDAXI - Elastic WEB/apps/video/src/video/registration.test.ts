@@ -1,0 +1,12 @@
+import { describe, expect, it, vi } from "vitest";
+import type { WebMcpRegistration, WebMcpTool } from "@vedaxi/contracts";
+import { VideoRegistrationController } from "./use-video-registration";
+const tool = { name: "read", title: "Read", description: "", inputSchema: { type: "object" }, execute: async () => [] } as WebMcpTool;
+const registration = (status: WebMcpRegistration["registrationStatus"]): WebMcpRegistration => ({ registrationStatus: status, uiStatus: status === "registered" ? "active" : status === "unsupported" ? "unsupported" : status === "cancelled" ? "disabled" : "error", disable: vi.fn(() => "disabled" as const) });
+const settle = () => Promise.resolve().then(() => Promise.resolve());
+describe("M2 registration lifecycle", () => {
+  it.each([["registered", "active"], ["unsupported", "unsupported"], ["cancelled", "disabled"], ["error", "error"]] as const)("maps %s truthfully", async (native, ui) => { const states: string[] = []; const controller = new VideoRegistrationController([tool], (s) => states.push(s), vi.fn(async () => registration(native))); controller.enable(); await settle(); expect(states).toEqual(["checking", ui]); });
+  it("maps an empty native registration to error", async () => { const states: string[] = []; const controller = new VideoRegistrationController([tool], (s) => states.push(s), vi.fn(async () => registration("empty"))); controller.enable(); await settle(); expect(states).toEqual(["checking", "error"]); });
+  it("maps rejection to error and stale completion cannot win", async () => { const states: string[] = []; let resolve!: (r: WebMcpRegistration) => void; const stale = registration("registered"); const register = vi.fn(() => new Promise<WebMcpRegistration>((r) => { resolve = r; })); const controller = new VideoRegistrationController([tool], (s) => states.push(s), register); controller.enable(); controller.disable(); resolve(stale); await settle(); expect(controller.status).toBe("disabled"); expect(stale.disable).toHaveBeenCalled(); expect(states).toEqual(["checking", "disabled"]); });
+  it("supports teardown and disable/re-enable", async () => { const states: string[] = []; const reg = registration("registered"); const controller = new VideoRegistrationController([tool], (s) => states.push(s), vi.fn(async () => reg)); controller.enable(); await settle(); controller.disable(); controller.enable(); await settle(); controller.teardown(); expect(reg.disable).toHaveBeenCalled(); expect(states).toEqual(["checking", "active", "disabled", "checking", "active"]); });
+});

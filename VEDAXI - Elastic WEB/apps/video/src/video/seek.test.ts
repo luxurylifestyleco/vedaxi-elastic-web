@@ -1,0 +1,9 @@
+import { describe, expect, it, vi } from "vitest";
+import { seekVideo } from "./seek";
+class FakeVideo extends EventTarget { readyState = 1; duration = 300; currentTime = 0; seekable = { length: 1, start: () => 0, end: () => 300 }; }
+const setup = () => { (globalThis as unknown as { HTMLMediaElement: { HAVE_METADATA: number } }).HTMLMediaElement = { HAVE_METADATA: 1 }; return new FakeVideo(); };
+const media = (video: FakeVideo) => video as unknown as HTMLVideoElement;
+describe("async human seek", () => {
+  it("requires duration and seekable target", async () => { const v = setup(); v.duration = 192; await expect(seekVideo(media(v), { seconds: 192 })).resolves.toMatchObject({ ok: false, reason: "media-unavailable" }); v.duration = 300; v.seekable = { length: 0, start: () => 0, end: () => 0 }; await expect(seekVideo(media(v), { seconds: 192 })).resolves.toMatchObject({ ok: false, reason: "seek-failed" }); });
+  it("confirms seek, rejects mismatch/error/timeout, and cleans listeners", async () => { const v = setup(); const confirmed = seekVideo(media(v), { seconds: 192 }, 100); v.currentTime = 192; v.dispatchEvent(new Event("seeked")); await expect(confirmed).resolves.toEqual({ ok: true, seconds: 192 }); const mismatch = seekVideo(media(v), { seconds: 192 }, 100); v.currentTime = 12; v.dispatchEvent(new Event("seeked")); await expect(mismatch).resolves.toMatchObject({ ok: false, reason: "seek-failed" }); const error = seekVideo(media(v), { seconds: 192 }, 100); v.dispatchEvent(new Event("error")); await expect(error).resolves.toMatchObject({ ok: false, reason: "seek-failed" }); vi.useFakeTimers(); const timeout = seekVideo(media(v), { seconds: 192 }, 50); vi.advanceTimersByTime(50); await expect(timeout).resolves.toMatchObject({ ok: false, reason: "timeout" }); vi.useRealTimers(); });
+});
