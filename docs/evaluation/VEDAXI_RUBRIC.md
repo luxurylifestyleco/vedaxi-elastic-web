@@ -8,7 +8,7 @@ Verified on **2026-08-31** against the [WebMCP Challenge Official Rules](https:/
 
 ## Release rule and foundation gates
 
-The official weighted score is meaningful only once a judge can exercise a coherent end-to-end product. It is therefore a hard release gate at M5 and M6, and a diagnostic interval before then. M0–M4 exit on their applicable hard gates and module evidence; they must not be failed or score-inflated for capabilities owned by later modules.
+The official weighted score is meaningful only once a judge can exercise a coherent end-to-end product. It is therefore a hard gate after M5 and against the frozen M6 package before release, and a diagnostic interval before then. M0–M4 exit on their applicable hard gates and module evidence; they must not be failed or score-inflated for capabilities owned by later modules.
 
 A judgeable release passes only when:
 

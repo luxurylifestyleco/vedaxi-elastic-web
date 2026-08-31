@@ -94,7 +94,7 @@ R0 COMPLETE → R1 IN PROGRESS [M1 BLOCKED] → R2 → R3 → R4 → USER-APPROV
   Spec ref: `docs/MODULE_ARCHITECTURE.md > M5 — Native End-to-End Proof`
   What to build: Two public origins, deployed registration adapters, mutation tools calling M3 actions, generic external-agent job prompt, ordered evidence trace, focus/confirmation, agent-free persistence proof, and full kill-switch ablation.
   Acceptance: Clean target-browser session dynamically discovers both origins sequentially; retrieves `40` then `6`; derives `34` externally; requires human confirmation; persists block/note; survives reload; disabling registrations removes the agent route but preserves the human site and note.
-  Verify: Public URLs; clean-session H1–H11 trace; D1; C01–C05; renamed/reordered tool resilience; network/console capture; WebMCP-off ablation; Dual Delphi ≥85/100 with no dimension below 4/5.
+  Verify: Public URLs; clean-session H1–H10 trace; D1; C01–C05; renamed/reordered tool resilience; network/console capture; WebMCP-off ablation; Dual Delphi ≥85/100 with no dimension below 4/5. H11 remains downstream of the M6 package.
   Git: Push deployment source/config candidate, then the exact public evidence and M5 exit checkpoint.
 
 - [ ] **7. Complete reviewable shipping documentation — M6 foundation**
@@ -114,8 +114,8 @@ R0 COMPLETE → R1 IN PROGRESS [M1 BLOCKED] → R2 → R3 → R4 → USER-APPROV
 - [ ] **9. Prepare and audit the Devpost package — M6 submission**
   Spec ref: `docs/evaluation/VEDAXI_RUBRIC.md > Devpost submission gates`
   What to build: `devpost-submission.md`, concise project/WebMCP explanation, public live URL, public repository URL, public video URL, tested-client matrix, claims ledger, AI/Codex usage disclosure, screenshots/thumbnail, and D1–D8 eval records.
-  Acceptance: Every submission claim points to M5/M6 evidence; live official rules and submission fields are re-fetched immediately before the Human Gate; free judge access is scheduled and verified through the published end of judging; no blocked or provisional fact is presented as verified. User acknowledgment and final authorization occur only at the separate Human Gate.
-  Verify: H11–H12 and D1–D8; separate Human Gate records for rules acknowledgment and final authorization; final Intended-vs-Implemented review; final Dual Delphi; independent clean reproduction at the submitted SHA.
+  Acceptance: The frozen package is ready for downstream release evaluation: every submission claim points to M5/M6 evidence, access and rights inputs are complete, and no blocked or provisional fact is presented as verified. User acknowledgment and final authorization occur only after the release gates at the separate Human Gate.
+  Verify: Final Intended-vs-Implemented review, final Dual Delphi, and independent clean reproduction at the candidate SHA. Then evaluate H11–H12 and D2–D8 against that frozen package before presenting separate rules-acknowledgment and final-authorization records at the Human Gate. D1 is already owned by M5.
   Git: Push the submission-candidate checkpoint. Submission itself remains unperformed.
 
 - [ ] **10. Explicit final approval and Devpost handoff**

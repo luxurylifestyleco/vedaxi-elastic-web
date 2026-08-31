@@ -254,13 +254,13 @@ M0 has two inseparable sub-gates. M0A proves source contracts. M0B proves the ex
 | Owned files | `apps/paper/src/webmcp/**`, `apps/video/src/webmcp/**`, deployment/origin configuration, `tests/browser/**`, browser matrix/ordered traces under `docs/evidence/M5/**`, `evals/registry/data/vedaxi/m5-native.*.jsonl`. |
 | Typed public contract | Per-origin registration adapters consume M0 `WebMcpTool`/lifecycle types and M1/M2 tool factories; mutation adapters consume M3 public actions. Captured trace schema records intent, origin, capability, call, result, concise rationale, confirmation, mutation, and audit result—never private chain-of-thought. |
 | Allowed dependencies | Only passed public boundaries from M0–M4 plus target-browser/deployment tooling. No publisher code in the external agent, no hardcoded publisher tool names in its prompt, no direct-call fallback, no aggregator that erases origin, and no simulated success. |
-| Devpost/hard gates | H1–H11; D1 and tested-client evidence for D5. H12 remains M6. |
+| Devpost/hard gates | H1–H10 and D1; tested-client evidence is retained for downstream D5. H11/H12 and D2–D8 remain downstream of the M6 package. |
 | Eval cases | M1, M2, C3, C4, C5, V1; rerun S1–S5, M3–M5, C1, and V4 as the full integration regression. |
 | Unit evidence | Tool schemas/descriptions; result validation; renamed/reordered tool fixtures; corrupt/missing evidence behavior; lifecycle cleanup. |
 | Integration evidence | Each connection C01–C05 passes in the selected topology; ordered trace proves evidence A and B precede derivation; human and agent are both indispensable. |
 | Browser evidence | Clean deployed session, exact version/origins, tool inventory, prompt capture, calls/results/provenance, focus/confirm/persist/reload, before/after kill-switch inventory, human route survival, and console/network errors. |
 | Entry gate | M4 `PASS`; deployed two-origin URLs exist; M0B browser assumptions are rechecked in the deployed environment. |
-| Exit gate | All applicable H1–H11 pass; D1 passes; all mapped cases pass; WebMCP ablation fails the agent route but not the human route; Dual Delphi score is at least 85 with no dimension below 4/5. |
+| Exit gate | All applicable H1–H10 and D1 pass; all mapped cases pass; WebMCP ablation fails the agent route but not the human route; Dual Delphi score is at least 85 with no dimension below 4/5. |
 | Connection point | C06 supplies only verified evidence to the public submission package. |
 | Rollback/repair boundary | Repair the failing adapter/connection and rerun downstream evidence. Simultaneous-to-sequential topology change is allowed only with the recorded M0/M5 failure and truthful copy. Native failure never falls back to direct internal calls. |
 | Judge dimensions | W and E primary; I and C validated end to end. |
@@ -273,13 +273,13 @@ M0 has two inseparable sub-gates. M0A proves source contracts. M0B proves the ex
 | Owned files | Public `README.md`, visible open-source `LICENSE`, reproduction/testing docs, `devpost-submission.md`, video shot/timing checklist, public URL/client matrix, `evals/registry/data/vedaxi/m6-submission.*.jsonl`, `docs/evidence/M6/**`. The public video file may live on its hosting service rather than in Git. |
 | Typed public contract | No new product runtime contract. Submission facts consume the verified M5 evidence schema and expose immutable public URLs, commit SHA, environment/client names, and versioned reproduction steps. |
 | Allowed dependencies | Documentation, repository host, deployment host, and public video host. Narration/caption tooling may polish an already-recorded real run. It may not create, replace, or conceal protocol evidence. |
-| Devpost/hard gates | H11, H12, D1–D8. Submission itself still requires explicit user confirmation after M6 exits. |
+| Devpost/hard gates | M6 produces the package-readiness evidence consumed by downstream H11, H12, and D2–D8. D1 belongs to M5. Submission itself still requires explicit user confirmation after the downstream gates pass. |
 | Eval cases | V5 plus D1–D8 submission completeness, access, rights, and current-rules cases. |
 | Unit evidence | Link/file/license/instruction checks; client matrix completeness; explanation cross-check against claims ledger. |
 | Integration evidence | Fresh clone/install/test/build and fresh-session live reproduction by an independent reviewer; public URLs resolve without private credentials. |
 | Browser evidence | Public live URL and video access; timed video under 180 seconds and target 154 seconds; audio present; no cuts conceal discovery, persistence, or kill switch. |
 | Entry gate | M5 `PASS`; public source/deployment/video destinations available. |
-| Exit gate | H11/H12 and D1–D8 pass; clean reproduction passes at the submitted SHA; final Intended-vs-Implemented and Dual Delphi reviews pass. Rules acknowledgment and final submission authorization remain separate user-owned gates. |
+| Exit gate | The public package inputs and reproducibility evidence are complete; clean reproduction passes at the candidate SHA; final Intended-vs-Implemented and Dual Delphi reviews pass. H11/H12 and D2–D8 then evaluate that frozen package. Rules acknowledgment and final submission authorization remain later, separate user-owned gates. |
 | Connection point | Final Devpost fields point only to the evidence-backed public artifacts. |
 | Rollback/repair boundary | Repair the failing document, link, recording, or deployment artifact and rerun its check. Never edit the product or video to claim unverified behavior, and never submit without user confirmation. |
 | Judge dimensions | All four dimensions communicated; no new score is invented beyond M5 evidence. |

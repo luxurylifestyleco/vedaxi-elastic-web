@@ -72,7 +72,7 @@
       "classification": "AGENT_EXECUTABLE",
       "dependencies": ["M4", "C05", "public-two-origin-deployment"],
       "evidence_paths": ["docs/MODULE_ARCHITECTURE.md", "docs/evaluation/VEDAXI_RUBRIC.md"],
-      "exit_criteria": ["Clean public H1-H11 trace passes.", "Sequential discovery, derivation, confirmation, reload, and kill-switch ablation are retained."],
+      "exit_criteria": ["Clean public H1-H10 and D1 trace passes.", "Sequential discovery, derivation, confirmation, reload, and kill-switch ablation are retained."],
       "risk": "This is the release proof: deployment or target-client drift blocks all submission claims."
     },
     {
@@ -82,7 +82,7 @@
       "classification": "MIXED",
       "dependencies": ["M5", "C06", "submission-assets"],
       "evidence_paths": ["docs/MODULE_ARCHITECTURE.md", "docs/VEDAXI_BUILD_SCOPE.md", "docs/evaluation/VEDAXI_RUBRIC.md"],
-      "exit_criteria": ["H11-H12 and D1-D8 pass.", "Clean reproduction and final reviews are retained before the separate Human Gate."],
+      "exit_criteria": ["The public package inputs and reproducibility evidence are complete for downstream release evaluation.", "Clean reproduction and final reviews are retained before the separate release and Human Gates."],
       "risk": "No asset may claim behavior that M5 has not proved."
     }
   ],
@@ -187,7 +187,7 @@
     { "id": "D4", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M5", "M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
     { "id": "D5", "status": "PENDING", "passed": false, "owner": "Native Proof owner", "dependencies": ["M5", "M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
     { "id": "D6", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M6", "live-url"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/SUBMISSION_PIPELINE.md"] },
-    { "id": "D7", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/SUBMISSION_PIPELINE.md"] },
+    { "id": "D7", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/SUBMISSION_PIPELINE.md", "docs/compliance/RIGHTS_LEDGER.md"] },
     { "id": "D8", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M6", "current-official-rules"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/compliance/OFFICIAL_RULES_MATRIX.md"] }
   ]
 }
