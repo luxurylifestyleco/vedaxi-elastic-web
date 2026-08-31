@@ -181,6 +181,10 @@ blockquote p { margin: 0; font-size: clamp(1.6rem, 3vw, 2.8rem) !important; line
 .search-form input::placeholder { color: var(--color-paper); opacity: 0.58; }
 .search-form button { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); padding: 0 var(--space-4); background: var(--color-paper); color: var(--color-ink); cursor: pointer; }
 .search-icon { flex: 0 0 auto; }
+.search-suggestions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-3); color: var(--color-paper); font-size: 0.9rem; }
+.search-suggestions > span { opacity: 0.68; }
+.search-suggestions button { min-height: 2.75rem; padding: 0 var(--space-3); border: 1px solid color-mix(in srgb, var(--color-paper) 42%, transparent); border-radius: 999px; background: transparent; color: inherit; cursor: pointer; }
+.search-suggestions button:hover { border-color: var(--color-paper); background: color-mix(in srgb, var(--color-paper) 9%, transparent); }
 .search-message { min-height: 1.5em; color: var(--color-paper); opacity: 0.74; }
 .search-result { display: flex; justify-content: space-between; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-paper); text-decoration: none; }
 

@@ -81,4 +81,20 @@ describe("M1 Paper Integrity Desk", () => {
     expect(markup).toContain('aria-hidden="true"');
     expect(markup).toContain('<span>Search</span>');
   });
+
+  it("offers judge-friendly example searches that map to publisher evidence", () => {
+    const markup = renderToStaticMarkup(
+      <PaperApp
+        fixture={fixture}
+        service={service}
+        protocol={{ status: "active", enable: () => undefined, disable: () => undefined }}
+      />
+    );
+
+    expect(markup).toContain("Try one:");
+    expect(markup).toContain("final analyzed sample");
+    expect(markup).toContain("forty participants");
+    expect(markup).toContain("included in the final analysis");
+    expect(markup).toContain('type="button"');
+  });
 });

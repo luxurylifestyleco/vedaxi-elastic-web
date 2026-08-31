@@ -42,9 +42,20 @@ function PaperSearch({ service }: { service: PaperEvidenceService }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<EvidenceSearchResult[] | null>(null);
 
+  const suggestions = [
+    "final analyzed sample",
+    "forty participants",
+    "included in the final analysis"
+  ] as const;
+
+  const runSearch = (nextQuery: string) => {
+    setQuery(nextQuery);
+    setResults(service.search(nextQuery));
+  };
+
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setResults(service.search(query));
+    runSearch(query);
   };
 
   const message =
@@ -90,6 +101,14 @@ function PaperSearch({ service }: { service: PaperEvidenceService }) {
           </button>
         </div>
       </form>
+      <div className="search-suggestions" aria-label="Suggested paper searches">
+        <span>Try one:</span>
+        {suggestions.map((suggestion) => (
+          <button key={suggestion} type="button" onClick={() => runSearch(suggestion)}>
+            {suggestion}
+          </button>
+        ))}
+      </div>
       <p className="search-message" aria-live="polite">{message}</p>
       {results?.map(({ evidence, score }) => (
         <a className="search-result" href="#methods-participants" key={evidence.id}>
