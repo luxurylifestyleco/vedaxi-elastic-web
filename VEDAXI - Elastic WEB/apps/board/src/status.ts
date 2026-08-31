@@ -4,6 +4,7 @@ export type BoardItem = {
   title: string;
   detail: string;
   action?: string;
+  href?: string;
 };
 
 export type AgentItem = {
@@ -43,7 +44,9 @@ const isBoardItem = (value: unknown): value is BoardItem =>
   isString(value.eyebrow) &&
   isString(value.title) &&
   isString(value.detail) &&
-  (value.action === undefined || isString(value.action));
+  (value.action === undefined || isString(value.action)) &&
+  (value.href === undefined ||
+    (isString(value.href) && (value.href.startsWith("https://") || value.href.startsWith("/"))));
 
 const isAgentItem = (value: unknown): value is AgentItem =>
   isObject(value) &&

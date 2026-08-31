@@ -37,4 +37,13 @@ describe("parseBoardStatus", () => {
       }),
     ).toThrow("failed validation");
   });
+
+  it("rejects unsafe attention links", () => {
+    expect(() =>
+      parseBoardStatus({
+        ...validStatus,
+        attention: [{ ...validStatus.attention[0], href: "javascript:alert(1)" }],
+      }),
+    ).toThrow("failed validation");
+  });
 });

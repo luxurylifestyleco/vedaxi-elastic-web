@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-31T05:30:00.000Z",
+  "updatedAt": "2026-08-31T08:31:00.000Z",
   "release": {
     "label": "R1 · Paper evidence gate",
     "progress": 20,
@@ -8,33 +8,59 @@
   },
   "attention": [
     {
-      "id": "attention.m2-video",
-      "eyebrow": "Now · M2 media",
-      "title": "Choose the controlled video asset",
-      "detail": "Provide or approve an original or licensed video longer than 03:12 with aligned captions. A simulated seek cannot pass S5.",
-      "action": "Needed from you before the Video Origin can exit."
+      "id": "attention.devpost-rules",
+      "eyebrow": "Now · Devpost gate",
+      "title": "Acknowledge the official hackathon rules",
+      "detail": "The authenticated account is registered, but the local submission workflow cannot prepare the official draft until the current rules are explicitly acknowledged.",
+      "action": "Review the official rules",
+      "href": "https://webmcp.devpost.com/rules"
     }
   ],
-  "agents": [],
+  "agents": [
+    {
+      "id": "agent.master-pipeline",
+      "name": "Master Agent // Pipeline Control",
+      "focus": "Unblocking browser evidence, integrating checkpoints, and keeping the deadline critical path moving.",
+      "state": "working"
+    },
+    {
+      "id": "agent.m2-code",
+      "name": "Sub Agent 4 // M2 Code",
+      "focus": "Implementing the Video Origin in fast mode without embedding the final media binary.",
+      "state": "working"
+    },
+    {
+      "id": "agent.ci-gate",
+      "name": "Sub Agent 5 // CI Gate",
+      "focus": "Turning tests, builds, registries, and contradiction checks into an automatic GitHub quality gate.",
+      "state": "working"
+    }
+  ],
   "watch": [
     {
       "id": "watch.m1-current-tree",
-      "eyebrow": "Agent-owned · M1",
-      "title": "Re-run browser evidence on the current Paper tree",
-      "detail": "Historical Chrome evidence is valid for its recorded source, but later search/navigation changes require fresh proof."
+      "eyebrow": "Critical path · M1",
+      "title": "Functional proof passed; interaction evidence blocked",
+      "detail": "Exact result, search navigation, protocol lifecycle, origins, and logs pass. The browser surface is swallowing keyboard focus, so no false PASS will be recorded."
     },
     {
-      "id": "watch.devpost",
-      "eyebrow": "Later · M6",
-      "title": "Acknowledge official Devpost rules",
-      "detail": "Required before final submission, not before current engineering work."
+      "id": "watch.video-slot",
+      "eyebrow": "Late-bound · Ready",
+      "title": "Final media slot is defined",
+      "detail": "The MP4 and captions plug in last. The product evidence video and the under-three-minute Devpost demo remain separate assets."
     },
-    {
-      "id": "watch.m5-deployed",
+      {
+        "id": "watch.m5-deployed",
       "eyebrow": "Later · M5",
       "title": "Verify deployed-client parity",
-      "detail": "Public origins, unsupported/error behavior, and the final browser matrix remain deployment work."
-    }
+        "detail": "Public origins, unsupported/error behavior, and the final browser matrix remain deployment work."
+      },
+      {
+        "id": "watch.vercel-git",
+        "eyebrow": "Infrastructure · Later",
+        "title": "Connect Vercel to GitHub",
+        "detail": "Direct board deployments work now. Push-triggered deployments need the Vercel account's GitHub login connection."
+      }
   ],
   "drawer": {
     "done": [
@@ -61,6 +87,24 @@
         "eyebrow": "Delivery control · Ready",
         "title": "Remote attention board",
         "detail": "Human decisions stay magnified, active agents remain glanceable, and completed work moves into the drawer."
+      },
+      {
+        "id": "done.video-slot",
+        "eyebrow": "M2 · Contract ready",
+        "title": "Late-bound media validator",
+        "detail": "Reserved media and caption paths, duration, timestamp, provenance, license, and checksum rules are machine validated."
+      },
+      {
+        "id": "done.m1-v3",
+        "eyebrow": "M1 · Evidence v3",
+        "title": "Current-tree functional proof",
+        "detail": "Native result, search navigation, lifecycle, origins, logs, 76 tests, type-check, build, and registry validation pass. Keyboard and narrow capture remain blocked."
+      },
+      {
+        "id": "done.release-registry",
+        "eyebrow": "Pipeline · Validated",
+        "title": "Deadline and asset registry",
+        "detail": "Machine-readable ownership, dependencies, proof paths, user gates, asset status, and contradiction checks are in place."
       }
     ],
     "milestones": [

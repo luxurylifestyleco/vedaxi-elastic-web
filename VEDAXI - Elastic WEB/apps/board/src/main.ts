@@ -24,7 +24,13 @@ const renderItem = (item: BoardItem, className = "card") => `
     <p class="eyebrow">${escapeHtml(item.eyebrow)}</p>
     <h3>${escapeHtml(item.title)}</h3>
     <p>${escapeHtml(item.detail)}</p>
-    ${item.action ? `<p class="action">${escapeHtml(item.action)}</p>` : ""}
+    ${
+      item.href
+        ? `<a class="card-link" href="${escapeHtml(item.href)}" target="_blank" rel="noreferrer">${escapeHtml(item.action ?? "Check output")}</a>`
+        : item.action
+          ? `<p class="action">${escapeHtml(item.action)}</p>`
+          : ""
+    }
   </article>`;
 
 const formatUpdatedAt = (value: string) =>
@@ -50,7 +56,7 @@ function render(status: BoardStatus) {
 
       <section class="focus" id="attention" tabindex="-1" aria-labelledby="attention-title">
         <p class="section-kicker">HUMAN ATTENTION · ${attentionCount} OPEN</p>
-        <h1 id="attention-title">${attentionCount === 1 ? "One decision needs you." : `${attentionCount} decisions need you.`}</h1>
+        <h1 id="attention-title">${attentionCount === 0 ? "Nothing needs you right now." : attentionCount === 1 ? "One decision needs you." : `${attentionCount} decisions need you.`}</h1>
         <div class="attention-grid">
           ${status.attention.map((item) => renderItem(item, "attention-card")).join("")}
         </div>
