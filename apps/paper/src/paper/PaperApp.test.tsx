@@ -171,6 +171,14 @@ describe("M4 Semantic Focus Shift", () => {
     expect(markup).toContain(focusRequest.provenance.video);
     expect(markup).toContain("Confirm focus");
     expect(markup).toContain("Reject focus");
+    expect(markup).toContain('data-focus-state="focused"');
+    expect(markup).toContain("Restore full workspace");
+    expect(markup).toContain('aria-label="Pinned focus context"');
+    expect(markup).toContain("Paper evidence");
+    expect(markup).toContain("Video evidence");
+    expect(markup).toContain("Focus decision");
+    expect(markup).toContain('aria-label="Review history"');
+    expect(markup).toContain("Focus requested");
   });
 
   it("renders one persisted blocked discrepancy with linked evidence and reset recovery", () => {
@@ -194,6 +202,9 @@ describe("M4 Semantic Focus Shift", () => {
     expect(markup).toContain(focusRequest.paperEvidenceId);
     expect(markup).toContain(focusRequest.videoEvidenceId);
     expect(markup).toContain("Reset focus review");
+    expect(markup).toContain('aria-label="Review history"');
+    expect(markup).toContain("Focus requested");
+    expect(markup).toContain("Citation block confirmed by human");
   });
 
   it("shows a recoverable storage error without claiming the citation was saved or blocked", () => {

@@ -15,7 +15,7 @@ export interface FocusRequest {
 }
 
 export interface Confirmation {
-  confirmedBy: "human" | "webmcp";
+  confirmedBy: "human";
 }
 
 export interface DiscrepancyNote extends FocusRequest {
@@ -126,8 +126,7 @@ function isValidConfirmation(value: unknown): value is Confirmation {
   return (
     !!value &&
     typeof value === "object" &&
-    ((value as Partial<Confirmation>).confirmedBy === "human" ||
-      (value as Partial<Confirmation>).confirmedBy === "webmcp")
+    (value as Partial<Confirmation>).confirmedBy === "human"
   );
 }
 
@@ -138,7 +137,7 @@ function isValidAuditEvent(value: unknown): value is AuditEvent {
     event.type === "focus-requested" ||
     event.type === "focus-rejected" ||
     (event.type === "focus-confirmed" &&
-      (event.confirmedBy === "human" || event.confirmedBy === "webmcp"))
+      event.confirmedBy === "human")
   );
 }
 

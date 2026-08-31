@@ -324,26 +324,42 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
 
 .focus-preview { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin: var(--space-4) clamp(1rem, 4vw, 4rem) 0; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-protocol); background: var(--color-protocol-soft); }
 .focus-preview h2, .focus-preview p { margin: 0; }
-.focus-preview button, .focus-actions button, .discrepancy-note button { min-height: 2.75rem; padding: var(--space-2) var(--space-3); border: 1px solid var(--color-ink); background: var(--color-ink); color: var(--color-paper); cursor: pointer; }
+.focus-preview button, .focus-actions button, .focus-view-actions button, .discrepancy-note button { min-height: 2.75rem; padding: var(--space-2) var(--space-3); border: 1px solid var(--color-ink); background: var(--color-ink); color: var(--color-paper); cursor: pointer; }
 .focus-preview button:disabled { opacity: .62; cursor: default; }
 .publisher-error { margin: var(--space-3) clamp(1rem, 4vw, 4rem) 0; padding: var(--space-3); border-left: 3px solid var(--color-error); background: var(--color-paper); color: var(--color-error); }
-.paper-article--focused .stage-chapter--video, .paper-article--focused .stage-chapter--evidence, .paper-article--focused .stage-chapter--decision { padding: var(--space-4); outline: 2px solid var(--color-protocol); outline-offset: var(--space-2); background: var(--color-paper); }
+.paper-article[data-focus-state="focused"] { display: grid; max-width: none; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "decision decision" "method evidence" "video paper"; gap: var(--space-4); }
+.paper-article[data-focus-state="focused"] section { margin-bottom: 0; }
+.paper-article[data-focus-state="focused"] .stage-chapter--paper { grid-area: paper; }
+.paper-article[data-focus-state="focused"] .stage-chapter--method { grid-area: method; }
+.paper-article[data-focus-state="focused"] .stage-chapter--video { grid-area: video; }
+.paper-article[data-focus-state="focused"] .stage-chapter--evidence { grid-area: evidence; }
+.paper-article[data-focus-state="focused"] .stage-chapter--decision { grid-area: decision; padding: var(--space-4); outline: 2px solid var(--color-protocol); outline-offset: var(--space-2); background: var(--color-paper); }
 .video-publisher { width: 100%; min-height: 34rem; margin-top: var(--space-4); border: 1px solid var(--color-ink); background: var(--color-ink); }
 .focus-decision { padding-top: var(--space-3); border-top: 3px solid var(--color-protocol); }
 .focus-derivation { font-family: var(--font-mono); font-size: clamp(1.4rem, 4vw, 2.5rem) !important; }
 .focus-provenance div { display: grid; grid-template-columns: 9rem 1fr; gap: var(--space-2); padding: var(--space-2) 0; border-top: 1px solid var(--color-rule); }
 .focus-provenance dd { margin: 0; overflow-wrap: anywhere; }
 .focus-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.focus-view-actions { margin: 0 0 var(--space-3); }
 .focus-actions button:last-child { background: transparent; color: var(--color-ink); }
 .discrepancy-note { padding: var(--space-4); border: 2px solid var(--color-error); background: var(--color-paper); }
+.review-history { margin: var(--space-4) 0 0; padding: var(--space-3) var(--space-3) var(--space-3) 2rem; border-top: 1px solid var(--color-rule); background: var(--color-paper); }
+.review-history li + li { margin-top: var(--space-1); }
 .capability-drawer { position: fixed; z-index: var(--layer-sticky); right: var(--space-3); bottom: var(--space-3); width: min(22rem, calc(100vw - 2 * var(--space-3))); border: 1px solid var(--color-ink); background: var(--color-paper); box-shadow: var(--shadow-sticky); }
 .capability-drawer summary { min-height: 3rem; padding: var(--space-2) var(--space-3); cursor: pointer; font-family: var(--font-display); font-weight: 700; }
 .capability-drawer nav { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--color-rule); }
 .capability-drawer a { display: flex; min-height: 2.75rem; align-items: center; padding: var(--space-2) var(--space-3); }
+.focus-pins { padding: var(--space-3); background: var(--color-protocol-soft); }
+.focus-pins .eyebrow { grid-column: 1 / -1; }
+.focus-pins a { border-top: 1px solid color-mix(in srgb, var(--color-protocol) 20%, transparent); }
 
 @media (max-width: 600px) {
   .focus-preview { align-items: stretch; flex-direction: column; }
   .video-publisher { min-height: 28rem; }
   .focus-provenance div { grid-template-columns: 1fr; }
   .capability-drawer { right: var(--space-2); bottom: var(--space-2); width: calc(100vw - 2 * var(--space-2)); }
+}
+
+@media (max-width: 900px) {
+  .paper-article[data-focus-state="focused"] { grid-template-columns: minmax(0, 1fr); grid-template-areas: "decision" "method" "evidence" "video" "paper"; }
 }

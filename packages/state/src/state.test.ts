@@ -133,14 +133,16 @@ describe("publisher state", () => {
     expect(store.getState()).toEqual(beforeUnknownAction);
   });
 
-  it("requires a valid confirmation actor before committing a focused proposal", () => {
+  it("rejects non-human confirmation before committing a focused proposal", () => {
     const store = createPublisherStore();
     store.dispatch({ type: "request-focus", request: validFocus });
     const beforeConfirmation = store.getState();
 
-    expect(
-      store.dispatch({ type: "confirm-focus", confirmation: { confirmedBy: "agent" } as unknown as Confirmation })
-    ).toEqual({ ok: false, code: "invalid-confirmation", recoverable: true });
+    for (const confirmedBy of ["agent", "webmcp"]) {
+      expect(
+        store.dispatch({ type: "confirm-focus", confirmation: { confirmedBy } as unknown as Confirmation })
+      ).toEqual({ ok: false, code: "invalid-confirmation", recoverable: true });
+    }
     expect(store.getState()).toEqual(beforeConfirmation);
   });
 

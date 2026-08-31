@@ -61,6 +61,17 @@ const EMPTY_PUBLISHER_STATE: PublisherState = {
   auditEvents: []
 };
 
+function reviewHistoryCopy(event: PublisherState["auditEvents"][number]): string {
+  switch (event.type) {
+    case "focus-requested":
+      return "Focus requested";
+    case "focus-rejected":
+      return "Focus rejected";
+    case "focus-confirmed":
+      return "Citation block confirmed by human";
+  }
+}
+
 function ProtocolStatus({ protocol }: { protocol: PaperProtocolControls }) {
   const isActive = protocol.status === "active";
   const isChecking = protocol.status === "checking";
@@ -210,8 +221,10 @@ export function PaperApp({
   const evidence = fixture.evidence;
   const [activeStageChapter, setActiveStageChapter] = useState<StageChapterId>("paper-top");
   const [videoAvailable, setVideoAvailable] = useState<boolean | null>(null);
+  const [stageRestored, setStageRestored] = useState(false);
   const focus = publisherState.focusProposal ?? publisherState.discrepancyNote;
-  const focusActive = focus !== null;
+  const hasFocus = focus !== null;
+  const focusActive = hasFocus && !stageRestored;
 
   useEffect(() => {
     let frame = 0;
@@ -248,6 +261,10 @@ export function PaperApp({
     return () => { current = false; };
   }, [videoOrigin]);
 
+  useEffect(() => {
+    setStageRestored(false);
+  }, [focus]);
+
   return (
     <>
       <a className="skip-link" href="#paper-content">Skip to paper</a>
@@ -271,10 +288,10 @@ export function PaperApp({
           </div>
           <button
             type="button"
-            disabled={focusActive}
+            disabled={hasFocus}
             onClick={() => dispatchPublisher({ type: "request-focus", request: CONTROLLED_FOCUS_REQUEST })}
           >
-            {focusActive ? "Focus review active" : "Run deterministic focus preview"}
+            {hasFocus ? "Focus review active" : "Run deterministic focus preview"}
           </button>
         </section>
         {publisherError && (
@@ -339,7 +356,10 @@ export function PaperApp({
             </nav>
           </details>
 
-          <article className={`paper-article${focusActive ? " paper-article--focused" : ""}`}>
+          <article
+            className={`paper-article${focusActive ? " paper-article--focused" : ""}`}
+            data-focus-state={focusActive ? "focused" : "ordinary"}
+          >
             <section className="stage-chapter stage-chapter--paper" aria-labelledby="abstract-title">
               <p className="stage-chapter__index mono">Chapter 01 / Paper</p>
               <div id="abstract">
@@ -424,6 +444,13 @@ export function PaperApp({
               <div className="focus-decision" aria-live="polite">
                 <p className="section-kicker">Human checkpoint</p>
                 <h2 id="focus-decision-title" tabIndex={-1}>Focus decision</h2>
+                {hasFocus && (
+                  <div className="focus-view-actions">
+                    <button type="button" onClick={() => setStageRestored(!focusActive)}>
+                      {focusActive ? "Restore full workspace" : "Review focused evidence"}
+                    </button>
+                  </div>
+                )}
                 {publisherState.focusProposal && (
                   <>
                     <p className="focus-derivation">{publisherState.focusProposal.provenance.derivation}</p>
@@ -463,7 +490,14 @@ export function PaperApp({
                     </button>
                   </aside>
                 )}
-                {!focusActive && <p>No focus proposal is awaiting review.</p>}
+                {!hasFocus && <p>No focus proposal is awaiting review.</p>}
+                {publisherState.auditEvents.length > 0 && (
+                  <ol className="review-history" aria-label="Review history">
+                    {publisherState.auditEvents.map((event, index) => (
+                      <li key={`${event.type}-${index}`}>{reviewHistoryCopy(event)}</li>
+                    ))}
+                  </ol>
+                )}
               </div>
               <div id="limitations">
                 <p className="section-kicker">Scope note</p>
@@ -493,6 +527,15 @@ export function PaperApp({
 
       <details className="capability-drawer">
         <summary>Review capabilities</summary>
+        {focusActive && (
+          <nav className="focus-pins" aria-label="Pinned focus context">
+            <p className="eyebrow">Pinned context</p>
+            <a href="#chapter-method">Paper evidence</a>
+            <a href="#chapter-video">Video evidence</a>
+            <a href="#chapter-evidence">Publisher provenance</a>
+            <a href="#chapter-decision">Focus decision</a>
+          </nav>
+        )}
         <nav aria-label="Capability drawer">
           <a href="#paper-top">Paper</a>
           <a href="#chapter-video">Video</a>
