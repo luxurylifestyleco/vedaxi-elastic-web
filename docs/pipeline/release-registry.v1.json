@@ -8,7 +8,7 @@
     "owner": "Master Agent // Delivery",
     "classification": "MIXED",
     "dependencies": ["M6", "rules-acknowledgment", "final-authorization"],
-    "evidence_paths": ["docs/VEDAXI_BUILD_SCOPE.md", ".devpost-hackathon-state.json"],
+    "evidence_paths": ["docs/VEDAXI_BUILD_SCOPE.md", "docs/compliance/OFFICIAL_RULES_MATRIX.md"],
     "exit_criteria": ["Devpost submission is accepted before the recorded close time."],
     "risk": "Five sequential product gates and all public submission assets remain open."
   },
@@ -132,7 +132,7 @@
       "owner": "Submission and Reproduction owner",
       "classification": "AGENT_EXECUTABLE",
       "dependencies": ["M5", "M6", "live-url", "demo-video-audio"],
-      "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", ".devpost-hackathon-state.json"],
+      "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/SUBMISSION_PIPELINE.md"],
       "exit_criteria": ["Explanation and claims ledger reference only verified M5/M6 facts."],
       "risk": "The expected draft file has not been created and cannot be written from provisional claims."
     },
@@ -152,7 +152,7 @@
       "owner": "User",
       "classification": "USER_REQUIRED",
       "dependencies": ["current-official-rules"],
-      "evidence_paths": [".devpost-hackathon-state.json", "docs/SUBMISSION_PIPELINE.md"],
+      "evidence_paths": ["docs/compliance/OFFICIAL_RULES_MATRIX.md", "docs/SUBMISSION_PIPELINE.md"],
       "exit_criteria": ["User explicitly acknowledges the current official rules."],
       "risk": "rules_acknowledged is false and agents must not change it."
     },
@@ -162,7 +162,7 @@
       "owner": "User",
       "classification": "USER_REQUIRED",
       "dependencies": ["M6", "rules-acknowledgment", "field-by-field-package"],
-      "evidence_paths": [".devpost-hackathon-state.json", "docs/SUBMISSION_PIPELINE.md"],
+      "evidence_paths": ["docs/compliance/OFFICIAL_RULES_MATRIX.md", "docs/SUBMISSION_PIPELINE.md"],
       "exit_criteria": ["User separately authorizes final Devpost submission after reviewing exact fields and risks."],
       "risk": "Final external submission is prohibited without explicit user authorization."
     }

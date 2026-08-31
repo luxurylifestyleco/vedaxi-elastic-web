@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -7,6 +8,7 @@ const defaultRegistry = "docs/pipeline/release-registry.v1.json";
 const itemStatuses = new Set(["PASS", "BLOCKED", "NOT_STARTED", "PENDING", "AT_RISK"]);
 const gateStatuses = new Set(["PASS", "PARTIAL", "PENDING", "BLOCKED", "FAIL"]);
 const classifications = new Set(["AGENT_EXECUTABLE", "USER_REQUIRED", "MIXED"]);
+const trackedPaths = new Set(execFileSync("git", ["ls-files", "-z"], { cwd: root, encoding: "utf8" }).split("\0").filter(Boolean));
 
 function fail(message) { throw new Error(message); }
 function nonEmpty(value, label) { if (typeof value !== "string" || value.trim() === "") fail(`${label} must be a non-empty string`); }
@@ -17,6 +19,7 @@ function localPath(relative, label) {
   const resolved = path.resolve(root, relative);
   if (!resolved.startsWith(`${root}${path.sep}`)) fail(`${label} escapes repository`);
   if (!fs.existsSync(resolved)) fail(`${label} does not exist: ${relative}`);
+  if (!trackedPaths.has(relative.replaceAll("\\", "/"))) fail(`${label} is not tracked by git: ${relative}`);
 }
 function uniqueIds(items, label) {
   const ids = new Set();
@@ -101,7 +104,9 @@ if (process.argv.includes("--self-test")) {
   passedBlocked.modules[5].status = "BLOCKED";
   passedBlocked.gates[10].status = "PASS";
   passedBlocked.gates[10].passed = true;
-  for (const [name, fixture] of [["contradictory gate", contradictoryGate], ["missing owner", missingOwner], ["passed blocked dependency", passedBlocked]]) {
+  const untrackedEvidence = structuredClone(registry);
+  untrackedEvidence.deadline.evidence_paths = [".devpost-hackathon-state.json"];
+  for (const [name, fixture] of [["contradictory gate", contradictoryGate], ["missing owner", missingOwner], ["passed blocked dependency", passedBlocked], ["untracked evidence", untrackedEvidence]]) {
     try {
       validateRegistry(fixture);
       fail(`self-test did not reject ${name}`);
@@ -109,7 +114,7 @@ if (process.argv.includes("--self-test")) {
       if (String(error.message).startsWith("self-test did not reject")) throw error;
     }
   }
-  console.log("pipeline validator self-test valid (3 rejection checks)");
+  console.log("pipeline validator self-test valid (4 rejection checks)");
 }
 
 console.log(`pipeline registry valid: ${path.relative(root, registryPath)}`);
