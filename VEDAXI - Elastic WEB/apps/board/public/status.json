@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-31T05:30:00.000Z",
+  "release": {
+    "label": "R1 · Paper evidence gate",
+    "progress": 20,
+    "summary": "M0 passed. M1 source is complete; current-tree browser verification remains open."
+  },
+  "attention": [
+    {
+      "id": "attention.m2-video",
+      "eyebrow": "Now · M2 media",
+      "title": "Choose the controlled video asset",
+      "detail": "Provide or approve an original or licensed video longer than 03:12 with aligned captions. A simulated seek cannot pass S5.",
+      "action": "Needed from you before the Video Origin can exit."
+    }
+  ],
+  "agents": [],
+  "watch": [
+    {
+      "id": "watch.m1-current-tree",
+      "eyebrow": "Agent-owned · M1",
+      "title": "Re-run browser evidence on the current Paper tree",
+      "detail": "Historical Chrome evidence is valid for its recorded source, but later search/navigation changes require fresh proof."
+    },
+    {
+      "id": "watch.devpost",
+      "eyebrow": "Later · M6",
+      "title": "Acknowledge official Devpost rules",
+      "detail": "Required before final submission, not before current engineering work."
+    },
+    {
+      "id": "watch.m5-deployed",
+      "eyebrow": "Later · M5",
+      "title": "Verify deployed-client parity",
+      "detail": "Public origins, unsupported/error behavior, and the final browser matrix remain deployment work."
+    }
+  ],
+  "drawer": {
+    "done": [
+      {
+        "id": "done.m0",
+        "eyebrow": "M0 · Passed",
+        "title": "Protocol foundation",
+        "detail": "Contracts, lifecycle, native probe, topology, and exit record are complete."
+      },
+      {
+        "id": "done.m1-source",
+        "eyebrow": "M1 · Source complete",
+        "title": "Paper evidence experience",
+        "detail": "Paper search, guided suggestions, semantics, and passage navigation are implemented."
+      },
+      {
+        "id": "done.m2-plan",
+        "eyebrow": "M2 · Planned",
+        "title": "Video architecture and experience",
+        "detail": "Bounded plan, contracts, exclusions, and evidence requirements are documented."
+      },
+      {
+        "id": "done.remote-board",
+        "eyebrow": "Delivery control · Ready",
+        "title": "Remote attention board",
+        "detail": "Human decisions stay magnified, active agents remain glanceable, and completed work moves into the drawer."
+      }
+    ],
+    "milestones": [
+      {
+        "id": "milestone.exits",
+        "eyebrow": "Module exits",
+        "title": "1 of 7 passed",
+        "detail": "M1 cannot exit on the current tree until fresh browser evidence is captured."
+      },
+      {
+        "id": "milestone.next",
+        "eyebrow": "Next sequence",
+        "title": "M2 → M3 → M4",
+        "detail": "Video Origin, Shared Actions, then Semantic Stage remain deliberately sequential."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "evidence.m1-v2",
+        "eyebrow": "Source-bound evidence",
+        "title": "M1 Chrome registry v2",
+        "detail": "Five pass, zero fail, two truthful environment-blocked observations for the recorded historical source."
+      },
+      {
+        "id": "evidence.verification",
+        "eyebrow": "Latest verification",
+        "title": "Paper tests and build",
+        "detail": "Focused Paper tests, TypeScript, production build, and both manual registry validators pass."
+      }
+    ]
+  }
+}
