@@ -1,0 +1,70 @@
+{
+  "captured_at_utc": "2026-08-31T08:12:19.575Z",
+  "source": {
+    "paper_runtime_commit": "85e139735da224f16985be1aeb11152dce4d20f4",
+    "head_commit": "e6c440fef0b04bad51b424c40fcdd7b78f00ed3c",
+    "identity_basis": "HEAD contains only a later Board commit after the Paper runtime commit; git diff 85e1397..HEAD for apps/paper was empty."
+  },
+  "build": {
+    "command": "npm run build:paper",
+    "status": "PASS",
+    "vite": "7.3.6",
+    "asset": "http://localhost:4173/assets/index-BeNExMvu.js"
+  },
+  "client": {
+    "name": "Codex In-app Browser",
+    "os": "Windows",
+    "url": "http://localhost:4173/",
+    "exact_browser_version": null
+  },
+  "native": {
+    "inventory_before": ["search_paper_evidence"],
+    "schema": {
+      "query": {"type": "string", "maxLength": 160, "pattern": "\\S"},
+      "additionalProperties": false,
+      "readOnlyHint": true,
+      "untrustedContentHint": true
+    },
+    "result": {
+      "id": "paper.methods.final-analysis",
+      "excerpt": "Forty participants completed the study and were included in the final analysis.",
+      "locator": "Methods, participants",
+      "provenance": "VEDAXI controlled paper fixture — Methods, participants",
+      "sourceOrigin": "http://localhost:4173",
+      "score": 3
+    }
+  },
+  "human_search": {
+    "query": "final analyzed sample",
+    "result": "Final analysis cohort Methods, participants · 3 exact query terms",
+    "navigation": {
+      "hash": "#methods-participants",
+      "active_element_id": "methods-participants",
+      "target_contains_exact_passage": true
+    }
+  },
+  "lifecycle": {
+    "before_inventory": 1,
+    "after_disable_inventory": 0,
+    "disabled_status": "Agent tools off",
+    "stale_call_error": "WebMCP tool registration is stale. Call fetchTools() again.",
+    "paper_content_survived": true,
+    "human_result_survived": true,
+    "after_reenable_inventory": 1,
+    "reenabled_status": "Native paper evidence tool active",
+    "reenabled_exact_result": true
+  },
+  "origins_and_logs": {
+    "page_origin": "http://localhost:4173",
+    "visible_provenance_origin": "http://localhost:4173",
+    "tool_origin": "http://localhost:4173",
+    "result_origin": "http://localhost:4173",
+    "warnings_or_errors": []
+  },
+  "limitations": {
+    "narrow_responsive": "BLOCKED: the browser service timed out while attaching a fresh page before a 390x844 measurement could be made.",
+    "keyboard": "BLOCKED: In-app CUA Tab did not move focus from BODY. The available Chrome fallback created an about:blank tab, but localhost navigation timed out before a real trace could be recorded.",
+    "unsupported_or_natural_error": "BLOCKED: this production run exposed WebMCP and no natural registration failure occurred.",
+    "exact_client_version": "BLOCKED: the browser did not expose an exact build value."
+  }
+}

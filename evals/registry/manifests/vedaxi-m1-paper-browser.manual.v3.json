@@ -1,0 +1,44 @@
+{
+  "id": "vedaxi.m1-paper-browser.manual.v3",
+  "version": 3,
+  "module": "m1-paper",
+  "dataset": "evals/registry/data/vedaxi/m1-paper-browser-manual-v3.jsonl",
+  "execution": {
+    "kind": "manual-multi-browser-evidence",
+    "executable": false,
+    "model_grader": false,
+    "command": null,
+    "note": "Immutable current-Paper production evidence. v1 and v2 remain unchanged; unavailable fresh browser observations remain BLOCKED."
+  },
+  "run": {
+    "utc": "2026-08-31T08:12:19.575Z",
+    "local": "2026-08-31T13:42:19.5757937+05:30",
+    "paper_runtime_commit": "85e139735da224f16985be1aeb11152dce4d20f4",
+    "head_commit": "e6c440fef0b04bad51b424c40fcdd7b78f00ed3c",
+    "tree_state": "Paper sources unchanged from paper_runtime_commit through HEAD; unrelated Board and evidence changes present.",
+    "os": "Windows",
+    "clients": ["Codex In-app Browser", "Google Chrome"],
+    "build_flavor": "Vite production preview",
+    "exact_browser_versions": null,
+    "exact_browser_versions_status": "BLOCKED"
+  },
+  "allowed_statuses": ["PASS", "FAIL", "BLOCKED"],
+  "summary": {"PASS": 4, "FAIL": 0, "BLOCKED": 3},
+  "evidence": [
+    "docs/evidence/M1/raw/2026-08-31T08-12-19Z-current-paper-browser.json"
+  ],
+  "cases": [
+    "m1-paper-native-production-current",
+    "m1-paper-human-search-navigation-current",
+    "m1-paper-native-lifecycle-current",
+    "m1-paper-origin-logs-source-current",
+    "m1-paper-responsive-current",
+    "m1-paper-keyboard-current",
+    "m1-paper-natural-limitations-current"
+  ],
+  "limitations": [
+    "Fresh current-runtime narrow responsive and real keyboard traces were unavailable because the browser service could not attach a subsequent local preview page.",
+    "The current run does not claim a natural unsupported client, natural registration rejection, exact browser version, or deployed-client parity."
+  ],
+  "validation_command": "node evals/validate-manual.mjs evals/registry/manifests/vedaxi-m1-paper-browser.manual.v3.json"
+}

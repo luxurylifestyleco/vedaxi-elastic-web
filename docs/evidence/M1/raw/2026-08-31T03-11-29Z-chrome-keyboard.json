@@ -1,0 +1,60 @@
+{
+  "run": {
+    "utc": "2026-08-31T03:11:29.8370394Z",
+    "local": "2026-08-31T08:41:29.8370394+05:30",
+    "source_commit": "06a9512c3e30672556d6eb524ac7d5d97221001a",
+    "prior_evidence_checkpoint": "019193f",
+    "client": "Google Chrome with ChatGPT extension",
+    "extension_version": "1.2.27268.51612_0",
+    "exact_browser_version": null,
+    "url": "http://localhost:4173/",
+    "build_flavor": "Vite production preview"
+  },
+  "keyboard": {
+    "initial_focus_order": [
+      "BODY",
+      "A Skip to paper",
+      "A identity",
+      "BUTTON Turn agent tools off",
+      "A Abstract",
+      "A Methods",
+      "A Study flow",
+      "A Limitations",
+      "A References",
+      "INPUT name=query",
+      "BUTTON Search"
+    ],
+    "protocol_control": {
+      "before": "Native paper evidence tool active",
+      "activate_with": "Enter",
+      "disabled": "Agent tools off",
+      "focused_control_after_disable": "Check native tools",
+      "reenabled": "Native paper evidence tool active"
+    },
+    "search": {
+      "query": "final analyzed sample",
+      "activate_with": "Tab then Enter",
+      "message": "1 matching paper passage found.",
+      "result": "Final analysis cohort — Methods, participants · 3 exact query terms",
+      "next_focused_target": "#methods-participants"
+    },
+    "skip_link": {
+      "activate_with": "Enter",
+      "result_hash": "#paper-content",
+      "active_element": "MAIN#paper-content"
+    },
+    "console_warnings": [],
+    "console_errors": []
+  },
+  "corroborating_screenshot": {
+    "path": "docs/evidence/M1/raw/chrome-keyboard-result.jpg",
+    "sha256": "E19968E8B09D32E08AC4AF320B1312865A6A68DB0C93081BF029E5B87EC1A16F",
+    "note": "Corroborating production render only; the retained focus trace is the primary keyboard evidence."
+  },
+  "limitations": [
+    "Both approved target clients exposed WebMCP, so a natural unsupported-client observation was unavailable.",
+    "No natural native registration rejection occurred.",
+    "The exact Chrome browser version was not exposed to the automation surface.",
+    "Local preview evidence does not prove deployed-client parity; M5 must repeat the native workflow."
+  ]
+}
