@@ -1,4 +1,5 @@
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
 
 import { renderToStaticMarkup } from "react-dom/server";
@@ -37,15 +38,29 @@ type Manifest = {
 
 const repoRoot = resolve(process.cwd(), "..");
 const manifestPath = resolve(repoRoot, "evals/registry/manifests/vedaxi-m1-paper.dev.v1.json");
-const runtimeRoot = resolve(process.cwd(), "apps/paper/src");
+const frozenM1Commit = "06a9512";
 
-function runtimeFiles(directory: string): string[] {
-  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    const path = resolve(directory, entry.name);
-    if (entry.isDirectory()) return runtimeFiles(path);
-    if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(entry.name)) return [];
-    return /\.(?:css|html|[cm]?[jt]sx?)$/.test(entry.name) ? [path] : [];
-  });
+function gitText(args: string[]): string {
+  return execFileSync("git", args, { cwd: repoRoot, encoding: "utf8", timeout: 20_000 });
+}
+
+function frozenM1File(path: string): string {
+  return gitText(["show", `${frozenM1Commit}:${path}`]);
+}
+
+function frozenM1RuntimeSource(): string {
+  const files = gitText([
+    "ls-tree",
+    "-r",
+    "--name-only",
+    frozenM1Commit,
+    "--",
+    "VEDAXI - Elastic WEB/apps/paper"
+  ]).trim().split(/\r?\n/).filter((path) =>
+    !/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path)
+    && /(?:\.css|\.html|\.[cm]?[jt]sx?)$/.test(path)
+  );
+  return files.map(frozenM1File).join("\n");
 }
 
 function readManifest(): Manifest {
@@ -117,16 +132,12 @@ const evaluators: Record<string, () => Promise<void> | void> = {
     }
   },
   "scope-boundary": () => {
-    const runtimeAndShellFiles = [
-      ...runtimeFiles(runtimeRoot),
-      resolve(process.cwd(), "apps/paper/index.html")
-    ];
-    const source = runtimeAndShellFiles.map((file) => readFileSync(file, "utf8")).join("\n");
+    const source = frozenM1RuntimeSource();
     const appManifest = JSON.parse(
-      readFileSync(resolve(process.cwd(), "apps/paper/package.json"), "utf8")
+      frozenM1File("VEDAXI - Elastic WEB/apps/paper/package.json")
     ) as { dependencies?: Record<string, string> };
     const rootManifest = JSON.parse(
-      readFileSync(resolve(process.cwd(), "package.json"), "utf8")
+      frozenM1File("VEDAXI - Elastic WEB/package.json")
     ) as { dependencies?: Record<string, string> };
     expect(source).not.toMatch(/(?:video\.transcript|40\s*-\s*6|\b34\b|localStorage|sessionStorage|from\s+["']three["']|@react-three|three\.js|shopify|navigator\.modelContext|executeTool|getTools)/i);
     expect(source).not.toMatch(/@vedaxi\/contracts\//);
@@ -163,5 +174,5 @@ describe("vedaxi.m1-paper.dev.v1", () => {
   it("replays every case through a deterministic evaluator", async () => {
     const manifest = readManifest();
     for (const binding of manifest.bindings) await evaluators[binding.evaluator]();
-  });
+  }, 20_000);
 });

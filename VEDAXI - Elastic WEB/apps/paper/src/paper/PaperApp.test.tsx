@@ -1,11 +1,43 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
+import type { FocusRequest, PublisherState } from "@vedaxi/state";
 
 import { createPaperEvidenceService, createPaperFixture } from "./index";
 import { PaperApp } from "./PaperApp";
 
 const fixture = createPaperFixture("https://paper.example.test/workspace");
 const service = createPaperEvidenceService(fixture.evidence);
+const focusRequest: FocusRequest = {
+  paperEvidenceId: "paper.methods.final-analysis",
+  videoEvidenceId: "video.transcript.calibration-drift",
+  analyzedSample: 34,
+  reasoning: "The video excludes six of the paper's forty reported participants.",
+  provenance: {
+    paper: "VEDAXI controlled paper fixture — Methods, participants",
+    video: "VEDAXI controlled video fixture — transcript cue at 00:03:12",
+    derivation: "Externally supplied comparison: 40 - 6 = 34"
+  }
+};
+const initialPublisherState: PublisherState = {
+  citationStatus: "unblocked",
+  discrepancyNote: null,
+  focusProposal: null,
+  auditEvents: []
+};
+
+function renderStage(state: PublisherState, publisherError: string | null = null) {
+  return renderToStaticMarkup(
+    <PaperApp
+      fixture={fixture}
+      service={service}
+      protocol={{ status: "unsupported", enable: () => undefined, disable: () => undefined }}
+      publisherState={state}
+      dispatchPublisher={() => ({ ok: true, state })}
+      publisherError={publisherError}
+      videoOrigin="https://video.example.test"
+    />
+  );
+}
 
 describe("M1 Paper Integrity Desk", () => {
   it.each([
@@ -98,5 +130,77 @@ describe("M1 Paper Integrity Desk", () => {
     expect(markup).toContain("included in the final analysis");
     expect(markup).toContain('type="button"');
     expect(markup).toContain('aria-pressed="false"');
+  });
+});
+
+describe("M4 Semantic Focus Shift", () => {
+  it("labels the controlled request as a deterministic preview and keeps every capability reachable", () => {
+    const markup = renderStage(initialPublisherState);
+
+    expect(markup).toContain("Run deterministic focus preview");
+    expect(markup).toContain("Controlled preview — not live agent success");
+    expect(markup).toContain('src="https://video.example.test"');
+    expect(markup).toContain('title="Independent Video publisher evidence"');
+    expect(markup).toContain('aria-label="Capability drawer"');
+    for (const target of ["#paper-top", "#chapter-video", "#chapter-evidence", "#chapter-decision"]) {
+      expect(markup).toContain(`href="${target}"`);
+    }
+    expect(markup).not.toContain("40 - 6 = 34");
+  });
+
+  it("promotes accepted external evidence and requires an explicit human decision", () => {
+    const markup = renderStage({
+      ...initialPublisherState,
+      focusProposal: focusRequest,
+      auditEvents: [{ type: "focus-requested" }]
+    });
+
+    expect(markup).toContain(fixture.evidence.excerpt);
+    expect(markup).toContain("40 - 6 = 34");
+    expect(markup).toContain(focusRequest.provenance.paper);
+    expect(markup).toContain(focusRequest.provenance.video);
+    expect(markup).toContain("Confirm focus");
+    expect(markup).toContain("Reject focus");
+  });
+
+  it("renders one persisted blocked discrepancy with linked evidence and reset recovery", () => {
+    const discrepancyNote = {
+      ...focusRequest,
+      id: "discrepancy:paper.methods.final-analysis:video.transcript.calibration-drift"
+    };
+    const markup = renderStage({
+      citationStatus: "blocked",
+      discrepancyNote,
+      focusProposal: null,
+      auditEvents: [
+        { type: "focus-requested" },
+        { type: "focus-confirmed", confirmedBy: "human" }
+      ]
+    });
+
+    expect(markup).toContain("Citation status: blocked");
+    expect(markup.match(/class="discrepancy-note"/g)).toHaveLength(1);
+    expect(markup).toContain('href="#methods-participants"');
+    expect(markup).toContain(focusRequest.paperEvidenceId);
+    expect(markup).toContain(focusRequest.videoEvidenceId);
+    expect(markup).toContain("Reset focus review");
+  });
+
+  it("shows a recoverable storage error without claiming the citation was saved or blocked", () => {
+    const markup = renderStage(initialPublisherState, "Publisher state could not be saved. Retry the action or reset the review.");
+
+    expect(markup).toContain('role="alert"');
+    expect(markup).toContain("could not be saved");
+    expect(markup).toContain("Reset failed review");
+    expect(markup).not.toContain("Citation status: blocked");
+    expect(markup).not.toContain("Discrepancy saved");
+  });
+
+  it("labels the Decision chapter with the focus decision heading", () => {
+    const markup = renderStage(initialPublisherState);
+
+    expect(markup).toContain('id="chapter-decision" aria-labelledby="focus-decision-title"');
+    expect(markup).toContain('<h2 id="focus-decision-title">Focus decision</h2>');
+    expect(markup).toContain('<h2 id="limitations-title">Limitations</h2>');
   });
 });
