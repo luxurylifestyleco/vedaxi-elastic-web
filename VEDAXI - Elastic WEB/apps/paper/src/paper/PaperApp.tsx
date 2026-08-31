@@ -64,7 +64,7 @@ function PaperSearch({ service }: { service: PaperEvidenceService }) {
         <p className="paper-search__hint">Works independently of native agent tools.</p>
       </div>
       <form className="search-form" onSubmit={submit}>
-        <label htmlFor="paper-query">Evidence query</label>
+        <label htmlFor="paper-query">Paper evidence query</label>
         <div className="search-form__controls">
           <input
             id="paper-query"
@@ -74,7 +74,20 @@ function PaperSearch({ service }: { service: PaperEvidenceService }) {
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Try “final analyzed sample”"
           />
-          <button type="submit">Search</button>
+          <button type="submit">
+            <svg
+              aria-hidden="true"
+              className="search-icon"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              focusable="false"
+            >
+              <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" strokeWidth="2" />
+              <path d="m16 16 4 4" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
+            </svg>
+            <span>Search</span>
+          </button>
         </div>
       </form>
       <p className="search-message" aria-live="polite">{message}</p>
@@ -105,6 +118,8 @@ export function PaperApp({ fixture, service, protocol }: PaperAppProps) {
       </header>
 
       <main id="paper-content" tabIndex={-1}>
+        <PaperSearch service={service} />
+
         <section className="paper-hero" id="paper-top" aria-labelledby="paper-title">
           <div className="paper-hero__meta">
             <p>{paper.journal}</p>
@@ -213,7 +228,6 @@ export function PaperApp({ fixture, service, protocol }: PaperAppProps) {
           </aside>
         </div>
 
-        <PaperSearch service={service} />
       </main>
 
       <footer>

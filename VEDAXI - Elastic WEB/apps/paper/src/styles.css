@@ -164,22 +164,23 @@ blockquote p { margin: 0; font-size: clamp(1.6rem, 3vw, 2.8rem) !important; line
 .desk-note { align-self: start; padding: var(--space-3); border-top: 2px solid var(--color-evidence); color: var(--color-muted); line-height: 1.55; }
 
 .paper-search {
-  margin: 0 clamp(1rem, 4vw, 4rem) var(--space-6);
-  padding: clamp(2rem, 5vw, 4.5rem);
+  margin: 0 clamp(1rem, 4vw, 4rem);
+  padding: var(--space-4) clamp(1rem, 3vw, 2.5rem);
   background: var(--search-background);
   color: var(--search-foreground);
 }
 .paper-search__heading { display: flex; justify-content: space-between; gap: var(--space-4); align-items: end; }
 .paper-search__heading .eyebrow, .paper-search__hint { color: var(--color-paper); opacity: 0.72; }
-.paper-search h2 { margin-bottom: 0; }
+.paper-search h2 { margin-bottom: 0; font-size: clamp(1.5rem, 2.5vw, 2.35rem); letter-spacing: -0.02em; }
 .paper-search__hint { max-width: 24ch; }
-.search-form { margin-top: var(--space-5); }
+.search-form { margin-top: var(--space-3); }
 .search-form label { display: block; margin-bottom: var(--space-2); }
 .search-form__controls { display: grid; grid-template-columns: 1fr auto; }
 .search-form input, .search-form button { min-height: 3.5rem; border: 1px solid var(--color-paper); }
 .search-form input { min-width: 0; padding: 0 var(--space-3); background: transparent; color: var(--color-paper); }
 .search-form input::placeholder { color: var(--color-paper); opacity: 0.58; }
-.search-form button { padding: 0 var(--space-4); background: var(--color-paper); color: var(--color-ink); cursor: pointer; }
+.search-form button { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); padding: 0 var(--space-4); background: var(--color-paper); color: var(--color-ink); cursor: pointer; }
+.search-icon { flex: 0 0 auto; }
 .search-message { min-height: 1.5em; color: var(--color-paper); opacity: 0.74; }
 .search-result { display: flex; justify-content: space-between; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-paper); text-decoration: none; }
 

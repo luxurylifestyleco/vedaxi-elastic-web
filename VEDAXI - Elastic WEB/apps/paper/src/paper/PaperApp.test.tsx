@@ -51,4 +51,34 @@ describe("M1 Paper Integrity Desk", () => {
       markup.indexOf(fixture.evidence.provenance)
     );
   });
+
+  it("gives the human search input an unambiguous agent-facing label", () => {
+    const markup = renderToStaticMarkup(
+      <PaperApp
+        fixture={fixture}
+        service={service}
+        protocol={{ status: "active", enable: () => undefined, disable: () => undefined }}
+      />
+    );
+
+    expect(markup).toContain('<label for="paper-query">Paper evidence query</label>');
+    expect(markup).toContain('name="query"');
+  });
+
+  it("places publication search before the paper body and exposes a magnifying-glass action", () => {
+    const markup = renderToStaticMarkup(
+      <PaperApp
+        fixture={fixture}
+        service={service}
+        protocol={{ status: "active", enable: () => undefined, disable: () => undefined }}
+      />
+    );
+
+    expect(markup.indexOf('class="paper-search"')).toBeLessThan(
+      markup.indexOf('class="paper-hero"')
+    );
+    expect(markup).toContain('class="search-icon"');
+    expect(markup).toContain('aria-hidden="true"');
+    expect(markup).toContain('<span>Search</span>');
+  });
 });
