@@ -2,7 +2,7 @@
   "contract_version": "vedaxi.m2.late-bound-media.v1",
   "delivery_state": "MISSING_MEDIA",
   "video": {
-    "path": "docs/assets/M2/final-demo.mp4",
+    "path": "VEDAXI - Elastic WEB/apps/video/public/media/vedaxi-controlled-evidence.mp4",
     "container": "mp4",
     "mime_type": "video/mp4",
     "video_codec": "h264",
@@ -11,7 +11,7 @@
     "sha256": "REPLACE_WITH_64_CHARACTER_LOWERCASE_SHA256"
   },
   "captions": {
-    "path": "docs/assets/M2/final-demo.vtt",
+    "path": "VEDAXI - Elastic WEB/apps/video/public/media/vedaxi-controlled-evidence.vtt",
     "format": "webvtt",
     "encoding": "utf-8",
     "alignment_source": "REPLACE_WITH_FINAL_RECORDING_OR_TRANSCRIPT_REFERENCE"
