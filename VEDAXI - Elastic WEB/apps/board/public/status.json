@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-31T08:31:00.000Z",
+  "updatedAt": "2026-08-31T08:41:12.513Z",
   "release": {
     "label": "R1 · Paper evidence gate",
     "progress": 20,
@@ -26,13 +26,7 @@
     {
       "id": "agent.m2-code",
       "name": "Sub Agent 4 // M2 Code",
-      "focus": "Implementing the Video Origin in fast mode without embedding the final media binary.",
-      "state": "working"
-    },
-    {
-      "id": "agent.ci-gate",
-      "name": "Sub Agent 5 // CI Gate",
-      "focus": "Turning tests, builds, registries, and contradiction checks into an automatic GitHub quality gate.",
+      "focus": "Fix round two: enforcing read-only native tools and completing lifecycle and asynchronous seek evidence.",
       "state": "working"
     }
   ],
@@ -42,6 +36,12 @@
       "eyebrow": "Critical path · M1",
       "title": "Functional proof passed; interaction evidence blocked",
       "detail": "Exact result, search navigation, protocol lifecycle, origins, and logs pass. The browser surface is swallowing keyboard focus, so no false PASS will be recorded."
+    },
+    {
+      "id": "watch.m2-audit",
+      "eyebrow": "Critical path · M2",
+      "title": "Adversarial review found contract gaps",
+      "detail": "Media wiring and truthful seek behavior pass. Read-only tool boundaries, independent-origin enforcement, and lifecycle coverage are in repair before a source checkpoint."
     },
     {
       "id": "watch.video-slot",
@@ -93,6 +93,18 @@
         "eyebrow": "M2 · Contract ready",
         "title": "Late-bound media validator",
         "detail": "Reserved media and caption paths, duration, timestamp, provenance, license, and checksum rules are machine validated."
+      },
+      {
+        "id": "done.mobile-control",
+        "eyebrow": "Delivery control · Ready",
+        "title": "Phone-first review workflow",
+        "detail": "The board is installable, respects mobile safe areas, and routes milestone review back to the Codex mobile chat."
+      },
+      {
+        "id": "done.ci-gate",
+        "eyebrow": "Pipeline · Verified",
+        "title": "Automatic quality gate",
+        "detail": "Tests, builds, registry integrity, immutable evidence inputs, and truthful missing-media behavior run together in CI."
       },
       {
         "id": "done.m1-v3",

@@ -57,6 +57,7 @@ function render(status: BoardStatus) {
       <section class="focus" id="attention" tabindex="-1" aria-labelledby="attention-title">
         <p class="section-kicker">HUMAN ATTENTION · ${attentionCount} OPEN</p>
         <h1 id="attention-title">${attentionCount === 0 ? "Nothing needs you right now." : attentionCount === 1 ? "One decision needs you." : `${attentionCount} decisions need you.`}</h1>
+        <p class="mobile-guidance">Phone check-in: open the highlighted action when you have a decision. Reply <strong>accept</strong> or <strong>report defect</strong> in the Codex mobile chat after reviewing it.</p>
         <div class="attention-grid">
           ${status.attention.map((item) => renderItem(item, "attention-card")).join("")}
         </div>
@@ -171,3 +172,11 @@ document.addEventListener("visibilitychange", () => {
   if (!document.hidden) void loadStatus();
 });
 window.addEventListener("pagehide", () => window.clearInterval(refreshTimer));
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    void navigator.serviceWorker.register("/sw.js").catch(() => {
+      // Offline enhancement is best-effort; the live board remains usable without it.
+    });
+  });
+}

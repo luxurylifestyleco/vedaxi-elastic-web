@@ -1,0 +1,11 @@
+{
+  "name": "VEDAXI Delivery Control",
+  "short_name": "VEDAXI Board",
+  "description": "Mobile-first delivery status and human attention queue for VEDAXI Elastic WebMCP.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f2efe7",
+  "theme_color": "#f2efe7",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
