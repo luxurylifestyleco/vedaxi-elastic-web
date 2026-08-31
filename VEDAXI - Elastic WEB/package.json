@@ -11,10 +11,13 @@
     "dev:probe:paper": "vite apps/protocol-probe/paper --port 4173 --strictPort",
     "dev:probe:video": "vite apps/protocol-probe/video --port 4174 --strictPort",
     "dev:paper": "vite apps/paper --port 4173 --strictPort",
+    "dev:video": "vite apps/video --port 4174 --strictPort",
     "dev:board": "vite apps/board --port 4175 --strictPort",
     "build:paper": "vite build apps/paper",
+    "build:video": "vite build apps/video",
     "build:board": "vite build apps/board",
     "preview:paper": "vite preview apps/paper --port 4173 --strictPort",
+    "preview:video": "vite preview apps/video --port 4174 --strictPort",
     "preview:board": "vite preview apps/board --port 4175 --strictPort",
     "build:probe": "vite build apps/protocol-probe/paper && vite build apps/protocol-probe/video"
   },
