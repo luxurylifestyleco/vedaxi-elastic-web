@@ -45,13 +45,14 @@ R0 COMPLETE → R1 IN PROGRESS [M1 BLOCKED] → R2 → R3 → R4 → USER-APPROV
 | Workstream | State | Evidence / next decision |
 | --- | --- | --- |
 | GitHub | **CURRENT** | Branch `codex/phase-0-webmcp`; latest pushed checkpoint `cc685c6`. |
+| Local candidate checkpoint | **LOCAL ONLY — NOT PUSHED** | Current committed candidate `4287e1d`; the source-evidence reconciliation remains uncommitted and cannot be treated as an immutable release checkpoint yet. |
 | M0 Protocol Foundation | **COMPLETE** | Sequential two-origin topology selected and approved. See `docs/evidence/M0/exit-record.md`. |
-| M1 Paper Origin source | **RECORDED BASELINE COMPLETE; CURRENT INTEGRATED WORKTREE UNEXITED** | Recorded baseline source commit `06a9512` passed 69/69 tests and three independent source reviews. Later integrated Paper/M3/M4 worktree changes have not received a current-source exit decision. |
+| M1 Paper Origin source | **RECORDED BASELINE COMPLETE; CURRENT INTEGRATED WORKTREE UNEXITED** | Recorded baseline source commit `06a9512` passed 69/69 tests and three independent source reviews. Current deterministic precursor `vedaxi.m1-paper.dev.v2` exists, but later integrated Paper/M3/M4 worktree changes have not received a current-source browser exit decision. |
 | M1 Paper Origin exit | **BLOCKED** | Browser keyboard traversal and real unsupported/error-state evidence remain blocked. See `docs/evidence/M1/exit-record.md`. |
-| M2 Video Origin source | **IMPLEMENTED LOCALLY; EXIT NOT RECORDED** | Deterministic fixture, tools, seek behavior, readiness contract, and M2 evals exist; physical media and required browser evidence remain open. |
-| M3 Shared Actions source | **IMPLEMENTED LOCALLY; EXIT NOT RECORDED** | Shared state, parity, persistence, rollback, reset, and deterministic evals exist; module review/browser evidence remain open. |
-| M4 Semantic Stage source | **IMPLEMENTED LOCALLY; EXIT NOT RECORDED** | Stage, mobile/reduced-motion behavior, reachability, and source tests exist; current rendered/browser review remains open. |
-| M5 Native Proof source | **PARTIAL — LOCAL PREDEPLOYMENT ONLY** | Per-origin adapters and ordered-trace validation exist locally; public origins, clean target-browser trace, and kill-switch browser evidence remain open. |
+| M2 Video Origin source | **IMPLEMENTED LOCALLY; EXIT NOT RECORDED** | Deterministic precursor `vedaxi.m2-video.dev.v1` covers the fixture, evidence-only tools, independent-origin configuration, unloaded-media truth, and seek source behavior; physical media and required browser evidence remain open. |
+| M3 Shared Actions source | **IMPLEMENTED LOCALLY; EXIT NOT RECORDED** | Deterministic precursor `vedaxi.m3-shared-actions.dev.v1` covers shared state, parity, human-only confirmation, persistence, rollback, reset, and rehydration; module exit/browser evidence remain open. |
+| M4 Semantic Stage source | **IMPLEMENTED LOCALLY; EXIT NOT RECORDED** | Deterministic precursor `vedaxi.m4-semantic-stage.dev.v1` covers shipped stage semantics, keyboard helper behavior, and responsive/reduced-motion source rules; current rendered target-browser and visual review remain open. |
+| M5 Native Proof source | **PARTIAL — LOCAL PREDEPLOYMENT ONLY** | Local precursor `vedaxi.m5-webmcp-local.dev.v1` covers the ordered-trace validator and production registration-controller lifecycle; public origins, native discovery, clean target-browser trace, persistence-session proof, and browser kill-switch evidence remain open. |
 | M6 Submission/Reproduction | **NOT STARTED** | Requires verified M5 evidence and human-selected/public release inputs. |
 | Official rules acknowledgment | **USER ACTION REQUIRED** | `.devpost-hackathon-state.json` records `rules_acknowledged: false`; never change this on the user's behalf. |
 | Devpost submission | **NOT SUBMITTED** | Nothing has been sent to Devpost. |
@@ -103,6 +104,7 @@ R0 COMPLETE → R1 IN PROGRESS [M1 BLOCKED] → R2 → R3 → R4 → USER-APPROV
 
 - [ ] **7. Complete reviewable shipping documentation — M6 foundation**
   Spec ref: `docs/MODULE_ARCHITECTURE.md > M6 — Submission and Reproduction`
+  Foundation map: `docs/M6_REPRODUCTION_FOUNDATION.md` (documentation scaffold only; no M6 or submission gate is promoted).
   What to build: Public `README.md`, human-selected visible open-source `LICENSE`, install/run/test/reproduction instructions, and concise `documentation/` artifacts: architecture, load-bearing flows/trust boundaries, permissions/no-auth truth, variables/secrets, existing/proposed test coverage, and WebMCP automation/tool guardrails. Include a dated prior-versus-new-work boundary and a rights ledger for third-party SDKs, APIs, data, marks, music, media, and assistance. State explicitly that no email, cron, or backend exists if still true.
   Acceptance: The current public repository contains every source file, asset, and instruction required to run the submitted project; its license is visible on the public repository page. A reviewer can understand intent, trust boundaries, configuration, exact tool surfaces, side effects, kill switch, verified/unverified tests, and which work predates the challenge without private context. Every third-party component has a recorded authorization/license basis. No secret is bundled client-side.
   Verify: Clean clone/install/test/build; link and file checks; documentation-to-code intended-vs-implemented review; public repository access.

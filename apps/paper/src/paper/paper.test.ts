@@ -5,7 +5,9 @@ import {
   createPaperEvidenceService,
   createPaperEvidenceTool,
   createPaperFixture,
-  protocolStatusCopy
+  protocolStatusCopy,
+  resolveConfiguredVideoOrigin,
+  resolvePaperRuntimeConfig
 } from "./index";
 
 const origin = "http://localhost:4173";
@@ -125,5 +127,32 @@ describe("M1 protocol status truthfulness", () => {
     expect(protocolStatusCopy("disabled")).toBe("Agent tools off");
     expect(protocolStatusCopy("unsupported")).toContain("does not expose native agent tools");
     expect(protocolStatusCopy("error")).toBe("Native agent tool unavailable");
+  });
+});
+
+describe("Paper peer-origin configuration", () => {
+  it("fails closed for missing, blank, invalid, non-HTTP, or same-origin Video configuration", () => {
+    expect(() => resolvePaperRuntimeConfig("https://paper.example.test", undefined)).toThrow("missing");
+    expect(() => resolvePaperRuntimeConfig("https://paper.example.test", "   ")).toThrow("missing");
+    expect(() => resolvePaperRuntimeConfig("https://paper.example.test", "not a URL")).toThrow("valid URL");
+    expect(() => resolvePaperRuntimeConfig("https://paper.example.test", "javascript:alert(1)"))
+      .toThrow("http or https");
+    expect(() => resolvePaperRuntimeConfig("https://paper.example.test/article", "https://paper.example.test/video"))
+      .toThrow("differ");
+  });
+
+  it("normalizes an independent Video origin and defaults to localhost only in development", () => {
+    expect(resolvePaperRuntimeConfig(
+      "https://paper.example.test/article",
+      "https://video.example.test/evidence"
+    )).toEqual({
+      paperOrigin: "https://paper.example.test",
+      videoOrigin: "https://video.example.test"
+    });
+    expect(resolveConfiguredVideoOrigin(undefined, true)).toBe("http://localhost:4174");
+    expect(resolveConfiguredVideoOrigin(undefined, false)).toBeUndefined();
+    expect(resolveConfiguredVideoOrigin("", true)).toBe("");
+    expect(resolveConfiguredVideoOrigin("https://video.example.test", false))
+      .toBe("https://video.example.test");
   });
 });

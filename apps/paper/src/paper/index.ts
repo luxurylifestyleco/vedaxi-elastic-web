@@ -1,5 +1,10 @@
-export { PAPER_EVIDENCE_ID, createPaperFixture } from "./fixture";
-export type { PaperDocument, PaperFixture } from "./fixture";
+export {
+  PAPER_EVIDENCE_ID,
+  createPaperFixture,
+  resolveConfiguredVideoOrigin,
+  resolvePaperRuntimeConfig
+} from "./fixture";
+export type { PaperDocument, PaperFixture, PaperRuntimeConfig } from "./fixture";
 export { createPaperEvidenceService } from "./service";
 export type { PaperEvidenceService } from "./service";
 export { createPaperEvidenceTool } from "./tool";

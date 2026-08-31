@@ -247,6 +247,22 @@ describe("M4 Semantic Focus Shift", () => {
     expect(markup).toContain("Independent Video publisher could not be verified or is unavailable");
   });
 
+  it("renders a configuration failure without mounting or trusting a Video iframe", () => {
+    const markup = renderToStaticMarkup(
+      <PaperApp
+        fixture={fixture}
+        service={service}
+        protocol={{ status: "unsupported", enable: () => undefined, disable: () => undefined }}
+        videoConfigurationError="Video origin configuration is missing"
+      />
+    );
+
+    expect(markup).not.toContain("<iframe");
+    expect(markup).toContain('role="alert"');
+    expect(markup).toContain("Video origin configuration is missing");
+    expect(markup).toContain("No embedded evidence is shown");
+  });
+
   it("arms each readiness attempt before posting and revalidates a reload", () => {
     let listener: ((event: MessageEvent) => void) | undefined;
     let timeout: (() => void) | undefined;

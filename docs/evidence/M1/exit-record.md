@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Module | M1 — Paper Origin / Paper Integrity Desk |
-| Deterministic eval | `vedaxi.m1-paper.dev.v1` |
+| Deterministic eval | `vedaxi.m1-paper.dev.v2` (v1 retained unchanged) |
 | Browser evidence eval | `vedaxi.m1-paper-browser.manual.v3` (v1/v2 retained unchanged) |
 | Source artifact | `85e139735da224f16985be1aeb11152dce4d20f4` (Paper runtime); v3 recorded repository HEAD `e6c440f` at capture time, not as the current repository HEAD; that commit did not change Paper sources |
 | Recorded | `2026-08-31T08:12:19.575Z` / `2026-08-31T13:42:19.5757937+05:30` |
@@ -13,6 +13,8 @@
 | Status | `RECORDED V3 PAPER RUNTIME PARTIALLY VERIFIED; CURRENT INTEGRATED WORKTREE UNEXITED AND UNVERIFIED` |
 
 The original in-app-browser evidence is retained as v1 and the earlier Chrome follow-up as v2. The recorded v3 evidence is bound to Paper runtime `85e1397`: native discovery/call, exact human-search navigation, lifecycle, source identity, origins, and logs pass for that captured runtime. The browser service then failed to attach a fresh local page for the narrow run; in-app CUA Tab remained on `BODY` and Chrome local-preview navigation timed out. v3 marks those observations `BLOCKED`; it does not inherit v2 keyboard or responsive results as passes for either v3 or the later integrated worktree. The current integrated Paper/M3/M4 worktree remains unexited and unverified in a current browser. M5 still owns public deployment parity and final end-to-end re-verification.
+
+The v2 deterministic manifest is the current source-precursor registry. It expands deterministic coverage of the integrated Paper boundary but is not browser evidence and does not change this exit decision from `BLOCKED`.
 
 ## Expected and observed
 
@@ -98,7 +100,8 @@ The adversarial reviewer's fresh sandboxed Vite development start on another por
 - Explicit blocked evidence: `docs/evidence/M1/raw/2026-08-30T21-25-53Z-browser-limitations.json`.
 - Desktop screenshot: `docs/evidence/M1/raw/desktop-production.jpg`.
 - Narrow screenshot (390 × 844 requested; 375 × 812 captured): `docs/evidence/M1/raw/mobile-390-requested.jpg`.
-- Deterministic dataset/manifest: `evals/registry/data/vedaxi/m1-paper-dev-v1.jsonl`, `evals/registry/manifests/vedaxi-m1-paper.dev.v1.json`.
+- Retained deterministic dataset/manifest: `evals/registry/data/vedaxi/m1-paper-dev-v1.jsonl`, `evals/registry/manifests/vedaxi-m1-paper.dev.v1.json`.
+- Current deterministic precursor dataset/manifest: `evals/registry/data/vedaxi/m1-paper-dev-v2.jsonl`, `evals/registry/manifests/vedaxi-m1-paper.dev.v2.json`.
 - Manual dataset/manifest: `evals/registry/data/vedaxi/m1-paper-browser-manual-v1.jsonl`, `evals/registry/manifests/vedaxi-m1-paper-browser.manual.v1.json`.
 - Chrome follow-up: `docs/evidence/M1/M1_CHROME_FOLLOWUP.md`.
 - Chrome keyboard trace: `docs/evidence/M1/raw/2026-08-31T03-11-29Z-chrome-keyboard.json`.

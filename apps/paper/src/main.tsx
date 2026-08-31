@@ -7,7 +7,9 @@ import {
   createDiscrepancyFocusTool,
   createPaperEvidenceService,
   createPaperEvidenceTool,
-  createPaperFixture
+  createPaperFixture,
+  resolveConfiguredVideoOrigin,
+  resolvePaperRuntimeConfig
 } from "./paper";
 import { usePaperRegistration } from "./paper/use-paper-registration";
 import { createPublisherRuntime } from "./stage/publisher-runtime";
@@ -35,8 +37,18 @@ const publisherRuntime = createPublisherRuntime(browserStorage);
 const paperEvidenceTool = createPaperEvidenceTool(service);
 const focusTool = createDiscrepancyFocusTool(publisherRuntime.dispatch);
 const tools = [paperEvidenceTool, focusTool] as const;
-const videoOrigin = (import.meta.env as { VITE_VIDEO_ORIGIN?: string }).VITE_VIDEO_ORIGIN
-  || "http://localhost:4174";
+let videoOrigin: string | undefined;
+let videoConfigurationError: string | null = null;
+try {
+  videoOrigin = resolvePaperRuntimeConfig(
+    window.location.origin,
+    resolveConfiguredVideoOrigin(import.meta.env.VITE_VIDEO_ORIGIN, import.meta.env.DEV)
+  ).videoOrigin;
+} catch (error) {
+  videoConfigurationError = error instanceof Error
+    ? error.message
+    : "Video origin configuration is invalid";
+}
 
 function PaperRoot() {
   const protocol = usePaperRegistration(tools);
@@ -53,6 +65,7 @@ function PaperRoot() {
     dispatchPublisher={publisherRuntime.dispatch}
     publisherError={publisherView.error}
     videoOrigin={videoOrigin}
+    videoConfigurationError={videoConfigurationError}
   />;
 }
 

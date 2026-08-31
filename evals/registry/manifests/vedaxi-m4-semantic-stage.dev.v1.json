@@ -1,0 +1,16 @@
+{
+  "id": "vedaxi.m4-semantic-stage.dev.v1",
+  "runner": {
+    "kind": "vitest",
+    "command": "npm test -- apps/paper/src/stage/m4-evals.test.tsx"
+  },
+  "dataset": "evals/registry/data/vedaxi/m4-semantic-stage-dev-v1.jsonl",
+  "unproven": [
+    "Target-browser responsive layout, keyboard operation, reduced-motion behavior, and visual review are unproven."
+  ],
+  "bindings": [
+    { "case_id": "m4-stage-semantic-ui", "evaluator": "semantic-ui" },
+    { "case_id": "m4-stage-keyboard-precursor", "evaluator": "keyboard-precursor" },
+    { "case_id": "m4-stage-responsive-motion-precursor", "evaluator": "responsive-motion-precursor" }
+  ]
+}

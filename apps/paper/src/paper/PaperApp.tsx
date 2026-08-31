@@ -35,6 +35,7 @@ export interface PaperAppProps {
   dispatchPublisher?: (action: PublisherAction) => PublisherResult;
   publisherError?: string | null;
   videoOrigin?: string;
+  videoConfigurationError?: string | null;
 }
 
 const VIDEO_READY_REQUEST = { type: "vedaxi:video-readiness-request", version: 1 } as const;
@@ -341,7 +342,8 @@ export function PaperApp({
   publisherState = EMPTY_PUBLISHER_STATE,
   dispatchPublisher = () => ({ ok: false, code: "invalid-action", recoverable: true }),
   publisherError = null,
-  videoOrigin = "http://localhost:4174"
+  videoOrigin = "",
+  videoConfigurationError = null
 }: PaperAppProps) {
   const paper = fixture.document;
   const evidence = fixture.evidence;
@@ -585,7 +587,11 @@ export function PaperApp({
                   title="Independent Video publisher evidence"
                 />
               )}
-              {videoAvailable !== true && (
+              {videoConfigurationError ? (
+                <p role="alert">
+                  Independent Video publisher configuration is invalid: {videoConfigurationError}. No embedded evidence is shown.
+                </p>
+              ) : videoAvailable !== true && (
                 <p role="status">
                   {videoAvailable === null
                     ? "Checking whether the independent Video publisher is available."

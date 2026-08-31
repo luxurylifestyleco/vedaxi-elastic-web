@@ -22,6 +22,38 @@ export interface PaperFixture {
   evidence: EvidenceObject;
 }
 
+export interface PaperRuntimeConfig {
+  paperOrigin: string;
+  videoOrigin: string;
+}
+
+export function resolveConfiguredVideoOrigin(value: unknown, isDevelopment: boolean): unknown {
+  return value ?? (isDevelopment ? "http://localhost:4174" : undefined);
+}
+
+export function resolvePaperRuntimeConfig(paperOrigin: string, videoOrigin: unknown): PaperRuntimeConfig {
+  if (typeof videoOrigin !== "string" || !videoOrigin.trim()) {
+    throw new Error("Video origin configuration is missing");
+  }
+  const paper = normalizeRuntimeOrigin(paperOrigin, "Paper");
+  const video = normalizeRuntimeOrigin(videoOrigin, "Video");
+  if (paper === video) throw new Error("Video origin must differ from Paper origin");
+  return { paperOrigin: paper, videoOrigin: video };
+}
+
+function normalizeRuntimeOrigin(value: string, label: string): string {
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error(`${label} origin must be a valid URL`);
+  }
+  if (url.protocol !== "http:" && url.protocol !== "https:") {
+    throw new Error(`${label} origin must use http or https`);
+  }
+  return url.origin;
+}
+
 function normalizeWebOrigin(value: string): string {
   let url: URL;
   try {

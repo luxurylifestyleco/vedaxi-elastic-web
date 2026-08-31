@@ -1,6 +1,8 @@
+import assert from "node:assert/strict";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { evaluateReleaseStatus, formatConsoleSummary } from "./release-status/generate-release-status.mjs";
 
 const repoRoot = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const npm = "npm";
@@ -14,6 +16,31 @@ function run(label, command, args, cwd = repoRoot) {
   const result = spawnSync(executable, executableArgs, { cwd, stdio: "inherit" });
   if (result.error) throw result.error;
   if (result.status !== 0) throw new Error(`${label} failed with exit code ${result.status}`);
+}
+
+function hardQualityExit(status, result) {
+  if (status === 0 && result.passed === true && result.gate_status === "PASS" && result.decision === "HOLD"
+    && result.eligible_for_human_gate === true && result.release_action === "NONE" && result.release_authority === "HUMAN_REQUIRED") return 0;
+  if (status === 1 && result.passed === false && result.gate_status === "FAIL" && result.decision === "HOLD"
+    && result.eligible_for_human_gate === false && result.release_action === "NONE" && result.release_authority === "HUMAN_REQUIRED") return 1;
+  throw new Error(`Inconsistent hard-quality result with exit code ${status}`);
+}
+
+function mediaExit(status, output) {
+  if (status === 0 && /^PASS:/m.test(output)) return 0;
+  if (status === 2 && /^BLOCKED:/m.test(output)) return 2;
+  throw new Error(`Inconsistent media readiness result with exit code ${status}`);
+}
+
+if (process.argv.includes("--self-test")) {
+  const humanHeld = { decision: "HOLD", release_action: "NONE", release_authority: "HUMAN_REQUIRED" };
+  assert.equal(hardQualityExit(1, { ...humanHeld, passed: false, gate_status: "FAIL", eligible_for_human_gate: false }), 1);
+  assert.equal(hardQualityExit(0, { ...humanHeld, passed: true, gate_status: "PASS", eligible_for_human_gate: true }), 0);
+  assert.equal(mediaExit(2, "BLOCKED: media missing\n"), 2);
+  assert.equal(mediaExit(0, "PASS: media valid\n"), 0);
+  assert.throws(() => mediaExit(0, "BLOCKED: contradictory status\n"));
+  console.log("quality runner self-test valid (hard-quality and media fail closed)");
+  process.exit(0);
 }
 
 if (cleanInstall) run("Install locked dependencies", npm, ["ci"]);
@@ -45,17 +72,12 @@ try {
 } catch {
   throw new Error(`Expected current hard-quality assessment to return JSON with HOLD/FAIL markers; got exit code ${hardQuality.status}`);
 }
-const hardQualityHeld = hardQuality.status === 1
-  && hardQualityResult.passed === false
-  && hardQualityResult.gate_status === "FAIL"
-  && hardQualityResult.decision === "HOLD"
-  && hardQualityResult.eligible_for_human_gate === false
-  && hardQualityResult.release_action === "NONE"
-  && hardQualityResult.release_authority === "HUMAN_REQUIRED";
-if (!hardQualityHeld) {
-  throw new Error(`Expected current hard-quality assessment to remain HOLD/FAIL; got exit code ${hardQuality.status}`);
+const hardQualityStatus = hardQualityExit(hardQuality.status, hardQualityResult);
+if (hardQualityStatus !== 0) {
+  console.log("BLOCKED: current hard-quality assessment remains HOLD/FAIL and is not eligible for the Human Gate");
+} else {
+  console.log("PASS: current hard-quality assessment");
 }
-console.log("BLOCKED: current hard-quality assessment remains HOLD/FAIL and is not eligible for the Human Gate");
 
 console.log("\n==> Media readiness contract");
 const media = spawnSync(process.execPath, ["evals/validate-m2-media-slot.mjs"], {
@@ -65,10 +87,18 @@ const media = spawnSync(process.execPath, ["evals/validate-m2-media-slot.mjs"], 
 const mediaOutput = `${media.stdout ?? ""}${media.stderr ?? ""}`;
 process.stdout.write(mediaOutput);
 if (media.error) throw media.error;
-const mediaBlocked = media.status === 2 && /^BLOCKED:/m.test(mediaOutput);
-if (!mediaBlocked) {
-  throw new Error(`Expected missing human-supplied media to report BLOCKED with exit code 2; got ${media.status}`);
+const mediaStatus = mediaExit(media.status, mediaOutput);
+if (mediaStatus !== 0) {
+  console.log("BLOCKED: media readiness awaits the human-supplied video and captions");
+} else {
+  console.log("PASS: media readiness");
 }
-console.log("BLOCKED: media readiness awaits the human-supplied video and captions");
 
 console.log("\nPASS: code quality gate");
+
+console.log("\n==> Release readiness snapshot");
+const releaseStatus = evaluateReleaseStatus(repoRoot, {
+  verification: { typecheck: "PASS", tests: "PASS", builds: "PASS" }
+});
+console.log(formatConsoleSummary(releaseStatus));
+if (releaseStatus.overall_status === "FAIL") throw new Error("Release readiness evaluation failed");

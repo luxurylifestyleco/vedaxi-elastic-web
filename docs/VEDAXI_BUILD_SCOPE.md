@@ -203,7 +203,7 @@ Stop condition: public video is under three minutes, public repository includes 
 
 - Local Git exists on `codex/phase-0-webmcp`.
 - The application folder was empty when implementation began.
-- The GitHub connector currently returns no accessible repositories, and local `git remote -v` returns no remote. This must be resolved before R3 despite the earlier verbal setup status.
+- Local Git has an `origin` remote configured at `https://github.com/luxurylifestyleco/vedaxi-elastic-web.git`, and `codex/phase-0-webmcp` tracks its origin branch. This repository fact does not prove logged-out public access, publication of the current local commits, or passing CI for an unpushed candidate; R3 must verify those separately.
 - Devpost submissions close at `2026-09-03T20:00:00Z`; the schedule prioritizes a complete vertical slice over optional infrastructure.
 - Devpost requires a live URL, a public source repository with a visible open-source license, a public demo video under three minutes with audio, and named tested WebMCP agents/clients.
 

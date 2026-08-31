@@ -1,0 +1,16 @@
+{
+  "id": "vedaxi.m5-webmcp-local.dev.v1",
+  "runner": {
+    "kind": "vitest",
+    "command": "npm test -- tests/integration/webmcp/m5-evals.test.ts"
+  },
+  "dataset": "evals/registry/data/vedaxi/m5-webmcp-local-dev-v1.jsonl",
+  "unproven": [
+    "Native WebMCP discovery and the complete workflow across public Paper and Video deployments are unproven.",
+    "Target-browser persistence, network, console, and post-disable fresh-session evidence are unproven."
+  ],
+  "bindings": [
+    { "case_id": "m5-local-ordered-trace", "evaluator": "ordered-trace" },
+    { "case_id": "m5-local-production-controllers", "evaluator": "production-controllers" }
+  ]
+}
