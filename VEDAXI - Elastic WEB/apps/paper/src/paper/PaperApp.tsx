@@ -1,4 +1,4 @@
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 
 import type { EvidenceSearchResult } from "@vedaxi/contracts";
 
@@ -41,6 +41,8 @@ function ProtocolStatus({ protocol }: { protocol: PaperProtocolControls }) {
 function PaperSearch({ service }: { service: PaperEvidenceService }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<EvidenceSearchResult[] | null>(null);
+  const [focusResult, setFocusResult] = useState(false);
+  const firstResultRef = useRef<HTMLAnchorElement>(null);
 
   const suggestions = [
     "final analyzed sample",
@@ -48,10 +50,27 @@ function PaperSearch({ service }: { service: PaperEvidenceService }) {
     "included in the final analysis"
   ] as const;
 
-  const runSearch = (nextQuery: string) => {
+  const runSearch = (nextQuery: string, shouldFocusResult = false) => {
     setQuery(nextQuery);
     setResults(service.search(nextQuery));
+    setFocusResult(shouldFocusResult);
   };
+
+  useEffect(() => {
+    if (!focusResult || results === null) return;
+    const resultLink = firstResultRef.current;
+    const targetId = resultLink?.hash.slice(1);
+    const target = targetId ? document.getElementById(targetId) : null;
+
+    if (target && targetId) {
+      window.location.hash = targetId;
+      target.focus({ preventScroll: true });
+      target.scrollIntoView({ block: "center" });
+    } else {
+      resultLink?.focus();
+    }
+    setFocusResult(false);
+  }, [focusResult, results]);
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -63,7 +82,7 @@ function PaperSearch({ service }: { service: PaperEvidenceService }) {
       ? "Search the publisher’s paper evidence."
       : results.length === 0
         ? "No matching paper evidence."
-        : `${results.length} matching paper passage found.`;
+        : `${results.length} matching paper passage found for “${query}”.`;
 
   return (
     <section className="paper-search" aria-labelledby="paper-search-title">
@@ -104,14 +123,24 @@ function PaperSearch({ service }: { service: PaperEvidenceService }) {
       <div className="search-suggestions" aria-label="Suggested paper searches">
         <span>Try one:</span>
         {suggestions.map((suggestion) => (
-          <button key={suggestion} type="button" onClick={() => runSearch(suggestion)}>
+          <button
+            aria-pressed={results !== null && query === suggestion}
+            key={suggestion}
+            type="button"
+            onClick={() => runSearch(suggestion, true)}
+          >
             {suggestion}
           </button>
         ))}
       </div>
       <p className="search-message" aria-live="polite">{message}</p>
-      {results?.map(({ evidence, score }) => (
-        <a className="search-result" href="#methods-participants" key={evidence.id}>
+      {results?.map(({ evidence, score }, index) => (
+        <a
+          className="search-result"
+          href="#methods-participants"
+          key={evidence.id}
+          ref={index === 0 ? firstResultRef : undefined}
+        >
           <span>{evidence.title}</span>
           <span className="mono">{evidence.locator} · {score} exact query terms</span>
         </a>
@@ -188,7 +217,7 @@ export function PaperApp({ fixture, service, protocol }: PaperAppProps) {
               <p className="section-kicker">Participant accounting</p>
               <h2 id="methods-title">Methods</h2>
               <p>{paper.methodsIntroduction}</p>
-              <div className="evidence-row" id="methods-participants">
+              <div className="evidence-row" id="methods-participants" tabIndex={-1}>
                 <blockquote cite={`${evidence.sourceOrigin}/#methods-participants`}>
                   <p>{evidence.excerpt}</p>
                 </blockquote>

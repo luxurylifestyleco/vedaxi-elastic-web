@@ -46,6 +46,7 @@ describe("M1 Paper Integrity Desk", () => {
     expect(markup).toMatch(/<main[ >]/);
     expect(markup).toMatch(/<article[ >]/);
     expect(markup).toMatch(/<aside[^>]+aria-label="Evidence provenance"/);
+    expect(markup).toMatch(/id="methods-participants" tabindex="-1"/);
     expect(markup).toMatch(/<footer[ >]/);
     expect(markup.indexOf(fixture.evidence.excerpt)).toBeLessThan(
       markup.indexOf(fixture.evidence.provenance)
@@ -96,5 +97,6 @@ describe("M1 Paper Integrity Desk", () => {
     expect(markup).toContain("forty participants");
     expect(markup).toContain("included in the final analysis");
     expect(markup).toContain('type="button"');
+    expect(markup).toContain('aria-pressed="false"');
   });
 });
