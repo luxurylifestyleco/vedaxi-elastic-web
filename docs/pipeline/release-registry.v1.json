@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-31T00:00:00Z",
+  "deadline": {
+    "id": "devpost-close",
+    "at": "2026-09-03T20:00:00Z",
+    "status": "AT_RISK",
+    "owner": "Master Agent // Delivery",
+    "classification": "MIXED",
+    "dependencies": ["M6", "rules-acknowledgment", "final-authorization"],
+    "evidence_paths": ["docs/VEDAXI_BUILD_SCOPE.md", ".devpost-hackathon-state.json"],
+    "exit_criteria": ["Devpost submission is accepted before the recorded close time."],
+    "risk": "Five sequential product gates and all public submission assets remain open."
+  },
+  "critical_path": ["M1", "M2", "M3", "M4", "M5", "M6", "rules-acknowledgment", "final-authorization"],
+  "modules": [
+    {
+      "id": "M0",
+      "status": "PASS",
+      "owner": "Protocol Foundation owner",
+      "classification": "AGENT_EXECUTABLE",
+      "dependencies": ["approved-design", "target-browser-contract"],
+      "evidence_paths": ["docs/evidence/M0/exit-record.md", "evals/registry/manifests/vedaxi-contracts.dev.v3.json", "evals/registry/manifests/vedaxi-m0b-browser.manual.v1.json"],
+      "exit_criteria": ["Native sequential topology is evidence-backed.", "M0 deterministic and manual registries validate."],
+      "risk": "Simultaneous iframe discovery failed; M5 must reverify the selected sequential topology publicly."
+    },
+    {
+      "id": "M1",
+      "status": "BLOCKED",
+      "owner": "Paper Origin owner",
+      "classification": "MIXED",
+      "dependencies": ["M0", "C01", "authorized target-browser verification"],
+      "evidence_paths": ["docs/evidence/M1/exit-record.md", "evals/registry/manifests/vedaxi-m1-paper.dev.v1.json", "evals/registry/manifests/vedaxi-m1-paper-browser.manual.v2.json"],
+      "exit_criteria": ["Bind a fresh production-browser matrix, including keyboard traversal, to the current Paper runtime.", "Record a current-source exit decision."],
+      "risk": "The retained browser baseline binds source 06a9512, while later Paper runtime commits require re-verification."
+    },
+    {
+      "id": "M2",
+      "status": "NOT_STARTED",
+      "owner": "Video Origin owner",
+      "classification": "AGENT_EXECUTABLE",
+      "dependencies": ["M1", "C02", "M0-sequential-topology"],
+      "evidence_paths": ["docs/MODULE_ARCHITECTURE.md", "docs/evaluation/MODULE_GATES.md"],
+      "exit_criteria": ["S4-S5 pass.", "Independent origin, keyboard evidence, and evidence-only output are retained."],
+      "risk": "Cannot start until M1 passes; origin independence is a release-critical proof."
+    },
+    {
+      "id": "M3",
+      "status": "NOT_STARTED",
+      "owner": "Shared Actions owner",
+      "classification": "AGENT_EXECUTABLE",
+      "dependencies": ["M1", "M2", "C03"],
+      "evidence_paths": ["docs/MODULE_ARCHITECTURE.md", "docs/evaluation/MODULE_GATES.md"],
+      "exit_criteria": ["Human/tool parity, rejection, persistence, reset, and failure tests pass."],
+      "risk": "Owns consequential mutation and durable state required by M5."
+    },
+    {
+      "id": "M4",
+      "status": "NOT_STARTED",
+      "owner": "Semantic Stage owner",
+      "classification": "AGENT_EXECUTABLE",
+      "dependencies": ["M3", "C04"],
+      "evidence_paths": ["docs/MODULE_ARCHITECTURE.md", "docs/evaluation/MODULE_GATES.md"],
+      "exit_criteria": ["Reduced-motion, reachability, responsive, and visual-regression evidence pass."],
+      "risk": "Must preserve M3 behavior while adding judge-facing focus semantics."
+    },
+    {
+      "id": "M5",
+      "status": "NOT_STARTED",
+      "owner": "Native Proof owner",
+      "classification": "AGENT_EXECUTABLE",
+      "dependencies": ["M4", "C05", "public-two-origin-deployment"],
+      "evidence_paths": ["docs/MODULE_ARCHITECTURE.md", "docs/evaluation/VEDAXI_RUBRIC.md"],
+      "exit_criteria": ["Clean public H1-H11 trace passes.", "Sequential discovery, derivation, confirmation, reload, and kill-switch ablation are retained."],
+      "risk": "This is the release proof: deployment or target-client drift blocks all submission claims."
+    },
+    {
+      "id": "M6",
+      "status": "NOT_STARTED",
+      "owner": "Submission and Reproduction owner",
+      "classification": "MIXED",
+      "dependencies": ["M5", "C06", "submission-assets", "rules-acknowledgment", "final-authorization"],
+      "evidence_paths": ["docs/MODULE_ARCHITECTURE.md", "docs/VEDAXI_BUILD_SCOPE.md", "docs/evaluation/VEDAXI_RUBRIC.md"],
+      "exit_criteria": ["H11-H12 and D1-D5 pass.", "Clean reproduction, final reviews, and user approval are retained."],
+      "risk": "No asset may claim behavior that M5 has not proved."
+    }
+  ],
+  "assets": [
+    {
+      "id": "live-url",
+      "status": "PENDING",
+      "owner": "Native Proof owner",
+      "classification": "AGENT_EXECUTABLE",
+      "dependencies": ["M5"],
+      "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/SUBMISSION_PIPELINE.md"],
+      "exit_criteria": ["A public URL passes a clean target-browser native trace."],
+      "risk": "No public deployment proof exists."
+    },
+    {
+      "id": "public-repo-license-instructions",
+      "status": "PENDING",
+      "owner": "Submission and Reproduction owner",
+      "classification": "AGENT_EXECUTABLE",
+      "dependencies": ["M5", "M6"],
+      "evidence_paths": ["docs/MODULE_ARCHITECTURE.md", "docs/SUBMISSION_PIPELINE.md"],
+      "exit_criteria": ["Public repository, visible open-source license, and clean-clone instructions are verified."],
+      "risk": "D2 and H11 remain unmet."
+    },
+    {
+      "id": "demo-video-audio",
+      "status": "PENDING",
+      "owner": "Submission and Reproduction owner",
+      "classification": "AGENT_EXECUTABLE",
+      "dependencies": ["M5", "M6"],
+      "evidence_paths": ["docs/VEDAXI_BUILD_SCOPE.md", "docs/evaluation/VEDAXI_RUBRIC.md"],
+      "exit_criteria": ["Public continuous real-run video is under 180 seconds, has audio, and shows discovery, persistence, and ablation."],
+      "risk": "A demo cannot substitute for M5 evidence or hide load-bearing steps."
+    },
+    {
+      "id": "screenshots",
+      "status": "PENDING",
+      "owner": "Submission and Reproduction owner",
+      "classification": "AGENT_EXECUTABLE",
+      "dependencies": ["M5", "M6"],
+      "evidence_paths": ["docs/SUBMISSION_PIPELINE.md"],
+      "exit_criteria": ["Submission-ready screenshots are captured from the verified public product."],
+      "risk": "Existing M1 screenshots do not prove the M5 workflow or serve as submission assets."
+    },
+    {
+      "id": "devpost-copy",
+      "status": "PENDING",
+      "owner": "Submission and Reproduction owner",
+      "classification": "AGENT_EXECUTABLE",
+      "dependencies": ["M5", "M6", "live-url", "demo-video-audio"],
+      "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", ".devpost-hackathon-state.json"],
+      "exit_criteria": ["Explanation and claims ledger reference only verified M5/M6 facts."],
+      "risk": "The expected draft file has not been created and cannot be written from provisional claims."
+    },
+    {
+      "id": "tested-agents-clients",
+      "status": "PENDING",
+      "owner": "Native Proof owner",
+      "classification": "AGENT_EXECUTABLE",
+      "dependencies": ["M5", "M6"],
+      "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/evidence/M1/exit-record.md"],
+      "exit_criteria": ["Matrix names only clients with date, result, version/build when available, and evidence path."],
+      "risk": "Exact client build is currently blocked; no unsupported name may appear in Devpost copy."
+    },
+    {
+      "id": "rules-acknowledgment",
+      "status": "BLOCKED",
+      "owner": "User",
+      "classification": "USER_REQUIRED",
+      "dependencies": ["current-official-rules"],
+      "evidence_paths": [".devpost-hackathon-state.json", "docs/SUBMISSION_PIPELINE.md"],
+      "exit_criteria": ["User explicitly acknowledges the current official rules."],
+      "risk": "rules_acknowledged is false and agents must not change it."
+    },
+    {
+      "id": "final-authorization",
+      "status": "BLOCKED",
+      "owner": "User",
+      "classification": "USER_REQUIRED",
+      "dependencies": ["M6", "rules-acknowledgment", "field-by-field-package"],
+      "evidence_paths": [".devpost-hackathon-state.json", "docs/SUBMISSION_PIPELINE.md"],
+      "exit_criteria": ["User separately authorizes final Devpost submission after reviewing exact fields and risks."],
+      "risk": "Final external submission is prohibited without explicit user authorization."
+    }
+  ],
+  "gates": [
+    { "id": "H1", "status": "PARTIAL", "passed": false, "owner": "Native Proof owner", "dependencies": ["M0", "M5"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/evidence/M0/exit-record.md"] },
+    { "id": "H2", "status": "PARTIAL", "passed": false, "owner": "Native Proof owner", "dependencies": ["M0", "M2", "M5"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/evidence/M0/exit-record.md"] },
+    { "id": "H3", "status": "PARTIAL", "passed": false, "owner": "Video Origin owner", "dependencies": ["M1", "M2", "M5"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/evidence/M1/exit-record.md"] },
+    { "id": "H4", "status": "PENDING", "passed": false, "owner": "Native Proof owner", "dependencies": ["M5"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
+    { "id": "H5", "status": "PENDING", "passed": false, "owner": "Native Proof owner", "dependencies": ["M2", "M5"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
+    { "id": "H6", "status": "PENDING", "passed": false, "owner": "Shared Actions owner", "dependencies": ["M3", "M5"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
+    { "id": "H7", "status": "PENDING", "passed": false, "owner": "Shared Actions owner", "dependencies": ["M3", "M5"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
+    { "id": "H8", "status": "PENDING", "passed": false, "owner": "Shared Actions owner", "dependencies": ["M3", "M5"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
+    { "id": "H9", "status": "PARTIAL", "passed": false, "owner": "Native Proof owner", "dependencies": ["M0", "M3", "M5"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/evidence/M0/exit-record.md"] },
+    { "id": "H10", "status": "PARTIAL", "passed": false, "owner": "Shared Actions owner", "dependencies": ["M1", "M3", "M5"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/evidence/M1/exit-record.md"] },
+    { "id": "H11", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M5", "M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
+    { "id": "H12", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
+    { "id": "D1", "status": "PENDING", "passed": false, "owner": "Native Proof owner", "dependencies": ["M5"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
+    { "id": "D2", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
+    { "id": "D3", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
+    { "id": "D4", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M5", "M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
+    { "id": "D5", "status": "PENDING", "passed": false, "owner": "Native Proof owner", "dependencies": ["M5", "M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] }
+  ]
+}
