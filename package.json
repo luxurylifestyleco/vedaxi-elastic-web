@@ -1,0 +1,30 @@
+{
+  "name": "vedaxi-elastic-web",
+  "private": true,
+  "version": "0.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "vitest run apps packages",
+    "quality:local": "node evals/run-quality-gate.mjs",
+    "dev:probe:paper": "vite apps/protocol-probe/paper --port 4173 --strictPort",
+    "dev:probe:video": "vite apps/protocol-probe/video --port 4174 --strictPort",
+    "dev:paper": "vite apps/paper --port 4173 --strictPort",
+    "dev:video": "vite apps/video --port 4174 --strictPort",
+    "build:paper": "vite build apps/paper",
+    "build:video": "vite build apps/video",
+    "preview:paper": "vite preview apps/paper --port 4173 --strictPort",
+    "preview:video": "vite preview apps/video --port 4174 --strictPort",
+    "build:probe": "vite build apps/protocol-probe/paper && vite build apps/protocol-probe/video"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "typescript": "^5.8.0",
+    "vite": "^7.0.0",
+    "vitest": "^3.2.0"
+  }
+}

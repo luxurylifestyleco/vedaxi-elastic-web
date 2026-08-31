@@ -7,3 +7,6 @@ dist/
 **/.env
 **/.env.*
 !**/.env.example
+**/.vercel/
+skill-router/
+skill-router-v1.0.0.zip

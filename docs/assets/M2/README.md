@@ -6,8 +6,8 @@ This directory reserves the final M2 evidence video without adding, generating, 
 
 | Artifact | Required repository path | Contract |
 | --- | --- | --- |
-| Video | `VEDAXI - Elastic WEB/apps/video/public/media/vedaxi-controlled-evidence.mp4` | MP4 container (`video/mp4`), H.264/AVC video and AAC audio; duration must be **strictly greater than 192 seconds**. |
-| Captions | `VEDAXI - Elastic WEB/apps/video/public/media/vedaxi-controlled-evidence.vtt` | UTF-8 WebVTT. A cue covering `00:03:12.000` must contain both required phrases below. |
+| Video | `apps/video/public/media/vedaxi-controlled-evidence.mp4` | MP4 container (`video/mp4`), H.264/AVC video and AAC audio; duration must be **strictly greater than 192 seconds**. |
+| Captions | `apps/video/public/media/vedaxi-controlled-evidence.vtt` | UTF-8 WebVTT. A cue covering `00:03:12.000` must contain both required phrases below. |
 | Manifest | `docs/assets/M2/media-manifest.json` | Completed only after the two final files exist. |
 
 The evidence timestamp is `00:03:12` (`192.000` seconds). Its normalized caption/transcript excerpt must include the literal phrases `six` and `did not replace`, and identify the exclusion/calibration-drift evidence. This contract deliberately does not permit a publisher-side derived sample-size statement, `34`, or contradiction language in the excerpt.

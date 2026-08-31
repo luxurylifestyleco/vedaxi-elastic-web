@@ -1,6 +1,6 @@
 # VEDAXI Evaluation Test Set
 
-The early build uses 20 outcome-based cases across four complexity strata. Paths may vary; end states may not.
+The early build uses 20 outcome-based product cases across four complexity strata plus eight submission-package cases. Paths may vary; end states may not.
 
 ## Simple
 
@@ -51,3 +51,6 @@ The early build uses 20 outcome-based cases across four complexity strata. Paths
 | D3 | Open the submitted YouTube demo in a logged-out session and inspect the video artifact. | The video is publicly viewable without authentication, duration is under three minutes, audio is present, and no cut hides a load-bearing protocol step. |
 | D4 | Compare submission explanation with the claims ledger and trace. | Every product/WebMCP claim is accurate, supported, and understandable. |
 | D5 | Compare the submitted tested-agent/client list with the browser matrix. | Every named client has a recorded version/build and result; no untested client is claimed. |
+| D6 | Open the submitted live app as a judge and review its availability plan through the end of judging. | Access remains free through judging; any required credentials and instructions work from a clean session. |
+| D7 | Audit every third-party SDK, API, dataset, mark, music track, media asset, and protected work in the submission. | Every item has a recorded source, license or authorization basis, and reviewer; unresolved rights block submission. |
+| D8 | Re-fetch the live official rules and current submission fields immediately before the Human Gate. | A timestamped diff records the current requirements and every unresolved change; cached local requirements cannot pass. |

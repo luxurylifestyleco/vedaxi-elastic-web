@@ -38,6 +38,35 @@ function validateWorkItem(item, label) {
   nonEmpty(item.risk, `${label}.risk`);
   for (const [index, evidence] of item.evidence_paths.entries()) localPath(evidence, `${label}.evidence_paths[${index}]`);
 }
+function validateDependencies(registry) {
+  array(registry.external_dependencies, "external_dependencies");
+  const external = new Set();
+  for (const dependency of registry.external_dependencies) {
+    nonEmpty(dependency, "external_dependencies[]");
+    if (external.has(dependency)) fail(`external_dependencies has duplicate id: ${dependency}`);
+    external.add(dependency);
+  }
+  const nodes = [registry.deadline, ...registry.modules, ...registry.assets, ...registry.gates];
+  uniqueIds(nodes, "dependency graph");
+  const byId = new Map(nodes.map((node) => [node.id, node]));
+  for (const node of nodes) {
+    for (const dependency of node.dependencies) {
+      nonEmpty(dependency, `${node.id}.dependencies[]`);
+      if (!byId.has(dependency) && !external.has(dependency)) fail(`${node.id} references unknown dependency: ${dependency}`);
+    }
+  }
+  const visiting = new Set();
+  const visited = new Set();
+  function visit(id) {
+    if (visiting.has(id)) fail(`dependency cycle includes: ${id}`);
+    if (visited.has(id)) return;
+    visiting.add(id);
+    for (const dependency of byId.get(id).dependencies) if (byId.has(dependency)) visit(dependency);
+    visiting.delete(id);
+    visited.add(id);
+  }
+  for (const id of byId.keys()) visit(id);
+}
 function validateRegistry(registry) {
   if (!registry || typeof registry !== "object" || Array.isArray(registry)) fail("registry must be an object");
   if (registry.schema_version !== 1) fail("registry.schema_version must be 1");
@@ -65,9 +94,9 @@ function validateRegistry(registry) {
     validateWorkItem(asset, asset.id);
     if (asset.classification === "USER_REQUIRED" && asset.owner !== "User") fail(`${asset.id} USER_REQUIRED asset must be owned by User`);
   }
-  if (!Array.isArray(registry.gates) || registry.gates.length !== 17) fail("registry.gates must contain H1-H12 and D1-D5");
+  if (!Array.isArray(registry.gates) || registry.gates.length !== 20) fail("registry.gates must contain H1-H12 and D1-D8");
   uniqueIds(registry.gates, "gates");
-  const expectedGateIds = [...Array.from({ length: 12 }, (_, i) => `H${i + 1}`), ...Array.from({ length: 5 }, (_, i) => `D${i + 1}`)];
+  const expectedGateIds = [...Array.from({ length: 12 }, (_, i) => `H${i + 1}`), ...Array.from({ length: 8 }, (_, i) => `D${i + 1}`)];
   for (const [index, gate] of registry.gates.entries()) {
     if (gate.id !== expectedGateIds[index]) fail(`gates[${index}] must be ${expectedGateIds[index]}`);
     if (!gateStatuses.has(gate.status)) fail(`${gate.id}.status is invalid`);
@@ -87,6 +116,8 @@ function validateRegistry(registry) {
   for (const id of registry.critical_path) {
     if (!registry.modules.some((item) => item.id === id) && !registry.assets.some((item) => item.id === id)) fail(`critical_path references unknown item: ${id}`);
   }
+  if (!registry.assets.find((item) => item.id === "rules-acknowledgment")?.dependencies.includes("D8")) fail("rules-acknowledgment must depend on D8");
+  validateDependencies(registry);
 }
 
 const input = process.argv.slice(2).find((argument) => argument !== "--self-test") ?? defaultRegistry;
@@ -106,7 +137,13 @@ if (process.argv.includes("--self-test")) {
   passedBlocked.gates[10].passed = true;
   const untrackedEvidence = structuredClone(registry);
   untrackedEvidence.deadline.evidence_paths = [".devpost-hackathon-state.json"];
-  for (const [name, fixture] of [["contradictory gate", contradictoryGate], ["missing owner", missingOwner], ["passed blocked dependency", passedBlocked], ["untracked evidence", untrackedEvidence]]) {
+  const unknownDependency = structuredClone(registry);
+  unknownDependency.modules[1].dependencies.push("missing-gate");
+  const dependencyCycle = structuredClone(registry);
+  dependencyCycle.modules[0].dependencies.push("M1");
+  const staleRulesAcknowledgment = structuredClone(registry);
+  staleRulesAcknowledgment.assets.find((item) => item.id === "rules-acknowledgment").dependencies = ["current-official-rules"];
+  for (const [name, fixture] of [["contradictory gate", contradictoryGate], ["missing owner", missingOwner], ["passed blocked dependency", passedBlocked], ["untracked evidence", untrackedEvidence], ["unknown dependency", unknownDependency], ["dependency cycle", dependencyCycle], ["stale rules acknowledgment", staleRulesAcknowledgment]]) {
     try {
       validateRegistry(fixture);
       fail(`self-test did not reject ${name}`);
@@ -114,7 +151,7 @@ if (process.argv.includes("--self-test")) {
       if (String(error.message).startsWith("self-test did not reject")) throw error;
     }
   }
-  console.log("pipeline validator self-test valid (4 rejection checks)");
+  console.log("pipeline validator self-test valid (7 rejection checks)");
 }
 
 console.log(`pipeline registry valid: ${path.relative(root, registryPath)}`);

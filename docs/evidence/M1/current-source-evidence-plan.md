@@ -26,7 +26,7 @@ The evidence operator must first freeze the exact Paper candidate. A dirty worki
 Record all of the following before launch:
 
 - full repository commit and whether the tree is clean;
-- canonical, sorted list of every runtime/build input under `VEDAXI - Elastic WEB/apps/paper/`, including untracked files if any;
+- canonical, sorted list of every runtime/build input under `apps/paper/`, including untracked files if any;
 - SHA-256 for each listed file and one SHA-256 for the canonical inventory;
 - package-lock SHA-256, Node/npm/Vite versions, OS, build command, preview command, host, and port;
 - production asset filenames and SHA-256 values after `npm run build:paper`;

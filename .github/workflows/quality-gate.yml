@@ -19,62 +19,16 @@ jobs:
 
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: VEDAXI - Elastic WEB/package-lock.json
+          cache-dependency-path: package-lock.json
 
-      - name: Install dependencies
-        working-directory: VEDAXI - Elastic WEB
-        run: npm ci
-
-      - name: TypeScript (no emit)
-        working-directory: VEDAXI - Elastic WEB
-        run: npx tsc --noEmit -p tsconfig.json
-
-      - name: Run full test suite
-        working-directory: VEDAXI - Elastic WEB
-        run: npm test
-
-      - name: Build Paper
-        working-directory: VEDAXI - Elastic WEB
-        run: npm run build:paper
-
-      - name: Build Video
-        working-directory: VEDAXI - Elastic WEB
-        run: npm run build:video
-
-      - name: Build Board
-        working-directory: VEDAXI - Elastic WEB
-        run: npm run build:board
-
-      - name: Validate pipeline registry implementation
-        run: node evals/validate-pipeline.mjs --self-test
-
-      - name: Validate current pipeline registry
-        run: node evals/validate-pipeline.mjs
-
-      - name: Validate immutable manual registries
-        run: node evals/ci/validate-manual-immutable.mjs
-
-      - name: Verify expected late-bound media block
-        run: |
-          set +e
-          output="$(node evals/validate-m2-media-slot.mjs 2>&1)"
-          status=$?
-          set -e
-          printf '%s\n' "$output"
-          if [ "$status" -ne 2 ]; then
-            echo "Expected the late-bound media validator to exit 2 (BLOCKED); got $status." >&2
-            exit 1
-          fi
-          if ! printf '%s\n' "$output" | grep -q '^BLOCKED:'; then
-            echo "Media validator exited 2 without its truthful BLOCKED contract." >&2
-            exit 1
-          fi
+      - name: Run canonical local/CI quality gate
+        run: node evals/run-quality-gate.mjs --clean-install

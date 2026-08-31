@@ -13,6 +13,7 @@
     "risk": "Five sequential product gates and all public submission assets remain open."
   },
   "critical_path": ["M1", "M2", "M3", "M4", "M5", "M6", "rules-acknowledgment", "final-authorization"],
+  "external_dependencies": ["approved-design", "target-browser-contract", "C01", "authorized target-browser verification", "C02", "M0-sequential-topology", "C03", "C04", "C05", "public-two-origin-deployment", "C06", "submission-assets", "current-official-rules", "field-by-field-package"],
   "modules": [
     {
       "id": "M0",
@@ -79,9 +80,9 @@
       "status": "NOT_STARTED",
       "owner": "Submission and Reproduction owner",
       "classification": "MIXED",
-      "dependencies": ["M5", "C06", "submission-assets", "rules-acknowledgment", "final-authorization"],
+      "dependencies": ["M5", "C06", "submission-assets"],
       "evidence_paths": ["docs/MODULE_ARCHITECTURE.md", "docs/VEDAXI_BUILD_SCOPE.md", "docs/evaluation/VEDAXI_RUBRIC.md"],
-      "exit_criteria": ["H11-H12 and D1-D5 pass.", "Clean reproduction, final reviews, and user approval are retained."],
+      "exit_criteria": ["H11-H12 and D1-D8 pass.", "Clean reproduction and final reviews are retained before the separate Human Gate."],
       "risk": "No asset may claim behavior that M5 has not proved."
     }
   ],
@@ -151,7 +152,7 @@
       "status": "BLOCKED",
       "owner": "User",
       "classification": "USER_REQUIRED",
-      "dependencies": ["current-official-rules"],
+      "dependencies": ["D8"],
       "evidence_paths": ["docs/compliance/OFFICIAL_RULES_MATRIX.md", "docs/SUBMISSION_PIPELINE.md"],
       "exit_criteria": ["User explicitly acknowledges the current official rules."],
       "risk": "rules_acknowledged is false and agents must not change it."
@@ -184,6 +185,9 @@
     { "id": "D2", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
     { "id": "D3", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
     { "id": "D4", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M5", "M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
-    { "id": "D5", "status": "PENDING", "passed": false, "owner": "Native Proof owner", "dependencies": ["M5", "M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] }
+    { "id": "D5", "status": "PENDING", "passed": false, "owner": "Native Proof owner", "dependencies": ["M5", "M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md"] },
+    { "id": "D6", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M6", "live-url"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/SUBMISSION_PIPELINE.md"] },
+    { "id": "D7", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M6"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/SUBMISSION_PIPELINE.md"] },
+    { "id": "D8", "status": "PENDING", "passed": false, "owner": "Submission and Reproduction owner", "dependencies": ["M6", "current-official-rules"], "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/compliance/OFFICIAL_RULES_MATRIX.md"] }
   ]
 }

@@ -35,8 +35,6 @@ An attractive screenshot cannot compensate for a failed protocol gate. A passing
 | H10 | Failure states never display saved/blocked success when persistence or tool execution fails. | Negative tests and browser observation. |
 | H11 | Live URL works in ChatGPT’s in-app browser; judge access stays free through the end of judging; and the current public repository contains all source, assets, instructions, and a human-selected open-source license visible on the repository page. | Fresh-session and logged-out checks, availability plan through judging end, public URLs, clean clone, and public license visibility. |
 | H12 | A public YouTube demo is strictly under three minutes, includes audio, and shows the real successful run without cuts hiding protocol or persistence. It is distinct from the controlled evidence video, which must extend beyond `00:03:12` (`>192s`). All third-party marks, music, media, and protected material are rights-cleared. | Logged-out YouTube playback, measured `<180s` duration/audio, shot checklist, controlled-evidence identity/duration check, and rights ledger. |
-| H13 | Prior work and challenge-period work are clearly separated with dated evidence; every third-party SDK, API, dataset, asset, and technical contribution has a recorded authorization or license basis. | Dated commit boundary/prior-vs-new statement plus dependency, data, asset, and assistance rights ledger. |
-| H14 | The current official rules and submission fields are rechecked immediately before submission; the Human Gate remains closed until the user acknowledges the current rules and separately authorizes submission. | Timestamped live-rule snapshot/diff and explicit user-owned acknowledgment/authorization records. |
 
 ## Devpost submission gates
 
@@ -54,6 +52,8 @@ These gates are independent of the product score and must all pass before submis
 | D8 | Live official rules and submission fields were rechecked immediately before the Human Gate. | Timestamped official-link fetch/diff and unresolved-change record. |
 
 No score can compensate for a failed D gate. Final submission remains a user-authorized external action.
+
+The Human Gate is separate from the rubric: after D1–D8 pass, the user must acknowledge the current rules and separately authorize submission. Agents cannot satisfy either user-owned decision.
 
 ## Equally weighted quality dimensions
 

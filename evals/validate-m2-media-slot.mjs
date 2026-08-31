@@ -6,8 +6,8 @@ import { fileURLToPath } from "node:url";
 
 const repoRoot = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const manifestRelativePath = "docs/assets/M2/media-manifest.json";
-const requiredVideoPath = "VEDAXI - Elastic WEB/apps/video/public/media/vedaxi-controlled-evidence.mp4";
-const requiredCaptionPath = "VEDAXI - Elastic WEB/apps/video/public/media/vedaxi-controlled-evidence.vtt";
+const requiredVideoPath = "apps/video/public/media/vedaxi-controlled-evidence.mp4";
+const requiredCaptionPath = "apps/video/public/media/vedaxi-controlled-evidence.vtt";
 const evidenceSeconds = 192;
 const placeholder = /REPLACE_|NOT_YET_PUBLISHED/;
 

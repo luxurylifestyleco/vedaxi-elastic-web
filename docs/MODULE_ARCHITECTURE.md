@@ -106,8 +106,11 @@ The official submission requirements are represented explicitly so they cannot d
 | D3 | Public demo video under three minutes with audio. |
 | D4 | Text explanation of the project and its WebMCP use. |
 | D5 | Named agents/clients in which the project was actually tested. |
+| D6 | Free judge access through the end of judging, with working credentials/instructions if needed. |
+| D7 | Recorded authorization or license basis for every third-party or protected component. |
+| D8 | Live official rules and submission fields rechecked immediately before the Human Gate. |
 
-`H1–H12` remain the product hard gates in `VEDAXI_RUBRIC.md`. `D1–D5` close the submission-package gaps that H11 and H12 do not fully express.
+`H1–H12` remain the product hard gates in `VEDAXI_RUBRIC.md`. `D1–D8` close the submission-package gaps that H11 and H12 do not fully express. The Human Gate remains separate and user-owned after these machine-tracked gates pass.
 
 ### Judge dimensions
 
@@ -151,7 +154,7 @@ M0 has two inseparable sub-gates. M0A proves source contracts. M0B proves the ex
 | Field | Definition |
 | --- | --- |
 | Claim | VEDAXI has a minimal typed evidence/search/registration vocabulary, and the exact target browser can natively register, discover, invoke, attribute, and remove publisher tools without a silent fallback. Shared publisher actions and audit vocabulary are owned by M3. |
-| Owned files | `VEDAXI - Elastic WEB/package.json`, lockfile, `tsconfig.json`; `packages/contracts/**`; minimal protocol probe under `apps/protocol-probe/**`; `evals/registry/data/vedaxi/m0-protocol.*.jsonl`; `docs/evidence/M0/**`. |
+| Owned files | Root `package.json`, lockfile, and `tsconfig.json`; `packages/contracts/**`; minimal protocol probe under `apps/protocol-probe/**`; `evals/registry/data/vedaxi/m0-protocol.*.jsonl`; `docs/evidence/M0/**`. |
 | Typed public contract | Package-root exports for `EvidenceObject`, `EvidenceSearchResult`, `WebMcpTool`, `WebMcpRegistration`, support/registration status including `registered | unsupported | empty | error | cancelled`, runtime result validation, lifecycle cancellation, and live UI status. Action/result envelopes and audit-event vocabulary are intentionally deferred to M3. |
 | Allowed dependencies | Browser APIs, TypeScript/JavaScript, Vitest already present. No React, app import, storage library, WebMCP polyfill, OpenAI Evals runtime, or Ponytail runtime. |
 | Devpost/hard gates | H1, H2 topology feasibility, H3 result boundary. M0 records an H9 removal-feasibility precursor only; full H9 remains not evaluated until M5 because no persisted note exists yet. D1 remains provisional until deployment. |
@@ -270,13 +273,13 @@ M0 has two inseparable sub-gates. M0A proves source contracts. M0B proves the ex
 | Owned files | Public `README.md`, visible open-source `LICENSE`, reproduction/testing docs, `devpost-submission.md`, video shot/timing checklist, public URL/client matrix, `evals/registry/data/vedaxi/m6-submission.*.jsonl`, `docs/evidence/M6/**`. The public video file may live on its hosting service rather than in Git. |
 | Typed public contract | No new product runtime contract. Submission facts consume the verified M5 evidence schema and expose immutable public URLs, commit SHA, environment/client names, and versioned reproduction steps. |
 | Allowed dependencies | Documentation, repository host, deployment host, and public video host. Narration/caption tooling may polish an already-recorded real run. It may not create, replace, or conceal protocol evidence. |
-| Devpost/hard gates | H11, H12, D1, D2, D3, D4, D5. Submission itself still requires explicit user confirmation. |
-| Eval cases | V5 plus new D1–D5 submission completeness/reproduction cases. |
+| Devpost/hard gates | H11, H12, D1–D8. Submission itself still requires explicit user confirmation after M6 exits. |
+| Eval cases | V5 plus D1–D8 submission completeness, access, rights, and current-rules cases. |
 | Unit evidence | Link/file/license/instruction checks; client matrix completeness; explanation cross-check against claims ledger. |
 | Integration evidence | Fresh clone/install/test/build and fresh-session live reproduction by an independent reviewer; public URLs resolve without private credentials. |
 | Browser evidence | Public live URL and video access; timed video under 180 seconds and target 154 seconds; audio present; no cuts conceal discovery, persistence, or kill switch. |
 | Entry gate | M5 `PASS`; public source/deployment/video destinations available. |
-| Exit gate | H11/H12 and D1–D5 pass; clean reproduction passes at the submitted SHA; final Intended-vs-Implemented and Dual Delphi reviews pass; user approves final submission. |
+| Exit gate | H11/H12 and D1–D8 pass; clean reproduction passes at the submitted SHA; final Intended-vs-Implemented and Dual Delphi reviews pass. Rules acknowledgment and final submission authorization remain separate user-owned gates. |
 | Connection point | Final Devpost fields point only to the evidence-backed public artifacts. |
 | Rollback/repair boundary | Repair the failing document, link, recording, or deployment artifact and rerun its check. Never edit the product or video to claim unverified behavior, and never submit without user confirmation. |
 | Judge dimensions | All four dimensions communicated; no new score is invented beyond M5 evidence. |
@@ -310,8 +313,8 @@ No files below are changed by this architecture task. These are the smallest fol
 | Resolved 2026-08-31 | M0 originally lacked versioned eval records and later added public cancellation semantics. | `vedaxi.contracts.dev.v2` remains immutable; `vedaxi.contracts.dev.v3` adds executable cancellation/lifecycle cases. M0B remains indexed by `vedaxi.m0b-browser.manual.v1`. |
 | High | The legacy aggregate `evals/registry/data/vedaxi/module-gates.jsonl` still shares `vedaxi.module-gates.dev.v1`; M0 has already moved to module-specific v2/v3/manual identities. | Migrate each later module to its own versioned identity while retaining the aggregate only as an explicit suite index. |
 | High | Eval ID `M3` is labeled `shared-actions` in JSONL but tests Semantic Stage behavior. `OPENAI_EVALS_ADAPTATION.md` also uses an `M2` example labeled shared actions while the live test set's M2 is native derivation. | Map test-set M3 to `m4-stage`; replace ambiguous example IDs with module-qualified IDs such as `M4-STAGE-FOCUS-001`. |
-| Resolved 2026-08-31 | H11/H12 did not explicitly cover Devpost text explanation or named tested agents/clients. | D1–D5 submission gates now separate those requirements from product scoring; M6 must add their concrete records. |
-| High | `.devpost-hackathon-state.json` still says `rules_acknowledged: false` while requirements are treated as verified in build docs. | Keep requirements recorded, but do not change acknowledgement on the user's behalf; require explicit user acknowledgement before the submission stage exits. |
+| Resolved 2026-08-31 | H11/H12 did not explicitly cover every Devpost package, access, rights, and current-rules requirement. | D1–D8 submission gates now separate those requirements from product scoring; M6 must add their concrete records before the separate Human Gate. |
+| High | `.devpost-hackathon-state.json` still says `rules_acknowledged: false` while requirements are treated as verified in build docs. | Keep requirements recorded, but do not change acknowledgement on the user's behalf; pass D8 first, then require explicit user acknowledgement at the separate Human Gate before submission. |
 | Resolved 2026-08-31 | M0 and M3 both claimed ownership of shared action/audit contracts; the older gap row also incorrectly said package exports, runtime validation, and truthful lifecycle status were absent. | M0 owns evidence/search/native-registration contracts and now exports/validates them; M3 exclusively owns shared action/result/audit contracts and tests. |
 | Medium | `VEDAXI_TEST_SET.md` and JSONL duplicate case meaning and can drift. | Make versioned JSONL the machine source and generate/review the Markdown as its human projection; record one provenance link rather than manually redefining behavior twice. |
 | Resolved for M0; required for later exits | Inspiration/firewall rules were repeated without a module exit artifact. | M0 now records one bounded inspiration/minimalism review in its exit record. M1–M6 must repeat that field rather than add another prose rule or lint dependency. |

@@ -11,7 +11,7 @@ This is the master execution and submission checklist for VEDAXI. It reports rep
 | Release milestones | 1 of 5 | **20%** | R0 complete; R1–R4 have not met their stop conditions. |
 | Module exits | 1 of 7 | **14%** | M0 exited; M1 is blocked; M2–M6 have not started. |
 | Source modules implemented | 2 of 7 | **29%** | M0 and the M1 source are built and pushed; this does not convert M1's blocked browser exit into a pass. |
-| Devpost submission gates | 0 of 5 | **0%** | D1–D5 require the deployed product and M6 submission assets. |
+| Devpost submission gates | 0 of 8 | **0%** | D1–D8 require the deployed product, M6 submission assets, access/rights evidence, and a current live-rules recheck. |
 
 These are count-based progress indicators, not time estimates. Later modules—especially M5 deployment proof and M6 media/submission—carry more risk than their item count suggests.
 
@@ -114,8 +114,8 @@ R0 COMPLETE → R1 IN PROGRESS [M1 BLOCKED] → R2 → R3 → R4 → USER-APPROV
 - [ ] **9. Prepare and audit the Devpost package — M6 submission**
   Spec ref: `docs/evaluation/VEDAXI_RUBRIC.md > Devpost submission gates`
   What to build: `devpost-submission.md`, concise project/WebMCP explanation, public live URL, public repository URL, public video URL, tested-client matrix, claims ledger, AI/Codex usage disclosure, screenshots/thumbnail, and D1–D8 eval records.
-  Acceptance: Every submission claim points to M5/M6 evidence; live official rules and submission fields are re-fetched immediately before the Human Gate and explicitly acknowledged by the user; free judge access is scheduled and verified through the published end of judging; no blocked or provisional fact is presented as verified.
-  Verify: H11–H14 and D1–D8; final Intended-vs-Implemented review; final Dual Delphi; independent clean reproduction at the submitted SHA.
+  Acceptance: Every submission claim points to M5/M6 evidence; live official rules and submission fields are re-fetched immediately before the Human Gate; free judge access is scheduled and verified through the published end of judging; no blocked or provisional fact is presented as verified. User acknowledgment and final authorization occur only at the separate Human Gate.
+  Verify: H11–H12 and D1–D8; separate Human Gate records for rules acknowledgment and final authorization; final Intended-vs-Implemented review; final Dual Delphi; independent clean reproduction at the submitted SHA.
   Git: Push the submission-candidate checkpoint. Submission itself remains unperformed.
 
 - [ ] **10. Explicit final approval and Devpost handoff**
@@ -151,6 +151,9 @@ R0 COMPLETE → R1 IN PROGRESS [M1 BLOCKED] → R2 → R3 → R4 → USER-APPROV
 | D3 Public YouTube demo `<180s` with audio | **PENDING** | Logged-out YouTube URL, measured duration/audio checks, protected-material rights review, and proof it is distinct from the `>192s` controlled evidence asset. |
 | D4 Concise project and WebMCP explanation | **PENDING** | Evidence-backed `devpost-submission.md`. |
 | D5 Only actually tested agents/clients named | **PENDING** | Tested-client matrix with version/build or explicit blocked value. |
+| D6 Free judge access through judging | **PENDING** | Clean-session access record, credentials/instructions if applicable, and a named availability owner/end date. |
+| D7 Third-party rights and licenses | **PENDING** | Complete dependency/data/asset/marks/media rights ledger with authorization basis and reviewer. |
+| D8 Current official rules and fields | **PENDING** | Timestamped live-rule and submission-field fetch/diff immediately before the Human Gate. |
 
 ## Provisional wow moment
 
@@ -162,7 +165,7 @@ This is provisional until the complete M5 run exists. Submission copy and demo n
 
 1. Obtain explicit approval for Chrome verification or an explicit decision to accept M1's blocked browser-evidence limitation.
 2. Close and push the M1 exit checkpoint.
-3. Re-fetch the current official rules and submission fields immediately before the Human Gate, then obtain explicit user acknowledgment before M6 exits.
+3. Re-fetch the current official rules and submission fields to pass D8, then present the result at the separate Human Gate for explicit user acknowledgment.
 4. Start M2 only after M1 is recorded `PASS`.
 
 ## Source of truth

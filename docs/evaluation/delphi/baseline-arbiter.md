@@ -41,7 +41,7 @@ At the time of this frozen run, the local project rubric incorrectly used `WebMC
 `MODULE_GATES.md:28-29` places **M4 Semantic Stage before M5 Native Proof** and makes a deployable M4 the entry condition for the first clean-session two-origin discovery/kill-switch proof. That directly conflicts with:
 
 - `docs/superpowers/specs/2026-08-30-vedaxi-protocol-proof-design.md:218-237`, which calls the exact-browser feasibility gate the first and highest-risk implementation activity and requires stopping before the full interface if native support is unavailable;
-- `HANDOFF.md:71`, which says the first execution phase must test native `document.modelContext`, unregister, fresh observation, and cross-origin discovery;
+- `docs/archive/PROJECT_HANDOFF.md:73`, which records that the first execution phase must test native `document.modelContext`, unregister, fresh observation, and cross-origin discovery;
 - frozen A1, which explicitly forbids full product work before the native matrix.
 
 This is not a subtle sequencing preference. It converts the highest-risk precondition into a late acceptance test after most of the expensive build. `[verified contradiction; severity CRITICAL; confidence 0.99]`
