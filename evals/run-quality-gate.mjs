@@ -102,3 +102,4 @@ const releaseStatus = evaluateReleaseStatus(repoRoot, {
 });
 console.log(formatConsoleSummary(releaseStatus));
 if (releaseStatus.overall_status === "FAIL") throw new Error("Release readiness evaluation failed");
+if (hardQualityStatus !== 0 || mediaStatus !== 0 || releaseStatus.overall_status === "BLOCKED") process.exit(2);
