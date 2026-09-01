@@ -1,0 +1,22 @@
+WEBVTT - VEDAXI Controlled Video Evidence Transcript
+
+00:00:00.000 --> 00:00:15.000
+Welcome to this research walkthrough on cognitive attention recovery during interrupted analytical work.
+
+00:00:15.000 --> 00:00:45.000
+In this session, we examine physiological baseline tracking, pupil response, and task resumption intervals across diverse participant cohorts.
+
+00:00:45.000 --> 00:01:30.000
+Our sensor apparatus utilized dual infrared eye trackers combined with synchronized EEG capture to measure cognitive load fluctuations.
+
+00:01:30.000 --> 00:02:15.000
+During the trial progression, environmental lighting and participant movement introduced known sensor drift parameters.
+
+00:02:15.000 --> 00:03:00.000
+We established rigorous pre-modeling data sanitization protocols to isolate true latency signals from mechanical sensor noise.
+
+00:03:04.000 --> 00:03:18.000
+We recruited forty participants. Six sessions had calibration drift, so we removed them before modeling and did not replace them.
+
+00:03:18.000 --> 00:03:30.000
+The remaining cohort data was subsequently processed through our predictive attention decay modeling pipeline.
