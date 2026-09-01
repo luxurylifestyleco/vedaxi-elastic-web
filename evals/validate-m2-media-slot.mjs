@@ -68,10 +68,26 @@ function parseWebVtt(source) {
   return cues;
 }
 
+function getFfprobeExecutable() {
+  const gyanPath = path.join(
+    process.env.LOCALAPPDATA ?? "",
+    "Microsoft",
+    "WinGet",
+    "Packages",
+    "Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe",
+    "ffmpeg-8.1.1-full_build",
+    "bin",
+    "ffprobe.exe"
+  );
+  if (fs.existsSync(gyanPath)) return gyanPath;
+  return "ffprobe";
+}
+
 function readFfprobe(videoPath) {
   let output;
+  const executable = getFfprobeExecutable();
   try {
-    output = execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=format_name,duration:stream=codec_type,codec_name", "-of", "json", videoPath], { encoding: "utf8" });
+    output = execFileSync(executable, ["-v", "error", "-show_entries", "format=format_name,duration:stream=codec_type,codec_name", "-of", "json", videoPath], { encoding: "utf8" });
   } catch (error) {
     fail(`ffprobe failed; install FFmpeg and ensure ffprobe is on PATH: ${error.message}`);
   }
