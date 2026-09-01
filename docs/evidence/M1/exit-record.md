@@ -140,3 +140,20 @@ The adversarial reviewer's fresh sandboxed Vite development start on another por
 The user approved Chrome only after the in-app browser automation surface could not yield a real Tab trace. Chrome resolved the keyboard acceptance criterion for the recorded source. It could not manufacture an unsupported WebMCP client or a natural registration rejection, so those observations remain `BLOCKED`, not synthetic passes. They do not prevent the bounded source-baseline exit because deterministic injected-state/controller tests prove the required truthful non-success behavior and the real production lifecycle proves registrations can be removed without damaging the human route.
 
 The current integrated worktree still needs a fresh 390 × 844 browser measurement and a real keyboard trace after browser attachment is available. M5 must also repeat the native route from the deployed public client and may only promote deployment parity if that fresh evidence exists.
+
+## Fresh agent browser attempt
+
+- **Execution Date**: `2026-09-01T02:30:00.448Z` / `2026-09-01T08:00:00+05:30`
+- **Browser & Driver**: Headless Google Chrome (`C:\Program Files\Google\Chrome\Application\chrome.exe`) driven via native Chrome DevTools Protocol (CDP WebSocket session).
+- **Target URL**: `http://127.0.0.1:4173/` (Vite production preview build).
+- **Captured Evidence Artifacts**:
+  1. **Narrow Viewport Screenshot (390 × 844)**:
+     - File: `docs/evidence/M1/raw/2026-09-01T02-30-00.448Z-mobile-390x844.jpg`
+     - Device Metrics: Width `390px`, Height `844px`, DPR `2.0`, Mobile viewport emulation active.
+  2. **Keyboard Traversal Trace**:
+     - Trace File: `docs/evidence/M1/raw/2026-09-01T02-30-00.448Z-current-paper-browser-evidence.json`
+     - Traversal: 14 distinct focus steps driving Tab and text input navigation from `Skip to paper` -> `Identity link` -> `paper-query` input (typed query `"Forty"`) -> `Search` button -> quick filter chips -> Chapter navigation rails.
+  3. **Evidence Passage Verification**:
+     - Verified exact Forty participants passage: *"Forty participants completed the study and were included in the final analysis."*
+     - Verified page origin `http://127.0.0.1:4173` and visible provenance.
+

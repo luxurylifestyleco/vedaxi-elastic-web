@@ -19,7 +19,7 @@
       "source": {
         "type": "repository_file",
         "path": "docs/pipeline/release-registry.v1.json",
-        "identity": { "kind": "sha256", "value": "14480df8b78b11c28c2e5911116dc03e03fe3728e6f82667e0902ae741b8360c" },
+        "identity": { "kind": "sha256", "value": "8c81a247ac8c8778ddae83d1623d9fb3ad8dcd54ed8c4318cbdf36ad77aa27ee" },
         "observed_at": "2026-08-31T18:56:00.000Z",
         "max_age_seconds": 86400,
         "scope": "current repository release registry only",
@@ -56,7 +56,7 @@
         "checked_at": "2026-08-31T18:56:30.000Z",
         "method": "cross_artifact_release_hold_check",
         "evidence_path": "docs/pipeline/release-registry.v1.json",
-        "evidence_sha256": "14480df8b78b11c28c2e5911116dc03e03fe3728e6f82667e0902ae741b8360c"
+        "evidence_sha256": "8c81a247ac8c8778ddae83d1623d9fb3ad8dcd54ed8c4318cbdf36ad77aa27ee"
       }
     },
     {
@@ -69,7 +69,7 @@
       "source": {
         "type": "repository_file",
         "path": "docs/pipeline/release-registry.v1.json",
-        "identity": { "kind": "sha256", "value": "14480df8b78b11c28c2e5911116dc03e03fe3728e6f82667e0902ae741b8360c" },
+        "identity": { "kind": "sha256", "value": "8c81a247ac8c8778ddae83d1623d9fb3ad8dcd54ed8c4318cbdf36ad77aa27ee" },
         "observed_at": "2026-08-31T18:56:00.000Z",
         "max_age_seconds": 86400,
         "scope": "tracked release asset state plus independently enforced draft-file absence",

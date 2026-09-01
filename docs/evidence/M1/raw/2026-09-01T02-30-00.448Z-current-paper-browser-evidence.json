@@ -1,0 +1,239 @@
+{
+  "timestamp": "2026-09-01T02:30:00.448Z",
+  "browser": {
+    "name": "Google Chrome",
+    "path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "headless": true,
+    "protocol": "Chrome DevTools Protocol (CDP)"
+  },
+  "targetUrl": "http://127.0.0.1:4173/",
+  "requirements": {
+    "narrowLayout390x844": {
+      "status": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "deviceScaleFactor": 2
+      },
+      "screenshotFile": "2026-09-01T02-30-00.448Z-mobile-390x844.jpg",
+      "screenshotPath": "C:\\Users\\m_jor\\OneDrive\\Documents\\ChatGPT\\Elastic WEBMCP\\docs\\evidence\\M1\\raw\\2026-09-01T02-30-00.448Z-mobile-390x844.jpg"
+    },
+    "keyboardTraversal": {
+      "status": "PASS",
+      "totalSteps": 14,
+      "trace": [
+        {
+          "step": 1,
+          "action": "initial_focus",
+          "activeElement": {
+            "tagName": "BODY",
+            "id": null,
+            "role": null,
+            "ariaLabel": null,
+            "className": null,
+            "text": "Skip to paperVVEDAXIPaper Integrity DeskControlled research noteHuman research p",
+            "value": null,
+            "href": null
+          }
+        },
+        {
+          "step": 2,
+          "action": "tab_press_1",
+          "activeElement": {
+            "tagName": "A",
+            "id": null,
+            "role": null,
+            "ariaLabel": null,
+            "className": "skip-link",
+            "text": "Skip to paper",
+            "value": null,
+            "href": "http://127.0.0.1:4173/#paper-content"
+          }
+        },
+        {
+          "step": 3,
+          "action": "tab_press_2",
+          "activeElement": {
+            "tagName": "A",
+            "id": null,
+            "role": null,
+            "ariaLabel": "VEDAXI Paper Integrity Desk home",
+            "className": "identity",
+            "text": "VVEDAXI",
+            "value": null,
+            "href": "http://127.0.0.1:4173/#paper-top"
+          }
+        },
+        {
+          "step": 4,
+          "action": "tab_press_3",
+          "activeElement": {
+            "tagName": "INPUT",
+            "id": "paper-query",
+            "role": null,
+            "ariaLabel": null,
+            "className": null,
+            "text": "",
+            "value": null,
+            "href": null
+          }
+        },
+        {
+          "step": 5,
+          "action": "typed_query_Forty",
+          "activeElement": {
+            "tagName": "INPUT",
+            "id": "paper-query",
+            "role": null,
+            "ariaLabel": null,
+            "className": null,
+            "text": "",
+            "value": "Forty",
+            "href": null
+          }
+        },
+        {
+          "step": 6,
+          "action": "tab_press_4",
+          "activeElement": {
+            "tagName": "BUTTON",
+            "id": null,
+            "role": null,
+            "ariaLabel": null,
+            "className": null,
+            "text": "Search",
+            "value": null,
+            "href": null
+          }
+        },
+        {
+          "step": 7,
+          "action": "tab_press_5",
+          "activeElement": {
+            "tagName": "BUTTON",
+            "id": null,
+            "role": null,
+            "ariaLabel": null,
+            "className": null,
+            "text": "final analyzed sample",
+            "value": null,
+            "href": null
+          }
+        },
+        {
+          "step": 8,
+          "action": "tab_press_6",
+          "activeElement": {
+            "tagName": "BUTTON",
+            "id": null,
+            "role": null,
+            "ariaLabel": null,
+            "className": null,
+            "text": "forty participants",
+            "value": null,
+            "href": null
+          }
+        },
+        {
+          "step": 9,
+          "action": "tab_press_7",
+          "activeElement": {
+            "tagName": "BUTTON",
+            "id": null,
+            "role": null,
+            "ariaLabel": null,
+            "className": null,
+            "text": "included in the final analysis",
+            "value": null,
+            "href": null
+          }
+        },
+        {
+          "step": 10,
+          "action": "tab_press_8",
+          "activeElement": {
+            "tagName": "BUTTON",
+            "id": null,
+            "role": null,
+            "ariaLabel": null,
+            "className": null,
+            "text": "Run deterministic focus preview",
+            "value": null,
+            "href": null
+          }
+        },
+        {
+          "step": 11,
+          "action": "tab_press_9",
+          "activeElement": {
+            "tagName": "BUTTON",
+            "id": null,
+            "role": null,
+            "ariaLabel": null,
+            "className": "text-button",
+            "text": "Check native tools",
+            "value": null,
+            "href": null
+          }
+        },
+        {
+          "step": 12,
+          "action": "tab_press_10",
+          "activeElement": {
+            "tagName": "A",
+            "id": null,
+            "role": null,
+            "ariaLabel": null,
+            "className": null,
+            "text": "01Paper",
+            "value": null,
+            "href": "http://127.0.0.1:4173/#paper-top"
+          }
+        },
+        {
+          "step": 13,
+          "action": "tab_press_11",
+          "activeElement": {
+            "tagName": "A",
+            "id": null,
+            "role": null,
+            "ariaLabel": null,
+            "className": null,
+            "text": "02Method",
+            "value": null,
+            "href": "http://127.0.0.1:4173/#chapter-method"
+          }
+        },
+        {
+          "step": 14,
+          "action": "tab_press_12",
+          "activeElement": {
+            "tagName": "A",
+            "id": null,
+            "role": null,
+            "ariaLabel": null,
+            "className": null,
+            "text": "03Video",
+            "value": null,
+            "href": "http://127.0.0.1:4173/#chapter-video"
+          }
+        }
+      ]
+    },
+    "evidencePassageVerification": {
+      "status": "PASS",
+      "passage": "Forty participants",
+      "pageDetails": {
+        "origin": "http://127.0.0.1:4173",
+        "hasFortyParticipants": true,
+        "snippet": "Forty participants completed the study and were included in the final analysis.\n\nPUBLISHER EVIDENCE\n\nLocator\nMethods, participants\nOrigin\nht",
+        "toolsCount": 0,
+        "toolNames": [],
+        "paperToolFound": false,
+        "title": "VEDAXI — Paper Integrity Desk",
+        "heading": "Attention recovery after interrupted analytical work",
+        "sectionsCount": 10
+      }
+    }
+  }
+}

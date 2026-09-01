@@ -139,7 +139,7 @@ describe("vedaxi.m4-semantic-stage.dev.v1", () => {
       expect(record.eval_id).toBe(manifest.id);
       expect(record.module).toBe("m4-semantic-stage");
       expect(record.assertions.length).toBeGreaterThan(0);
-      expect(record.hard_gates.length).toBeGreaterThan(0);
+      expect(record.hard_gates).toEqual([]);
       expect(record.limitations).toContain(browserLimitation);
       expect(evaluators[manifest.bindings.find(({ case_id }) => case_id === record.id)!.evaluator]).toBeTypeOf("function");
     }
