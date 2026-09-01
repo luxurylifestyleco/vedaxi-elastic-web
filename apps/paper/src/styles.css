@@ -418,14 +418,14 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
 .edition-scene {
   position: relative;
   isolation: isolate;
-  min-height: 100svh;
-  overflow: hidden;
+  min-height: max(100svh, fit-content);
+  overflow: visible;
 }
 .edition-desk .paper-article { max-width: none; }
 .edition-desk .paper-layout { padding-top: 0; }
 .edition-desk .paper-article .edition-scene {
   margin-bottom: 0;
-  padding: clamp(4.5rem, 8vw, 7rem) clamp(1.25rem, 4vw, 4rem);
+  padding: clamp(3rem, 6vw, 6rem) clamp(1.25rem, 4vw, 4rem);
 }
 .edition-scene__painting,
 .edition-scene__halo,
@@ -455,13 +455,13 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
 .edition-scene__caption {
   position: relative;
   z-index: 3;
-  max-width: var(--measure-reading);
-  padding: clamp(1.2rem, 3vw, 2.4rem);
-  border: 1px solid color-mix(in srgb, #c4a056 50%, transparent);
-  background: color-mix(in srgb, #f4ead4 92%, transparent);
+  max-width: min(100%, 72ch);
+  padding: clamp(1.5rem, 3.5vw, 2.8rem);
+  border: 1px solid color-mix(in srgb, #c4a056 60%, transparent);
+  background: #f4ead4;
   color: #17151b;
-  box-shadow: 0 1.4rem 3rem rgba(8, 6, 4, 0.38);
-  backdrop-filter: blur(8px);
+  box-shadow: 0 1.4rem 3rem rgba(8, 6, 4, 0.5);
+  border-radius: 4px;
 }
 .edition-scene__caption .eyebrow,
 .edition-scene__caption .section-kicker,
