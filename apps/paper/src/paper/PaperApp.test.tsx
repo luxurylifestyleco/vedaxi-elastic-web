@@ -132,6 +132,13 @@ describe("M1 Paper Integrity Desk", () => {
       />
     );
 
+    expect(markup).toContain('class="edition-desk"');
+    expect(markup).toContain("edition-scene--hero");
+    expect(markup).toContain("edition-scene--reversed");
+    expect(markup).toContain("edition-scene--burn");
+    expect(markup).not.toContain("Shopify");
+    expect(markup).not.toContain("Sidekick");
+    expect(markup).not.toContain("Winter '26");
     expect(markup).toContain("Try one:");
     expect(markup).toContain("final analyzed sample");
     expect(markup).toContain("forty participants");
