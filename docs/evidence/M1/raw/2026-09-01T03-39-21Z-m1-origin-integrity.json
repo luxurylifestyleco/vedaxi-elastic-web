@@ -1,0 +1,23 @@
+{
+  "utc": "2026-09-01T03:39:21.900Z",
+  "automation": "Playwright Chromium headless; human search/DOM observation (not a native WebMCP client)",
+  "pageOrigin": "http://localhost:4173",
+  "visibleProvenanceOrigin": "http://localhost:4173",
+  "inventoryOrigin": "http://localhost:4173",
+  "resultOrigin": "http://localhost:4173",
+  "evidenceId": "paper.methods.final-analysis",
+  "excerpt": "Forty participants completed the study and were included in the final analysis.",
+  "excerptContainsForty": true,
+  "searchMessage": "1 matching paper passage found for “included in the final analysis”.",
+  "searchResult": "Final analysis cohortMethods, participants · 3 exact query terms",
+  "footerOrigin": "VEDAXI-FIXTURE-2026-014 · http://localhost:4173",
+  "title": "Attention recovery after interrupted analytical work",
+  "originsEqual": true,
+  "nativeProtocolSurface": {
+    "modelContext": "undefined",
+    "getTools": "undefined",
+    "executeTool": "undefined"
+  },
+  "nativeToolCall": "BLOCKED: Playwright Chromium has no navigator.modelContext; human page evidence path was observed instead",
+  "status": "captured"
+}

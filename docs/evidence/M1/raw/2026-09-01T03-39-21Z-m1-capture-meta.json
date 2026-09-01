@@ -1,0 +1,19 @@
+{
+  "shotInfo": {
+    "path": "C:\\Users\\m_jor\\OneDrive\\Documents\\ChatGPT\\Elastic WEBMCP\\docs\\evidence\\M1\\raw\\2026-09-01T03-39-21Z-m1-390x844-screenshot.jpg",
+    "requestedViewport": {
+      "width": 390,
+      "height": 844
+    },
+    "measuredViewport": {
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "devicePixelRatio": 1,
+      "origin": "http://localhost:4173",
+      "href": "http://localhost:4173/"
+    },
+    "viewportExact": true
+  },
+  "stamp": "2026-09-01T03-39-21Z",
+  "utc": "2026-09-01T03:39:21.900Z"
+}

@@ -1,0 +1,158 @@
+{
+  "utc": "2026-09-01T03:39:21.900Z",
+  "automation": "Playwright Chromium headless 390x844",
+  "url": "http://localhost:4173/",
+  "reachedSearch": true,
+  "typed": true,
+  "submitted": true,
+  "reachedEvidence": true,
+  "keys": [
+    {
+      "key": "Tab",
+      "n": 1
+    },
+    {
+      "key": "Tab",
+      "n": 2
+    },
+    {
+      "key": "Tab",
+      "n": 3
+    },
+    {
+      "key": "type",
+      "text": "final analyzed sample"
+    },
+    {
+      "key": "Enter"
+    },
+    {
+      "key": "Tab",
+      "afterSubmit": true,
+      "n": 1
+    },
+    {
+      "key": "Tab",
+      "afterSubmit": true,
+      "n": 2
+    },
+    {
+      "key": "Tab",
+      "afterSubmit": true,
+      "n": 3
+    },
+    {
+      "key": "Tab",
+      "afterSubmit": true,
+      "n": 4
+    },
+    {
+      "key": "Enter",
+      "target": {
+        "id": "",
+        "href": "",
+        "text": "included in the final analysis"
+      }
+    }
+  ],
+  "focusTrace": [
+    {
+      "t": 1788233964243,
+      "via": "initial",
+      "tag": "BODY",
+      "role": "document",
+      "label": "BODY",
+      "id": "",
+      "name": ""
+    },
+    {
+      "t": 1788233964318,
+      "via": "focusin",
+      "tag": "A",
+      "role": "a",
+      "label": "Skip to paper",
+      "id": "",
+      "name": "",
+      "href": "#paper-content",
+      "type": ""
+    },
+    {
+      "t": 1788233964380,
+      "via": "focusin",
+      "tag": "A",
+      "role": "a",
+      "label": "VEDAXI Paper Integrity Desk home",
+      "id": "",
+      "name": "",
+      "href": "#paper-top",
+      "type": ""
+    },
+    {
+      "t": 1788233964412,
+      "via": "focusin",
+      "tag": "INPUT",
+      "role": "input",
+      "label": "Paper evidence query",
+      "id": "paper-query",
+      "name": "query",
+      "href": "",
+      "type": ""
+    },
+    {
+      "t": 1788233965551,
+      "via": "focusin",
+      "tag": "BUTTON",
+      "role": "button",
+      "label": "Search",
+      "id": "",
+      "name": "",
+      "href": "",
+      "type": "submit"
+    },
+    {
+      "t": 1788233965568,
+      "via": "focusin",
+      "tag": "BUTTON",
+      "role": "button",
+      "label": "final analyzed sample",
+      "id": "",
+      "name": "",
+      "href": "",
+      "type": "button"
+    },
+    {
+      "t": 1788233965581,
+      "via": "focusin",
+      "tag": "BUTTON",
+      "role": "button",
+      "label": "forty participants",
+      "id": "",
+      "name": "",
+      "href": "",
+      "type": "button"
+    },
+    {
+      "t": 1788233965594,
+      "via": "focusin",
+      "tag": "BUTTON",
+      "role": "button",
+      "label": "included in the final analysis",
+      "id": "",
+      "name": "",
+      "href": "",
+      "type": "button"
+    },
+    {
+      "t": 1788233965623,
+      "via": "focusin",
+      "tag": "DIV",
+      "role": "div",
+      "label": "Forty participants completed the study and were included in the final analysis.P",
+      "id": "methods-participants",
+      "name": "",
+      "href": "",
+      "type": ""
+    }
+  ],
+  "status": "captured"
+}

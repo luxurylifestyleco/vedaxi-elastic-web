@@ -157,3 +157,13 @@ The current integrated worktree still needs a fresh 390 × 844 browser measureme
      - Verified exact Forty participants passage: *"Forty participants completed the study and were included in the final analysis."*
      - Verified page origin `http://127.0.0.1:4173` and visible provenance.
 
+## Fresh browser-evidence attempt
+
+- **Execution Date**: `2026-09-01T03:39:21.900Z`
+- **Browser & automation**: Playwright Chromium headless (`playwright` via hermes-agent Node package), viewport forced to 390×844 against live `http://localhost:4173/` (did not start/stop the server).
+- **Measured viewport**: `innerWidth=390`, `innerHeight=844`, `devicePixelRatio=1` (JPEG pixels also 390×844).
+- **Items**:
+  1. **390×844 narrow screenshot** — **captured** → `docs/evidence/M1/raw/2026-09-01T03-39-21Z-m1-390x844-screenshot.jpg`
+  2. **Keyboard-only traversal trace** — **captured** → `docs/evidence/M1/raw/2026-09-01T03-39-21Z-m1-keyboard-trace.json` (Tab to `#paper-query`, typed `final analyzed sample`, Enter submit, Tab to suggestion / evidence, Enter to `#methods-participants`)
+  3. **Forty-participant + origin integrity** — **captured** → `docs/evidence/M1/raw/2026-09-01T03-39-21Z-m1-origin-integrity.json` (exact excerpt present; page/provenance/inventory/result origins all `http://localhost:4173`). Native `navigator.modelContext` remains unavailable in Playwright Chromium (noted in that JSON; human evidence path used).
+- **Remaining BLOCKED**: none of the three requested evidence items. Native WebMCP tool surface inside this automation browser is still absent (not required as a fourth deliverable here).

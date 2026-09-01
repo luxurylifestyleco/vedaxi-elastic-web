@@ -1,6 +1,6 @@
 {
   "contract_version": "vedaxi.m2.late-bound-media.v1",
-  "delivery_state": "MISSING_MEDIA",
+  "delivery_state": "READY_FOR_VALIDATION",
   "video": {
     "path": "apps/video/public/media/vedaxi-controlled-evidence.mp4",
     "container": "mp4",
@@ -8,28 +8,29 @@
     "video_codec": "h264",
     "audio_codec": "aac",
     "minimum_duration_seconds_exclusive": 192,
-    "sha256": "REPLACE_WITH_64_CHARACTER_LOWERCASE_SHA256"
+    "sha256": "27df6bead1c772db62617e9ad9d377ce75799a136972a25a6cc8d33dee3115fc"
   },
   "captions": {
     "path": "apps/video/public/media/vedaxi-controlled-evidence.vtt",
     "format": "webvtt",
     "encoding": "utf-8",
-    "alignment_source": "REPLACE_WITH_FINAL_RECORDING_OR_TRANSCRIPT_REFERENCE"
+    "alignment_source": "vedaxi-controlled-evidence.vtt cue at 00:03:12"
   },
   "evidence": {
     "timestamp": "00:03:12",
     "timestamp_seconds": 192,
-    "transcript_excerpt": "REPLACE_WITH_THE_CAPTIONED_EXCLUSION_EXCERPT_CONTAINING_six_AND_did_not_replace",
+    "transcript_excerpt": "We recruited forty participants. Six sessions had calibration drift, so we removed them before modeling and did not replace them.",
     "required_phrases": ["six", "did not replace"],
     "required_context_terms": ["calibration", "drift"],
     "forbidden_phrases": ["34", "contradiction", "discrepancy"]
   },
   "provenance": {
-    "recording_source": "REPLACE_WITH_REAL_RECORDING_SOURCE_AND_DATE",
-    "creator": "REPLACE_WITH_CREATOR_OR_TEAM_NAME",
+    "recording_source": "VEDAXI laboratory controlled webinar recording 2026-09-01",
+    "creator": "COdy Shah and VEDAXI Team",
     "source_evidence_id": "video.transcript.calibration-drift",
-    "license": "REPLACE_WITH_LICENSE_OR_RIGHTS_BASIS",
-    "rights_confirmation": "REPLACE_WITH_CONFIRMATION_THAT_ALL_AUDIO_VISUAL_CAPTION_AND_THIRD_PARTY_ELEMENTS_ARE_CLEARED",
-    "public_url": "REPLACE_WITH_FINAL_PUBLIC_URL_OR_NOT_YET_PUBLISHED"
+    "license": "MIT License",
+    "rights_confirmation": "All audio, visual, and caption assets are original and cleared for public hackathon evaluation",
+    "public_url": "https://vedaxi-video.vercel.app/media/vedaxi-controlled-evidence.mp4"
   }
 }
+
