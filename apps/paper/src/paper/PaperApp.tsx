@@ -9,8 +9,6 @@ import type {
 } from "@vedaxi/state";
 
 import { EditionWorld } from "../stage/EditionWorld";
-import { FireBurnReveal } from "../stage/FireBurnReveal";
-import { HeroBurnIntro } from "../stage/HeroBurnIntro";
 import {
   STAGE_CHAPTERS,
   StageNavigation,
@@ -454,7 +452,6 @@ export function PaperApp({
         )}
 
         <section className="paper-hero" id="paper-top" aria-labelledby="paper-title">
-          <HeroBurnIntro />
           <div className="edition-scene edition-scene--hero" aria-hidden="true">
             <div className="edition-scene__painting" aria-hidden="true" />
             <div className="edition-scene__halo" aria-hidden="true" />
@@ -629,7 +626,20 @@ export function PaperApp({
               <div className="edition-scene__caption edition-scene__caption--reveal">
                 <p className="stage-chapter__index mono">Chapter 04 / Evidence</p>
                 <h2 id="evidence-title" tabIndex={-1}>{evidence.title}</h2>
-                <FireBurnReveal evidence={evidence} />
+                <div className="evidence-row" id="methods-participants" tabIndex={-1}>
+                  <blockquote cite={`${evidence.sourceOrigin}/#methods-participants`}>
+                    <p>{evidence.excerpt}</p>
+                  </blockquote>
+                  <aside className="provenance" aria-label="Evidence provenance">
+                    <p className="eyebrow">Publisher evidence</p>
+                    <dl>
+                      <div><dt>Locator</dt><dd>{evidence.locator}</dd></div>
+                      <div><dt>Origin</dt><dd className="mono">{evidence.sourceOrigin}</dd></div>
+                      <div><dt>Evidence ID</dt><dd className="mono">{evidence.id}</dd></div>
+                      <div><dt>Provenance</dt><dd>{evidence.provenance}</dd></div>
+                    </dl>
+                  </aside>
+                </div>
               </div>
             </section>
 
