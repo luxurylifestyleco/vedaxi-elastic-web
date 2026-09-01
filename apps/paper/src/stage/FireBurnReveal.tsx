@@ -6,16 +6,18 @@ interface FireBurnRevealProps {
 }
 
 export function FireBurnReveal({ evidence }: FireBurnRevealProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [burnProgress, setBurnProgress] = useState(0);
-  const [isBurning, setIsBurning] = useState(false);
   const [hasBurned, setHasBurned] = useState(false);
   const progressRef = useRef(0);
   const burningRef = useRef(false);
+  const autoTriggeredRef = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
@@ -200,11 +202,10 @@ export function FireBurnReveal({ evidence }: FireBurnRevealProps) {
       ctx.shadowBlur = 0;
 
       if (burningRef.current) {
-        progressRef.current = Math.min(1, progressRef.current + 0.008);
+        progressRef.current = Math.min(1, progressRef.current + 0.009);
         setBurnProgress(progressRef.current);
         if (progressRef.current >= 1) {
           burningRef.current = false;
-          setIsBurning(false);
           setHasBurned(true);
         }
       }
@@ -213,61 +214,63 @@ export function FireBurnReveal({ evidence }: FireBurnRevealProps) {
     }
 
     frame = window.requestAnimationFrame(render);
+
+    // AUTO-IGNITE WHEN JUDGE SCROLLS INTO VIEW
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && !autoTriggeredRef.current) {
+          autoTriggeredRef.current = true;
+          // Small dramatic delay for visual suspense
+          setTimeout(() => {
+            burningRef.current = true;
+          }, 300);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(container);
+
     return () => {
+      observer.disconnect();
       window.cancelAnimationFrame(frame);
       window.removeEventListener("resize", resize);
     };
   }, []);
 
-  const triggerBurn = () => {
-    if (progressRef.current >= 1) {
-      progressRef.current = 0;
-      setBurnProgress(0);
-      setHasBurned(false);
-    }
-    burningRef.current = true;
-    setIsBurning(true);
-  };
-
-  const resetPaper = () => {
-    burningRef.current = false;
+  const replayBurn = () => {
     progressRef.current = 0;
     setBurnProgress(0);
-    setIsBurning(false);
     setHasBurned(false);
+    burningRef.current = true;
   };
 
   return (
-    <div className="fire-burn-wrapper">
+    <div className="fire-burn-wrapper" ref={containerRef}>
       <div className="fire-burn-controls">
         <div className="fire-burn-controls__status">
-          <span className="eyebrow">Interactive Fire Ignition</span>
+          <span className="eyebrow">Automatic Fire Ignition Reveal</span>
           <p className="mono">
             {hasBurned
               ? "✓ Unverified Claim Consumed — Provenance Verified"
-              : isBurning
+              : burningRef.current
                 ? `🔥 Burning in progress: ${Math.round(burnProgress * 100)}%`
-                : "Awaiting ignition to burn unverified claim"}
+                : "Auto-ignites on scroll to reveal true cohort"}
           </p>
         </div>
         <div className="fire-burn-controls__buttons">
           <button
             type="button"
             className="text-button fire-burn-btn"
-            onClick={triggerBurn}
-            disabled={isBurning}
+            onClick={replayBurn}
           >
-            {isBurning ? "Burning..." : hasBurned ? "🔥 Re-Ignite Reveal" : "🔥 Ignite Paper Reveal"}
+            🔥 Replay Ignition
           </button>
-          {hasBurned && (
-            <button type="button" className="text-button" onClick={resetPaper}>
-              Reset Paper
-            </button>
-          )}
         </div>
       </div>
 
-      <div className="fire-burn-stage">
+      <div className="fire-burn-stage" onClick={replayBurn} title="Click to replay burn effect">
         {/* UNDER-LAYER: REVEALED VERIFIED PROVENANCE */}
         <div className="fire-burn-underlayer" aria-live="polite">
           <div className="evidence-row" id="methods-participants" tabIndex={-1}>

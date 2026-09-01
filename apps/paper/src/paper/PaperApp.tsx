@@ -10,6 +10,7 @@ import type {
 
 import { EditionWorld } from "../stage/EditionWorld";
 import { FireBurnReveal } from "../stage/FireBurnReveal";
+import { HeroBurnIntro } from "../stage/HeroBurnIntro";
 import {
   STAGE_CHAPTERS,
   StageNavigation,
@@ -453,6 +454,7 @@ export function PaperApp({
         )}
 
         <section className="paper-hero" id="paper-top" aria-labelledby="paper-title">
+          <HeroBurnIntro />
           <div className="edition-scene edition-scene--hero" aria-hidden="true">
             <div className="edition-scene__painting" aria-hidden="true" />
             <div className="edition-scene__halo" aria-hidden="true" />
