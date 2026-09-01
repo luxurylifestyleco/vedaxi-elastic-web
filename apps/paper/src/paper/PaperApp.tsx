@@ -8,6 +8,8 @@ import type {
   PublisherState
 } from "@vedaxi/state";
 
+import { EditionWorld } from "../stage/EditionWorld";
+import { FireBurnReveal } from "../stage/FireBurnReveal";
 import {
   STAGE_CHAPTERS,
   StageNavigation,
@@ -413,7 +415,7 @@ export function PaperApp({
   }, [focus]);
 
   return (
-    <>
+    <div className="edition-desk">
       <a className="skip-link" href="#paper-content">Skip to paper</a>
       <header className="masthead">
         <a className="identity" href="#paper-top" aria-label="VEDAXI Paper Integrity Desk home">
@@ -421,7 +423,7 @@ export function PaperApp({
           <span>VEDAXI</span>
         </a>
         <p>Paper Integrity Desk</p>
-        <p className="mono">Controlled research note</p>
+        <p className="mono">Five-chapter gallery</p>
       </header>
 
       <main id="paper-content" tabIndex={-1}>
@@ -451,13 +453,18 @@ export function PaperApp({
         )}
 
         <section className="paper-hero" id="paper-top" aria-labelledby="paper-title">
+          <div className="edition-scene edition-scene--hero" aria-hidden="true">
+            <div className="edition-scene__painting" aria-hidden="true" />
+            <div className="edition-scene__halo" aria-hidden="true" />
+            <div className="edition-scene__frame" aria-hidden="true" />
+          </div>
           <div className="paper-hero__meta">
             <p>{paper.journal}</p>
             <p>{paper.published}</p>
             <p className="mono">{paper.identifier}</p>
           </div>
           <div className="paper-hero__title">
-            <p className="eyebrow">Research note / methods integrity</p>
+            <p className="eyebrow">Integrity gallery / methods on parchment</p>
             <h1 className="display-title" id="paper-title" tabIndex={-1}>{paper.title}</h1>
             <p className="dek">{paper.dek}</p>
             <p className="authors">{paper.authors.join(" · ")}</p>
@@ -507,16 +514,23 @@ export function PaperApp({
             className={`paper-article${focusActive ? " paper-article--focused" : ""}`}
             data-focus-state={focusActive ? "focused" : "ordinary"}
           >
-            <section className="stage-chapter stage-chapter--paper" aria-labelledby="abstract-title">
+            <section className="stage-chapter stage-chapter--paper edition-scene edition-scene--parchment" aria-labelledby="abstract-title">
+              <div className="edition-scene__painting" aria-hidden="true" />
+              <div className="edition-scene__frame" aria-hidden="true" />
+              <div className="edition-scene__caption">
               <p className="stage-chapter__index mono">Chapter 01 / Paper</p>
               <div id="abstract">
                 <p className="section-kicker">Study overview</p>
                 <h2 id="abstract-title">Abstract</h2>
                 <p className="lead">{paper.abstract}</p>
               </div>
+              </div>
             </section>
 
-            <section className="stage-chapter stage-chapter--method" id="chapter-method" aria-labelledby="methods-title">
+            <section className="stage-chapter stage-chapter--method edition-scene edition-scene--triptych" id="chapter-method" aria-labelledby="methods-title">
+              <div className="edition-scene__painting" aria-hidden="true" />
+              <div className="edition-scene__frame" aria-hidden="true" />
+              <div className="edition-scene__caption">
               <p className="stage-chapter__index mono">Chapter 02 / Method</p>
               <div id="methods">
                 <p className="section-kicker">Participant accounting</p>
@@ -543,14 +557,19 @@ export function PaperApp({
                   <figcaption>Figure 1. Participant accounting reported by this controlled paper fixture.</figcaption>
                 </figure>
               </div>
+              </div>
             </section>
 
-            <section className="stage-chapter stage-chapter--video" id="chapter-video" aria-labelledby="video-title">
+            <section className="stage-chapter stage-chapter--video edition-scene edition-scene--reversed" id="chapter-video" aria-labelledby="video-title">
+              <div className="edition-scene__painting" aria-hidden="true" />
+              <div className="edition-scene__frame" aria-hidden="true" />
+              <EditionWorld reverse />
+              <div className="edition-scene__caption">
               <p className="stage-chapter__index mono">Chapter 03 / Video</p>
               <div>
-                <p className="section-kicker">Independent publisher surface</p>
+                <p className="section-kicker">Independent publisher, inverted world</p>
                 <h2 id="video-title" tabIndex={-1}>Video transcript evidence</h2>
-                <p>The Video publisher is hosted independently and appears here only after it confirms readiness.</p>
+                <p>The Video publisher is hosted independently and appears here only after it confirms readiness. The reversed field is decoration; transcript evidence stays upright and unpublished until the origin answers.</p>
               </div>
               {normalizedVideoOrigin && (
                 <iframe
@@ -598,28 +617,24 @@ export function PaperApp({
                     : "Independent Video publisher could not be verified or is unavailable. No embedded evidence is shown."}
                 </p>
               )}
-            </section>
-
-            <section className="stage-chapter stage-chapter--evidence" id="chapter-evidence" aria-labelledby="evidence-title">
-              <p className="stage-chapter__index mono">Chapter 04 / Evidence</p>
-              <h2 id="evidence-title" tabIndex={-1}>{evidence.title}</h2>
-              <div className="evidence-row" id="methods-participants" tabIndex={-1}>
-                <blockquote cite={`${evidence.sourceOrigin}/#methods-participants`}>
-                  <p>{evidence.excerpt}</p>
-                </blockquote>
-                <aside className="provenance" aria-label="Evidence provenance">
-                  <p className="eyebrow">Publisher evidence</p>
-                  <dl>
-                    <div><dt>Locator</dt><dd>{evidence.locator}</dd></div>
-                    <div><dt>Origin</dt><dd className="mono">{evidence.sourceOrigin}</dd></div>
-                    <div><dt>Evidence ID</dt><dd className="mono">{evidence.id}</dd></div>
-                    <div><dt>Provenance</dt><dd>{evidence.provenance}</dd></div>
-                  </dl>
-                </aside>
               </div>
             </section>
 
-            <section className="stage-chapter stage-chapter--decision" id="chapter-decision" aria-labelledby="focus-decision-title">
+            <section className="stage-chapter stage-chapter--evidence edition-scene edition-scene--burn" id="chapter-evidence" aria-labelledby="evidence-title">
+              <div className="edition-scene__painting" aria-hidden="true" />
+              <div className="edition-burn" aria-hidden="true" />
+              <div className="edition-scene__frame" aria-hidden="true" />
+              <div className="edition-scene__caption edition-scene__caption--reveal">
+                <p className="stage-chapter__index mono">Chapter 04 / Evidence</p>
+                <h2 id="evidence-title" tabIndex={-1}>{evidence.title}</h2>
+                <FireBurnReveal evidence={evidence} />
+              </div>
+            </section>
+
+            <section className="stage-chapter stage-chapter--decision edition-scene edition-scene--seal" id="chapter-decision" aria-labelledby="focus-decision-title">
+              <div className="edition-scene__painting" aria-hidden="true" />
+              <div className="edition-scene__frame" aria-hidden="true" />
+              <div className="edition-scene__caption">
               <p className="stage-chapter__index mono">Chapter 05 / Decision</p>
               <div className="focus-decision" aria-live="polite">
                 <p className="section-kicker">Human checkpoint</p>
@@ -691,6 +706,7 @@ export function PaperApp({
                   ))}
                 </ol>
               </div>
+              </div>
             </section>
           </article>
 
@@ -725,6 +741,6 @@ export function PaperApp({
         <p>VEDAXI / research integrity before citation</p>
         <p className="mono">{paper.identifier} · {evidence.sourceOrigin}</p>
       </footer>
-    </>
+    </div>
   );
 }
