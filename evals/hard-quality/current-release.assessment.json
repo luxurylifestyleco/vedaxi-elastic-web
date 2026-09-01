@@ -9,9 +9,9 @@
   "module_gates": [
     { "id": "M0", "status": "PASS", "evidence": ["docs/evidence/M0/exit-record.md"] },
     { "id": "M1", "status": "BLOCKED", "evidence": ["docs/evidence/M1/exit-record.md", "docs/pipeline/release-registry.v1.json"] },
-    { "id": "M2", "status": "NOT_STARTED", "evidence": ["docs/assets/M2/media-manifest.json"] },
-    { "id": "M3", "status": "NOT_STARTED", "evidence": [] },
-    { "id": "M4", "status": "NOT_STARTED", "evidence": [] },
+    { "id": "M2", "status": "BLOCKED", "evidence": ["docs/assets/M2/media-manifest.json"] },
+    { "id": "M3", "status": "BLOCKED", "evidence": ["evals/registry/manifests/vedaxi-m3-actions.dev.v1.json"] },
+    { "id": "M4", "status": "BLOCKED", "evidence": ["evals/registry/manifests/vedaxi-m4-semantic-stage.dev.v1.json"] },
     { "id": "M5", "status": "NOT_STARTED", "evidence": [] },
     { "id": "M6", "status": "NOT_STARTED", "evidence": [] }
   ],
@@ -25,7 +25,7 @@
   "automatic_failures": {
     "native_protocol_bypass": { "status": "NOT_EVALUATED", "evidence": [] },
     "false_or_stale_evidence": { "status": "BLOCKED", "evidence": ["Current worktree is dirty and has no immutable evaluated source identity."] },
-    "incomplete_golden_workflow": { "status": "BLOCKED", "evidence": ["M1 is BLOCKED; M2-M6 are not complete."] },
+    "incomplete_golden_workflow": { "status": "BLOCKED", "evidence": ["Local tests done except public Vercel hosting; Vercel live URL: (to be provided). Formal M1–M4 exits still not PASS in the registry."] },
     "generic_html_dashboard_quality": { "status": "NOT_EVALUATED", "evidence": [] },
     "decorative_or_inaccessible_motion": { "status": "NOT_EVALUATED", "evidence": [] },
     "critical_accessibility_failure": { "status": "NOT_EVALUATED", "evidence": [] },
@@ -36,7 +36,7 @@
   "dimensions": {
     "protocol_truth": { "status": "NOT_EVALUATED", "score": null, "evidence": [] },
     "evidence_integrity": { "status": "BLOCKED", "score": null, "evidence": ["Current source identity is not immutable."] },
-    "functional_completeness": { "status": "BLOCKED", "score": null, "evidence": ["Module gates M1-M6 are incomplete."] },
+    "functional_completeness": { "status": "BLOCKED", "score": null, "evidence": ["Module gates M1–M6 have not recorded PASS."] },
     "visual_direction": { "status": "NOT_EVALUATED", "score": null, "evidence": [] },
     "interaction_motion_quality": { "status": "NOT_EVALUATED", "score": null, "evidence": [] },
     "accessibility_responsiveness": { "status": "BLOCKED", "score": null, "evidence": ["Fresh current-source mobile and keyboard evidence is not complete."] },

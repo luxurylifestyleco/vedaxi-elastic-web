@@ -10,11 +10,11 @@
 | Source artifact | `85e139735da224f16985be1aeb11152dce4d20f4` (Paper runtime); v3 recorded repository HEAD `e6c440f` at capture time, not as the current repository HEAD; that commit did not change Paper sources |
 | Recorded | `2026-08-31T08:12:19.575Z` / `2026-08-31T13:42:19.5757937+05:30` |
 | Source review | Sub Agent 14 // Paper Plan — APPROVED; Sub Agent 15 // Paper Red Team — APPROVED; Sub Agent 16 // Paper Experience — APPROVED |
-| Status | `RECORDED V3 PAPER RUNTIME PARTIALLY VERIFIED; CURRENT INTEGRATED WORKTREE UNEXITED AND UNVERIFIED` |
+| Status | `RECORDED V3 PARTIAL; 2026-09-01 CURRENT-SOURCE ARTIFACTS PRESENT; FORMAL EXIT NOT PASS` |
 
 The original in-app-browser evidence is retained as v1 and the earlier Chrome follow-up as v2. The recorded v3 evidence is bound to Paper runtime `85e1397`: native discovery/call, exact human-search navigation, lifecycle, source identity, origins, and logs pass for that captured runtime. The browser service then failed to attach a fresh local page for the narrow run; in-app CUA Tab remained on `BODY` and Chrome local-preview navigation timed out. v3 marks those observations `BLOCKED`; it does not inherit v2 keyboard or responsive results as passes for either v3 or the later integrated worktree. The current integrated Paper/M3/M4 worktree remains unexited and unverified in a current browser. M5 still owns public deployment parity and final end-to-end re-verification.
 
-The v2 deterministic manifest is the current source-precursor registry. It expands deterministic coverage of the integrated Paper boundary but is not browser evidence and does not change this exit decision from `BLOCKED`.
+The v2 deterministic manifest is the current source-precursor registry. It expands deterministic coverage of the integrated Paper boundary but is not a recorded M1 `PASS`. 2026-09-01 captures added current-source 390×844 and keyboard artifacts; they are not a v4 manual registry and do not close the module exit.
 
 ## Expected and observed
 
@@ -25,8 +25,8 @@ The v2 deterministic manifest is the current source-precursor registry. It expan
 | Native evidence route | One strict read-only tool in production; exact result; page, visible provenance, inventory, and result origins equal. | PASS |
 | No publisher reasoning | No video evidence, subtraction, `34`, contradiction judgment, mutation, persistence, or recommendation in output/runtime. | PASS |
 | Human route survives kill switch | Fresh inventory changed one → zero → one; disabled call rejected; full paper and human search remained. | PASS |
-| Responsive experience | The recorded source baseline passed narrow layout. V3 could not attach a page for the requested 390 × 844 measurement, so it does not claim that result for the recorded v3 runtime or the later integrated worktree. | BLOCKED — current-source browser evidence missing |
-| Real keyboard traversal | The recorded source baseline passed in Chrome. V3 in-app CUA Tab stayed on `BODY`, and Chrome local-preview navigation timed out; it does not claim that pass for the recorded v3 runtime or the later integrated worktree. | BLOCKED — current-source browser evidence missing |
+| Responsive experience | 2026-09-01 CDP and Playwright captures recorded viewport 390×844 (`docs/evidence/M1/raw/2026-09-01T02-30-00.448Z-mobile-390x844.jpg`, `docs/evidence/M1/raw/2026-09-01T03-39-21Z-m1-390x844-screenshot.jpg`). v3 registry still records this case BLOCKED; no v4 package. | CAPTURED — not a recorded M1 PASS |
+| Real keyboard traversal | 2026-09-01 CDP/Playwright traces under `docs/evidence/M1/raw/*keyboard*` and `*current-paper-browser-evidence.json`. v3 registry still records this case BLOCKED; no v4 package. | CAPTURED — not a recorded M1 PASS |
 | Real unsupported browser state | Both approved clients expose native WebMCP; a natural unsupported-client observation was unavailable. Deterministic truthful-state/controller coverage passes separately. | BLOCKED — non-gating environment limitation |
 | Natural native registration error | No natural native rejection occurred; deterministic rejection/status tests pass separately. | BLOCKED — non-gating environment limitation |
 | Exact client version/build | Exact browser builds were not exposed; Chrome extension version `1.2.27268.51612_0` is retained. | BLOCKED — non-gating environment limitation |
@@ -139,7 +139,7 @@ The adversarial reviewer's fresh sandboxed Vite development start on another por
 
 The user approved Chrome only after the in-app browser automation surface could not yield a real Tab trace. Chrome resolved the keyboard acceptance criterion for the recorded source. It could not manufacture an unsupported WebMCP client or a natural registration rejection, so those observations remain `BLOCKED`, not synthetic passes. They do not prevent the bounded source-baseline exit because deterministic injected-state/controller tests prove the required truthful non-success behavior and the real production lifecycle proves registrations can be removed without damaging the human route.
 
-The current integrated worktree still needs a fresh 390 × 844 browser measurement and a real keyboard trace after browser attachment is available. M5 must also repeat the native route from the deployed public client and may only promote deployment parity if that fresh evidence exists.
+The current integrated worktree has 2026-09-01 390×844 and keyboard artifacts in `docs/evidence/M1/raw/`. Those files do not mint v4 or record M1 `PASS`. M5 must still repeat the native route from a deployed public client.
 
 ## Fresh agent browser attempt
 

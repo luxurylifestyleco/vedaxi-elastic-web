@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-31T19:46:53Z",
+  "generated_at": "2026-09-01T05:26:00Z",
   "deadline": {
     "id": "devpost-close",
     "at": "2026-09-03T20:00:00Z",
@@ -33,37 +33,37 @@
       "dependencies": ["M0", "C01", "authorized target-browser verification"],
       "evidence_paths": ["docs/evidence/M1/exit-record.md", "evals/registry/manifests/vedaxi-m1-paper.dev.v2.json", "evals/registry/manifests/vedaxi-m1-paper-browser.manual.v3.json"],
       "exit_criteria": ["Bind a fresh production-browser matrix, including keyboard traversal, to the current Paper runtime.", "Record a current-source exit decision."],
-      "risk": "The retained browser baseline binds source 06a9512, while later Paper runtime commits require re-verification."
+      "risk": "Current-source 390×844 and keyboard artifacts exist under docs/evidence/M1/raw/ (2026-09-01). Formal PASS still requires a v4 manual registry and recorded exit; v3 remains the last immutable package."
     },
     {
       "id": "M2",
-      "status": "NOT_STARTED",
+      "status": "BLOCKED",
       "owner": "Video Origin owner",
       "classification": "MIXED",
       "dependencies": ["M1", "C02", "M0-sequential-topology"],
       "evidence_paths": ["docs/MODULE_ARCHITECTURE.md", "docs/evaluation/MODULE_GATES.md", "evals/registry/manifests/vedaxi-m2-video.dev.v1.json", "docs/assets/M2/media-manifest.json"],
       "exit_criteria": ["S4-S5 pass.", "Independent origin, keyboard evidence, and evidence-only output are retained."],
-      "risk": "The deterministic precursor does not satisfy the required controlled media or target-browser origin, keyboard, and seek proof; formal work remains gated by M1."
+      "risk": "Video source, seek, MP4+VTT, and media validator exist (slot PASS when ffprobe is present). Formal M2 module exit and target-browser origin/keyboard proof remain open."
     },
     {
       "id": "M3",
-      "status": "NOT_STARTED",
+      "status": "BLOCKED",
       "owner": "Shared Actions owner",
       "classification": "MIXED",
       "dependencies": ["M1", "M2", "C03"],
       "evidence_paths": ["docs/MODULE_ARCHITECTURE.md", "docs/evaluation/MODULE_GATES.md", "evals/registry/manifests/vedaxi-m3-actions.dev.v1.json"],
       "exit_criteria": ["Human/tool parity, rejection, persistence, reset, and failure tests pass."],
-      "risk": "The deterministic precursor does not establish current-browser parity or reload behavior; this consequential mutation boundary still requires its formal exit."
+      "risk": "Shared PublisherStore.dispatch source and tests exist. Formal exit and current-browser parity remain open; gated by M1/M2 exits."
     },
     {
       "id": "M4",
-      "status": "NOT_STARTED",
+      "status": "BLOCKED",
       "owner": "Semantic Stage owner",
       "classification": "MIXED",
       "dependencies": ["M3", "C04"],
       "evidence_paths": ["docs/MODULE_ARCHITECTURE.md", "docs/evaluation/MODULE_GATES.md", "evals/registry/manifests/vedaxi-m4-semantic-stage.dev.v1.json"],
       "exit_criteria": ["Reduced-motion, reachability, responsive, and visual-regression evidence pass."],
-      "risk": "Source-bound semantic, responsive, and reduced-motion precursors do not replace target-browser accessibility, visual, and M3/M4 connection review."
+      "risk": "Stage/navigation source and tests exist. Target-browser accessibility, visual review, and recorded M4 exit remain open."
     },
     {
       "id": "M5",
@@ -73,7 +73,7 @@
       "dependencies": ["M4", "C05", "public-two-origin-deployment"],
       "evidence_paths": ["docs/MODULE_ARCHITECTURE.md", "docs/evaluation/VEDAXI_RUBRIC.md", "evals/registry/manifests/vedaxi-m5-webmcp-local.dev.v1.json"],
       "exit_criteria": ["Clean public H1-H10 and D1 trace passes.", "Sequential discovery, derivation, confirmation, reload, and kill-switch ablation are retained."],
-      "risk": "The local ordered trace and production-controller precursor are not native public discovery evidence; deployment or target-client drift blocks all submission claims."
+      "risk": "Local tests are complete. Public two-origin webpage will be hosted on Vercel; live URL is (to be provided). No invented deployment URL."
     },
     {
       "id": "M6",
@@ -95,7 +95,7 @@
       "dependencies": ["M5"],
       "evidence_paths": ["docs/evaluation/VEDAXI_RUBRIC.md", "docs/SUBMISSION_PIPELINE.md"],
       "exit_criteria": ["A public URL passes a clean target-browser native trace."],
-      "risk": "No public deployment proof exists."
+      "risk": "Vercel live URL: (to be provided). Paper origin (public): (to be provided). Video origin (public): (to be provided)."
     },
     {
       "id": "public-repo-license-instructions",

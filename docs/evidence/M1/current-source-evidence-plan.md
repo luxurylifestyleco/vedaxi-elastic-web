@@ -2,9 +2,11 @@
 
 ## Decision now
 
-M1 remains **BLOCKED**. The newest immutable M1 browser package is `vedaxi.m1-paper-browser.manual.v3`, bound to Paper runtime commit `85e139735da224f16985be1aeb11152dce4d20f4`. It contains four passing cases but explicitly blocks fresh narrow-responsive and real-keyboard observations. The current Paper candidate has changed after that commit (`PaperApp.tsx`, `styles.css`, and the new `stage/**` surface), including chapter navigation and a focus-handoff repair. Therefore neither v1/v2 nor v3 can be inherited as current-source proof.
+M1 formal exit remains **not `PASS`**. Immutable package `vedaxi.m1-paper-browser.manual.v3` is still bound to Paper runtime `85e139735da224f16985be1aeb11152dce4d20f4` and records blocked narrow/keyboard cases.
 
-This file is a run plan only. It does not alter the M1 exit record, registry, manifests, datasets, or promotion state.
+Current-source artifacts **do** exist from 2026-09-01 under `docs/evidence/M1/raw/` (390×844 screenshots, keyboard traces, origin-integrity JSON). They are not a v4 registry and do not promote M1.
+
+This file remains a run plan. It does not convert those captures into a module `PASS`.
 
 ## Evidence lineage and permitted use
 

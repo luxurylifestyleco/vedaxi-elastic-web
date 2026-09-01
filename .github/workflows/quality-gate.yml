@@ -30,5 +30,8 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
 
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
       - name: Run canonical local/CI quality gate
         run: node evals/run-quality-gate.mjs --clean-install

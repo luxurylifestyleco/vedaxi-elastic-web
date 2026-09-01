@@ -4,12 +4,12 @@ This is the master execution and submission checklist for VEDAXI. It reports rep
 
 ## Milestone progress
 
-> **Current position:** R0 is complete. R1 is in progress and stopped at the M1 exit gate.
+> **Current position:** R0 complete. R1 in progress. M1 formal exit is still not `PASS`. M2–M4 source is in tree; M2 media slot validates when `ffprobe` is available.
 
 | Progress lens | Completed | How far | Meaning |
 | --- | ---: | ---: | --- |
 | Release milestones | 1 of 5 | **20%** | R0 complete; R1–R4 have not met their stop conditions. |
-| Module exits | 1 of 7 | **14%** | M0 exited; M1 is blocked; M2–M6 have not started. |
+| Module exits | 1 of 7 | **14%** | M0 exited. M1 exit not recorded as PASS (current-source 390×844 + keyboard artifacts exist). M2–M4 source implemented, exits not recorded. M5–M6 not started. |
 | Source modules implemented | 5 of 7 | **71%** | M0–M4 source exists locally; M5 has local predeployment adapters only. Source presence does not convert blocked or unevaluated release gates into passes. |
 | Devpost submission gates | 0 of 8 | **0%** | D1–D8 require the deployed product, M6 submission assets, access/rights evidence, and a current live-rules recheck. |
 
@@ -18,13 +18,13 @@ These are count-based progress indicators, not time estimates. Later modules—e
 | Release milestone | Status | Evidence / completion condition |
 | --- | --- | --- |
 | R0 — Protocol and architecture gate | **COMPLETE** | M0 contracts and exact-browser sequential topology approved and pushed. |
-| R1 — Judgeable vertical slice | **IN PROGRESS — BLOCKED AT M1** | M1 source is complete; its browser exit must close before M2. R1 also requires M2, M3, and M4. |
+| R1 — Judgeable vertical slice | **IN PROGRESS — M1 EXIT NOT PASS** | M1 source plus 2026-09-01 current-source browser artifacts exist; formal M1 PASS is not recorded. R1 also requires M2, M3, and M4 exits. |
 | R2 — Quality and trust | **NOT STARTED** | Begins after the functional vertical slice; requires negative, accessibility, responsive, audit, and intended-vs-implemented proof. |
 | R3 — Deployment and judge proof | **NOT STARTED** | Requires two public origins, clean-session native reproduction, public repo/license/instructions, and demo rehearsal. |
 | R4 — Submission assets | **NOT STARTED** | Requires the real recorded run, audio, captions if useful, Devpost copy, thumbnail, and verified fields. |
 
 ```text
-R0 COMPLETE → R1 IN PROGRESS [M1 BLOCKED] → R2 → R3 → R4 → USER-APPROVED SUBMISSION
+R0 COMPLETE → R1 IN PROGRESS [M1 EXIT NOT PASS] → R2 → R3 → R4 → USER-APPROVED SUBMISSION
 ```
 
 ## Operating contract
@@ -44,15 +44,15 @@ R0 COMPLETE → R1 IN PROGRESS [M1 BLOCKED] → R2 → R3 → R4 → USER-APPROV
 
 | Workstream | State | Evidence / next decision |
 | --- | --- | --- |
-| GitHub | **CURRENT** | Branch `codex/phase-0-webmcp`; latest pushed checkpoint `cc685c6`. |
-| Local candidate checkpoint | **LOCAL ONLY — NOT PUSHED** | Current committed candidate `4287e1d`; the source-evidence reconciliation remains uncommitted and cannot be treated as an immutable release checkpoint yet. |
+| GitHub | **CURRENT** | Branch `codex/phase-0-webmcp`; remote `https://github.com/luxurylifestyleco/vedaxi-elastic-web.git`. Quality Gate CI installs FFmpeg then runs `evals/run-quality-gate.mjs --clean-install`. |
+| Local candidate checkpoint | **SEE GIT HEAD** | Do not treat an uncommitted worktree as an immutable release identity. |
 | M0 Protocol Foundation | **COMPLETE** | Sequential two-origin topology selected and approved. See `docs/evidence/M0/exit-record.md`. |
-| M1 Paper Origin source | **RECORDED BASELINE COMPLETE; CURRENT INTEGRATED WORKTREE UNEXITED** | Recorded baseline source commit `06a9512` passed 69/69 tests and three independent source reviews. Current deterministic precursor `vedaxi.m1-paper.dev.v2` exists, but later integrated Paper/M3/M4 worktree changes have not received a current-source browser exit decision. |
-| M1 Paper Origin exit | **BLOCKED** | Browser keyboard traversal and real unsupported/error-state evidence remain blocked. See `docs/evidence/M1/exit-record.md`. |
-| M2 Video Origin source | **IMPLEMENTED LOCALLY; EXIT NOT RECORDED** | Deterministic precursor `vedaxi.m2-video.dev.v1` covers the fixture, evidence-only tools, independent-origin configuration, unloaded-media truth, and seek source behavior; physical media and required browser evidence remain open. |
-| M3 Shared Actions source | **IMPLEMENTED LOCALLY; EXIT NOT RECORDED** | Deterministic precursor `vedaxi.m3-shared-actions.dev.v1` covers shared state, parity, human-only confirmation, persistence, rollback, reset, and rehydration; module exit/browser evidence remain open. |
-| M4 Semantic Stage source | **IMPLEMENTED LOCALLY; EXIT NOT RECORDED** | Deterministic precursor `vedaxi.m4-semantic-stage.dev.v1` covers shipped stage semantics, keyboard helper behavior, and responsive/reduced-motion source rules; current rendered target-browser and visual review remain open. |
-| M5 Native Proof source | **PARTIAL — LOCAL PREDEPLOYMENT ONLY** | Local precursor `vedaxi.m5-webmcp-local.dev.v1` covers the ordered-trace validator and production registration-controller lifecycle; public origins, native discovery, clean target-browser trace, persistence-session proof, and browser kill-switch evidence remain open. |
+| M1 Paper Origin source | **IMPLEMENTED** | Paper Integrity Desk, evidence search, and shared-action wiring exist. Deterministic precursor `vedaxi.m1-paper.dev.v2`. |
+| M1 Paper Origin exit | **NOT PASS** | Current-source 390×844 screenshot and keyboard traces from 2026-09-01 are in `docs/evidence/M1/raw/`. Formal PASS still needs a v4 manual registry and recorded exit. See `docs/evidence/M1/exit-record.md`. |
+| M2 Video Origin source | **IMPLEMENTED; SLOT VALID; EXIT NOT RECORDED** | Video app, seek, MP4+VTT, and `vedaxi.m2-video.dev.v1` exist. Path: `apps/video/public/media/vedaxi-controlled-evidence.mp4`. Validator PASSes with ffprobe. Formal M2 exit remains open. |
+| M3 Shared Actions source | **IMPLEMENTED; EXIT NOT RECORDED** | Deterministic precursor `vedaxi.m3-actions.dev.v1` / shared `PublisherStore.dispatch`; module exit/browser evidence remain open. |
+| M4 Semantic Stage source | **IMPLEMENTED; EXIT NOT RECORDED** | Deterministic precursor `vedaxi.m4-semantic-stage.dev.v1`; current rendered target-browser and visual review remain open. |
+| M5 Native Proof / hosting | **WAITING ON VERCEL URL** | Local tests are done. Public two-origin webpage will be hosted on Vercel. **Vercel live URL: (to be provided).** Paper origin (public): (to be provided). Video origin (public): (to be provided). |
 | M6 Submission/Reproduction | **NOT STARTED** | Requires verified M5 evidence and human-selected/public release inputs. |
 | Official rules acknowledgment | **USER ACTION REQUIRED** | `.devpost-hackathon-state.json` records `rules_acknowledged: false`; never change this on the user's behalf. |
 | Devpost submission | **NOT SUBMITTED** | Nothing has been sent to Devpost. |
@@ -170,7 +170,7 @@ This is provisional until the complete M5 run exists. Submission copy and demo n
 ## Immediate next actions
 
 1. Freeze the integrated M0–M5-predeployment source in an immutable candidate after the local code-quality gate passes while retaining the expected release `HOLD`/`BLOCKED` markers.
-2. Retain M1–M4 as blocked/not evaluated until their required current-source browser and independent-review evidence exists; do not infer exits from source tests.
+2. Keep M1–M4 exits not PASS until a recorded v4/browser package (M1) and remaining M2–M4 evidence exist; do not infer exits from source tests. M2 still needs the MP4.
 3. Supply and validate the distinct controlled M2 media asset without substituting the `<180s` submission demo.
 4. Create the public two-origin deployment and run the clean target-browser M5 trace.
 5. Re-fetch the current official rules and submission fields for D8, then present them at the separate Human Gate for explicit user acknowledgment.

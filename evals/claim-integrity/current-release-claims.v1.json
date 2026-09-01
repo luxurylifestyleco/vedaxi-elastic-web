@@ -11,7 +11,7 @@
   "claims": [
     {
       "claim_id": "m1-remains-blocked",
-      "text": "M1 remains BLOCKED in the current release registry.",
+      "text": "M1 remains BLOCKED (formal exit not PASS) in the current release registry.",
       "claim_kind": "repository_state",
       "decision_bearing": true,
       "status": "VERIFIED",
@@ -19,8 +19,8 @@
       "source": {
         "type": "repository_file",
         "path": "docs/pipeline/release-registry.v1.json",
-        "identity": { "kind": "sha256", "value": "8c81a247ac8c8778ddae83d1623d9fb3ad8dcd54ed8c4318cbdf36ad77aa27ee" },
-        "observed_at": "2026-08-31T18:56:00.000Z",
+        "identity": { "kind": "sha256", "value": "f46aacaa2902e308dd74f3487474f661847b5b830d0f1d6fce58d124e104c959" },
+        "observed_at": "2026-09-01T05:26:00.000Z",
         "max_age_seconds": 86400,
         "scope": "current repository release registry only",
         "representation": "paraphrased"
@@ -28,10 +28,10 @@
       "assertion": { "json_pointer": "/modules/1/status", "equals": "BLOCKED" },
       "independent_check": {
         "checker_id": "hard-quality-current-assessment",
-        "checked_at": "2026-08-31T18:56:30.000Z",
+        "checked_at": "2026-09-01T05:26:30.000Z",
         "method": "cross_artifact_json_assertion",
         "evidence_path": "evals/hard-quality/current-release.assessment.json",
-        "evidence_sha256": "f7bfadb4ec7ba2c42363ee16c96f13e949b79bc6537f252d44d219bc266c2c6e"
+        "evidence_sha256": "773589927c644acf3d2e23b2c177e6bab6e8f5045db119e31439f82ea06cee05"
       }
     },
     {
@@ -44,8 +44,8 @@
       "source": {
         "type": "repository_file",
         "path": "evals/hard-quality/current-release.assessment.json",
-        "identity": { "kind": "sha256", "value": "f7bfadb4ec7ba2c42363ee16c96f13e949b79bc6537f252d44d219bc266c2c6e" },
-        "observed_at": "2026-08-31T18:56:00.000Z",
+        "identity": { "kind": "sha256", "value": "773589927c644acf3d2e23b2c177e6bab6e8f5045db119e31439f82ea06cee05" },
+        "observed_at": "2026-09-01T05:26:00.000Z",
         "max_age_seconds": 86400,
         "scope": "current hard-quality assessment only",
         "representation": "paraphrased"
@@ -53,10 +53,10 @@
       "assertion": { "json_pointer": "/release_identity/worktree_clean", "equals": false },
       "independent_check": {
         "checker_id": "release-registry-v1",
-        "checked_at": "2026-08-31T18:56:30.000Z",
+        "checked_at": "2026-09-01T05:26:30.000Z",
         "method": "cross_artifact_release_hold_check",
         "evidence_path": "docs/pipeline/release-registry.v1.json",
-        "evidence_sha256": "8c81a247ac8c8778ddae83d1623d9fb3ad8dcd54ed8c4318cbdf36ad77aa27ee"
+        "evidence_sha256": "f46aacaa2902e308dd74f3487474f661847b5b830d0f1d6fce58d124e104c959"
       }
     },
     {
@@ -69,8 +69,8 @@
       "source": {
         "type": "repository_file",
         "path": "docs/pipeline/release-registry.v1.json",
-        "identity": { "kind": "sha256", "value": "8c81a247ac8c8778ddae83d1623d9fb3ad8dcd54ed8c4318cbdf36ad77aa27ee" },
-        "observed_at": "2026-08-31T18:56:00.000Z",
+        "identity": { "kind": "sha256", "value": "f46aacaa2902e308dd74f3487474f661847b5b830d0f1d6fce58d124e104c959" },
+        "observed_at": "2026-09-01T05:26:00.000Z",
         "max_age_seconds": 86400,
         "scope": "tracked release asset state plus independently enforced draft-file absence",
         "representation": "paraphrased"
@@ -78,10 +78,10 @@
       "assertion": { "json_pointer": "/assets/4/status", "equals": "PENDING" },
       "independent_check": {
         "checker_id": "hard-quality-current-assessment",
-        "checked_at": "2026-08-31T18:56:30.000Z",
+        "checked_at": "2026-09-01T05:26:30.000Z",
         "method": "release_hold_and_filesystem_absence_check",
         "evidence_path": "evals/hard-quality/current-release.assessment.json",
-        "evidence_sha256": "f7bfadb4ec7ba2c42363ee16c96f13e949b79bc6537f252d44d219bc266c2c6e"
+        "evidence_sha256": "773589927c644acf3d2e23b2c177e6bab6e8f5045db119e31439f82ea06cee05"
       }
     }
   ]

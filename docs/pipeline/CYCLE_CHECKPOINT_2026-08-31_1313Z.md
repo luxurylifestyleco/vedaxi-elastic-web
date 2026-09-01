@@ -1,6 +1,6 @@
 # VEDAXI Cycle Checkpoint — 2026-08-31 13:13Z
 
-This is the authoritative scheduling checkpoint for the active nine-assignment cycle. It records orchestration status, not release approval. A returned agent packet is sufficient to close a scheduling seat, but only resolvable repository evidence may support a product, protocol, quality, or release claim.
+This is the authoritative scheduling checkpoint for the active nine-assignment cycle as of **2026-08-31 13:13Z**. It is a frozen orchestration snapshot. Current module/media truth lives in [README](../../README.md), [submission pipeline](../SUBMISSION_PIPELINE.md), and [release-registry.v1.json](release-registry.v1.json) (M1 exit not PASS; M2–M4 source started; M2 MP4+VTT in tree).
 
 ## Operating shape
 
@@ -63,7 +63,7 @@ Department counts: Protocol `1 ACTIVE / 2 QUEUED`; Product `1 ACTIVE / 2 QUEUED`
 - **Video/media:** fixture behavior may be tested, but controlled video and captions have not been delivered. `MISSING_MEDIA` remains the only truthful media state; no completion or evidence claim may be made.
 - **Perceptual quality:** historical scores do not promote the current working tree. A current-source independent hard-eval rerun is required, with overall `>= 0.90`, per-dimension floors, and automatic vetoes intact.
 - **Reproducibility:** the working tree is not frozen or clean, and no clean-source reproduction exists for the current candidate.
-- **Release:** `HOLD`. M1 is blocked, M2–M6 are incomplete/not promoted, required media is absent, current keyboard/mobile evidence is incomplete, and Human Gate authority has not been granted.
+- **Release (as of this 13:13Z snapshot):** `HOLD`. Later HEAD: M1 still not PASS (2026-09-01 browser artifacts exist); M2–M4 source started; MP4 still absent. See current [release-registry](release-registry.v1.json).
 
 ## User-owned boundaries
 

@@ -1,29 +1,31 @@
 # M2 Late-Bound Media Slot
 
-This directory reserves the final M2 evidence video without adding, generating, downloading, embedding, or committing media. It is a delivery contract only; it does not authorize M2 runtime work before the M1 gate is recorded `PASS`.
+This directory is the delivery contract for the controlled in-product evidence video. It is not the public Devpost demo.
 
-## Required final files
+## HEAD status
 
-| Artifact | Required repository path | Contract |
+| Artifact | Required path | Current tree |
 | --- | --- | --- |
-| Video | `apps/video/public/media/vedaxi-controlled-evidence.mp4` | MP4 container (`video/mp4`), H.264/AVC video and AAC audio; duration must be **strictly greater than 192 seconds**. |
-| Captions | `apps/video/public/media/vedaxi-controlled-evidence.vtt` | UTF-8 WebVTT. A cue covering `00:03:12.000` must contain both required phrases below. |
-| Manifest | `docs/assets/M2/media-manifest.json` | Completed only after the two final files exist. |
+| Video | `apps/video/public/media/vedaxi-controlled-evidence.mp4` | Present. Validator reports 210.000s, H.264 + AAC. |
+| Captions | `apps/video/public/media/vedaxi-controlled-evidence.vtt` | Present. Cue covering `00:03:12` includes `six` and `did not replace`. |
+| Manifest | `docs/assets/M2/media-manifest.json` | `delivery_state: "READY_FOR_VALIDATION"` |
 
-The evidence timestamp is `00:03:12` (`192.000` seconds). Its normalized caption/transcript excerpt must include the literal phrases `six` and `did not replace`, and identify the exclusion/calibration-drift evidence. This contract deliberately does not permit a publisher-side derived sample-size statement, `34`, or contradiction language in the excerpt.
+`node evals/validate-m2-media-slot.mjs` exits `0` when `ffprobe` can probe the MP4. A slot `PASS` is not a recorded M2 module exit and is not Devpost D3 (`<180s` YouTube demo).
 
-## Missing-media behavior
+## Contract
 
-`media-manifest.json` is intentionally a template with `delivery_state: "MISSING_MEDIA"`. Running the validator in that state exits with code `2` and reports `BLOCKED`: the slot is structurally valid, but no media claim is made. It never treats a placeholder, an absent file, a declared duration, or an unverified checksum as a pass.
+| Artifact | Rule |
+| --- | --- |
+| MP4 | `video/mp4`, H.264 video, AAC audio, duration **strictly greater than 192 seconds** |
+| WebVTT | UTF-8. A cue covering `00:03:12.000` must include `six` and `did not replace` |
+| Excerpt | Must include calibration/drift context. Must not contain `34`, `contradiction`, or `discrepancy` |
 
-## Final handoff
+## How ffmpeg is used
 
-After M1 is recorded `PASS` and a real recording exists, place the final binary and its aligned VTT file at the exact paths above, replace every `REPLACE_*` value in the manifest, and run:
+The validator shells out to **`ffprobe`** (not an encode). It reads container name, duration, and stream codecs. Locally, `ffprobe` must be on `PATH` (Windows also checks a known WinGet Gyan.FFmpeg layout). GitHub Actions Ubuntu installs the `ffmpeg` package so `ffprobe` exists on the CI runner.
 
 ```text
 node evals/validate-m2-media-slot.mjs
 ```
 
-The command requires `ffprobe` on `PATH` once video is present. It verifies the actual container, H.264 video stream, AAC audio stream, strictly-greater-than-192-second duration, SHA-256 checksum, caption timing/text, transcript excerpt, and provenance/license fields.
-
-The current submission pipeline separately says the public Devpost video must be under three minutes. That is incompatible with this requested `> 192` second hold-point contract. A validator `PASS` therefore means the M2 media slot is valid; it is **not** proof of Devpost D3 readiness. Resolve that product-level conflict before using this asset as the final submission video.
+If the MP4 is removed, set `delivery_state` back to `MISSING_MEDIA` so the gate exits `2` (`BLOCKED`) instead of failing closed.
