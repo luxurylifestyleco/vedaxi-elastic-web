@@ -41,6 +41,7 @@ export function ProtocolStage3D({
     window.addEventListener("resize", onResize);
 
     const isLight = theme === "light";
+    const isMobile = width < 768;
 
     // Mouse & Touch parallax tracking
     let mouseX = width / 2;
@@ -56,8 +57,8 @@ export function ProtocolStage3D({
       mouseY = clientY;
       const cx = width / 2;
       const cy = height / 2;
-      targetRotY = ((clientX - cx) / cx) * 0.55;
-      targetRotX = -((clientY - cy) / cy) * 0.55;
+      targetRotY = ((clientX - cx) / cx) * 0.45;
+      targetRotX = -((clientY - cy) / cy) * 0.35;
     };
 
     const onMouseMove = (e: MouseEvent) => {
@@ -74,70 +75,70 @@ export function ProtocolStage3D({
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("touchstart", onTouchMove, { passive: true });
 
-    // 5 Key Protocol God Nodes
+    // 5 Key Protocol God Nodes - Tightened vertical spacing to prevent bottom clipping
     const baseGodNodes: Node3D[] = [
       {
-        x: -280,
-        y: -120,
-        z: 80,
+        x: -240,
+        y: -80,
+        z: 60,
         vx: 0,
         vy: 0,
         vz: 0,
         colorDark: "#69e9f1",
         colorLight: "#0284c7",
-        size: 9,
+        size: 8.5,
         label: "ORIGIN A: PAPER",
         targetId: "chapter-method",
       },
       {
-        x: 260,
-        y: 110,
-        z: -40,
+        x: 220,
+        y: 65,
+        z: -30,
         vx: 0,
         vy: 0,
         vz: 0,
         colorDark: "#f59e0b",
         colorLight: "#d97706",
-        size: 9,
+        size: 8.5,
         label: "ORIGIN B: VIDEO (00:03:12)",
         targetId: "chapter-video",
       },
       {
         x: 0,
-        y: -40,
-        z: 180,
+        y: -25,
+        z: 140,
         vx: 0,
         vy: 0,
         vz: 0,
         colorDark: "#c5ff73",
         colorLight: "#059669",
-        size: 12,
+        size: 11,
         label: "DISCREPANCY (40 - 6 = 34)",
         targetId: "chapter-evidence",
       },
       {
-        x: 180,
-        y: -180,
-        z: 120,
+        x: 150,
+        y: -120,
+        z: 90,
         vx: 0,
         vy: 0,
         vz: 0,
         colorDark: "#69e9f1",
         colorLight: "#4f46e5",
-        size: 8,
+        size: 7.5,
         label: "WebMCP RUNTIME",
         targetId: "paper-top",
       },
       {
-        x: -160,
-        y: 180,
-        z: 60,
+        x: -140,
+        y: 110,
+        z: 40,
         vx: 0,
         vy: 0,
         vz: 0,
         colorDark: "#c5ff73",
         colorLight: "#16a34a",
-        size: 10,
+        size: 9.5,
         label: "HUMAN GATE",
         targetId: "chapter-decision",
       },
@@ -175,19 +176,18 @@ export function ProtocolStage3D({
 
     // Floating particle mesh
     const particles: Node3D[] = [];
-    const isMobile = width < 768;
-    const PARTICLE_COUNT = isMobile ? 35 : 60;
+    const PARTICLE_COUNT = isMobile ? 30 : 50;
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       particles.push({
-        x: (Math.random() - 0.5) * (isMobile ? 700 : 1200),
-        y: (Math.random() - 0.5) * (isMobile ? 600 : 900),
-        z: (Math.random() - 0.5) * 600,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
-        vz: (Math.random() - 0.5) * 0.45,
+        x: (Math.random() - 0.5) * (isMobile ? 600 : 1000),
+        y: (Math.random() - 0.5) * (isMobile ? 450 : 700),
+        z: (Math.random() - 0.5) * 500,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        vz: (Math.random() - 0.5) * 0.4,
         colorDark: Math.random() > 0.4 ? "#69e9f1" : "#c5ff73",
         colorLight: Math.random() > 0.4 ? "#0284c7" : "#059669",
-        size: Math.random() * 2 + 1.4,
+        size: Math.random() * 2 + 1.2,
         label: "",
       });
     }
@@ -204,7 +204,7 @@ export function ProtocolStage3D({
       const z2 = z1 * cosX + y * sinX;
 
       const fov = isMobile ? 550 : 750;
-      const scale = fov / (fov + z2 + (isMobile ? 250 : 350));
+      const scale = fov / (fov + z2 + (isMobile ? 280 : 380));
       return {
         px: width / 2 + x1 * scale,
         py: height / 2 + y2 * scale,
@@ -221,11 +221,11 @@ export function ProtocolStage3D({
 
       ctx.clearRect(0, 0, width, height);
 
-      const currentRotX = rotX + Math.sin(t * 0.5) * 0.08;
-      const currentRotY = rotY + Math.cos(t * 0.35) * 0.12;
+      const currentRotX = rotX + Math.sin(t * 0.5) * 0.06;
+      const currentRotY = rotY + Math.cos(t * 0.35) * 0.09;
 
-      const maxParticleX = isMobile ? 350 : 600;
-      const maxParticleY = isMobile ? 300 : 450;
+      const maxParticleX = isMobile ? 300 : 500;
+      const maxParticleY = isMobile ? 220 : 350;
 
       // Project ambient particles
       const projectedParticles = particles.map((p) => {
@@ -236,13 +236,13 @@ export function ProtocolStage3D({
         if (p.x > maxParticleX) p.x = -maxParticleX;
         if (p.y < -maxParticleY) p.y = maxParticleY;
         if (p.y > maxParticleY) p.y = -maxParticleY;
-        if (p.z < -300) p.z = 300;
-        if (p.z > 300) p.z = -300;
+        if (p.z < -250) p.z = 250;
+        if (p.z > 250) p.z = -250;
         return { ...project(p.x, p.y, p.z, currentRotX, currentRotY), p };
       });
 
       // Connect near particles
-      const maxConnectDist = isMobile ? 85 : 120;
+      const maxConnectDist = isMobile ? 80 : 110;
       for (let i = 0; i < projectedParticles.length; i++) {
         for (let j = i + 1; j < projectedParticles.length; j++) {
           const p1 = projectedParticles[i];
@@ -251,11 +251,11 @@ export function ProtocolStage3D({
           const dy = p1.py - p2.py;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < maxConnectDist) {
-            const alpha = (1 - dist / maxConnectDist) * (isLight ? 0.25 : 0.2) * Math.min(p1.scale, p2.scale);
+            const alpha = (1 - dist / maxConnectDist) * (isLight ? 0.25 : 0.18) * Math.min(p1.scale, p2.scale);
             ctx.strokeStyle = isLight
               ? "rgba(2, 132, 199, " + alpha + ")"
               : "rgba(105, 233, 241, " + alpha + ")";
-            ctx.lineWidth = isLight ? 1.2 : 1;
+            ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(p1.px, p1.py);
             ctx.lineTo(p2.px, p2.py);
@@ -274,11 +274,11 @@ export function ProtocolStage3D({
         ctx.fill();
       });
 
-      // Project God Nodes
-      const godPosScale = isMobile ? 0.6 : 1.0;
+      // Project God Nodes with responsive scaling
+      const godPosScale = isMobile ? 0.65 : 0.95;
       currentProjectedGods = baseGodNodes.map((g, idx) => {
-        const floatY = g.y * godPosScale + Math.sin(t * 1.5 + idx * 1.3) * 12;
-        const floatX = g.x * godPosScale + Math.cos(t * 1.2 + idx * 0.9) * 8;
+        const floatY = (g.y * godPosScale) + Math.sin(t * 1.5 + idx * 1.3) * 8;
+        const floatX = (g.x * godPosScale) + Math.cos(t * 1.2 + idx * 0.9) * 6;
         return {
           ...project(floatX, floatY, g.z * godPosScale, currentRotX, currentRotY),
           g,
@@ -310,20 +310,20 @@ export function ProtocolStage3D({
 
           ctx.strokeStyle = gradient;
           ctx.globalAlpha = (isLight ? 0.45 : 0.35) + Math.sin(t * 2 + i + j) * 0.12;
-          ctx.lineWidth = isMobile ? 1.4 : 2.0;
+          ctx.lineWidth = isMobile ? 1.3 : 1.8;
           ctx.beginPath();
           ctx.moveTo(g1.px, g1.py);
           ctx.lineTo(g2.px, g2.py);
           ctx.stroke();
 
-          // Animated data packet along vector
+          // Animated data packet
           const packetPos = (t * 0.45 + (i * 0.3 + j * 0.2)) % 1;
           const packetX = g1.px + (g2.px - g1.px) * packetPos;
           const packetY = g1.py + (g2.py - g1.py) * packetPos;
           ctx.fillStyle = isLight ? "#0f172a" : "#ffffff";
           ctx.globalAlpha = 0.95;
           ctx.beginPath();
-          ctx.arc(packetX, packetY, isMobile ? 2.5 : 3.5, 0, Math.PI * 2);
+          ctx.arc(packetX, packetY, isMobile ? 2.2 : 3.0, 0, Math.PI * 2);
           ctx.fill();
         }
       }
@@ -332,12 +332,12 @@ export function ProtocolStage3D({
       currentProjectedGods.forEach(({ px, py, scale, g }) => {
         if (scale <= 0) return;
         const isHovered = hoveredNode === g.label;
-        const multiplier = isHovered ? 1.35 : 1.0;
+        const multiplier = isHovered ? 1.3 : 1.0;
         const nodeSize = g.size * (isMobile ? 0.85 : 1.0);
         const nodeColor = isLight ? g.colorLight : g.colorDark;
 
         // Radial ambient glow
-        const glowRad = nodeSize * 4.2 * scale * multiplier;
+        const glowRad = nodeSize * 3.8 * scale * multiplier;
         const radGrad = ctx.createRadialGradient(px, py, 0, px, py, glowRad);
         radGrad.addColorStop(0, nodeColor);
         radGrad.addColorStop(1, "transparent");
@@ -350,13 +350,13 @@ export function ProtocolStage3D({
         // Orbital ring
         ctx.strokeStyle = nodeColor;
         ctx.globalAlpha = isHovered ? 0.95 : 0.7;
-        ctx.lineWidth = isHovered ? 2.2 : 1.4;
+        ctx.lineWidth = isHovered ? 2.0 : 1.2;
         ctx.beginPath();
         ctx.ellipse(
           px,
           py,
-          nodeSize * 2.2 * scale * multiplier,
-          nodeSize * 1.15 * scale * multiplier,
+          nodeSize * 2.1 * scale * multiplier,
+          nodeSize * 1.1 * scale * multiplier,
           t * 2,
           0,
           Math.PI * 2
@@ -364,7 +364,7 @@ export function ProtocolStage3D({
         ctx.stroke();
 
         // Node center core
-        ctx.fillStyle = isLight ? "#ffffff" : "#ffffff";
+        ctx.fillStyle = "#ffffff";
         ctx.globalAlpha = 1;
         ctx.beginPath();
         ctx.arc(px, py, nodeSize * scale * multiplier, 0, Math.PI * 2);
@@ -375,11 +375,11 @@ export function ProtocolStage3D({
 
         // Label pill tag
         if (g.label) {
-          const fontSize = Math.max(8, Math.round((isMobile ? 8.5 : 10.5) * scale * (isHovered ? 1.15 : 1)));
+          const fontSize = Math.max(8, Math.round((isMobile ? 8.5 : 10.0) * scale * (isHovered ? 1.15 : 1)));
           ctx.font = "700 " + fontSize + "px SFMono-Regular, Consolas, monospace";
 
           const textWidth = ctx.measureText(g.label).width;
-          const tagX = px + nodeSize * scale + 8;
+          const tagX = px + nodeSize * scale + 6;
           const tagY = py - fontSize / 2;
 
           ctx.fillStyle = isLight ? "rgba(255, 255, 255, 0.95)" : "rgba(6, 18, 27, 0.9)";
