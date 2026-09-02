@@ -329,8 +329,15 @@ blockquote p { margin: 0; font-size: clamp(1.6rem, 3vw, 2.8rem) !important; line
 
 .study-flow { margin: 0; }
 .study-flow__plot { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); padding: var(--space-4); background: var(--color-ink); color: var(--color-paper); }
-.study-flow__stage { display: grid; min-height: 11rem; align-content: space-between; padding: var(--space-3); border: 1px solid color-mix(in srgb, var(--color-paper) 30%, transparent); }
-.study-flow__value { font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1; }
+.study-flow__stage { display: grid; min-height: 11rem; align-content: space-between; padding: var(--space-3); border: 1px solid color-mix(in srgb, var(--color-paper) 30%, transparent); border-radius: 8px; }
+.study-flow__stage--drift { border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.08); }
+.study-flow__stage--drift .study-flow__value { color: #f59e0b; }
+.study-flow__stage--verified { border-color: rgba(197, 255, 115, 0.4); background: rgba(197, 255, 115, 0.08); }
+.study-flow__stage--verified .study-flow__value { color: #c5ff73; }
+.study-flow__label-row { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+.stage-tag { font-size: 0.72rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: rgba(245, 158, 11, 0.25); color: #f59e0b; }
+.stage-tag--ok { background: rgba(197, 255, 115, 0.25); color: #c5ff73; }
+.study-flow__value { font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1; font-weight: 800; font-family: var(--font-display); }
 .study-flow figcaption { padding-top: var(--space-2); color: var(--color-muted); font-size: 0.9rem; }
 .references { padding-left: 1.25rem; }
 .references li { margin-bottom: var(--space-3); padding-left: var(--space-2); line-height: 1.6; }

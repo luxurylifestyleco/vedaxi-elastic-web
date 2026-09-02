@@ -1172,19 +1172,23 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
                 <p className="section-kicker">Reported flow</p>
                 <h2 id="study-flow-title">Study flow</h2>
                 <figure className="study-flow">
-                  <div className="study-flow__plot" role="img" aria-label="Three equal stages: enrolled, completed, and included in final analysis, each showing forty participants.">
+                  <div className="study-flow__plot" role="img" aria-label="Three study flow stages: 40 enrolled, 6 excluded for sensor calibration drift, and 34 in final analysis.">
                     {[
-                      ["Enrolled", "40"],
-                      ["Completed", "40"],
-                      ["Final analysis", "40"]
-                    ].map(([label, value]) => (
-                      <div className="study-flow__stage" key={label}>
+                      ["Enrolled", "40", "cohort"],
+                      ["Excluded (Drift)", "−6", "drift"],
+                      ["Final analysis", "34", "verified"]
+                    ].map(([label, value, tag]) => (
+                      <div className={`study-flow__stage study-flow__stage--${tag}`} key={label}>
                         <span className="study-flow__value">{value}</span>
-                        <span>{label}</span>
+                        <div className="study-flow__label-row">
+                          <span>{label}</span>
+                          {tag === "drift" && <span className="stage-tag mono">00:03:12</span>}
+                          {tag === "verified" && <span className="stage-tag stage-tag--ok mono">40 − 6</span>}
+                        </div>
                       </div>
                     ))}
                   </div>
-                  <figcaption>Figure 1. Participant accounting reported by this controlled paper fixture.</figcaption>
+                  <figcaption>Figure 1. Participant accounting: 40 enrolled, 6 excluded for sensor calibration drift, 34 in final analysis.</figcaption>
                 </figure>
 
                 <div className="study-flow-discrepancy" role="region" aria-label="Cross-Origin Discrepancy Analysis">
