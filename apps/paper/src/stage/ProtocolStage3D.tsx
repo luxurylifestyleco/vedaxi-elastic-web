@@ -11,6 +11,7 @@ interface Node3D {
   colorLight: string;
   size: number;
   label: string;
+  subLabel?: string;
   targetId?: string;
 }
 
