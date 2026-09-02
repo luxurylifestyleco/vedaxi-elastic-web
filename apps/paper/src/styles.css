@@ -1328,9 +1328,9 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
   gap: var(--space-4);
   max-width: 1240px;
   margin: 0 auto;
-  padding: clamp(3rem, 6vw, 5rem) 2rem;
-  background: radial-gradient(circle at 50% 25%, rgba(46, 126, 142, 0.22), transparent 45%), linear-gradient(135deg, #06121bf2, #082835);
-  border-bottom: 1px solid rgba(235, 248, 244, 0.15);
+  padding: clamp(2rem, 4vw, 3.5rem) 2rem;
+  background: transparent;
+  border-bottom: none;
 }
 .edition-desk .paper-hero > :not(.edition-scene__painting):not(.edition-scene__halo):not(.edition-scene__frame) {
   position: relative;
@@ -1404,21 +1404,19 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
 .edition-desk .paper-search {
   position: relative;
   z-index: 10;
-  max-width: 1100px;
-  margin: 2rem auto 2.5rem;
-  padding: 1.5rem 2rem;
-  background: rgba(8, 24, 32, 0.92);
-  backdrop-filter: blur(24px);
-  border: 1px solid rgba(105, 233, 241, 0.25);
-  border-radius: 16px;
+  max-width: 1240px;
+  margin: 1.5rem auto 0;
+  padding: 0 2rem;
+  background: transparent;
+  border: none;
   color: #eff7f3;
-  box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.6);
+  box-shadow: none;
 }
 .edition-desk[data-theme="light"] .paper-search {
-  background: rgba(255, 255, 255, 0.92);
-  border-color: rgba(2, 132, 199, 0.3);
+  background: transparent;
+  border: none;
   color: #0f172a;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
 }
 .edition-desk .paper-search__heading {
   display: flex;
