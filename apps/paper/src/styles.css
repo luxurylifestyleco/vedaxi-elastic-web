@@ -855,10 +855,63 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
 }
 
 @media (max-width: 600px) {
+  *, *::before, *::after {
+    box-sizing: border-box !important;
+  }
+
+  html, body, .edition-desk, .paper-layout, main#paper-content, article.paper-article {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+  }
+
+  .paper-article,
+  .paper-layout,
+  .edition-card,
+  .evidence-card,
+  .focus-decision,
+  .discrepancy-note,
+  .discrepancy-card,
+  .pilot-capture-card,
+  .evidence-verdict-banner,
+  .methods-accounting-card,
+  .study-flow__plot,
+  .embedded-video-card,
+  .embedded-transcript-cue,
+  .benchmark-suite-card,
+  .simulation-showcase-box,
+  .judge-fast-track-card,
+  .webmcp-mission-card,
+  .focus-preview,
+  .stage-chapter,
+  .stage-chapter--decision,
+  .stage-chapter--evidence,
+  section,
+  blockquote,
+  p {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+
+  .provenance,
+  .focus-provenance,
+  .cue-provenance,
+  .evidence-card .provenance,
+  dl, dt, dd, pre, code, .mono {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+
   .masthead {
     position: static;
     min-height: auto;
     padding: 0.75rem 1rem;
+    max-width: 100% !important;
   }
   .masthead > :last-child { display: none; }
   .display-title { font-size: clamp(2.1rem, 9vw, 2.7rem); line-height: 1.05; }
@@ -867,6 +920,7 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
   .study-flow__stage { min-height: auto; padding: 0.85rem; }
   .provenance { margin-left: 0; }
   .provenance dl div { grid-template-columns: 1fr; }
+  .paper-search { margin: 0; padding: var(--space-3); max-width: 100% !important; }
   .paper-search__heading, .search-result, footer { align-items: flex-start; flex-direction: column; }
   .search-form__controls { grid-template-columns: 1fr; gap: var(--space-2); }
   
@@ -879,12 +933,14 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
     background: transparent;
     box-shadow: none;
     backdrop-filter: none;
+    max-width: 100% !important;
   }
   .stage-navigation-mobile {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     padding: 0.25rem 0.5rem;
+    max-width: 100% !important;
   }
   .stage-navigation-mobile ol {
     display: flex;
@@ -909,6 +965,28 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
   .paper-layout {
     padding-top: 0.5rem;
     padding-bottom: 3rem;
+    max-width: 100% !important;
+  }
+
+  .evidence-dossier-grid,
+  .simulation-cards-grid,
+  .benchmark-chips-grid,
+  .webmcp-mission-grid,
+  .discrepancy-comparison-grid {
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .focus-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .focus-actions button,
+  .focus-view-actions button,
+  .discrepancy-note button {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
 

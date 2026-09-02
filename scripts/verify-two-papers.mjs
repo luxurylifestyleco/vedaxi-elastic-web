@@ -4,7 +4,6 @@ import fs from "fs";
 import path from "path";
 
 async function run() {
-  console.log("Starting preview server on port 4173...");
   const server = spawn("npx", ["vite", "preview", "apps/paper", "--port", "4173", "--strictPort"], {
     shell: true,
     stdio: "pipe"
@@ -16,79 +15,52 @@ async function run() {
   const context = await browser.newContext();
   const page = await context.newPage();
 
-  page.on("console", (msg) => {
-    if (msg.type() === "error") console.log("PAGE ERROR:", msg.text());
-  });
-  page.on("pageerror", (err) => console.log("PAGE CRASH:", err.message));
-
   const screenshotsDir = path.resolve("audit-screenshots");
   if (!fs.existsSync(screenshotsDir)) {
     fs.mkdirSync(screenshotsDir, { recursive: true });
   }
 
-  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.setViewportSize({ width: 1440, height: 1100 });
   await page.goto("http://localhost:4173", { waitUntil: "networkidle" });
 
-  console.log("Waiting for React client mount...");
-  await page.waitForSelector(".benchmark-suite-card", { timeout: 10000 });
-  console.log("React mounted successfully! Found .benchmark-suite-card.");
+  await page.waitForSelector(".benchmark-suite-card");
 
-  console.log("\n==================================================");
-  console.log("TEST 1: CLEAN PAPER REPLICATION (NEURAL LATENCY)");
-  console.log("==================================================");
-
-  // Click Paper 2 (Clean Paper) chip
+  // 1. CLEAN PAPER
   const cleanChip = page.locator(".benchmark-chip").nth(1);
   await cleanChip.scrollIntoViewIfNeeded();
   await cleanChip.click();
-  await page.waitForTimeout(400);
+  await page.waitForTimeout(300);
 
-  // Click Simulate VEDAXI Agent (WebMCP On)
   await page.click(".sim-run-btn--success");
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(1600);
 
-  const cleanSynthesis = await page.textContent(".copilot-synthesis");
-  console.log("CLEAN PAPER VERIFICATION RESULT:\n", cleanSynthesis?.trim());
+  const copilotSection = page.locator(".agent-copilot");
+  await copilotSection.screenshot({ path: path.join(screenshotsDir, "clean-paper-concordant.png") });
+  console.log("Saved clean-paper-concordant.png");
 
-  const cleanScreenshot = path.join(screenshotsDir, "clean-paper-concordant.png");
-  await page.screenshot({ path: cleanScreenshot });
-  console.log("Saved screenshot: clean-paper-concordant.png");
-
-  console.log("\n==================================================");
-  console.log("TEST 2: DISCREPANT PAPER (fMRI DECISION MAPPING)");
-  console.log("==================================================");
-
-  // Click Paper 3 (fMRI Decision Mapping) chip
+  // 2. DISCREPANT PAPER 3 (fMRI)
   const fmriChip = page.locator(".benchmark-chip").nth(2);
   await fmriChip.scrollIntoViewIfNeeded();
   await fmriChip.click();
-  await page.waitForTimeout(400);
+  await page.waitForTimeout(300);
 
-  // Click Simulate VEDAXI Agent (WebMCP On)
   await page.click(".sim-run-btn--success");
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(1600);
 
-  const discrepantSynthesis = await page.textContent(".copilot-synthesis");
-  console.log("DISCREPANT PAPER VERIFICATION RESULT:\n", discrepantSynthesis?.trim());
+  await copilotSection.screenshot({ path: path.join(screenshotsDir, "discrepant-paper3-caught.png") });
+  console.log("Saved discrepant-paper3-caught.png");
 
-  const discrepantScreenshot = path.join(screenshotsDir, "discrepant-paper-caught.png");
-  await page.screenshot({ path: discrepantScreenshot });
-  console.log("Saved screenshot: discrepant-paper-caught.png");
-
-  console.log("\n==================================================");
-  console.log("TEST 3: DISCREPANT PAPER 1 (ATTENTION RECOVERY)");
-  console.log("==================================================");
-
+  // 3. DISCREPANT PAPER 1 (Attention)
   const paper1Chip = page.locator(".benchmark-chip").nth(0);
   await paper1Chip.scrollIntoViewIfNeeded();
   await paper1Chip.click();
-  await page.waitForTimeout(400);
+  await page.waitForTimeout(300);
 
   await page.click(".sim-run-btn--success");
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(1600);
 
-  const paper1Synthesis = await page.textContent(".copilot-synthesis");
-  console.log("ATTENTION RECOVERY RESULT:\n", paper1Synthesis?.trim());
+  await copilotSection.screenshot({ path: path.join(screenshotsDir, "discrepant-paper1-caught.png") });
+  console.log("Saved discrepant-paper1-caught.png");
 
   await browser.close();
   server.kill();

@@ -592,6 +592,10 @@ export function PaperApp({
   const focusActive = hasFocus && !stageRestored;
 
   const [selectedCorpusId, setSelectedCorpusId] = useState<string>("attention-trial");
+  const selectedPaper = BENCHMARK_PAPERS.find((p) => p.id === selectedCorpusId) || BENCHMARK_PAPERS[0];
+  const derivedCohort = selectedPaper.enrolled - selectedPaper.excluded;
+  const isCorpusDiscrepant = selectedPaper.excluded > 0;
+
   const [prompt, setPrompt] = useState("");
   const [isExecuting, setIsExecuting] = useState(false);
   const [executionTrace, setExecutionTrace] = useState<ExecutionStep[] | null>(null);
@@ -1199,8 +1203,16 @@ export function PaperApp({
                   Agent reads only static paper text. It cannot query independent web origins.
                 </p>
                 <div className="sim-outcome sim-outcome--fail">
-                  <strong>❌ Result: False Citation (N = 40)</strong>
-                  <span>Blindly believes 40 participants were analyzed. Misses the 6 dropped sessions in the video talk.</span>
+                  <strong>
+                    {isCorpusDiscrepant
+                      ? `❌ Result: False Citation (N = ${selectedPaper.enrolled})`
+                      : `⚠ Result: Unverified Citation (N = ${selectedPaper.enrolled})`}
+                  </strong>
+                  <span>
+                    {isCorpusDiscrepant
+                      ? `Blindly believes ${selectedPaper.enrolled} participants were analyzed. Misses the ${selectedPaper.excluded} dropped sessions in the video talk.`
+                      : `Cites N = ${selectedPaper.enrolled} directly from static text without cross-origin secondary verification.`}
+                  </span>
                 </div>
                 <button
                   type="button"
@@ -1237,8 +1249,16 @@ export function PaperApp({
                   Agent queries Paper + Video origins in real time using standardized WebMCP tools.
                 </p>
                 <div className="sim-outcome sim-outcome--success">
-                  <strong>✅ Result: True Cohort (40 − 6 = 34)</strong>
-                  <span>Catches video confession at 00:03:12. Derives 34, blocks citation, and engages Human Gate.</span>
+                  <strong>
+                    {isCorpusDiscrepant
+                      ? `✅ Result: True Cohort (${selectedPaper.enrolled} − ${selectedPaper.excluded} = ${derivedCohort})`
+                      : `✅ Result: Verified Cohort (${selectedPaper.enrolled} = ${derivedCohort})`}
+                  </strong>
+                  <span>
+                    {isCorpusDiscrepant
+                      ? `Catches video confession at ${selectedPaper.videoTimestamp}. Derives ${derivedCohort}, blocks citation, and engages Human Gate.`
+                      : `Verifies author talk at ${selectedPaper.videoTimestamp}. Confirms ${selectedPaper.enrolled} participants with zero exclusions, and authorizes citation.`}
+                  </span>
                 </div>
                 <button
                   type="button"
