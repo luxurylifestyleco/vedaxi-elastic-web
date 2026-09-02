@@ -877,6 +877,90 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
 .edition-desk[data-theme="light"] .embedded-transcript-cue { background: rgba(22, 163, 74, 0.06); border-color: rgba(22, 163, 74, 0.25); }
 .edition-desk[data-theme="light"] .cue-body { color: #0f172a; }
 
+.protocol-3d-stage {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.9;
+  mix-blend-mode: screen;
+}
+.protocol-3d-canvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+.edition-desk[data-theme="light"] .protocol-3d-stage {
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+}
+
+.page-progress {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent;
+  pointer-events: none;
+}
+.page-progress i {
+  display: block;
+  height: 100%;
+  background: var(--color-protocol);
+  box-shadow: 0 0 10px var(--color-protocol);
+  transition: width 100ms ease-out;
+}
+
+.story-index-return {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid rgba(235, 248, 244, 0.3);
+  border-radius: 50%;
+  background: rgba(6, 18, 27, 0.85);
+  color: #eff7f3;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+}
+.edition-desk[data-theme="light"] .story-index-return {
+  background: rgba(255, 255, 255, 0.85);
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.2);
+}
+.story-index-return span {
+  position: absolute;
+  right: 3.5rem;
+  width: max-content;
+  opacity: 0;
+  pointer-events: none;
+  color: var(--color-ink);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease;
+}
+.story-index-return:hover {
+  background: var(--color-evidence);
+  color: #06121b;
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--color-evidence);
+}
+.story-index-return:hover span {
+  opacity: 1;
+}
+
 .edition-desk .identity__mark {
   border-color: rgba(105, 233, 241, 0.4);
   color: #69e9f1;

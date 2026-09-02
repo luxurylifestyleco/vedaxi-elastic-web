@@ -9,6 +9,7 @@ import type {
 } from "@vedaxi/state";
 
 import { EditionWorld } from "../stage/EditionWorld";
+import { ProtocolStage3D } from "../stage/ProtocolStage3D";
 import {
   STAGE_CHAPTERS,
   StageNavigation,
@@ -705,12 +706,28 @@ export function PaperApp({
     }
   };
 
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (typeof window === "undefined") return;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(total > 0 ? Math.min(100, Math.max(0, (window.scrollY / total) * 100)) : 0);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   useEffect(() => {
     setStageRestored(false);
   }, [focus]);
 
   return (
     <div className="edition-desk" data-theme={theme}>
+      <ProtocolStage3D activeChapter={activeStageChapter} />
+      <div className="page-progress" aria-hidden="true">
+        <i style={{ width: `${scrollProgress}%` }} />
+      </div>
       <a className="skip-link" href="#paper-content">Skip to paper</a>
       <header className="masthead">
         <a className="identity" href="#paper-top" aria-label="VEDAXI Paper Integrity Desk home">
@@ -1317,6 +1334,11 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
         <p>VEDAXI / research integrity before citation</p>
         <p className="mono">{paper.identifier} · {evidence.sourceOrigin}</p>
       </footer>
+
+      <a href="#paper-top" className="story-index-return" aria-label="Return to top">
+        <span>Return to top</span>
+        ↑
+      </a>
     </div>
   );
 }
