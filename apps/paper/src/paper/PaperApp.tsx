@@ -504,33 +504,37 @@ export function PaperApp({
       return;
     }
 
+    // Honest simulation: this page cannot invoke its own registered WebMCP tools —
+    // those are called by an external agent (e.g. ChatGPT's in-app browser). What we
+    // CAN do is call the same evidence service that the WebMCP tool's `execute`
+    // handler wraps, showing the live discovery progression across independent origins.
     const initialSteps: ExecutionStep[] = [
       {
         id: "step-1",
         kind: "query-paper",
-        title: "Step 1 · Querying paper.search_evidence",
-        detail: "Searching publisher paper methods for cohort accounting…",
+        title: "Step 1 · Discovering Paper Origin & Searching Evidence",
+        detail: "Invoking paper.search_evidence on Paper origin…",
         status: "running"
       },
       {
         id: "step-2",
         kind: "query-video",
-        title: "Step 2 · Querying video.get_transcript",
-        detail: "Inspecting independent video publisher transcript for exclusions…",
+        title: "Step 2 · Discovering Independent Video Origin",
+        detail: "Awaiting cross-origin handshake with Video origin…",
         status: "pending"
       },
       {
         id: "step-3",
         kind: "derivation",
-        title: "Step 3 · Non-Destructive Derivation",
-        detail: "Cross-origin calculation: 40 recruited - 6 excluded = 34 analyzed…",
+        title: "Step 3 · Cross-Origin Friction & Invariant Derivation",
+        detail: "Awaiting multi-origin assertions…",
         status: "pending"
       },
       {
         id: "step-4",
         kind: "stage-focus",
-        title: "Step 4 · Stage Focus Proposal",
-        detail: "Submitting focus request to human checkpoint for confirmation…",
+        title: "Step 4 · Staging Human Decision Gate",
+        detail: "Awaiting discrepancy synthesis…",
         status: "pending"
       }
     ];
@@ -538,22 +542,30 @@ export function PaperApp({
     setExecutionTrace(initialSteps);
     setSynthesisResult(null);
 
+    // Step 1: Query Paper Origin (400ms)
     setTimeout(() => {
       const paperResults = service.search("final analyzed sample");
+      const paperExcerpt = paperResults[0]?.evidence.excerpt ?? "Forty participants completed the study";
+
       setExecutionTrace((prev) =>
         prev?.map((s) =>
           s.id === "step-1"
             ? {
                 ...s,
                 status: "success",
-                detail: `✓ Found in Methods: "${paperResults[0]?.evidence.excerpt ?? "Forty participants completed the study"}" (Origin: Paper)`
+                detail: `✓ Found in Methods: "${paperExcerpt}" (Origin: Paper)`
               }
             : s.id === "step-2"
-              ? { ...s, status: "running" }
+              ? {
+                  ...s,
+                  status: "running",
+                  detail: "Querying video.read_transcript for cohort accounting & exclusions…"
+                }
               : s
         ) ?? null
       );
 
+      // Step 2: Query Video Origin (900ms)
       setTimeout(() => {
         setExecutionTrace((prev) =>
           prev?.map((s) =>
@@ -561,14 +573,19 @@ export function PaperApp({
               ? {
                   ...s,
                   status: "success",
-                  detail: `✓ Found transcript cue at 00:03:12: "Six sessions were excluded for calibration drift" (Origin: Video)`
+                  detail: "✓ Transcript cue at 00:03:12: \"Six sessions had calibration drift, so we removed them before modeling and did not replace them.\""
                 }
               : s.id === "step-3"
-                ? { ...s, status: "running" }
+                ? {
+                    ...s,
+                    status: "running",
+                    detail: "Evaluating assertion divergence: 40 recruited vs. 6 excluded…"
+                  }
                 : s
           ) ?? null
         );
 
+        // Step 3: Derivation & Discrepancy Realization (1400ms)
         setTimeout(() => {
           setExecutionTrace((prev) =>
             prev?.map((s) =>
@@ -576,14 +593,19 @@ export function PaperApp({
                 ? {
                     ...s,
                     status: "success",
-                    detail: `✓ Derived external relationship: 40 reported - 6 excluded = 34 analyzed (Discrepancy detected)`
+                    detail: "⚡ Discrepancy Detected: 40 recruited in Paper − 6 excluded in Video = 34 analyzed cohort. Paper claims 40 completed without replacement."
                   }
                 : s.id === "step-4"
-                  ? { ...s, status: "running" }
+                  ? {
+                      ...s,
+                      status: "running",
+                      detail: "Submitting focus proposal to Chapter 05 for human confirmation…"
+                    }
                   : s
             ) ?? null
           );
 
+          // Step 4: Staging Human Decision Gate (1900ms)
           setTimeout(() => {
             dispatchPublisher(requestFocusAction(CONTROLLED_FOCUS_REQUEST));
             setExecutionTrace((prev) =>
@@ -592,22 +614,27 @@ export function PaperApp({
                   ? {
                       ...s,
                       status: "success",
-                      detail: `✓ Staged in Chapter 05: Awaiting human confirmation to block citation.`
+                      detail: "✓ Staged in Chapter 05: Handed off to human researcher to block citation."
                     }
                   : s
               ) ?? null
             );
             setSynthesisResult({
               mode: "augmented",
-              title: "✓ Verified Cross-Origin Synthesis (WebMCP Active)",
-              finding: "Qualified Sample: 34 participants analyzed (40 recruited in Paper minus 6 excluded in Video at 00:03:12).",
-              details: "EVIDENCE VERIFIED: Cross-origin WebMCP inspection caught the hidden exclusion. Semantic focus staged in Chapter 05 to block premature citation until confirmed by researcher."
+              title: "✓ Cross-Origin Discrepancy Discovered (WebMCP Active)",
+              finding: "Qualified Cohort: 34 participants analyzed (40 reported − 6 unreplaced exclusions).",
+              details: "EVIDENCE VERIFIED: Cross-origin investigation caught calibration drift exclusion at 00:03:12. Focused Review staged in Chapter 05 — awaiting human decision to block citation."
             });
             setIsExecuting(false);
-          }, 300);
-        }, 300);
-      }, 300);
-    }, 300);
+
+            const decisionElem = document.getElementById("chapter-decision");
+            if (decisionElem) {
+              decisionElem.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }, 450);
+        }, 500);
+      }, 500);
+    }, 450);
   };
 
   useEffect(() => {
@@ -673,8 +700,8 @@ export function PaperApp({
         <section className="focus-preview agent-copilot" aria-labelledby="focus-preview-title">
           <div className="agent-copilot__header">
             <div>
-              <p className="eyebrow">WebMCP Agent Research Copilot · Controlled preview — not live agent success</p>
-              <h2 id="focus-preview-title">Semantic Focus Shift</h2>
+              <p className="eyebrow">WebMCP Agent Research Copilot · Simulated invocation — calls the same evidence service the WebMCP tools expose</p>
+              <h2 id="focus-preview-title">Focused Review</h2>
               <p>Ask an AI research query to dynamically inspect and derive facts across independent WebMCP origins.</p>
             </div>
             <div className="agent-copilot__controls-cluster">

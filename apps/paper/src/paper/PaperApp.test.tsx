@@ -148,12 +148,13 @@ describe("M1 Paper Integrity Desk", () => {
   });
 });
 
-describe("M4 Semantic Focus Shift", () => {
-  it("labels the controlled request as a deterministic preview and keeps every capability reachable", () => {
+describe("M4 Focused Review", () => {
+  it("labels the simulated invocation honestly and keeps every capability reachable", () => {
     const markup = renderStage(initialPublisherState);
 
     expect(markup).toContain("Run deterministic focus preview");
-    expect(markup).toContain("Controlled preview — not live agent success");
+    expect(markup).toContain("Simulated invocation — calls the same evidence service the WebMCP tools expose");
+    expect(markup).toContain("Focused Review");
     expect(markup).toContain('<iframe class="video-publisher" hidden=""');
     expect(markup).toContain("Checking whether the independent Video publisher is available");
     expect(markup).toContain('aria-label="Capability drawer"');
