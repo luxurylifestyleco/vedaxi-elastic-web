@@ -966,6 +966,22 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
   color: #69e9f1;
   background: rgba(105, 233, 241, 0.1);
 }
+
+.edition-desk .focus-preview,
+.edition-desk .embedded-video-card,
+.edition-desk .discrepancy-note {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease;
+  transform: perspective(1200px) translateZ(0);
+}
+.edition-desk .focus-preview:hover,
+.edition-desk .embedded-video-card:hover,
+.edition-desk .discrepancy-note:hover {
+  transform: perspective(1200px) translateY(-5px) rotateX(1.5deg) rotateY(-1deg);
+  box-shadow: 0 1.5rem 4rem rgba(105, 233, 241, 0.18);
+  border-color: rgba(105, 233, 241, 0.45);
+}
 .edition-desk .masthead {
   display: flex;
   justify-content: space-between;
