@@ -891,8 +891,8 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
   display: block;
 }
 .edition-desk[data-theme="light"] .protocol-3d-stage {
-  opacity: 0.3;
-  mix-blend-mode: multiply;
+  opacity: 0.9;
+  mix-blend-mode: normal;
 }
 
 .page-progress {

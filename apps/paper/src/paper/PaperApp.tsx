@@ -746,7 +746,7 @@ export function PaperApp({
 
   return (
     <div className="edition-desk" data-theme={theme}>
-      <ProtocolStage3D activeChapter={activeStageChapter} />
+      <ProtocolStage3D activeChapter={activeStageChapter} theme={theme} />
       <div className="page-progress" aria-hidden="true">
         <i style={{ width: `${scrollProgress}%` }} />
       </div>

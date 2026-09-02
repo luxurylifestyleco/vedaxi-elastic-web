@@ -7,13 +7,20 @@ interface Node3D {
   vx: number;
   vy: number;
   vz: number;
-  color: string;
+  colorDark: string;
+  colorLight: string;
   size: number;
   label: string;
   targetId?: string;
 }
 
-export function ProtocolStage3D({ activeChapter }: { activeChapter?: string }) {
+export function ProtocolStage3D({
+  activeChapter,
+  theme = "dark",
+}: {
+  activeChapter?: string;
+  theme?: "dark" | "light";
+}) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -32,6 +39,8 @@ export function ProtocolStage3D({ activeChapter }: { activeChapter?: string }) {
       height = canvas.height = window.innerHeight;
     };
     window.addEventListener("resize", onResize);
+
+    const isLight = theme === "light";
 
     // Mouse & Touch parallax tracking
     let mouseX = width / 2;
@@ -67,11 +76,71 @@ export function ProtocolStage3D({ activeChapter }: { activeChapter?: string }) {
 
     // 5 Key Protocol God Nodes
     const baseGodNodes: Node3D[] = [
-      { x: -280, y: -120, z: 80, vx: 0, vy: 0, vz: 0, color: "#69e9f1", size: 9, label: "ORIGIN A: PAPER", targetId: "chapter-method" },
-      { x: 260, y: 110, z: -40, vx: 0, vy: 0, vz: 0, color: "#f59e0b", size: 9, label: "ORIGIN B: VIDEO (00:03:12)", targetId: "chapter-video" },
-      { x: 0, y: -40, z: 180, vx: 0, vy: 0, vz: 0, color: "#c5ff73", size: 12, label: "DISCREPANCY (40 - 6 = 34)", targetId: "chapter-evidence" },
-      { x: 180, y: -180, z: 120, vx: 0, vy: 0, vz: 0, color: "#69e9f1", size: 8, label: "WebMCP RUNTIME", targetId: "paper-top" },
-      { x: -160, y: 180, z: 60, vx: 0, vy: 0, vz: 0, color: "#c5ff73", size: 10, label: "HUMAN GATE", targetId: "chapter-decision" },
+      {
+        x: -280,
+        y: -120,
+        z: 80,
+        vx: 0,
+        vy: 0,
+        vz: 0,
+        colorDark: "#69e9f1",
+        colorLight: "#0284c7",
+        size: 9,
+        label: "ORIGIN A: PAPER",
+        targetId: "chapter-method",
+      },
+      {
+        x: 260,
+        y: 110,
+        z: -40,
+        vx: 0,
+        vy: 0,
+        vz: 0,
+        colorDark: "#f59e0b",
+        colorLight: "#d97706",
+        size: 9,
+        label: "ORIGIN B: VIDEO (00:03:12)",
+        targetId: "chapter-video",
+      },
+      {
+        x: 0,
+        y: -40,
+        z: 180,
+        vx: 0,
+        vy: 0,
+        vz: 0,
+        colorDark: "#c5ff73",
+        colorLight: "#059669",
+        size: 12,
+        label: "DISCREPANCY (40 - 6 = 34)",
+        targetId: "chapter-evidence",
+      },
+      {
+        x: 180,
+        y: -180,
+        z: 120,
+        vx: 0,
+        vy: 0,
+        vz: 0,
+        colorDark: "#69e9f1",
+        colorLight: "#4f46e5",
+        size: 8,
+        label: "WebMCP RUNTIME",
+        targetId: "paper-top",
+      },
+      {
+        x: -160,
+        y: 180,
+        z: 60,
+        vx: 0,
+        vy: 0,
+        vz: 0,
+        colorDark: "#c5ff73",
+        colorLight: "#16a34a",
+        size: 10,
+        label: "HUMAN GATE",
+        targetId: "chapter-decision",
+      },
     ];
 
     let currentProjectedGods: { px: number; py: number; scale: number; g: Node3D }[] = [];
@@ -116,8 +185,9 @@ export function ProtocolStage3D({ activeChapter }: { activeChapter?: string }) {
         vx: (Math.random() - 0.5) * 0.45,
         vy: (Math.random() - 0.5) * 0.45,
         vz: (Math.random() - 0.5) * 0.45,
-        color: Math.random() > 0.4 ? "#69e9f1" : "#c5ff73",
-        size: Math.random() * 2 + 1.2,
+        colorDark: Math.random() > 0.4 ? "#69e9f1" : "#c5ff73",
+        colorLight: Math.random() > 0.4 ? "#0284c7" : "#059669",
+        size: Math.random() * 2 + 1.4,
         label: "",
       });
     }
@@ -181,9 +251,11 @@ export function ProtocolStage3D({ activeChapter }: { activeChapter?: string }) {
           const dy = p1.py - p2.py;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < maxConnectDist) {
-            const alpha = (1 - dist / maxConnectDist) * 0.18 * Math.min(p1.scale, p2.scale);
-            ctx.strokeStyle = "rgba(105, 233, 241, " + alpha + ")";
-            ctx.lineWidth = 1;
+            const alpha = (1 - dist / maxConnectDist) * (isLight ? 0.25 : 0.2) * Math.min(p1.scale, p2.scale);
+            ctx.strokeStyle = isLight
+              ? "rgba(2, 132, 199, " + alpha + ")"
+              : "rgba(105, 233, 241, " + alpha + ")";
+            ctx.lineWidth = isLight ? 1.2 : 1;
             ctx.beginPath();
             ctx.moveTo(p1.px, p1.py);
             ctx.lineTo(p2.px, p2.py);
@@ -195,18 +267,18 @@ export function ProtocolStage3D({ activeChapter }: { activeChapter?: string }) {
       // Draw ambient particles
       projectedParticles.forEach(({ px, py, scale, p }) => {
         if (scale <= 0) return;
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = Math.max(0.15, Math.min(0.75, scale * 0.8));
+        ctx.fillStyle = isLight ? p.colorLight : p.colorDark;
+        ctx.globalAlpha = Math.max(isLight ? 0.35 : 0.15, Math.min(isLight ? 0.9 : 0.75, scale * (isLight ? 0.95 : 0.8)));
         ctx.beginPath();
         ctx.arc(px, py, p.size * scale, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      // Project God Nodes with responsive mobile scale factor
+      // Project God Nodes
       const godPosScale = isMobile ? 0.6 : 1.0;
       currentProjectedGods = baseGodNodes.map((g, idx) => {
-        const floatY = (g.y * godPosScale) + Math.sin(t * 1.5 + idx * 1.3) * 12;
-        const floatX = (g.x * godPosScale) + Math.cos(t * 1.2 + idx * 0.9) * 8;
+        const floatY = g.y * godPosScale + Math.sin(t * 1.5 + idx * 1.3) * 12;
+        const floatX = g.x * godPosScale + Math.cos(t * 1.2 + idx * 0.9) * 8;
         return {
           ...project(floatX, floatY, g.z * godPosScale, currentRotX, currentRotY),
           g,
@@ -224,18 +296,21 @@ export function ProtocolStage3D({ activeChapter }: { activeChapter?: string }) {
         }
       }
 
-      // Draw flowing laser connection beams between God Nodes
+      // Draw flowing laser beams between God Nodes
       for (let i = 0; i < currentProjectedGods.length; i++) {
         for (let j = i + 1; j < currentProjectedGods.length; j++) {
           const g1 = currentProjectedGods[i];
           const g2 = currentProjectedGods[j];
+          const color1 = isLight ? g1.g.colorLight : g1.g.colorDark;
+          const color2 = isLight ? g2.g.colorLight : g2.g.colorDark;
+
           const gradient = ctx.createLinearGradient(g1.px, g1.py, g2.px, g2.py);
-          gradient.addColorStop(0, g1.g.color);
-          gradient.addColorStop(1, g2.g.color);
+          gradient.addColorStop(0, color1);
+          gradient.addColorStop(1, color2);
 
           ctx.strokeStyle = gradient;
-          ctx.globalAlpha = 0.35 + Math.sin(t * 2 + i + j) * 0.12;
-          ctx.lineWidth = isMobile ? 1.2 : 1.8;
+          ctx.globalAlpha = (isLight ? 0.45 : 0.35) + Math.sin(t * 2 + i + j) * 0.12;
+          ctx.lineWidth = isMobile ? 1.4 : 2.0;
           ctx.beginPath();
           ctx.moveTo(g1.px, g1.py);
           ctx.lineTo(g2.px, g2.py);
@@ -245,10 +320,10 @@ export function ProtocolStage3D({ activeChapter }: { activeChapter?: string }) {
           const packetPos = (t * 0.45 + (i * 0.3 + j * 0.2)) % 1;
           const packetX = g1.px + (g2.px - g1.px) * packetPos;
           const packetY = g1.py + (g2.py - g1.py) * packetPos;
-          ctx.fillStyle = "#ffffff";
-          ctx.globalAlpha = 0.9;
+          ctx.fillStyle = isLight ? "#0f172a" : "#ffffff";
+          ctx.globalAlpha = 0.95;
           ctx.beginPath();
-          ctx.arc(packetX, packetY, isMobile ? 2 : 3, 0, Math.PI * 2);
+          ctx.arc(packetX, packetY, isMobile ? 2.5 : 3.5, 0, Math.PI * 2);
           ctx.fill();
         }
       }
@@ -259,51 +334,63 @@ export function ProtocolStage3D({ activeChapter }: { activeChapter?: string }) {
         const isHovered = hoveredNode === g.label;
         const multiplier = isHovered ? 1.35 : 1.0;
         const nodeSize = g.size * (isMobile ? 0.85 : 1.0);
+        const nodeColor = isLight ? g.colorLight : g.colorDark;
 
-        // Radial glow
-        const glowRad = nodeSize * 3.8 * scale * multiplier;
+        // Radial ambient glow
+        const glowRad = nodeSize * 4.2 * scale * multiplier;
         const radGrad = ctx.createRadialGradient(px, py, 0, px, py, glowRad);
-        radGrad.addColorStop(0, g.color);
+        radGrad.addColorStop(0, nodeColor);
         radGrad.addColorStop(1, "transparent");
         ctx.fillStyle = radGrad;
-        ctx.globalAlpha = isHovered ? 0.7 : 0.45;
+        ctx.globalAlpha = isHovered ? (isLight ? 0.65 : 0.75) : (isLight ? 0.4 : 0.5);
         ctx.beginPath();
         ctx.arc(px, py, glowRad, 0, Math.PI * 2);
         ctx.fill();
 
         // Orbital ring
-        ctx.strokeStyle = g.color;
-        ctx.globalAlpha = isHovered ? 0.9 : 0.6;
-        ctx.lineWidth = isHovered ? 2 : 1.2;
+        ctx.strokeStyle = nodeColor;
+        ctx.globalAlpha = isHovered ? 0.95 : 0.7;
+        ctx.lineWidth = isHovered ? 2.2 : 1.4;
         ctx.beginPath();
-        ctx.ellipse(px, py, nodeSize * 2.1 * scale * multiplier, nodeSize * 1.1 * scale * multiplier, t * 2, 0, Math.PI * 2);
+        ctx.ellipse(
+          px,
+          py,
+          nodeSize * 2.2 * scale * multiplier,
+          nodeSize * 1.15 * scale * multiplier,
+          t * 2,
+          0,
+          Math.PI * 2
+        );
         ctx.stroke();
 
         // Node center core
-        ctx.fillStyle = "#ffffff";
+        ctx.fillStyle = isLight ? "#ffffff" : "#ffffff";
         ctx.globalAlpha = 1;
         ctx.beginPath();
         ctx.arc(px, py, nodeSize * scale * multiplier, 0, Math.PI * 2);
         ctx.fill();
+        ctx.strokeStyle = nodeColor;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
 
         // Label pill tag
         if (g.label) {
           const fontSize = Math.max(8, Math.round((isMobile ? 8.5 : 10.5) * scale * (isHovered ? 1.15 : 1)));
           ctx.font = "700 " + fontSize + "px SFMono-Regular, Consolas, monospace";
-          
+
           const textWidth = ctx.measureText(g.label).width;
-          const tagX = px + nodeSize * scale + 6;
+          const tagX = px + nodeSize * scale + 8;
           const tagY = py - fontSize / 2;
-          
-          ctx.fillStyle = "rgba(6, 18, 27, 0.88)";
-          ctx.strokeStyle = g.color;
+
+          ctx.fillStyle = isLight ? "rgba(255, 255, 255, 0.95)" : "rgba(6, 18, 27, 0.9)";
+          ctx.strokeStyle = nodeColor;
           ctx.lineWidth = 1;
           ctx.beginPath();
-          ctx.roundRect(tagX - 3, tagY - 3, textWidth + 6, fontSize + 6, 3);
+          ctx.roundRect(tagX - 4, tagY - 4, textWidth + 8, fontSize + 8, 4);
           ctx.fill();
           ctx.stroke();
 
-          ctx.fillStyle = g.color;
+          ctx.fillStyle = nodeColor;
           ctx.globalAlpha = 1;
           ctx.fillText(g.label, tagX, py + fontSize / 3);
         }
@@ -324,10 +411,10 @@ export function ProtocolStage3D({ activeChapter }: { activeChapter?: string }) {
       window.removeEventListener("click", onClick);
       window.removeEventListener("touchend", onTouchEnd);
     };
-  }, [activeChapter]);
+  }, [activeChapter, theme]);
 
   return (
-    <div className="protocol-3d-stage" aria-hidden="true">
+    <div className="protocol-3d-stage" data-theme={theme} aria-hidden="true">
       <canvas ref={canvasRef} className="protocol-3d-canvas" />
     </div>
   );
