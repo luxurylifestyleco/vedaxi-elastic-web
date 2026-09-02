@@ -699,6 +699,26 @@ export function PaperApp({
       <main id="paper-content" tabIndex={-1}>
         <PaperSearch service={service} />
 
+        <section className="paper-hero" id="paper-top" aria-labelledby="paper-title">
+          <div className="edition-scene edition-scene--hero" aria-hidden="true">
+            <div className="edition-scene__painting" aria-hidden="true" />
+            <div className="edition-scene__halo" aria-hidden="true" />
+            <div className="edition-scene__frame" aria-hidden="true" />
+          </div>
+          <div className="paper-hero__meta">
+            <p>{paper.journal}</p>
+            <p>{paper.published}</p>
+            <p className="mono">{paper.identifier}</p>
+          </div>
+          <div className="paper-hero__title">
+            <p className="eyebrow">Integrity gallery / methods on parchment</p>
+            <h1 className="display-title" id="paper-title" tabIndex={-1}>{paper.title}</h1>
+            <p className="dek">{paper.dek}</p>
+            <p className="authors">{paper.authors.join(" · ")}</p>
+          </div>
+          <ProtocolStatus protocol={protocol} service={service} />
+        </section>
+
         <section className="focus-preview agent-copilot" aria-labelledby="focus-preview-title">
           <div className="agent-copilot__header">
             <div>
@@ -809,26 +829,6 @@ export function PaperApp({
             </button>
           </div>
         )}
-
-        <section className="paper-hero" id="paper-top" aria-labelledby="paper-title">
-          <div className="edition-scene edition-scene--hero" aria-hidden="true">
-            <div className="edition-scene__painting" aria-hidden="true" />
-            <div className="edition-scene__halo" aria-hidden="true" />
-            <div className="edition-scene__frame" aria-hidden="true" />
-          </div>
-          <div className="paper-hero__meta">
-            <p>{paper.journal}</p>
-            <p>{paper.published}</p>
-            <p className="mono">{paper.identifier}</p>
-          </div>
-          <div className="paper-hero__title">
-            <p className="eyebrow">Integrity gallery / methods on parchment</p>
-            <h1 className="display-title" id="paper-title" tabIndex={-1}>{paper.title}</h1>
-            <p className="dek">{paper.dek}</p>
-            <p className="authors">{paper.authors.join(" · ")}</p>
-          </div>
-          <ProtocolStatus protocol={protocol} service={service} />
-        </section>
 
         <div className="paper-layout">
           <StageNavigation
@@ -1112,7 +1112,6 @@ export function PaperApp({
             <p>This is a fictional controlled fixture. It demonstrates publisher evidence provenance and does not describe a real study.</p>
           </aside>
         </div>
-
       </main>
 
       <details className="capability-drawer">
