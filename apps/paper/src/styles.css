@@ -717,14 +717,20 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
 .capability-drawer nav { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--color-rule); }
 .capability-drawer a { display: flex; min-height: 2.75rem; align-items: center; padding: var(--space-2) var(--space-3); }
 .focus-pins { padding: var(--space-3); background: var(--color-protocol-soft); }
-.focus-pins .eyebrow { grid-column: 1 / -1; }
-.focus-pins a { border-top: 1px solid color-mix(in srgb, var(--color-protocol) 20%, transparent); }
-
 @media (max-width: 600px) {
   .focus-preview { align-items: stretch; flex-direction: column; }
-  .video-publisher { min-height: 28rem; }
+  .agent-copilot__header { flex-direction: column; align-items: stretch; gap: var(--space-2); }
+  .agent-copilot__controls-cluster { justify-content: space-between; flex-wrap: wrap; }
+  .copilot-form__controls { grid-template-columns: 1fr; }
+  .copilot-presets { flex-direction: column; align-items: stretch; }
+  .copilot-presets button { width: 100%; text-align: left; }
+  .video-publisher { min-height: 22rem; }
+  .embedded-video-card { padding: var(--space-3); }
+  .native-video-player { max-height: 18rem; }
   .focus-provenance div { grid-template-columns: 1fr; }
   .capability-drawer { right: var(--space-2); bottom: var(--space-2); width: calc(100vw - 2 * var(--space-2)); }
+  .cue-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .cue-provenance { flex-direction: column; gap: 2px; }
 }
 
 @media (max-width: 900px) {
