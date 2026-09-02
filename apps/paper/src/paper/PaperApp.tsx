@@ -1120,11 +1120,11 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
             <nav className="paper-outline" aria-label="Paper outline">
               <p className="eyebrow">Within the paper</p>
               <ol>
-                <li><a href="#abstract">Abstract</a></li>
-                <li><a href="#methods">Methods</a></li>
-                <li><a href="#study-flow">Study flow</a></li>
-                <li><a href="#limitations">Limitations</a></li>
-                <li><a href="#references">References</a></li>
+                <li><a href="#abstract" onClick={(e) => { e.preventDefault(); document.getElementById("abstract")?.scrollIntoView({ behavior: "smooth", block: "start" }); window.history.pushState(null, "", "#abstract"); }}>Abstract</a></li>
+                <li><a href="#methods" onClick={(e) => { e.preventDefault(); document.getElementById("methods")?.scrollIntoView({ behavior: "smooth", block: "start" }); window.history.pushState(null, "", "#methods"); }}>Methods</a></li>
+                <li><a href="#study-flow" onClick={(e) => { e.preventDefault(); document.getElementById("study-flow")?.scrollIntoView({ behavior: "smooth", block: "start" }); window.history.pushState(null, "", "#study-flow"); }}>Study flow</a></li>
+                <li><a href="#limitations" onClick={(e) => { e.preventDefault(); document.getElementById("limitations")?.scrollIntoView({ behavior: "smooth", block: "start" }); window.history.pushState(null, "", "#limitations"); }}>Limitations</a></li>
+                <li><a href="#references" onClick={(e) => { e.preventDefault(); document.getElementById("references")?.scrollIntoView({ behavior: "smooth", block: "start" }); window.history.pushState(null, "", "#references"); }}>References</a></li>
               </ol>
             </nav>
           </div>
@@ -1132,11 +1132,11 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
           <details className="paper-outline-mobile">
             <summary>Paper outline</summary>
             <nav aria-label="Paper outline on small screens">
-              <a href="#abstract">Abstract</a>
-              <a href="#methods">Methods</a>
-              <a href="#study-flow">Study flow</a>
-              <a href="#limitations">Limitations</a>
-              <a href="#references">References</a>
+              <a href="#abstract" onClick={(e) => { e.preventDefault(); document.getElementById("abstract")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>Abstract</a>
+              <a href="#methods" onClick={(e) => { e.preventDefault(); document.getElementById("methods")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>Methods</a>
+              <a href="#study-flow" onClick={(e) => { e.preventDefault(); document.getElementById("study-flow")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>Study flow</a>
+              <a href="#limitations" onClick={(e) => { e.preventDefault(); document.getElementById("limitations")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>Limitations</a>
+              <a href="#references" onClick={(e) => { e.preventDefault(); document.getElementById("references")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>References</a>
             </nav>
           </details>
 

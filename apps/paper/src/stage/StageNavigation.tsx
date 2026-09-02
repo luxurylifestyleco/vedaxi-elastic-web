@@ -91,8 +91,18 @@ function ChapterLinks({
             onKeyDown={(event) => {
               handleStageChapterKeyDown(chapter.id, event, onNavigate);
             }}
-            onClick={() => {
+            onClick={(e) => {
               onNavigate(chapter.id);
+              if (typeof document !== "undefined") {
+                const target = document.getElementById(chapter.id) || document.getElementById(chapter.focusTargetId);
+                if (target) {
+                  e.preventDefault();
+                  target.scrollIntoView({ behavior: "smooth", block: "start" });
+                  if (typeof window !== "undefined") {
+                    window.history.pushState(null, "", `#${chapter.id}`);
+                  }
+                }
+              }
             }}
           >
             <span className="stage-navigation__number" aria-hidden="true">
