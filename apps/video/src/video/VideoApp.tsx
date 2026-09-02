@@ -35,7 +35,9 @@ export function VideoApp({ fixture, service, protocol }: VideoAppProps) {
     <>
       <a className="skip" href="#content">Skip to video evidence</a>
       <header>
-        <span className="mark" aria-hidden="true">V</span>
+        <span className="mark" aria-hidden="true">
+          <img src="/brand/vdx-mark.svg" alt="" width="18" height="18" className="identity__icon" />
+        </span>
         <span>VEDAXI</span>
         <span className="origin">Independent video origin · {fixture.evidence.sourceOrigin}</span>
       </header>

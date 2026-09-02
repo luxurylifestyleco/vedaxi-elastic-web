@@ -687,7 +687,9 @@ export function PaperApp({
       <a className="skip-link" href="#paper-content">Skip to paper</a>
       <header className="masthead">
         <a className="identity" href="#paper-top" aria-label="VEDAXI Paper Integrity Desk home">
-          <span className="identity__mark" aria-hidden="true">V</span>
+          <span className="identity__mark" aria-hidden="true">
+            <img src="/brand/vdx-mark.svg" alt="" width="20" height="20" className="identity__icon" />
+          </span>
           <span>VEDAXI</span>
         </a>
         <p>Paper Integrity Desk</p>

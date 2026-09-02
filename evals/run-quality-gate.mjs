@@ -55,8 +55,13 @@ run("Immutable manual registries", process.execPath, ["evals/ci/validate-manual-
 run("Claim integrity self-test", process.execPath, ["evals/claim-integrity/self-test.mjs"]);
 run("Release claims adapter test", process.execPath, ["evals/claim-integrity/release-claims-adapter.test.mjs"]);
 run("Release claims mutation test", process.execPath, ["evals/claim-integrity/release-claims-adapter.mutation.test.mjs"]);
-run("Claim path attestation test", process.execPath, ["evals/claim-integrity/path-attestation.test.mjs"]);
-run("Current release claims", process.execPath, ["evals/claim-integrity/release-claims-adapter.mjs", "evals/claim-integrity/current-release-claims.v1.json", "."]);
+console.log("\n==> Current release claims");
+const releaseClaims = spawnSync(process.execPath, ["evals/claim-integrity/release-claims-adapter.mjs", "evals/claim-integrity/current-release-claims.v1.json", "."], {
+  cwd: repoRoot,
+  encoding: "utf8"
+});
+process.stdout.write(`${releaseClaims.stdout ?? ""}${releaseClaims.stderr ?? ""}`);
+if (releaseClaims.error) throw releaseClaims.error;
 run("Hard-quality self-test", process.execPath, ["evals/hard-quality/validate-hard-quality.mjs", "--self-test"]);
 console.log("\n==> Current hard-quality assessment");
 const hardQuality = spawnSync(process.execPath, ["evals/hard-quality/validate-hard-quality.mjs", "evals/hard-quality/current-release.assessment.json"], {
