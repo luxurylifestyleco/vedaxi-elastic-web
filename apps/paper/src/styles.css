@@ -728,13 +728,14 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
   border: 1px solid #c5ff73;
   border-radius: 8px;
   background: #c5ff73;
-  color: #06121b;
+  color: #06121b !important;
   font-weight: 700;
   cursor: pointer;
   transition: all 180ms ease;
 }
 .focus-preview > button:hover, .focus-actions button:hover, .discrepancy-note button:hover {
   background: #d8ff94;
+  color: #06121b !important;
   box-shadow: 0 0 15px rgba(197, 255, 115, 0.4);
 }
 .focus-preview > button:disabled { opacity: .62; cursor: default; }
@@ -909,6 +910,22 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
 .edition-desk[data-theme="light"] .search-form input { background: #f8fafc; border-color: rgba(15, 23, 42, 0.2); color: #0f172a; }
 .edition-desk[data-theme="light"] .search-form button { background: #0284c7; color: #ffffff; }
 .edition-desk[data-theme="light"] .focus-preview { background: #ffffff; border-color: rgba(2, 132, 199, 0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.06); color: #0f172a; }
+.edition-desk[data-theme="light"] .focus-preview > button,
+.edition-desk[data-theme="light"] .focus-actions button,
+.edition-desk[data-theme="light"] .focus-view-actions button,
+.edition-desk[data-theme="light"] .discrepancy-note button {
+  border-color: #16a34a;
+  background: #16a34a;
+  color: #ffffff !important;
+}
+.edition-desk[data-theme="light"] .focus-preview > button:hover,
+.edition-desk[data-theme="light"] .focus-actions button:hover,
+.edition-desk[data-theme="light"] .focus-view-actions button:hover,
+.edition-desk[data-theme="light"] .discrepancy-note button:hover {
+  background: #15803d;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
+}
 .edition-desk[data-theme="light"] .copilot-presets > span { color: #0f172a; font-weight: 700; }
 .edition-desk[data-theme="light"] .copilot-presets button { background: #f0f9ff; border: 1px solid rgba(2, 132, 199, 0.4); color: #0369a1; font-weight: 700; }
 .edition-desk[data-theme="light"] .copilot-presets button:hover:not(:disabled) { background: #0284c7; border-color: #0284c7; color: #ffffff !important; font-weight: 700; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
