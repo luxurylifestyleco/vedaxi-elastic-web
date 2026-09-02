@@ -523,19 +523,23 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
   color: #b6c6c2;
 }
 .copilot-presets button {
-  padding: 5px 12px;
-  font-size: 0.8rem;
-  border: 1px solid rgba(235, 248, 244, 0.15);
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid rgba(105, 233, 241, 0.3);
   border-radius: var(--radius-round);
-  background: rgba(235, 248, 244, 0.05);
+  background: rgba(105, 233, 241, 0.08);
   color: #69e9f1;
   cursor: pointer;
   transition: all 160ms ease;
 }
 .copilot-presets button:hover {
-  background: rgba(105, 233, 241, 0.15);
+  background: #69e9f1;
   border-color: #69e9f1;
-  color: #eff7f3;
+  color: #06121b !important;
+  font-weight: 700;
+  box-shadow: 0 0 14px rgba(105, 233, 241, 0.4);
+  transform: translateY(-1px);
 }
 
 .copilot-toggle-btn {
@@ -554,8 +558,11 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
   transition: all 180ms ease;
 }
 .copilot-toggle-btn:hover {
-  background: rgba(197, 255, 115, 0.25);
-  box-shadow: 0 0 15px rgba(197, 255, 115, 0.3);
+  background: #c5ff73;
+  color: #06121b !important;
+  font-weight: 800;
+  box-shadow: 0 0 18px rgba(197, 255, 115, 0.5);
+  transform: translateY(-1px);
 }
 
 .agent-copilot__status-badge {
@@ -877,6 +884,11 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
 .edition-desk[data-theme="light"] .search-form input { background: #f8fafc; border-color: rgba(15, 23, 42, 0.2); color: #0f172a; }
 .edition-desk[data-theme="light"] .search-form button { background: #0284c7; color: #ffffff; }
 .edition-desk[data-theme="light"] .focus-preview { background: #ffffff; border-color: rgba(2, 132, 199, 0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+.edition-desk[data-theme="light"] .copilot-presets > span { color: #0f172a; font-weight: 700; }
+.edition-desk[data-theme="light"] .copilot-presets button { background: #f1f5f9; border-color: rgba(2, 132, 199, 0.35); color: #0284c7; font-weight: 600; }
+.edition-desk[data-theme="light"] .copilot-presets button:hover { background: #0284c7; border-color: #0284c7; color: #ffffff !important; font-weight: 700; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
+.edition-desk[data-theme="light"] .copilot-toggle-btn { border-color: #16a34a; background: rgba(22, 163, 74, 0.1); color: #16a34a; }
+.edition-desk[data-theme="light"] .copilot-toggle-btn:hover { background: #16a34a; color: #ffffff !important; box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3); }
 .edition-desk[data-theme="light"] .copilot-form input { background: #f8fafc; border-color: rgba(15, 23, 42, 0.15); color: #0f172a; }
 .edition-desk[data-theme="light"] .copilot-trace { background: #f8fafc; border-color: rgba(15, 23, 42, 0.12); color: #0f172a; }
 .edition-desk[data-theme="light"] .trace-step { background: rgba(15, 23, 42, 0.03); color: #0f172a; }
