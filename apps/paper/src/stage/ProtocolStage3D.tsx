@@ -86,7 +86,7 @@ export function ProtocolStage3D({
         vz: 0,
         colorDark: "#69e9f1",
         colorLight: "#0284c7",
-        size: 8.5,
+        size: 13,
         label: "ORIGIN A: PAPER",
         targetId: "chapter-method",
       },
@@ -99,7 +99,7 @@ export function ProtocolStage3D({
         vz: 0,
         colorDark: "#f59e0b",
         colorLight: "#d97706",
-        size: 8.5,
+        size: 13,
         label: "ORIGIN B: VIDEO (00:03:12)",
         targetId: "chapter-video",
       },
@@ -112,7 +112,7 @@ export function ProtocolStage3D({
         vz: 0,
         colorDark: "#c5ff73",
         colorLight: "#059669",
-        size: 11,
+        size: 16.5,
         label: "DISCREPANCY (40 - 6 = 34)",
         targetId: "chapter-evidence",
       },
@@ -125,7 +125,7 @@ export function ProtocolStage3D({
         vz: 0,
         colorDark: "#69e9f1",
         colorLight: "#4f46e5",
-        size: 7.5,
+        size: 12,
         label: "WebMCP RUNTIME",
         targetId: "paper-top",
       },
@@ -138,7 +138,7 @@ export function ProtocolStage3D({
         vz: 0,
         colorDark: "#c5ff73",
         colorLight: "#16a34a",
-        size: 9.5,
+        size: 14.5,
         label: "HUMAN GATE",
         targetId: "chapter-decision",
       },
@@ -255,7 +255,7 @@ export function ProtocolStage3D({
             ctx.strokeStyle = isLight
               ? "rgba(2, 132, 199, " + alpha + ")"
               : "rgba(105, 233, 241, " + alpha + ")";
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 1.5;
             ctx.beginPath();
             ctx.moveTo(p1.px, p1.py);
             ctx.lineTo(p2.px, p2.py);
@@ -375,18 +375,18 @@ export function ProtocolStage3D({
 
         // Label pill tag
         if (g.label) {
-          const fontSize = Math.max(8, Math.round((isMobile ? 8.5 : 10.0) * scale * (isHovered ? 1.15 : 1)));
-          ctx.font = "700 " + fontSize + "px SFMono-Regular, Consolas, monospace";
+          const fontSize = Math.max(10, Math.round((isMobile ? 11.0 : 14.0) * scale * (isHovered ? 1.2 : 1)));
+          ctx.font = "800 " + fontSize + "px SFMono-Regular, Consolas, monospace";
 
           const textWidth = ctx.measureText(g.label).width;
-          const tagX = px + nodeSize * scale + 6;
+          const tagX = px + nodeSize * scale + 9;
           const tagY = py - fontSize / 2;
 
           ctx.fillStyle = isLight ? "rgba(255, 255, 255, 0.95)" : "rgba(6, 18, 27, 0.9)";
           ctx.strokeStyle = nodeColor;
           ctx.lineWidth = 1;
           ctx.beginPath();
-          ctx.roundRect(tagX - 4, tagY - 4, textWidth + 8, fontSize + 8, 4);
+          ctx.roundRect(tagX - 6, tagY - 6, textWidth + 12, fontSize + 12, 6);
           ctx.fill();
           ctx.stroke();
 
