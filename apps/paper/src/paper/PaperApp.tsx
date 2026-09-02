@@ -299,6 +299,17 @@ function ProtocolStatus({
   );
 }
 
+function getEvidenceAnchor(locator: string): string {
+  const lower = locator.toLowerCase();
+  if (lower.includes("abstract")) return "#abstract";
+  if (lower.includes("flow")) return "#study-flow";
+  if (lower.includes("limitation")) return "#limitations";
+  if (lower.includes("reference")) return "#references";
+  if (lower.includes("participants")) return "#methods-participants";
+  if (lower.includes("methods")) return "#methods";
+  return "#methods-participants";
+}
+
 function PaperSearch({ service }: { service: PaperEvidenceService }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<EvidenceSearchResult[] | null>(null);
@@ -398,7 +409,7 @@ function PaperSearch({ service }: { service: PaperEvidenceService }) {
       {results?.map(({ evidence, score }, index) => (
         <a
           className="search-result"
-          href="#methods-participants"
+          href={getEvidenceAnchor(evidence.locator)}
           key={evidence.id}
           ref={index === 0 ? firstResultRef : undefined}
         >

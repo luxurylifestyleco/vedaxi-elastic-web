@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   PAPER_EVIDENCE_ID,
+  createPaperCorpus,
   createPaperEvidenceService,
   createPaperEvidenceTool,
   createPaperFixture,
@@ -71,6 +72,32 @@ describe("M1 paper fixture and evidence boundary", () => {
     expect(JSON.stringify(result)).not.toMatch(
       /(?:\b34\b|difference|recommendation|assessment|validParticipants|expectedSample|video\.transcript)/i
     );
+  });
+
+  it("searches across the whole paper page corpus (Abstract, Methods, Limitations, References)", () => {
+    const fixture = createPaperFixture(origin);
+    const corpus = createPaperCorpus(fixture);
+    const service = createPaperEvidenceService(corpus);
+
+    // Search for abstract terms
+    const abstractResults = service.search("reconstructing context");
+    expect(abstractResults.length).toBeGreaterThan(0);
+    expect(abstractResults[0].evidence.locator).toBe("Abstract");
+
+    // Search for methods intro terms
+    const methodsResults = service.search("document coding task");
+    expect(methodsResults.length).toBeGreaterThan(0);
+    expect(methodsResults[0].evidence.locator).toBe("Methods");
+
+    // Search for limitations terms
+    const limitResults = service.search("behavioral finding");
+    expect(limitResults.length).toBeGreaterThan(0);
+    expect(limitResults[0].evidence.locator).toBe("Limitations");
+
+    // Search for references terms
+    const refResults = service.search("fixture appendix");
+    expect(refResults.length).toBeGreaterThan(0);
+    expect(refResults[0].evidence.locator).toBe("References");
   });
 });
 

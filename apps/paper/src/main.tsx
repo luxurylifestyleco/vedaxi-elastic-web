@@ -22,7 +22,8 @@ if (!root) {
 }
 
 const fixture = createPaperFixture(window.location.origin);
-const service = createPaperEvidenceService(fixture.evidence);
+const paperCorpus = createPaperCorpus(fixture);
+const service = createPaperEvidenceService(paperCorpus);
 const unavailableStorage: PublisherStorage = {
   getItem: () => { throw new Error("localStorage unavailable"); },
   setItem: () => { throw new Error("localStorage unavailable"); }

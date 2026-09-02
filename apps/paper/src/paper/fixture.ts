@@ -112,3 +112,61 @@ export function createPaperFixture(sourceOrigin: string): PaperFixture {
     evidence
   };
 }
+
+export function createPaperCorpus(fixture: PaperFixture): EvidenceObject[] {
+  const origin = fixture.evidence.sourceOrigin;
+  return [
+    fixture.evidence,
+    {
+      id: "paper.abstract",
+      assetType: "paper-passage",
+      sourceOrigin: origin,
+      locator: "Abstract",
+      title: "Abstract · Study overview",
+      excerpt: fixture.document.abstract,
+      keywords: ["abstract", "context", "interruption", "reconstructing", "workflows", "resuming", "analysts", "analytical"],
+      provenance: "VEDAXI controlled paper fixture — Abstract"
+    },
+    {
+      id: "paper.methods.intro",
+      assetType: "paper-passage",
+      sourceOrigin: origin,
+      locator: "Methods",
+      title: "Methods · Participant accounting",
+      excerpt: fixture.document.methodsIntroduction,
+      keywords: ["document", "coding", "task", "eligibility", "criterion", "stopping", "sessions", "methods"],
+      provenance: "VEDAXI controlled paper fixture — Methods introduction"
+    },
+    {
+      id: "paper.study-flow",
+      assetType: "paper-passage",
+      sourceOrigin: origin,
+      locator: "Study flow",
+      title: "Study flow · Participant progression",
+      excerpt: "Three equal stages: enrolled forty, completed forty, and included in final analysis forty participants.",
+      keywords: ["enrolled", "completed", "flow", "stages", "accounting", "study", "progression"],
+      provenance: "VEDAXI controlled paper fixture — Study flow"
+    },
+    {
+      id: "paper.limitations",
+      assetType: "paper-passage",
+      sourceOrigin: origin,
+      locator: "Limitations",
+      title: "Limitations · Scope note",
+      excerpt: fixture.document.limitations,
+      keywords: ["limitations", "narrow", "fixture", "clinical", "behavioral", "scope", "interpretation"],
+      provenance: "VEDAXI controlled paper fixture — Limitations"
+    },
+    {
+      id: "paper.references",
+      assetType: "paper-passage",
+      sourceOrigin: origin,
+      locator: "References",
+      title: "References · Source list",
+      excerpt: fixture.document.references.map((r) => `${r.id}: ${r.citation}`).join(" "),
+      keywords: ["references", "citations", "appendix", "specification", "sources"],
+      provenance: "VEDAXI controlled paper fixture — References"
+    }
+  ];
+}
+

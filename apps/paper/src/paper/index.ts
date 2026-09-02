@@ -1,6 +1,7 @@
 export {
   PAPER_EVIDENCE_ID,
   createPaperFixture,
+  createPaperCorpus,
   resolveConfiguredVideoOrigin,
   resolvePaperRuntimeConfig
 } from "./fixture";
