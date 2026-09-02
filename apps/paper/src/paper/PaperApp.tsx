@@ -1050,90 +1050,99 @@ export function PaperApp({
             <p className="authors">{paper.authors.join(" · ")}</p>
           </div>
 
-          <div className="judge-fast-track-card" aria-label="Judge fast track and executive demonstration">
-            <div className="judge-fast-track-header">
-              <span className="judge-badge">⚡ JUDGE FAST-TRACK (15s DEMO)</span>
-              <span className="judge-meta-tag">Two-Origin WebMCP Challenge Proof</span>
-            </div>
-            <p className="judge-lead">
-              <strong>The Problem:</strong> A single AI reading the paper alone believes <strong>40 participants</strong> were analyzed.
-              <br />
-              <strong>The Solution:</strong> VEDAXI queries the independent Video origin via WebMCP, catches <strong>6 participants excluded at 00:03:12</strong>, derives true <strong>N = 34</strong>, and enforces human sign-off before citation.
-            </p>
-            <div className="judge-action-row">
-              <button
-                type="button"
-                className="judge-run-btn"
-                onClick={() => {
-                  startGuidedTour();
-                  dispatchPublisher(requestFocusAction(CONTROLLED_FOCUS_REQUEST));
-                  setSynthesisResult({
-                    mode: "augmented",
-                    title: "✓ Verified Cross-Origin Synthesis (WebMCP Active)",
-                    finding: "Qualified Sample: 34 participants analyzed (40 recruited in Paper minus 6 excluded in Video at 00:03:12).",
-                    details: "EVIDENCE VERIFIED: Cross-origin WebMCP inspection caught the hidden exclusion. Semantic focus staged in Chapter 05 to block premature citation until confirmed by researcher."
-                  });
-                }}
-              >
-                ▶ Run 15s Interactive Proof
-              </button>
-              <a
-                href="https://vedaxi-protocol-edition.vercel.app/"
-                target="_blank"
-                rel="noreferrer"
-                className="judge-link-btn"
-              >
-                Open 3D Protocol Story Map ↗
-              </a>
-            </div>
-            <div className="judge-rubric-pills">
-              <span>🛡️ Fail-Closed 403 Kill Switch</span>
-              <span>🧪 220/220 Tests Green</span>
-              <span>⚡ Live JSON-RPC 2.0 Tools</span>
-              <span>🔒 Two-Phase Human Gate</span>
-            </div>
-          </div>
-
-          <div className="webmcp-mission-card" aria-label="What VEDAXI WebMCP Solves">
-            <div className="webmcp-mission-header">
-              <span className="eyebrow">The Core Innovation</span>
-              <h2 className="webmcp-mission-title">What VEDAXI WebMCP Solves</h2>
-              <p className="webmcp-mission-subtitle">
-                Autonomous cross-origin truth verification for AI agents — eliminating single-source hallucinations across published literature and live multimedia.
+          <details className="supplementary-disclosure" aria-label="Judge fast track and executive demonstration">
+            <summary>⚡ Judge Fast-Track & 15s Challenge Brief</summary>
+            <div className="judge-fast-track-card" aria-label="Judge fast track and executive demonstration">
+              <div className="judge-fast-track-header">
+                <span className="judge-badge">⚡ JUDGE FAST-TRACK (15s DEMO)</span>
+                <span className="judge-meta-tag">Two-Origin WebMCP Challenge Proof</span>
+              </div>
+              <p className="judge-lead">
+                <strong>The Problem:</strong> A single AI reading the paper alone believes <strong>40 participants</strong> were analyzed.
+                <br />
+                <strong>The Solution:</strong> VEDAXI queries the independent Video origin via WebMCP, catches <strong>6 participants excluded at 00:03:12</strong>, derives true <strong>N = 34</strong>, and enforces human sign-off before citation.
               </p>
+              <div className="judge-action-row">
+                <button
+                  type="button"
+                  className="judge-run-btn"
+                  onClick={() => {
+                    startGuidedTour();
+                    dispatchPublisher(requestFocusAction(CONTROLLED_FOCUS_REQUEST));
+                    setSynthesisResult({
+                      mode: "augmented",
+                      title: "✓ Verified Cross-Origin Synthesis (WebMCP Active)",
+                      finding: "Qualified Sample: 34 participants analyzed (40 recruited in Paper minus 6 excluded in Video at 00:03:12).",
+                      details: "EVIDENCE VERIFIED: Cross-origin WebMCP inspection caught the hidden exclusion. Semantic focus staged in Chapter 05 to block premature citation until confirmed by researcher."
+                    });
+                  }}
+                >
+                  ▶ Run 15s Interactive Proof
+                </button>
+                <a
+                  href="https://vedaxi-protocol-edition.vercel.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="judge-link-btn"
+                >
+                  Open 3D Protocol Story Map ↗
+                </a>
+              </div>
+              <div className="judge-rubric-pills">
+                <span>🛡️ Fail-Closed 403 Kill Switch</span>
+                <span>🧪 220/220 Tests Green</span>
+                <span>⚡ Live JSON-RPC 2.0 Tools</span>
+                <span>🔒 Two-Phase Human Gate</span>
+              </div>
             </div>
-            <div className="webmcp-mission-grid">
-              <div className="webmcp-mission-step webmcp-mission-step--problem">
-                <div className="step-icon" aria-hidden="true">❌</div>
-                <div className="step-content">
-                  <h3>1. The Single-Source Flaw</h3>
-                  <p>
-                    Today’s AI agents (ChatGPT, Claude, Perplexity) only read static text from a single source. If a published PDF paper claims <strong>40 participants completed the trial</strong>, the AI blindly cites <strong>N = 40</strong> as absolute truth.
-                  </p>
-                </div>
-              </div>
-              <div className="webmcp-mission-step webmcp-mission-step--discovery">
-                <div className="step-icon" aria-hidden="true">⚡</div>
-                <div className="step-content">
-                  <h3>2. Cross-Origin WebMCP Protocol</h3>
-                  <p>
-                    VEDAXI introduces <strong>WebMCP (Web Model Context Protocol)</strong>, enabling the AI agent to query independent web origins. The agent inspects the author&rsquo;s conference talk (Origin B at 00:03:12) where they admit <strong>6 participants had sensor calibration drift</strong>.
-                  </p>
-                </div>
-              </div>
-              <div className="webmcp-mission-step webmcp-mission-step--resolution">
-                <div className="step-icon" aria-hidden="true">🛡️</div>
-                <div className="step-content">
-                  <h3>3. Fail-Closed Integrity Gate</h3>
-                  <p>
-                    VEDAXI flags the contradiction (<strong>40 ≠ 34</strong>), updates the true analysis cohort to <strong>34</strong>, and <strong>blocks automated citation</strong> until a human researcher explicitly reviews and authorizes the evidence.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          </details>
 
-          <ProtocolStatus protocol={protocol} service={service} />
+          <details className="supplementary-disclosure" aria-label="What VEDAXI WebMCP Solves">
+            <summary>🛡️ What VEDAXI WebMCP Solves (Core Innovation)</summary>
+            <div className="webmcp-mission-card" aria-label="What VEDAXI WebMCP Solves">
+              <div className="webmcp-mission-header">
+                <span className="eyebrow">The Core Innovation</span>
+                <h2 className="webmcp-mission-title">What VEDAXI WebMCP Solves</h2>
+                <p className="webmcp-mission-subtitle">
+                  Autonomous cross-origin truth verification for AI agents — eliminating single-source hallucinations across published literature and live multimedia.
+                </p>
+              </div>
+              <div className="webmcp-mission-grid">
+                <div className="webmcp-mission-step webmcp-mission-step--problem">
+                  <div className="step-icon" aria-hidden="true">❌</div>
+                  <div className="step-content">
+                    <h3>1. The Single-Source Flaw</h3>
+                    <p>
+                      Today’s AI agents (ChatGPT, Claude, Perplexity) only read static text from a single source. If a published PDF paper claims <strong>40 participants completed the trial</strong>, the AI blindly cites <strong>N = 40</strong> as absolute truth.
+                    </p>
+                  </div>
+                </div>
+                <div className="webmcp-mission-step webmcp-mission-step--discovery">
+                  <div className="step-icon" aria-hidden="true">⚡</div>
+                  <div className="step-content">
+                    <h3>2. Cross-Origin WebMCP Protocol</h3>
+                    <p>
+                      VEDAXI introduces <strong>WebMCP (Web Model Context Protocol)</strong>, enabling the AI agent to query independent web origins. The agent inspects the author&rsquo;s conference talk (Origin B at 00:03:12) where they admit <strong>6 participants had sensor calibration drift</strong>.
+                    </p>
+                  </div>
+                </div>
+                <div className="webmcp-mission-step webmcp-mission-step--resolution">
+                  <div className="step-icon" aria-hidden="true">🛡️</div>
+                  <div className="step-content">
+                    <h3>3. Fail-Closed Integrity Gate</h3>
+                    <p>
+                      VEDAXI flags the contradiction (<strong>40 ≠ 34</strong>), updates the true analysis cohort to <strong>34</strong>, and <strong>blocks automated citation</strong> until a human researcher explicitly reviews and authorizes the evidence.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details className="supplementary-disclosure" aria-label="Native WebMCP Protocol Surface">
+            <summary>⚡ Native WebMCP Protocol & Tool Diagnostics</summary>
+            <ProtocolStatus protocol={protocol} service={service} />
+          </details>
         </section>
 
         <section className="focus-preview agent-copilot" aria-labelledby="focus-preview-title">
@@ -1578,248 +1587,267 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
             className={`paper-article${focusActive ? " paper-article--focused" : ""}`}
             data-focus-state={focusActive ? "focused" : "ordinary"}
           >
-            <section className="stage-chapter stage-chapter--paper edition-scene edition-scene--parchment" aria-labelledby="abstract-title">
-              <div className="edition-scene__painting" aria-hidden="true" />
-              <div className="edition-scene__frame" aria-hidden="true" />
-              <div className="edition-scene__caption">
-              <p className="stage-chapter__index mono">Chapter 01 / Paper</p>
-              <div id="abstract">
-                <p className="section-kicker">Study overview & Abstract</p>
-                <h2 id="abstract-title">Abstract</h2>
-                <p className="lead">{paper.abstract}</p>
-                <p>
-                  Modern analytical research is characterized by frequent, high-friction context switches that disrupt cognitive flow.
-                  While traditional evaluation frameworks quantify simple task completion, the latent cognitive overhead required to rebuild working memory remains largely unaccounted for.
-                  In this controlled empirical trial, we establish an experimental baseline for contextual state recovery, measuring both resumption latency and error susceptibility across structured analytical evidence synthesis.
-                </p>
-                <p className="mono paper-keywords">
-                  <strong>Keywords:</strong> Cognitive State Reconstruction · Context Interruption · Provenance Verification · Multi-Modal Evidence · WebMCP Standard
-                </p>
-              </div>
-              </div>
-            </section>
-
-            <section className="stage-chapter stage-chapter--method edition-scene edition-scene--triptych" id="chapter-method" aria-labelledby="methods-title">
-              <div className="edition-scene__painting" aria-hidden="true" />
-              <div className="edition-scene__frame" aria-hidden="true" />
-              <div className="edition-scene__caption">
-              <p className="stage-chapter__index mono">Chapter 02 / Method</p>
-              <div id="methods">
-                <p className="section-kicker">Experimental Protocol & Procedures</p>
-                <h2 id="methods-title" tabIndex={-1}>Methods</h2>
-                <p className="lead">{paper.methodsIntroduction}</p>
-                
-                <h3>2.1 Experimental Protocol</h3>
-                <p>
-                  Participants were subjected to a standardized multi-source document coding workflow involving qualitative evidence synthesis and numerical verification.
-                  Each evaluation trial comprised a baseline undisturbed phase, a standardized 180-second forced context interruption, and an unassisted task resumption phase.
-                  Continuous biometric telemetry and sensory calibration monitors tracked gaze fixation stability, task resumption latency, and decision confidence.
-                </p>
-
-                <h3>2.2 Eligibility Criteria & Stopping Rules</h3>
-                <p>
-                  Eligibility required proficiency in technical document verification and baseline visual-spatial tracking calibration.
-                  A pre-registered stopping rule dictated session termination if hardware calibration drift exceeded 0.05 RMS error thresholds.
-                  The full analytical methodology and data integrity checkpoints were registered prior to data collection.
-                </p>
-
-                <h3>2.3 Cohort Accounting & Sample Allocation</h3>
-                <p className="methods-cohort-paragraph">
-                  Forty participants completed the study and were included in the final analysis.
-                  Participant progression through enrollment, experimental allocation, and final computational evaluation was logged according to pre-specified protocol criteria.
-                </p>
-              </div>
-
-              <div id="study-flow" aria-labelledby="study-flow-title">
-                <p className="section-kicker">Reported flow</p>
-                <h2 id="study-flow-title">Study flow</h2>
-                <figure className="study-flow">
-                  <div className="study-flow__plot" role="img" aria-label="Three study flow stages: 40 enrolled, 6 excluded for sensor calibration drift, and 34 in final analysis.">
-                    {[
-                      ["Enrolled", "40", "cohort"],
-                      ["Excluded (Drift)", "−6", "drift"],
-                      ["Final analysis", "34", "verified"]
-                    ].map(([label, value, tag]) => (
-                      <div className={`study-flow__stage study-flow__stage--${tag}`} key={label}>
-                        <span className="study-flow__value">{value}</span>
-                        <div className="study-flow__label-row">
-                          <span>{label}</span>
-                          {tag === "drift" && <span className="stage-tag mono">00:03:12</span>}
-                          {tag === "verified" && <span className="stage-tag stage-tag--ok mono">40 − 6</span>}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <figcaption>Figure 1. Participant accounting: 40 enrolled, 6 excluded for sensor calibration drift, 34 in final analysis.</figcaption>
-                </figure>
-
-                <div className="study-flow-discrepancy" role="region" aria-label="Cross-Origin Discrepancy Analysis">
-                  <div className="study-flow-discrepancy__header">
-                    <span className="eyebrow">WebMCP Discrepancy Proof</span>
-                    <span className="discrepancy-badge mono">Contradiction: 40 ≠ 34</span>
-                  </div>
-                  <div className="study-flow-discrepancy__grid">
-                    <div className="study-flow-discrepancy__card">
-                      <span className="origin-label mono">Origin A · Written Paper</span>
-                      <strong className="math-statement">40 Enrolled → 0 Excluded → 40 Analyzed</strong>
-                      <p>The published text claims full 40-cohort analysis with zero reported exclusions.</p>
-                    </div>
-                    <div className="study-flow-discrepancy__card study-flow-discrepancy__card--warn">
-                      <span className="origin-label mono">Origin B · Author Video (00:03:12)</span>
-                      <strong className="math-statement">40 Enrolled − 6 Excluded = 34 Analyzed</strong>
-                      <p>Author explicitly admits: <em>&ldquo;Six sessions had calibration drift, so we removed them...&rdquo;</em></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </div>
-            </section>
-
-            <section className="stage-chapter stage-chapter--video edition-scene edition-scene--reversed" id="chapter-video" aria-labelledby="video-title">
-              <div className="edition-scene__painting" aria-hidden="true" />
-              <div className="edition-scene__frame" aria-hidden="true" />
-              <EditionWorld reverse />
-              <div className="edition-scene__caption">
-              <p className="stage-chapter__index mono">Chapter 03 / Video</p>
-              <div>
-                <p className="section-kicker">Independent publisher, inverted world</p>
-                <h2 id="video-title" tabIndex={-1}>Video transcript evidence</h2>
-                <p>The Video publisher is hosted independently and appears here only after it confirms readiness. The reversed field is decoration; transcript evidence stays upright and unpublished until the origin answers.</p>
-              </div>
-              {normalizedVideoOrigin && (
-                <iframe
-                  className="video-publisher"
-                  hidden={videoAvailable !== true}
-                  onLoad={() => {
-                    const attemptOrigin = normalizedVideoOrigin;
-                    const generation = ++readinessGenerationRef.current;
-                    cleanupVideoReadinessAttempt(readinessAttemptRef);
-                    setVideoReadiness({ origin: attemptOrigin, available: null });
-                    const videoWindow = videoFrameRef.current?.contentWindow;
-                    if (!videoWindow) {
-                      setVideoReadiness({ origin: attemptOrigin, available: false });
-                      return;
-                    }
-                    const attempt: VideoReadinessAttempt = {
-                      origin: attemptOrigin,
-                      generation,
-                      cleanup: () => undefined
-                    };
-                    readinessAttemptRef.current = attempt;
-                    attempt.cleanup = startVideoReadinessAttempt(
-                      window,
-                      attemptOrigin,
-                      videoWindow,
-                      (available) => {
-                        if (readinessAttemptRef.current !== attempt) return;
-                        setVideoReadiness({ origin: attemptOrigin, available });
-                      }
-                    );
-                  }}
-                  ref={videoFrameRef}
-                  src={normalizedVideoOrigin}
-                  title="Independent Video publisher evidence"
-                />
-              )}
-              {videoConfigurationError ? (
-                <p role="alert">
-                  Independent Video publisher configuration is invalid: {videoConfigurationError}. No embedded evidence is shown.
-                </p>
-              ) : videoAvailable !== true && (
-                <div className="embedded-video-card">
-                  <p role="status" className="embedded-video-status">
-                    {videoAvailable === null
-                      ? "Checking whether the independent Video publisher is available."
-                      : "Independent Video publisher could not be verified or is unavailable. Direct local evidence player loaded below:"}
-                  </p>
-                  <div className="embedded-video-wrapper">
-                    <video
-                      className="native-video-player"
-                      controls
-                      preload="metadata"
-                      src="/media/vedaxi-controlled-evidence.mp4"
-                      aria-label="Recorded source video: calibration drift evidence"
-                    >
-                      <track kind="captions" src="/media/vedaxi-controlled-evidence.vtt" srcLang="en" label="English" default />
-                    </video>
-                  </div>
-                  <div className="embedded-transcript-cue">
-                    <div className="cue-header">
-                      <span className="mono cue-badge">00:03:12 (192s)</span>
-                      <span className="eyebrow">Author Statement</span>
-                    </div>
-                    <p className="cue-body">
-                      &ldquo;We recruited forty participants. Six sessions had calibration drift, so we removed them before modeling and did not replace them.&rdquo;
-                    </p>
-                    <div className="cue-provenance mono">
-                      <span>ID: video.transcript.calibration-drift</span>
-                      <span>Locator: Transcript 00:03:12</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-              </div>
-            </section>
-
-            <section className="stage-chapter stage-chapter--evidence edition-scene edition-scene--burn" id="chapter-evidence" aria-labelledby="evidence-title">
-              <div className="edition-scene__painting" aria-hidden="true" />
-              <div className="edition-burn" aria-hidden="true" />
-              <div className="edition-scene__frame" aria-hidden="true" />
-              <div className="edition-scene__caption edition-scene__caption--reveal">
-                <p className="stage-chapter__index mono">Chapter 04 / Evidence Dossier</p>
-                <p className="section-kicker">Multi-Origin Corroboration</p>
-                <h2 id="evidence-title" tabIndex={-1}>Cross-Origin Evidence Comparison</h2>
-                <p className="lead">
-                  VEDAXI independently extracts and contrasts evidence records from both the written publication (Origin A) and the live presentation talk (Origin B) to catch silent reporting contradictions.
-                </p>
-
-                <div className="evidence-dossier-grid">
-                  {/* Origin A */}
-                  <div className="evidence-card evidence-card--origin-a" id="methods-participants" tabIndex={-1}>
-                    <div className="evidence-card__badge mono">Origin A · Published Manuscript</div>
-                    <blockquote cite={`${evidence.sourceOrigin}/#methods-participants`}>
-                      <p>{evidence.excerpt}</p>
-                    </blockquote>
-                    <aside className="provenance" aria-label="Evidence provenance">
-                      <p className="eyebrow">Manuscript Provenance</p>
-                      <dl>
-                        <div><dt>Locator</dt><dd>{evidence.locator}</dd></div>
-                        <div><dt>Reported</dt><dd><strong>40 Analyzed (0 Excluded)</strong></dd></div>
-                        <div><dt>Origin</dt><dd className="mono">{evidence.sourceOrigin}</dd></div>
-                        <div><dt>Evidence ID</dt><dd className="mono">{evidence.id}</dd></div>
-                        <div><dt>Provenance</dt><dd>{evidence.provenance}</dd></div>
-                      </dl>
-                    </aside>
-                  </div>
-
-                  {/* Origin B */}
-                  <div className="evidence-card evidence-card--origin-b">
-                    <div className="evidence-card__badge evidence-card__badge--video mono">Origin B · Author Video Talk (00:03:12)</div>
-                    <blockquote cite="https://vedaxi-video-origin-teal.vercel.app/#00:03:12">
-                      <p>&ldquo;We recruited forty participants. Six sessions had calibration drift, so we removed them before modeling and did not replace them.&rdquo;</p>
-                    </blockquote>
-                    <aside className="provenance" aria-label="Origin B evidence provenance">
-                      <p className="eyebrow">Video Talk Provenance</p>
-                      <dl>
-                        <div><dt>Locator</dt><dd>Transcript Cue 00:03:12</dd></div>
-                        <div><dt>Admitted</dt><dd><strong>34 Analyzed (6 Excluded)</strong></dd></div>
-                        <div><dt>Origin</dt><dd className="mono">vedaxi-video-origin-teal.vercel.app</dd></div>
-                        <div><dt>Evidence ID</dt><dd className="mono">video.transcript.calibration-drift</dd></div>
-                      </dl>
-                    </aside>
-                  </div>
-                </div>
-
-                <div className="evidence-verdict-banner">
-                  <div className="verdict-tag mono">⚡ DISCREPANCY VERDICT: 40 ≠ 34</div>
+            <details className="supplementary-disclosure manuscript-disclosure" aria-label="Full research manuscript and evidence dossier">
+              <summary>📄 Full Research Manuscript & Evidence Dossier (Chapters 01–04, Study Flow, References)</summary>
+              <section className="stage-chapter stage-chapter--paper edition-scene edition-scene--parchment" aria-labelledby="abstract-title">
+                <div className="edition-scene__painting" aria-hidden="true" />
+                <div className="edition-scene__frame" aria-hidden="true" />
+                <div className="edition-scene__caption">
+                <p className="stage-chapter__index mono">Chapter 01 / Paper</p>
+                <div id="abstract">
+                  <p className="section-kicker">Study overview & Abstract</p>
+                  <h2 id="abstract-title">Abstract</h2>
+                  <p className="lead">{paper.abstract}</p>
                   <p>
-                    <strong>Integrity Alert:</strong> The published paper silently omitted 6 excluded participants.
-                    An AI relying solely on the text would cite a false sample size of 40.
-                    VEDAXI’s WebMCP agent catches this 6-participant gap and requires human sign-off in Chapter 05 before any citation can proceed.
+                    Modern analytical research is characterized by frequent, high-friction context switches that disrupt cognitive flow.
+                    While traditional evaluation frameworks quantify simple task completion, the latent cognitive overhead required to rebuild working memory remains largely unaccounted for.
+                    In this controlled empirical trial, we establish an experimental baseline for contextual state recovery, measuring both resumption latency and error susceptibility across structured analytical evidence synthesis.
+                  </p>
+                  <p className="mono paper-keywords">
+                    <strong>Keywords:</strong> Cognitive State Reconstruction · Context Interruption · Provenance Verification · Multi-Modal Evidence · WebMCP Standard
                   </p>
                 </div>
+                </div>
+              </section>
+
+              <section className="stage-chapter stage-chapter--method edition-scene edition-scene--triptych" id="chapter-method" aria-labelledby="methods-title">
+                <div className="edition-scene__painting" aria-hidden="true" />
+                <div className="edition-scene__frame" aria-hidden="true" />
+                <div className="edition-scene__caption">
+                <p className="stage-chapter__index mono">Chapter 02 / Method</p>
+                <div id="methods">
+                  <p className="section-kicker">Experimental Protocol & Procedures</p>
+                  <h2 id="methods-title" tabIndex={-1}>Methods</h2>
+                  <p className="lead">{paper.methodsIntroduction}</p>
+                  
+                  <h3>2.1 Experimental Protocol</h3>
+                  <p>
+                    Participants were subjected to a standardized multi-source document coding workflow involving qualitative evidence synthesis and numerical verification.
+                    Each evaluation trial comprised a baseline undisturbed phase, a standardized 180-second forced context interruption, and an unassisted task resumption phase.
+                    Continuous biometric telemetry and sensory calibration monitors tracked gaze fixation stability, task resumption latency, and decision confidence.
+                  </p>
+
+                  <h3>2.2 Eligibility Criteria & Stopping Rules</h3>
+                  <p>
+                    Eligibility required proficiency in technical document verification and baseline visual-spatial tracking calibration.
+                    A pre-registered stopping rule dictated session termination if hardware calibration drift exceeded 0.05 RMS error thresholds.
+                    The full analytical methodology and data integrity checkpoints were registered prior to data collection.
+                  </p>
+
+                  <h3>2.3 Cohort Accounting & Sample Allocation</h3>
+                  <p className="methods-cohort-paragraph">
+                    Forty participants completed the study and were included in the final analysis.
+                    Participant progression through enrollment, experimental allocation, and final computational evaluation was logged according to pre-specified protocol criteria.
+                  </p>
+                </div>
+
+                <div id="study-flow" aria-labelledby="study-flow-title">
+                  <p className="section-kicker">Reported flow</p>
+                  <h2 id="study-flow-title">Study flow</h2>
+                  <figure className="study-flow">
+                    <div className="study-flow__plot" role="img" aria-label="Three study flow stages: 40 enrolled, 6 excluded for sensor calibration drift, and 34 in final analysis.">
+                      {[
+                        ["Enrolled", "40", "cohort"],
+                        ["Excluded (Drift)", "−6", "drift"],
+                        ["Final analysis", "34", "verified"]
+                      ].map(([label, value, tag]) => (
+                        <div className={`study-flow__stage study-flow__stage--${tag}`} key={label}>
+                          <span className="study-flow__value">{value}</span>
+                          <div className="study-flow__label-row">
+                            <span>{label}</span>
+                            {tag === "drift" && <span className="stage-tag mono">00:03:12</span>}
+                            {tag === "verified" && <span className="stage-tag stage-tag--ok mono">40 − 6</span>}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <figcaption>Figure 1. Participant accounting: 40 enrolled, 6 excluded for sensor calibration drift, 34 in final analysis.</figcaption>
+                  </figure>
+
+                  <div className="study-flow-discrepancy" role="region" aria-label="Cross-Origin Discrepancy Analysis">
+                    <div className="study-flow-discrepancy__header">
+                      <span className="eyebrow">WebMCP Discrepancy Proof</span>
+                      <span className="discrepancy-badge mono">Contradiction: 40 ≠ 34</span>
+                    </div>
+                    <div className="study-flow-discrepancy__grid">
+                      <div className="study-flow-discrepancy__card">
+                        <span className="origin-label mono">Origin A · Written Paper</span>
+                        <strong className="math-statement">40 Enrolled → 0 Excluded → 40 Analyzed</strong>
+                        <p>The published text claims full 40-cohort analysis with zero reported exclusions.</p>
+                      </div>
+                      <div className="study-flow-discrepancy__card study-flow-discrepancy__card--warn">
+                        <span className="origin-label mono">Origin B · Author Video (00:03:12)</span>
+                        <strong className="math-statement">40 Enrolled − 6 Excluded = 34 Analyzed</strong>
+                        <p>Author explicitly admits: <em>&ldquo;Six sessions had calibration drift, so we removed them...&rdquo;</em></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </section>
+
+              <section className="stage-chapter stage-chapter--video edition-scene edition-scene--reversed" id="chapter-video" aria-labelledby="video-title">
+                <div className="edition-scene__painting" aria-hidden="true" />
+                <div className="edition-scene__frame" aria-hidden="true" />
+                <EditionWorld reverse />
+                <div className="edition-scene__caption">
+                <p className="stage-chapter__index mono">Chapter 03 / Video</p>
+                <div>
+                  <p className="section-kicker">Independent publisher, inverted world</p>
+                  <h2 id="video-title" tabIndex={-1}>Video transcript evidence</h2>
+                  <p>The Video publisher is hosted independently and appears here only after it confirms readiness. The reversed field is decoration; transcript evidence stays upright and unpublished until the origin answers.</p>
+                </div>
+                {normalizedVideoOrigin && (
+                  <iframe
+                    className="video-publisher"
+                    hidden={videoAvailable !== true}
+                    onLoad={() => {
+                      const attemptOrigin = normalizedVideoOrigin;
+                      const generation = ++readinessGenerationRef.current;
+                      cleanupVideoReadinessAttempt(readinessAttemptRef);
+                      setVideoReadiness({ origin: attemptOrigin, available: null });
+                      const videoWindow = videoFrameRef.current?.contentWindow;
+                      if (!videoWindow) {
+                        setVideoReadiness({ origin: attemptOrigin, available: false });
+                        return;
+                      }
+                      const attempt: VideoReadinessAttempt = {
+                        origin: attemptOrigin,
+                        generation,
+                        cleanup: () => undefined
+                      };
+                      readinessAttemptRef.current = attempt;
+                      attempt.cleanup = startVideoReadinessAttempt(
+                        window,
+                        attemptOrigin,
+                        videoWindow,
+                        (available) => {
+                          if (readinessAttemptRef.current !== attempt) return;
+                          setVideoReadiness({ origin: attemptOrigin, available });
+                        }
+                      );
+                    }}
+                    ref={videoFrameRef}
+                    src={normalizedVideoOrigin}
+                    title="Independent Video publisher evidence"
+                  />
+                )}
+                {videoConfigurationError ? (
+                  <p role="alert">
+                    Independent Video publisher configuration is invalid: {videoConfigurationError}. No embedded evidence is shown.
+                  </p>
+                ) : videoAvailable !== true && (
+                  <div className="embedded-video-card">
+                    <p role="status" className="embedded-video-status">
+                      {videoAvailable === null
+                        ? "Checking whether the independent Video publisher is available."
+                        : "Independent Video publisher could not be verified or is unavailable. Direct local evidence player loaded below:"}
+                    </p>
+                    <div className="embedded-video-wrapper">
+                      <video
+                        className="native-video-player"
+                        controls
+                        preload="metadata"
+                        src="/media/vedaxi-controlled-evidence.mp4"
+                        aria-label="Recorded source video: calibration drift evidence"
+                      >
+                        <track kind="captions" src="/media/vedaxi-controlled-evidence.vtt" srcLang="en" label="English" default />
+                      </video>
+                    </div>
+                    <div className="embedded-transcript-cue">
+                      <div className="cue-header">
+                        <span className="mono cue-badge">00:03:12 (192s)</span>
+                        <span className="eyebrow">Author Statement</span>
+                      </div>
+                      <p className="cue-body">
+                        &ldquo;We recruited forty participants. Six sessions had calibration drift, so we removed them before modeling and did not replace them.&rdquo;
+                      </p>
+                      <div className="cue-provenance mono">
+                        <span>ID: video.transcript.calibration-drift</span>
+                        <span>Locator: Transcript 00:03:12</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                </div>
+              </section>
+
+              <section className="stage-chapter stage-chapter--evidence edition-scene edition-scene--burn" id="chapter-evidence" aria-labelledby="evidence-title">
+                <div className="edition-scene__painting" aria-hidden="true" />
+                <div className="edition-burn" aria-hidden="true" />
+                <div className="edition-scene__frame" aria-hidden="true" />
+                <div className="edition-scene__caption edition-scene__caption--reveal">
+                  <p className="stage-chapter__index mono">Chapter 04 / Evidence Dossier</p>
+                  <p className="section-kicker">Multi-Origin Corroboration</p>
+                  <h2 id="evidence-title" tabIndex={-1}>Cross-Origin Evidence Comparison</h2>
+                  <p className="lead">
+                    VEDAXI independently extracts and contrasts evidence records from both the written publication (Origin A) and the live presentation talk (Origin B) to catch silent reporting contradictions.
+                  </p>
+
+                  <div className="evidence-dossier-grid">
+                    {/* Origin A */}
+                    <div className="evidence-card evidence-card--origin-a" id="methods-participants" tabIndex={-1}>
+                      <div className="evidence-card__badge mono">Origin A · Published Manuscript</div>
+                      <blockquote cite={`${evidence.sourceOrigin}/#methods-participants`}>
+                        <p>{evidence.excerpt}</p>
+                      </blockquote>
+                      <aside className="provenance" aria-label="Evidence provenance">
+                        <p className="eyebrow">Manuscript Provenance</p>
+                        <dl>
+                          <div><dt>Locator</dt><dd>{evidence.locator}</dd></div>
+                          <div><dt>Reported</dt><dd><strong>40 Analyzed (0 Excluded)</strong></dd></div>
+                          <div><dt>Origin</dt><dd className="mono">{evidence.sourceOrigin}</dd></div>
+                          <div><dt>Evidence ID</dt><dd className="mono">{evidence.id}</dd></div>
+                          <div><dt>Provenance</dt><dd>{evidence.provenance}</dd></div>
+                        </dl>
+                      </aside>
+                    </div>
+
+                    {/* Origin B */}
+                    <div className="evidence-card evidence-card--origin-b">
+                      <div className="evidence-card__badge evidence-card__badge--video mono">Origin B · Author Video Talk (00:03:12)</div>
+                      <blockquote cite="https://vedaxi-video-origin-teal.vercel.app/#00:03:12">
+                        <p>&ldquo;We recruited forty participants. Six sessions had calibration drift, so we removed them before modeling and did not replace them.&rdquo;</p>
+                      </blockquote>
+                      <aside className="provenance" aria-label="Origin B evidence provenance">
+                        <p className="eyebrow">Video Talk Provenance</p>
+                        <dl>
+                          <div><dt>Locator</dt><dd>Transcript Cue 00:03:12</dd></div>
+                          <div><dt>Admitted</dt><dd><strong>34 Analyzed (6 Excluded)</strong></dd></div>
+                          <div><dt>Origin</dt><dd className="mono">vedaxi-video-origin-teal.vercel.app</dd></div>
+                          <div><dt>Evidence ID</dt><dd className="mono">video.transcript.calibration-drift</dd></div>
+                        </dl>
+                      </aside>
+                    </div>
+                  </div>
+
+                  <div className="evidence-verdict-banner">
+                    <div className="verdict-tag mono">⚡ DISCREPANCY VERDICT: 40 ≠ 34</div>
+                    <p>
+                      <strong>Integrity Alert:</strong> The published paper silently omitted 6 excluded participants.
+                      An AI relying solely on the text would cite a false sample size of 40.
+                      VEDAXI’s WebMCP agent catches this 6-participant gap and requires human sign-off in Chapter 05 before any citation can proceed.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <div id="limitations">
+                <p className="section-kicker">Scope note</p>
+                <h2 id="limitations-title">Limitations</h2>
+                <p>{paper.limitations}</p>
               </div>
-            </section>
+
+              <div id="references" aria-labelledby="references-title">
+                <p className="section-kicker">Source list</p>
+                <h2 id="references-title">References</h2>
+                <ol className="references">
+                  {paper.references.map((reference) => (
+                    <li key={reference.id}><span className="mono">{reference.id}</span> {reference.citation}</li>
+                  ))}
+                </ol>
+              </div>
+            </details>
 
             <section className="stage-chapter stage-chapter--decision edition-scene edition-scene--seal" id="chapter-decision" aria-labelledby="focus-decision-title">
               <div className="edition-scene__painting" aria-hidden="true" />
@@ -1880,21 +1908,6 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
                     ))}
                   </ol>
                 )}
-              </div>
-              <div id="limitations">
-                <p className="section-kicker">Scope note</p>
-                <h2 id="limitations-title">Limitations</h2>
-                <p>{paper.limitations}</p>
-              </div>
-
-              <div id="references" aria-labelledby="references-title">
-                <p className="section-kicker">Source list</p>
-                <h2 id="references-title">References</h2>
-                <ol className="references">
-                  {paper.references.map((reference) => (
-                    <li key={reference.id}><span className="mono">{reference.id}</span> {reference.citation}</li>
-                  ))}
-                </ol>
               </div>
               </div>
             </section>

@@ -53,73 +53,120 @@ async function run() {
   console.log("✓ FIX 1 PASSED: Honest labelling with exact counts and zero % characters in fixture suite.");
 
   console.log("\n================================================================================");
-  console.log("FIX 2: UTILITY DRAWER OVERLAP PREVENTION (1440x900 AND 390x844)");
+  console.log("FIX 2: UTILITY DRAWER OVERLAP PREVENTION (1280x900 AND 390x844)");
   console.log("================================================================================");
 
-  for (const viewport of [
-    { width: 1440, height: 900, label: "1440x900 Desktop" },
-    { width: 390, height: 844, label: "390x844 Mobile" }
-  ]) {
-    console.log("\n--- Testing Viewport: " + viewport.label + " ---");
+  const viewports = [
+    { label: "1280x900 Desktop", width: 1280, height: 900 },
+    { label: "390x844 Mobile", width: 390, height: 844 }
+  ];
+
+  for (const viewport of viewports) {
+    console.log(`\n--- Testing Viewport: ${viewport.label} ---`);
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
-    await page.waitForTimeout(300);
+    await page.goto("http://localhost:4173", { waitUntil: "networkidle" });
+    await page.waitForSelector(".capability-drawer");
 
-    // 1. Test elementFromPoint for .sim-run-btn--success
-    const simBtn = page.locator(".sim-run-btn--success");
-    await simBtn.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(300);
+    const overlapResult = await page.evaluate(() => {
+      const drawer = document.querySelector(".capability-drawer");
+      if (!drawer) return { error: "Drawer not found in DOM" };
 
-    const hitBtnResult = await page.evaluate(() => {
-      const btn = document.querySelector(".sim-run-btn--success");
-      if (!btn) return { found: false, reason: "Button not found in DOM" };
-      const rect = btn.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const topEl = document.elementFromPoint(cx, cy);
-      const isDirectOrDescendant = topEl === btn || btn.contains(topEl);
+      const drawerRect = drawer.getBoundingClientRect();
+      const violations = [];
+
+      const candidates = Array.from(
+        document.querySelectorAll(
+          "button, a, input, select, textarea, [role='button'], label, .eyebrow, .section-kicker, dt, dd, summary, h1, h2, h3, p"
+        )
+      );
+
+      for (const el of candidates) {
+        if (drawer.contains(el) || el === drawer) continue;
+
+        const style = window.getComputedStyle(el);
+        if (style.display === "none" || style.visibility === "hidden" || style.opacity === "0") {
+          continue;
+        }
+
+        const rect = el.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) continue;
+
+        // Check if inside viewport
+        if (
+          rect.bottom <= 0 ||
+          rect.top >= window.innerHeight ||
+          rect.right <= 0 ||
+          rect.left >= window.innerWidth
+        ) {
+          continue;
+        }
+
+        const intersects = !(
+          rect.right <= drawerRect.left ||
+          rect.left >= drawerRect.right ||
+          rect.bottom <= drawerRect.top ||
+          rect.top >= drawerRect.bottom
+        );
+
+        if (intersects) {
+          const selector =
+            el.tagName.toLowerCase() +
+            (el.id ? "#" + el.id : "") +
+            (el.className && typeof el.className === "string" ? "." + el.className.trim().replace(/\s+/g, ".") : "");
+          const text = (el.innerText || el.textContent || "").slice(0, 40).trim();
+
+          violations.push({
+            selector,
+            text,
+            elementRect: {
+              top: rect.top,
+              bottom: rect.bottom,
+              left: rect.left,
+              right: rect.right,
+              width: rect.width,
+              height: rect.height
+            },
+            drawerRect: {
+              top: drawerRect.top,
+              bottom: drawerRect.bottom,
+              left: drawerRect.left,
+              right: drawerRect.right,
+              width: drawerRect.width,
+              height: drawerRect.height
+            }
+          });
+        }
+      }
+
       return {
-        found: true,
-        isDirectOrDescendant,
-        topElTag: topEl?.tagName,
-        topElClass: topEl?.className,
-        coords: { cx, cy, innerHeight: window.innerHeight, innerWidth: window.innerWidth }
+        drawerRect: {
+          top: drawerRect.top,
+          bottom: drawerRect.bottom,
+          left: drawerRect.left,
+          right: drawerRect.right,
+          width: drawerRect.width,
+          height: drawerRect.height
+        },
+        violationsCount: violations.length,
+        violations
       };
     });
-    console.log("elementFromPoint at center of .sim-run-btn--success (" + viewport.label + "):", hitBtnResult);
-    if (!hitBtnResult.found || !hitBtnResult.isDirectOrDescendant) {
-      throw new Error("Overlap failure on .sim-run-btn--success at " + viewport.label + ": element at center was <" + hitBtnResult.topElTag + " class=\"" + hitBtnResult.topElClass + "\">");
+
+    console.log("Collapsed Drawer Bounding Box (" + viewport.label + "):", overlapResult.drawerRect);
+    if (overlapResult.violationsCount > 0) {
+      console.error(`❌ FAILED: ${overlapResult.violationsCount} elements intersect the collapsed drawer at ${viewport.label}:`);
+      for (const v of overlapResult.violations) {
+        console.error(
+          `Violation on: <${v.selector}> ("${v.text}")\n  Element Rect: ${JSON.stringify(v.elementRect)}\n  Drawer Rect:  ${JSON.stringify(v.drawerRect)}`
+        );
+      }
+      throw new Error(`Drawer overlap detected at ${viewport.label}`);
     }
 
-    // 2. Test elementFromPoint for .provenance
-    const provEl = page.locator(".provenance").first();
-    await provEl.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(300);
-
-    const hitProvResult = await page.evaluate(() => {
-      const prov = document.querySelector(".provenance");
-      if (!prov) return { found: false, reason: "Provenance element not found in DOM" };
-      const rect = prov.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const topEl = document.elementFromPoint(cx, cy);
-      const isDirectOrDescendant = topEl === prov || prov.contains(topEl);
-      return {
-        found: true,
-        isDirectOrDescendant,
-        topElTag: topEl?.tagName,
-        topElClass: topEl?.className,
-        coords: { cx, cy, innerHeight: window.innerHeight, innerWidth: window.innerWidth }
-      };
-    });
-    console.log("elementFromPoint at center of .provenance (" + viewport.label + "):", hitProvResult);
-    if (!hitProvResult.found || !hitProvResult.isDirectOrDescendant) {
-      throw new Error("Overlap failure on .provenance at " + viewport.label + ": element at center was <" + hitProvResult.topElTag + " class=\"" + hitProvResult.topElClass + "\">");
-    }
-
-    console.log("✓ " + viewport.label + ": Drawer does NOT occlude buttons or provenance cards.");
+    console.log("✓ " + viewport.label + ": ZERO overlap detected across all visible interactive elements & text labels.");
   }
 
-  console.log("✓ FIX 2 PASSED: Capability drawer does not overlap critical interactive elements.");
+  console.log("✓ FIX 2 PASSED: Capability drawer does not overlap critical interactive elements or labels.");
 
   console.log("\n================================================================================");
   console.log("FIX 3: POST-DEMO FINAL PILOT CAPTURE SECTION (EMAIL INPUT & LOCALSTORAGE)");
