@@ -927,8 +927,39 @@ export function PaperApp({
   }, []);
 
   const [tourStep, setTourStep] = useState<number | null>(null);
-  const [pilotEmail, setPilotEmail] = useState("");
-  const [pilotJoined, setPilotJoined] = useState(false);
+  const [finalPilotEmail, setFinalPilotEmail] = useState(() => {
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        return window.localStorage.getItem("vedaxi-pilot-email") || "";
+      }
+    } catch {
+      return "";
+    }
+    return "";
+  });
+  const [finalPilotSubmitted, setFinalPilotSubmitted] = useState(() => {
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        return Boolean(window.localStorage.getItem("vedaxi-pilot-email"));
+      }
+    } catch {
+      return false;
+    }
+    return false;
+  });
+
+  const handleFinalPilotSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!finalPilotEmail.trim()) return;
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        window.localStorage.setItem("vedaxi-pilot-email", finalPilotEmail.trim());
+      }
+    } catch {
+      // Ignore in restricted environments
+    }
+    setFinalPilotSubmitted(true);
+  };
 
   const startGuidedTour = () => {
     const steps = [
@@ -1127,23 +1158,24 @@ export function PaperApp({
           </div>
 
           {/* Multi-Paper Benchmark & False-Positive Quality Gate */}
-          <div className="benchmark-suite-card" aria-label="Multi-Paper Verification Benchmark">
+          <div className="benchmark-suite-card" aria-label="Three deterministic demo fixtures">
             <div className="benchmark-header">
               <div className="benchmark-title-wrap">
-                <span className="eyebrow">Production Quality & Accuracy Benchmark</span>
-                <h3 className="benchmark-title">Multi-Paper Verification & False-Positive Gate</h3>
+                <span className="eyebrow">Deterministic Benchmark Fixtures</span>
+                <h3 className="benchmark-title">Three deterministic demo fixtures</h3>
                 <p className="benchmark-desc">
-                  Select a paper below to test VEDAXI across clean vs discrepant studies. Verify that it catches real discrepancies while <strong>never crying wolf on clean papers (0% False-Positive Rate)</strong>:
+                  Select a paper below to test VEDAXI across clean vs discrepant studies. Verify that it catches real discrepancies while <strong>never crying wolf on clean papers (zero false alarms)</strong>:
                 </p>
+                <p className="benchmark-disclaimer mono">These are fixed demo cases, not a measured accuracy rate.</p>
               </div>
               <div className="benchmark-scorecard mono">
                 <div className="scorecard-item">
-                  <span className="scorecard-label">False Positive Rate</span>
-                  <strong className="scorecard-val text-emerald">0.0% (0/1 clean)</strong>
+                  <span className="scorecard-label">Clean verification</span>
+                  <strong className="scorecard-val text-emerald">1 of 1 clean paper passed</strong>
                 </div>
                 <div className="scorecard-item">
-                  <span className="scorecard-label">Contradiction Recall</span>
-                  <strong className="scorecard-val text-emerald">100.0% (2/2 caught)</strong>
+                  <span className="scorecard-label">Discrepancy recall</span>
+                  <strong className="scorecard-val text-emerald">2 of 2 discrepancies caught</strong>
                 </div>
               </div>
             </div>
@@ -1802,29 +1834,6 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
                     <button type="button" onClick={() => setStageRestored(!focusActive)}>
                       {focusActive ? "Restore full workspace" : "Review focused evidence"}
                     </button>
-                    <div className="pilot-capture-card">
-                      <span className="eyebrow">Continuous Pipeline Integrity</span>
-                      <h4>Join the VEDAXI Research Pilot</h4>
-                      <form
-                        className="pilot-form"
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                          setPilotJoined(true);
-                        }}
-                      >
-                        <input
-                          type="email"
-                          required
-                          value={pilotEmail}
-                          onChange={(e) => setPilotEmail(e.target.value)}
-                          placeholder="Enter your institutional email…"
-                          aria-label="Research email for pilot access"
-                        />
-                        <button type="submit" className="pilot-btn">
-                          {pilotJoined ? "✓ Joined Pilot List!" : "Join the Pilot →"}
-                        </button>
-                      </form>
-                    </div>
                   </div>
                 )}
                 {publisherState.focusProposal && (
@@ -1889,6 +1898,39 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
               </div>
               </div>
             </section>
+
+            <section className="post-demo-pilot" id="research-pilot" aria-labelledby="pilot-section-title">
+              <span className="eyebrow mono">Continuous Pipeline Integrity</span>
+              <h3 id="pilot-section-title" className="final-pilot-title">Join the Research Pilot</h3>
+              <p className="pilot-subtitle">
+                Get early access to autonomous cross-origin WebMCP verification for your research pipeline.
+              </p>
+              {finalPilotSubmitted ? (
+                <div className="pilot-confirmation" role="status">
+                  <span className="pilot-confirmation__icon" aria-hidden="true">✓</span>
+                  <div>
+                    <strong>You&rsquo;re on the pilot list!</strong>
+                    <p className="mono text-xs">{finalPilotEmail}</p>
+                  </div>
+                </div>
+              ) : (
+                <form className="final-pilot-form" onSubmit={handleFinalPilotSubmit}>
+                  <label htmlFor="pilot-email-input" className="sr-only">Researcher email</label>
+                  <input
+                    id="pilot-email-input"
+                    name="email"
+                    type="email"
+                    required
+                    value={finalPilotEmail}
+                    onChange={(e) => setFinalPilotEmail(e.target.value)}
+                    placeholder="researcher@institution.edu"
+                  />
+                  <button type="submit" className="final-pilot-submit-btn">
+                    Join the research pilot
+                  </button>
+                </form>
+              )}
+            </section>
           </article>
 
           <aside className="desk-note" aria-label="Fixture notice">
@@ -1898,23 +1940,28 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
         </div>
       </main>
 
-      <details className="capability-drawer">
-        <summary>Review capabilities</summary>
-        {focusActive && (
-          <nav className="focus-pins" aria-label="Pinned focus context">
-            <p className="eyebrow">Pinned context</p>
-            <a href="#chapter-method">Paper evidence</a>
-            <a href="#chapter-video">Video evidence</a>
-            <a href="#chapter-evidence">Publisher provenance</a>
-            <a href="#chapter-decision">Focus decision</a>
+      <details className="capability-drawer" aria-label="Review capabilities drawer">
+        <summary className="capability-drawer__toggle">
+          <span className="capability-drawer__icon" aria-hidden="true">⚡</span>
+          <span>Review capabilities</span>
+        </summary>
+        <div className="capability-drawer__content">
+          {focusActive && (
+            <nav className="focus-pins" aria-label="Pinned focus context">
+              <p className="eyebrow">Pinned context</p>
+              <a href="#chapter-method">Paper evidence</a>
+              <a href="#chapter-video">Video evidence</a>
+              <a href="#chapter-evidence">Publisher provenance</a>
+              <a href="#chapter-decision">Focus decision</a>
+            </nav>
+          )}
+          <nav aria-label="Capability drawer">
+            <a href="#paper-top">Paper</a>
+            <a href="#chapter-video">Video</a>
+            <a href="#chapter-evidence">Evidence</a>
+            <a href="#chapter-decision">Decision</a>
           </nav>
-        )}
-        <nav aria-label="Capability drawer">
-          <a href="#paper-top">Paper</a>
-          <a href="#chapter-video">Video</a>
-          <a href="#chapter-evidence">Evidence</a>
-          <a href="#chapter-decision">Decision</a>
-        </nav>
+        </div>
       </details>
 
       <footer>
