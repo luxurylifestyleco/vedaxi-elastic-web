@@ -359,6 +359,26 @@ function PaperSearch({ service }: { service: PaperEvidenceService }) {
 
   return (
     <section className="paper-search" aria-labelledby="paper-search-title">
+      <div className="product-intro-hero" aria-label="VEDAXI Product Overview">
+        <div className="product-intro-hero__badge mono">
+          <span>VEDAXI · Autonomous Research Integrity Protocol</span>
+        </div>
+        <h2 className="product-intro-hero__headline">
+          Check whether a paper&rsquo;s claims match its source evidence.
+        </h2>
+        <p className="product-intro-hero__sub">
+          Built for <strong>researchers, peer reviewers, and autonomous AI verification</strong> to catch hidden contradictions between published manuscripts and live conference presentations before false citations spread.
+        </p>
+        <div className="product-intro-hero__actions">
+          <a href="#focus-preview-title" className="product-intro-btn product-intro-btn--primary">
+            ▶ Run 15s Interactive Proof
+          </a>
+          <a href="#study-flow" className="product-intro-btn product-intro-btn--secondary">
+            Inspect 40 ≠ 34 Contradiction ↘
+          </a>
+        </div>
+      </div>
+
       <form className="search-form" onSubmit={submit}>
         <label htmlFor="paper-query">Paper evidence query</label>
         <div className="search-form__controls">
