@@ -1,0 +1,122 @@
+[
+  {
+    "id": "w0",
+    "text": "We",
+    "start": 0.199,
+    "end": 0.319
+  },
+  {
+    "id": "w1",
+    "text": "recruited",
+    "start": 0.399,
+    "end": 0.839
+  },
+  {
+    "id": "w2",
+    "text": "forty",
+    "start": 0.979,
+    "end": 1.259
+  },
+  {
+    "id": "w3",
+    "text": "participants.",
+    "start": 1.36,
+    "end": 2.139
+  },
+  {
+    "id": "w4",
+    "text": "Six",
+    "start": 2.819,
+    "end": 3.039
+  },
+  {
+    "id": "w5",
+    "text": "sessions",
+    "start": 3.119,
+    "end": 3.659
+  },
+  {
+    "id": "w6",
+    "text": "had",
+    "start": 3.72,
+    "end": 3.859
+  },
+  {
+    "id": "w7",
+    "text": "calibration",
+    "start": 3.939,
+    "end": 4.559
+  },
+  {
+    "id": "w8",
+    "text": "drift,",
+    "start": 4.639,
+    "end": 4.96
+  },
+  {
+    "id": "w9",
+    "text": "so",
+    "start": 5.4,
+    "end": 5.5
+  },
+  {
+    "id": "w10",
+    "text": "we",
+    "start": 5.559,
+    "end": 5.659
+  },
+  {
+    "id": "w11",
+    "text": "removed",
+    "start": 5.719,
+    "end": 6.199
+  },
+  {
+    "id": "w12",
+    "text": "them",
+    "start": 6.239,
+    "end": 6.399
+  },
+  {
+    "id": "w13",
+    "text": "before",
+    "start": 6.44,
+    "end": 6.759
+  },
+  {
+    "id": "w14",
+    "text": "modeling",
+    "start": 6.819,
+    "end": 7.299
+  },
+  {
+    "id": "w15",
+    "text": "and",
+    "start": 7.659,
+    "end": 7.739
+  },
+  {
+    "id": "w16",
+    "text": "did",
+    "start": 7.779,
+    "end": 7.899
+  },
+  {
+    "id": "w17",
+    "text": "not",
+    "start": 7.94,
+    "end": 8.099
+  },
+  {
+    "id": "w18",
+    "text": "replace",
+    "start": 8.159,
+    "end": 8.559
+  },
+  {
+    "id": "w19",
+    "text": "them.",
+    "start": 8.599,
+    "end": 8.8
+  }
+]

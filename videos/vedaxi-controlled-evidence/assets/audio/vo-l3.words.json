@@ -1,0 +1,536 @@
+[
+  {
+    "id": "w0",
+    "text": "During",
+    "start": 0.14,
+    "end": 0.379
+  },
+  {
+    "id": "w1",
+    "text": "the",
+    "start": 0.419,
+    "end": 0.519
+  },
+  {
+    "id": "w2",
+    "text": "trial",
+    "start": 0.579,
+    "end": 0.859
+  },
+  {
+    "id": "w3",
+    "text": "progression,",
+    "start": 0.959,
+    "end": 1.48
+  },
+  {
+    "id": "w4",
+    "text": "environmental",
+    "start": 1.939,
+    "end": 2.599
+  },
+  {
+    "id": "w5",
+    "text": "lighting",
+    "start": 2.72,
+    "end": 3.059
+  },
+  {
+    "id": "w6",
+    "text": "and",
+    "start": 3.139,
+    "end": 3.199
+  },
+  {
+    "id": "w7",
+    "text": "participant",
+    "start": 3.299,
+    "end": 3.819
+  },
+  {
+    "id": "w8",
+    "text": "movement",
+    "start": 3.899,
+    "end": 4.319
+  },
+  {
+    "id": "w9",
+    "text": "introduced",
+    "start": 4.679,
+    "end": 5.219
+  },
+  {
+    "id": "w10",
+    "text": "known",
+    "start": 5.339,
+    "end": 5.639
+  },
+  {
+    "id": "w11",
+    "text": "sensor",
+    "start": 5.719,
+    "end": 6.019
+  },
+  {
+    "id": "w12",
+    "text": "drift",
+    "start": 6.119,
+    "end": 6.319
+  },
+  {
+    "id": "w13",
+    "text": "parameters",
+    "start": 6.42,
+    "end": 6.98
+  },
+  {
+    "id": "w14",
+    "text": "across",
+    "start": 7.119,
+    "end": 7.46
+  },
+  {
+    "id": "w15",
+    "text": "several",
+    "start": 7.519,
+    "end": 7.879
+  },
+  {
+    "id": "w16",
+    "text": "continuous",
+    "start": 7.919,
+    "end": 8.46
+  },
+  {
+    "id": "w17",
+    "text": "recording",
+    "start": 8.539,
+    "end": 8.939
+  },
+  {
+    "id": "w18",
+    "text": "sessions.",
+    "start": 9.039,
+    "end": 9.539
+  },
+  {
+    "id": "w19",
+    "text": "Our",
+    "start": 10.119,
+    "end": 10.219
+  },
+  {
+    "id": "w20",
+    "text": "laboratory",
+    "start": 10.3,
+    "end": 10.8
+  },
+  {
+    "id": "w21",
+    "text": "space",
+    "start": 10.939,
+    "end": 11.179
+  },
+  {
+    "id": "w22",
+    "text": "receives",
+    "start": 11.239,
+    "end": 11.619
+  },
+  {
+    "id": "w23",
+    "text": "indirect",
+    "start": 11.699,
+    "end": 12.059
+  },
+  {
+    "id": "w24",
+    "text": "daylight,",
+    "start": 12.159,
+    "end": 12.579
+  },
+  {
+    "id": "w25",
+    "text": "and",
+    "start": 13.039,
+    "end": 13.159
+  },
+  {
+    "id": "w26",
+    "text": "afternoon",
+    "start": 13.259,
+    "end": 13.659
+  },
+  {
+    "id": "w27",
+    "text": "sessions",
+    "start": 13.779,
+    "end": 14.159
+  },
+  {
+    "id": "w28",
+    "text": "showed",
+    "start": 14.219,
+    "end": 14.359
+  },
+  {
+    "id": "w29",
+    "text": "a",
+    "start": 14.399,
+    "end": 14.479
+  },
+  {
+    "id": "w30",
+    "text": "measurable",
+    "start": 14.539,
+    "end": 14.96
+  },
+  {
+    "id": "w31",
+    "text": "shift",
+    "start": 15.099,
+    "end": 15.359
+  },
+  {
+    "id": "w32",
+    "text": "in",
+    "start": 15.399,
+    "end": 15.539
+  },
+  {
+    "id": "w33",
+    "text": "baseline",
+    "start": 15.599,
+    "end": 16.059
+  },
+  {
+    "id": "w34",
+    "text": "pupil",
+    "start": 16.139,
+    "end": 16.399
+  },
+  {
+    "id": "w35",
+    "text": "diameter",
+    "start": 16.479,
+    "end": 16.959
+  },
+  {
+    "id": "w36",
+    "text": "that",
+    "start": 17.319,
+    "end": 17.399
+  },
+  {
+    "id": "w37",
+    "text": "was",
+    "start": 17.44,
+    "end": 17.579
+  },
+  {
+    "id": "w38",
+    "text": "unrelated",
+    "start": 17.659,
+    "end": 18.199
+  },
+  {
+    "id": "w39",
+    "text": "to",
+    "start": 18.239,
+    "end": 18.339
+  },
+  {
+    "id": "w40",
+    "text": "task",
+    "start": 18.42,
+    "end": 18.739
+  },
+  {
+    "id": "w41",
+    "text": "demand.",
+    "start": 18.779,
+    "end": 19.239
+  },
+  {
+    "id": "w42",
+    "text": "Participant",
+    "start": 19.539,
+    "end": 20.219
+  },
+  {
+    "id": "w43",
+    "text": "posture",
+    "start": 20.299,
+    "end": 20.719
+  },
+  {
+    "id": "w44",
+    "text": "change",
+    "start": 20.779,
+    "end": 21.119
+  },
+  {
+    "id": "w45",
+    "text": "also",
+    "start": 21.219,
+    "end": 21.519
+  },
+  {
+    "id": "w46",
+    "text": "displaced",
+    "start": 21.579,
+    "end": 22.199
+  },
+  {
+    "id": "w47",
+    "text": "the",
+    "start": 22.239,
+    "end": 22.299
+  },
+  {
+    "id": "w48",
+    "text": "head",
+    "start": 22.42,
+    "end": 22.619
+  },
+  {
+    "id": "w49",
+    "text": "position",
+    "start": 22.659,
+    "end": 23.119
+  },
+  {
+    "id": "w50",
+    "text": "estimate",
+    "start": 23.199,
+    "end": 23.699
+  },
+  {
+    "id": "w51",
+    "text": "beyond",
+    "start": 24.059,
+    "end": 24.359
+  },
+  {
+    "id": "w52",
+    "text": "the",
+    "start": 24.399,
+    "end": 24.479
+  },
+  {
+    "id": "w53",
+    "text": "tolerance",
+    "start": 24.579,
+    "end": 25.079
+  },
+  {
+    "id": "w54",
+    "text": "of",
+    "start": 25.119,
+    "end": 25.199
+  },
+  {
+    "id": "w55",
+    "text": "the",
+    "start": 25.239,
+    "end": 25.319
+  },
+  {
+    "id": "w56",
+    "text": "original",
+    "start": 25.379,
+    "end": 25.859
+  },
+  {
+    "id": "w57",
+    "text": "calibration.",
+    "start": 25.939,
+    "end": 26.659
+  },
+  {
+    "id": "w58",
+    "text": "We",
+    "start": 27.039,
+    "end": 27.159
+  },
+  {
+    "id": "w59",
+    "text": "logged",
+    "start": 27.219,
+    "end": 27.639
+  },
+  {
+    "id": "w60",
+    "text": "each",
+    "start": 27.739,
+    "end": 27.899
+  },
+  {
+    "id": "w61",
+    "text": "of",
+    "start": 27.939,
+    "end": 28.019
+  },
+  {
+    "id": "w62",
+    "text": "these",
+    "start": 28.059,
+    "end": 28.259
+  },
+  {
+    "id": "w63",
+    "text": "conditions",
+    "start": 28.299,
+    "end": 28.84
+  },
+  {
+    "id": "w64",
+    "text": "as",
+    "start": 28.92,
+    "end": 29.039
+  },
+  {
+    "id": "w65",
+    "text": "they",
+    "start": 29.079,
+    "end": 29.179
+  },
+  {
+    "id": "w66",
+    "text": "occurred",
+    "start": 29.239,
+    "end": 29.799
+  },
+  {
+    "id": "w67",
+    "text": "rather",
+    "start": 29.92,
+    "end": 30.199
+  },
+  {
+    "id": "w68",
+    "text": "than",
+    "start": 30.239,
+    "end": 30.399
+  },
+  {
+    "id": "w69",
+    "text": "correcting",
+    "start": 30.459,
+    "end": 30.879
+  },
+  {
+    "id": "w70",
+    "text": "them",
+    "start": 30.92,
+    "end": 31.039
+  },
+  {
+    "id": "w71",
+    "text": "in",
+    "start": 31.079,
+    "end": 31.199
+  },
+  {
+    "id": "w72",
+    "text": "software,",
+    "start": 31.279,
+    "end": 31.799
+  },
+  {
+    "id": "w73",
+    "text": "so",
+    "start": 32.219,
+    "end": 32.299
+  },
+  {
+    "id": "w74",
+    "text": "that",
+    "start": 32.34,
+    "end": 32.459
+  },
+  {
+    "id": "w75",
+    "text": "the",
+    "start": 32.5,
+    "end": 32.579
+  },
+  {
+    "id": "w76",
+    "text": "decision",
+    "start": 32.619,
+    "end": 33.059
+  },
+  {
+    "id": "w77",
+    "text": "to",
+    "start": 33.099,
+    "end": 33.159
+  },
+  {
+    "id": "w78",
+    "text": "retain",
+    "start": 33.219,
+    "end": 33.659
+  },
+  {
+    "id": "w79",
+    "text": "or",
+    "start": 33.739,
+    "end": 33.779
+  },
+  {
+    "id": "w80",
+    "text": "exclude",
+    "start": 33.899,
+    "end": 34.319
+  },
+  {
+    "id": "w81",
+    "text": "a",
+    "start": 34.36,
+    "end": 34.419
+  },
+  {
+    "id": "w82",
+    "text": "session",
+    "start": 34.5,
+    "end": 35.119
+  },
+  {
+    "id": "w83",
+    "text": "could",
+    "start": 35.159,
+    "end": 35.279
+  },
+  {
+    "id": "w84",
+    "text": "be",
+    "start": 35.319,
+    "end": 35.399
+  },
+  {
+    "id": "w85",
+    "text": "made",
+    "start": 35.459,
+    "end": 35.619
+  },
+  {
+    "id": "w86",
+    "text": "transparently",
+    "start": 35.68,
+    "end": 36.54
+  },
+  {
+    "id": "w87",
+    "text": "after",
+    "start": 36.639,
+    "end": 36.899
+  },
+  {
+    "id": "w88",
+    "text": "collection.",
+    "start": 36.939,
+    "end": 37.52
+  }
+]

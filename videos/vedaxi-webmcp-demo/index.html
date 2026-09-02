@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; margin: 0; overflow: hidden; background: #07151b; }
+      body { font-family: Arial, Helvetica, sans-serif; color: #edf3ee; }
+      .clip { position: absolute; inset: 0; overflow: hidden; }
+      .backdrop { background: radial-gradient(circle at 72% 28%, #173842 0, #0a1d25 31%, #07151b 74%); }
+      .grid { background-image: linear-gradient(rgba(188,226,218,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(188,226,218,.08) 1px, transparent 1px); background-size: 90px 90px; mask-image: linear-gradient(90deg, transparent, black 22%, black 78%, transparent); }
+      .grain { opacity: .18; background-image: repeating-radial-gradient(circle at 18% 35%, rgba(255,255,255,.15) 0 1px, transparent 1px 5px); background-size: 17px 17px; }
+      .rail { position:absolute; left: 74px; right:auto; top: 54px; bottom:auto; width: 430px; height: 44px; padding:12px 14px; background:rgba(7,21,27,.88); letter-spacing: .17em; font-size: 18px; font-weight: 700; z-index:20; }
+      .rail span { color: #72d6db; }
+      .legal { position:absolute; bottom: 52px; left:74px; font-size: 16px; line-height:1.45; color: #b8c7c5; max-width: 610px; }
+      .kicker { font-size: 21px; letter-spacing: .18em; text-transform: uppercase; color: #72d6db; font-weight: 700; }
+      .title { font-size: 110px; font-weight: 700; line-height: .91; letter-spacing: -.065em; max-width: 1050px; }
+      .title em { color: #b9ff63; font-style: normal; }
+      .lede { font-size: 34px; line-height: 1.23; max-width: 560px; color: #d7e4e1; }
+      .open-copy { position:absolute; left: 148px; top: 250px; }
+      .question { position:absolute; font-size: 33px; font-weight: 700; letter-spacing:.08em; color:#c7dbd7; }
+      .q1 { left: 980px; top: 336px; }.q2 { left: 1120px; top: 495px; }.q3 { left: 890px; top: 650px; }.q4 { left: 1180px; top: 800px; }
+      .hook-stage { position:absolute; inset:0; perspective:1500px; overflow:hidden; }
+      .hook-ghost { position:absolute; left:104px; top:168px; color:#789e82; font-size:232px; line-height:.75; font-weight:800; letter-spacing:-.09em; }
+      .hook-intro { position:absolute; left:148px; top:218px; width:780px; }
+      .hook-intro h1 { margin:18px 0 0; font-size:134px; line-height:.78; letter-spacing:-.085em; max-width:730px; }
+      .hook-intro h1 em { color:#b9ff63; font-style:normal; }.hook-intro p { max-width:500px; margin:34px 0 0; font-size:29px; line-height:1.15; color:#cfe0dc; }
+      .hook-deck { position:absolute; right:126px; top:184px; width:760px; height:620px; transform-style:preserve-3d; }
+      .hook-card { position:absolute; width:350px; height:188px; padding:22px 25px; border:1px solid rgba(231,244,239,.8); background:rgba(9,31,40,.92); box-shadow:22px 26px 0 rgba(0,0,0,.23); transform-style:preserve-3d; }
+      .hook-card small { display:block; color:#72d6db; font-size:15px; letter-spacing:.16em; font-weight:700; }.hook-card b { display:block; margin-top:24px; font-size:44px; line-height:.86; letter-spacing:-.055em; }.hook-card span { display:block; margin-top:12px; font-size:17px; color:#d9e9e6; }
+      .hook-card.paper { left:12px; top:76px; border-top:7px solid #72d6db; }.hook-card.video { right:20px; top:138px; border-top:7px solid #b9ff63; }.hook-card.derived { left:70px; bottom:70px; border-top:7px solid #db6d54; }.hook-card.human { right:70px; bottom:20px; background:#e7eee9; color:#0c2229; border-top:7px solid #b9ff63; }.hook-card.human small { color:#197279; }.hook-card.human span { color:#264249; }
+      .hook-question { position:absolute; left:148px; right:148px; bottom:126px; height:165px; border-top:2px solid rgba(185,255,99,.8); padding-top:20px; }.hook-question p { margin:0; font-size:68px; line-height:.9; letter-spacing:-.065em; font-weight:800; }.hook-question b { color:#b9ff63; }.hook-question small { position:absolute; right:0; top:32px; color:#72d6db; font-size:17px; letter-spacing:.15em; }
+      .hook-snap { position:absolute; left:148px; right:148px; top:338px; text-align:center; }.hook-snap small { display:block; color:#72d6db; letter-spacing:.2em; font-size:18px; font-weight:700; }.hook-snap strong { display:block; margin-top:28px; font-size:132px; line-height:.78; letter-spacing:-.09em; }.hook-snap strong em { color:#b9ff63; font-style:normal; }
+      .frame { position:absolute; border: 2px solid rgba(220,245,238,.8); box-shadow: 0 40px 80px rgba(0,0,0,.35); overflow:hidden; background:#101e21; }
+      .frame img, .frame video { width:100%; height:100%; object-fit:cover; display:block; }
+      .evidence-frame { left: 150px; top: 140px; width: 1320px; height: 742px; }
+      .evidence-frame video { object-position: center; }
+      .frame-label { position:absolute; left: 151px; top: 88px; padding: 11px 15px; background:#b9ff63; color:#092028; font-size:16px; letter-spacing:.12em; font-weight:700; }
+      .side-copy { position:absolute; left:auto; right: 108px; top: 260px; bottom:auto; width: 420px; height:390px; padding:30px; background:rgba(7,21,27,.82); border-left:3px solid #72d6db; }
+      .side-copy h2 { font-size: 53px; line-height:.96; letter-spacing:-.055em; margin:12px 0 24px; }
+      .side-copy p { font-size: 23px; line-height:1.32; color:#d4e2df; }
+      .origin-pill { position:absolute; left:auto; top:auto; bottom:75px; right:108px; width:430px; height:52px; border:1px solid rgba(185,255,99,.75); background:#072128; padding:14px 18px; font-size:17px; color:#b9ff63; letter-spacing:.12em; font-weight:700; }
+      .numbers { display:flex; position:absolute; left:150px; right:auto; top:auto; bottom:120px; width:766px; height:190px; gap:20px; }
+      .number { width:242px; min-height:190px; padding:24px; background:#e7eee9; color:#0b2025; border-top:7px solid #72d6db; }
+      .number:nth-child(2){ border-color:#db6d54; }.number:nth-child(3){ border-color:#4ab58c; }
+      .number small { font-size:16px; letter-spacing:.13em; font-weight:700; }.number strong { display:block; font-size:82px; line-height:.9; margin-top:18px; }.number span { display:block; font-size:17px; line-height:1.2; margin-top:9px; }
+      .equation { position:absolute; right:110px; bottom:124px; font-size:68px; font-weight:700; letter-spacing:-.06em; color:#edf3ee; }.equation b { color:#b9ff63; }
+      .proof-label { position:absolute; left:150px; right:auto; top:auto; bottom:57px; width:920px; height:28px; font-size:17px; letter-spacing:.13em; color:#cde2dd; }
+      .diagram { position:absolute; left:146px; right:146px; top:206px; bottom:145px; display:grid; grid-template-columns:1fr 130px 1fr; align-items:center; }
+      .source-card { height:340px; background:#e8eee9; color:#0c1f26; padding:42px; border:1px solid #c8d7d2; box-shadow:24px 24px 0 rgba(114,214,219,.22); }
+      .source-card.dark { background:#113039; color:#f1f6f2; box-shadow:24px 24px 0 rgba(185,255,99,.16); }
+      .source-card h3 { font-size:57px; line-height:.92; letter-spacing:-.06em; margin:18px 0; }.source-card p { max-width:440px; font-size:25px; line-height:1.28; }
+      .connector { height:2px; background:#b9ff63; position:relative; }.connector:after { content:'DERIVE'; position:absolute; left:32px; top:-38px; color:#b9ff63; font-size:15px; letter-spacing:.15em; font-weight:700; }
+      .governance { position:absolute; left:146px; right:146px; top:220px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px; }
+      .governance article { min-height:390px; padding:37px; border:1px solid rgba(230,245,240,.52); background:rgba(13,38,47,.92); }.governance article:nth-child(2){ background:#dce9e2; color:#0a1c23; }.governance article:nth-child(3){ background:#b9ff63; color:#0a1c23; }
+      .governance small { letter-spacing:.15em; font-size:15px; font-weight:700; }.governance h3 { margin:58px 0 22px; font-size:57px; line-height:.9; letter-spacing:-.06em; }.governance p{font-size:24px; line-height:1.27;}
+      .statusline { position:absolute; left:146px; right:146px; bottom:91px; border-top:1px solid rgba(223,242,235,.45); padding-top:18px; font-size:19px; letter-spacing:.07em; color:#c9d8d5; }
+      .close-copy { position:absolute; left:150px; top:260px; }.close-copy h1 { margin:20px 0 32px; font-size:128px; letter-spacing:-.08em; line-height:.78; }.close-copy p { max-width:620px; font-size:36px; line-height:1.19; }.lockup { position:absolute; right:155px; bottom:160px; width:550px; }.lockup div{border-bottom:2px solid #b9ff63; padding:18px 0; color:#eff7f2; font-size:29px; font-weight:700;}.lockup b{color:#b9ff63; margin-right:22px;}
+      .watermark { position:absolute; left:auto; right:75px; top:54px; bottom:auto; width:420px; height:44px; padding:13px 14px; background:rgba(7,21,27,.88); text-align:right; font-size:15px; letter-spacing:.15em; color:#e6f0ed; z-index:20; }
+      .frame-label { right:auto; bottom:auto; width:420px; height:43px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="140" data-width="1920" data-height="1080">
+      <div id="bg" class="clip backdrop" data-start="0" data-duration="140" data-track-index="0"></div>
+      <div id="grid" class="clip grid" data-start="0" data-duration="140" data-track-index="0"></div>
+      <div id="grain" class="clip grain" data-start="0" data-duration="140" data-track-index="0"></div>
+      <div id="identity" class="clip rail" data-start="0" data-duration="140" data-track-index="3"><span>VEDAXI</span> / WEBMCP EVIDENCE FILM</div>
+      <div id="mark" class="clip watermark" data-start="0" data-duration="140" data-track-index="3">CONTROLLED PRODUCT DEMONSTRATION</div>
+
+      <section id="opening" class="clip" data-start="0" data-duration="12" data-track-index="2">
+        <div class="hook-stage">
+          <p class="hook-ghost" aria-hidden="true" data-layout-allow-overlap="true">ANSWER</p>
+          <div class="hook-intro"><p class="kicker">THE FAST-ANSWER PROBLEM</p><h1>Research got <em>faster.</em></h1><p>But a result can look complete long before its trail is understood.</p></div>
+          <div class="hook-deck"><article class="hook-card paper"><small>PAPER / PUBLISHER A</small><b>40<br />RECRUITED</b><span>Recorded evidence</span></article><article class="hook-card video"><small>VIDEO / PUBLISHER B</small><b>00:03:12</b><span>Independent context</span></article><article class="hook-card derived"><small>OUTSIDE BOTH ORIGINS</small><b>40 − 6 = 34</b><span>Derived relationship</span></article><article class="hook-card human"><small>DECISION GATE</small><b>HUMAN<br />CONFIRMS</b><span>Publisher-governed action</span></article></div>
+          <div class="hook-question"><p>FAST ANSWER.<br /><b>UNKNOWN TRAIL.</b></p><small>WHO SAID IT? / WHO DERIVED IT? / WHO CONFIRMS IT?</small></div>
+          <div class="hook-snap"><small>THE VEDAXI TEST</small><strong>SHOW THE <em>TRAIL.</em></strong></div>
+        </div>
+      </section>
+
+      <video id="paper-video" class="clip" src="assets/vedaxi-controlled-evidence.mp4" data-start="12" data-duration="20" data-media-start="0" data-track-index="1" muted playsinline></video>
+      <div id="paper-wash" class="clip" data-start="12" data-duration="20" data-track-index="2" style="background:linear-gradient(90deg, rgba(7,21,27,.72), transparent 65%);"></div>
+      <div id="paper-copy" class="clip side-copy" data-start="12" data-duration="20" data-track-index="3"><p class="kicker">01 / Paper origin</p><h2>Evidence, <em>bounded.</em></h2><p>The supplied recording is the actual controlled fixture used by VEDAXI’s Video publisher.</p></div>
+      <p id="paper-label" class="clip origin-pill" data-start="12" data-duration="20" data-track-index="3">PUBLISHER A / PAPER EVIDENCE</p>
+
+      <video id="video-video" class="clip" src="assets/vedaxi-controlled-evidence.mp4" data-start="32" data-duration="20" data-media-start="90" data-track-index="1" muted playsinline></video>
+      <div id="video-wash" class="clip" data-start="32" data-duration="20" data-track-index="2" style="background:linear-gradient(90deg, rgba(7,21,27,.78), transparent 68%);"></div>
+      <div id="video-copy" class="clip side-copy" data-start="32" data-duration="20" data-track-index="3"><p class="kicker">02 / Video origin</p><h2>Context, <em>timestamped.</em></h2><p>At <b>00:03:12</b>, the recording discloses what the cohort number alone leaves out.</p></div>
+      <p id="video-label" class="clip origin-pill" data-start="32" data-duration="20" data-track-index="3">PUBLISHER B / VIDEO EVIDENCE</p>
+
+      <video id="cohort-video" class="clip" src="assets/vedaxi-controlled-evidence.mp4" data-start="52" data-duration="18" data-media-start="174" data-track-index="1" muted playsinline></video>
+      <div id="cohort-wash" class="clip" data-start="52" data-duration="18" data-track-index="2" style="background:linear-gradient(0deg, rgba(7,21,27,.94), transparent 67%);"></div>
+      <div id="numbers" class="clip numbers" data-start="52" data-duration="18" data-track-index="3"><div class="number"><small>RECRUITED</small><strong>40</strong><span>Recorded by the paper.</span></div><div class="number"><small>EXCLUDED</small><strong>6</strong><span>Calibration drift in the video record.</span></div><div class="number"><small>ANALYSED</small><strong>34</strong><span>External derivation.</span></div></div>
+      <p id="cohort-proof" class="clip proof-label" data-start="52" data-duration="18" data-track-index="3">Evidence ≠ derivation. The relationship remains outside both publisher origins.</p>
+
+      <section id="derivation" class="clip" data-start="70" data-duration="22" data-track-index="2"><div class="diagram"><article class="source-card"><p class="kicker">Publisher A</p><h3>Paper evidence</h3><p>40 participants recruited.</p></article><div class="connector"></div><article class="source-card dark"><p class="kicker">Publisher B</p><h3>Video evidence</h3><p>00:03:12 · 6 sessions excluded for calibration drift.</p></article></div><p class="equation">40 − 6 = <b>34</b></p></section>
+
+      <img id="discrepancy-image" class="clip" src="assets/product/discrepancy.png" data-start="92" data-duration="15" data-track-index="1" alt="Real VEDAXI discrepancy chapter screenshot" />
+      <div id="discrepancy-wash" class="clip" data-start="92" data-duration="15" data-track-index="2" style="background:linear-gradient(90deg, rgba(7,21,27,.85), transparent 65%);"></div>
+      <div id="focus-copy" class="clip side-copy" data-start="92" data-duration="15" data-track-index="3"><p class="kicker">Agent action</p><h2>Requests, not control.</h2><p>VEDAXI exposes bounded evidence tools and a structured focus request. The person keeps the confirmation gate.</p></div>
+
+      <video id="critical-video" class="clip" src="assets/vedaxi-controlled-evidence.mp4" data-start="107" data-duration="11" data-media-start="192" data-track-index="1" muted playsinline></video>
+      <div id="critical-wash" class="clip" data-start="107" data-duration="11" data-track-index="2" style="background:rgba(7,21,27,.28);"></div>
+      <p id="critical-label" class="clip frame-label" data-start="107" data-duration="11" data-track-index="3">REAL VIDEO FIXTURE / 00:03:12</p>
+
+      <img id="governance-image" class="clip" src="assets/product/kill-switch.png" data-start="118" data-duration="16" data-track-index="1" alt="Real VEDAXI kill-switch chapter screenshot" />
+      <div id="governance-wash" class="clip" data-start="118" data-duration="16" data-track-index="2" style="background:rgba(7,21,27,.82);"></div>
+      <section id="governance-copy" class="clip" data-start="118" data-duration="16" data-track-index="3"><div class="governance"><article><small>PUBLISHER</small><h3>Controls capability.</h3><p>Agent access is governed at the origin boundary.</p></article><article><small>AGENT</small><h3>Retrieves and assists.</h3><p>It can request a focused evidence view, not unilaterally confirm it.</p></article><article><small>HUMAN</small><h3>Reviews and confirms.</h3><p>The final editorial decision remains visible and attributable.</p></article></div><p class="statusline">KILL SWITCH: AGENT CAPABILITY OFF / HUMAN WORKSPACE INTACT</p></section>
+
+      <section id="closing" class="clip" data-start="134" data-duration="6" data-track-index="4"><div class="close-copy"><p class="kicker">Built with WebMCP</p><h1>VEDAXI</h1><p>Publisher-governed evidence.<br />Agent capability.<br />Human authority.</p></div><div class="lockup"><div><b>01</b> PUBLISHER ORIGIN</div><div><b>02</b> EVIDENCE BOUNDARY</div><div><b>03</b> HUMAN CONFIRMATION</div></div></section>
+
+      <audio id="music-bed" src="assets/audio/vedaxi-ambient-bed.m4a" data-start="0" data-duration="140" data-track-index="9" data-volume="0.7" data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":2,"v":0.7},{"t":139.5,"v":0.7},{"t":140,"v":0}]}]}'></audio>
+      <audio id="narration-hook" src="assets/voice/clean/01-hook.mp3" data-start="0" data-duration="12" data-track-index="10" data-volume="1"></audio>
+      <audio id="narration-paper" src="assets/voice/clean/02-paper.mp3" data-start="12" data-duration="18" data-track-index="10" data-volume="1"></audio>
+      <audio id="narration-video" src="assets/voice/clean/03-video.mp3" data-start="30" data-duration="18" data-track-index="10" data-volume="1"></audio>
+      <audio id="narration-derivation" src="assets/voice/clean/04-derivation.mp3" data-start="48" data-duration="15" data-track-index="10" data-volume="1"></audio>
+      <audio id="narration-focus" src="assets/voice/clean/05-focus.mp3" data-start="63" data-duration="17" data-track-index="10" data-volume="1"></audio>
+      <audio id="narration-human" src="assets/voice/clean/06-human.mp3" data-start="80" data-duration="19" data-track-index="10" data-volume="1"></audio>
+      <audio id="narration-governance" src="assets/voice/clean/07-governance.mp3" data-start="99" data-duration="19" data-track-index="10" data-volume="1"></audio>
+      <audio id="narration-close" src="assets/voice/clean/08-close.mp3" data-start="118" data-duration="18" data-track-index="10" data-volume="1"></audio>
+      <audio id="impact" src="assets/sfx/impact-bass-1.mp3" data-start="4" data-duration="2" data-track-index="11" data-volume="0.9"></audio>
+      <audio id="hook-hit-2" src="assets/sfx/impact-bass-1.mp3" data-start="5.2" data-duration="2" data-track-index="12" data-volume="0.62"></audio>
+      <audio id="hook-hit-3" src="assets/sfx/impact-bass-1.mp3" data-start="6.4" data-duration="2" data-track-index="13" data-volume="0.62"></audio>
+      <audio id="hook-snap" src="assets/sfx/impact-bass-1.mp3" data-start="10.75" data-duration="2" data-track-index="14" data-volume="0.8"></audio>
+      <audio id="riser" src="assets/sfx/riser.mp3" data-start="9" data-duration="3" data-track-index="15" data-volume="0.5"></audio>
+      <audio id="whoosh" src="assets/sfx/whoosh-cinematic.mp3" data-start="70" data-duration="3" data-track-index="16" data-volume="0.55"></audio>
+      <audio id="confirm" src="assets/sfx/click.mp3" data-start="107" data-duration="0.37" data-track-index="17" data-volume="0.9"></audio>
+      <audio id="thunk" src="assets/sfx/impact-bass-1.mp3" data-start="119" data-duration="2" data-track-index="18" data-volume="0.82"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const show = (id, at, vars = {}) => tl.fromTo(id, { autoAlpha: 0, ...vars }, { autoAlpha: 1, duration: .75, ease: 'power2.out' }, at);
+      tl.fromTo('#opening .hook-ghost', { x: -120, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 1.7, ease: 'power2.out' }, .05)
+        .fromTo('#opening .hook-intro .kicker', { y: 22, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .55, ease: 'power3.out' }, .3)
+        .fromTo('#opening .hook-intro h1', { y: 110, autoAlpha: 0, rotationX: 16 }, { y: 0, autoAlpha: 1, rotationX: 0, duration: .85, ease: 'power4.out' }, .48)
+        .fromTo('#opening .hook-intro p:not(.kicker)', { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .6, ease: 'power3.out' }, 1.15)
+        .fromTo('#opening .hook-card.paper', { x: 360, y: -260, z: -800, rotationX: 22, rotationY: -28, autoAlpha: 0 }, { x: 0, y: 0, z: 0, rotationX: 0, rotationY: -7, autoAlpha: 1, duration: .48, ease: 'power4.out' }, 3.8)
+        .fromTo('#opening .hook-card.video', { x: 450, y: 250, z: -900, rotationX: -20, rotationY: 30, autoAlpha: 0 }, { x: 0, y: 0, z: 0, rotationX: 0, rotationY: 8, autoAlpha: 1, duration: .48, ease: 'power4.out' }, 5.0)
+        .fromTo('#opening .hook-card.derived', { x: -420, y: 260, z: -700, rotationX: -18, rotationY: -22, autoAlpha: 0 }, { x: 0, y: 0, z: 0, rotationX: 0, rotationY: -5, autoAlpha: 1, duration: .48, ease: 'power4.out' }, 6.2)
+        .fromTo('#opening .hook-card.human', { x: 400, y: 260, z: -700, rotationX: 24, rotationY: 24, autoAlpha: 0 }, { x: 0, y: 0, z: 0, rotationX: 0, rotationY: 6, autoAlpha: 1, duration: .48, ease: 'power4.out' }, 7.4)
+        .fromTo('#opening .hook-question', { y: 80, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .45, ease: 'power4.out' }, 8.2)
+        .to(['#opening .hook-intro', '#opening .hook-deck', '#opening .hook-question', '#opening .hook-ghost'], { scale: .78, autoAlpha: 0, duration: .3, ease: 'power4.in' }, 10.28)
+        .fromTo('#opening .hook-snap', { scale: 1.28, autoAlpha: 0, rotationX: -12 }, { scale: 1, autoAlpha: 1, rotationX: 0, duration: .28, ease: 'expo.out' }, 10.66)
+        .to('#opening .hook-snap', { scale: 1.6, autoAlpha: 0, duration: .35, ease: 'power4.in' }, 11.28)
+        .to('#opening', { scale: 1.1, autoAlpha: 0, duration: .6, ease: 'power4.in' }, 11.35)
+        .fromTo('#paper-video', { scale: 1.15, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 1, ease: 'power3.out' }, 12)
+        .fromTo('#paper-copy', { x: 70, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: .75, ease: 'power3.out' }, 12.4)
+        .fromTo('#paper-label', { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .55, ease: 'power2.out' }, 12.65)
+        .to('#paper-video', { scale: 1.08, duration: 18.7, ease: 'none' }, 13)
+        .fromTo('#video-video', { scale: .9, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .9, ease: 'expo.out' }, 32)
+        .fromTo('#video-copy', { y: 50, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .7, ease: 'power3.out' }, 32.3)
+        .fromTo('#video-label', { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .55, ease: 'power2.out' }, 32.65)
+        .fromTo('#cohort-video', { autoAlpha: 0, scale: 1.12 }, { autoAlpha: 1, scale: 1, duration: .8, ease: 'power3.out' }, 52)
+        .fromTo('#numbers .number', { y: 90, autoAlpha: 0, rotation: 3 }, { y: 0, autoAlpha: 1, rotation: 0, duration: .55, stagger: .18, ease: 'back.out(1.3)' }, 52.4)
+        .fromTo('#cohort-proof', { y: 25, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .55, ease: 'power2.out' }, 53.2)
+        .fromTo('#derivation .source-card', { y: 120, autoAlpha: 0, rotationY: 15 }, { y: 0, autoAlpha: 1, rotationY: 0, duration: .8, stagger: .25, ease: 'power4.out' }, 70.2)
+        .fromTo('#derivation .connector', { scaleX: 0, autoAlpha: 0 }, { scaleX: 1, autoAlpha: 1, duration: .65, ease: 'power3.out' }, 70.9)
+        .fromTo('#derivation .equation', { y: 50, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .6, ease: 'back.out(1.5)' }, 72.1)
+        .fromTo('#discrepancy-image', { scale: 1.12, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .8, ease: 'power3.out' }, 92)
+        .fromTo('#focus-copy', { x: 75, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: .8, ease: 'power3.out' }, 92.25)
+        .fromTo('#critical-video', { scale: .92, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .6, ease: 'power3.out' }, 107)
+        .fromTo('#critical-label', { y: -20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .45, ease: 'power2.out' }, 107.25)
+        .fromTo('#governance-image', { autoAlpha: 0, scale: 1.08 }, { autoAlpha: 1, scale: 1, duration: .55, ease: 'power3.out' }, 118)
+        .fromTo('#governance-copy article', { y: 90, autoAlpha: 0, rotationY: 8 }, { y: 0, autoAlpha: 1, rotationY: 0, duration: .55, stagger: .17, ease: 'power3.out' }, 118.35)
+        .fromTo('#governance-copy .statusline', { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .45, ease: 'power2.out' }, 119.2)
+        .fromTo('#closing', { scale: 1.04, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .65, ease: 'power3.out' }, 134)
+        .fromTo('#closing .lockup div', { x: 60, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: .4, stagger: .13, ease: 'power2.out' }, 134.65);
+      window.__timelines['main'] = tl;
+    </script>
+  </body>
+</html>

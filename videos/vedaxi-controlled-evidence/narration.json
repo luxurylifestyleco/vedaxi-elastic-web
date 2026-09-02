@@ -1,0 +1,82 @@
+{
+  "_comment": "SINGLE SOURCE OF TRUTH for this fixture. transcript.vtt, transcript.json and the audio slot timings in index.html are all derived from this file. Edit here, then re-run: node scripts/build-transcript.mjs",
+  "output": "vedaxi-controlled-evidence.mp4",
+  "duration": 210,
+  "fps": 30,
+  "wpm_target": 135,
+  "critical_cue": "L6",
+  "critical_timestamp": "00:03:12",
+  "slides": [
+    { "n": 1, "start": 0, "end": 30, "kicker": "Session overview", "title": "Cognitive Attention Recovery and Sensor Calibration in Analytical Workflows" },
+    { "n": 2, "start": 30, "end": 75, "kicker": "Method 1", "title": "Sensor apparatus" },
+    { "n": 3, "start": 75, "end": 120, "kicker": "Method 2", "title": "Recording conditions and known drift" },
+    { "n": 4, "start": 120, "end": 170, "kicker": "Method 3", "title": "Pre-modeling data sanitization" },
+    { "n": 5, "start": 170, "end": 202, "kicker": "Method 4", "title": "Cohort and exclusions" },
+    { "n": 6, "start": 202, "end": 210, "kicker": "Close", "title": "Methodology overview complete" }
+  ],
+  "lines": [
+    {
+      "id": "L1",
+      "slide": 1,
+      "start": 0.5,
+      "end": 26.0,
+      "atomic": false,
+      "delivery": "Calm, unhurried, scholarly. Settle before the first word.",
+      "text": "Welcome to this research walkthrough on cognitive attention recovery during interrupted analytical work. In this session we examine physiological baseline tracking, pupil response, and task resumption intervals across diverse participant cohorts. We will cover the sensor apparatus, the recording conditions encountered in the field, our data sanitization protocol, and the final composition of the analyzed cohort."
+    },
+    {
+      "id": "L2",
+      "slide": 2,
+      "start": 30.5,
+      "end": 71.0,
+      "atomic": false,
+      "delivery": "Even, technical. Let the numbers land individually.",
+      "text": "Our sensor apparatus utilized dual infrared eye trackers combined with synchronized EEG capture to measure cognitive load fluctuations during sustained visual search tasks. Eye trackers sampled at two hundred and fifty hertz, with a nine point calibration routine performed at the start of every session and revalidated at the midpoint. Electroencephalography was recorded across thirty two channels, referenced to linked mastoids. Both streams were timestamped against a shared hardware clock, so that pupil dilation events could be aligned to task boundaries within a single sampling window."
+    },
+    {
+      "id": "L3",
+      "slide": 3,
+      "start": 75.5,
+      "end": 116.0,
+      "atomic": false,
+      "delivery": "Matter of fact. This is a limitation being disclosed, not defended.",
+      "text": "During the trial progression, environmental lighting and participant movement introduced known sensor drift parameters across several continuous recording sessions. Our laboratory space receives indirect daylight, and afternoon sessions showed a measurable shift in baseline pupil diameter that was unrelated to task demand. Participant posture change also displaced the head position estimate beyond the tolerance of the original calibration. We logged each of these conditions as they occurred rather than correcting them in software, so that the decision to retain or exclude a session could be made transparently after collection."
+    },
+    {
+      "id": "L4",
+      "slide": 4,
+      "start": 120.5,
+      "end": 166.0,
+      "atomic": false,
+      "delivery": "Measured. Slight emphasis on 'before any outcome variable was inspected'.",
+      "text": "We established rigorous pre-modeling data sanitization protocols to isolate true latency signals from mechanical sensor noise before applying our predictive attention decay modeling. Every session was reviewed against three criteria: calibration validity at both checkpoints, continuous signal coverage across the full task block, and agreement between the eye tracking and electroencephalography timestamps. Sessions that failed any single criterion were marked for exclusion. This review was completed before any outcome variable was inspected, and the exclusion list was fixed in advance of modeling, so that no decision about the data could be influenced by the result it produced."
+    },
+    {
+      "id": "L5",
+      "slide": 5,
+      "start": 170.5,
+      "end": 189.0,
+      "atomic": false,
+      "delivery": "Slow down here. This sets up the key statement. End on a full stop, then hold silent.",
+      "text": "That brings us to the composition of the analyzed cohort. This slide reports recruitment, exclusions, and the sessions carried forward into the model. I want to state that sequence precisely, because the two figures are often reported together and confused."
+    },
+    {
+      "id": "L6",
+      "slide": 5,
+      "start": 192.0,
+      "end": 201.5,
+      "atomic": true,
+      "delivery": "CRITICAL FIXTURE LINE. Must begin at exactly 00:03:12.000 and must remain a single unsplit cue. Deliberate, evenly paced, no rush on the two numbers. Do not reword — the paper fixture and the demo narration both quote this verbatim.",
+      "text": "We recruited forty participants. Six sessions had calibration drift, so we removed them before modeling and did not replace them."
+    },
+    {
+      "id": "L7",
+      "slide": 6,
+      "start": 202.0,
+      "end": 209.5,
+      "atomic": false,
+      "delivery": "Warm, closing down.",
+      "text": "The remaining cohort was processed through our attention decay pipeline. Thank you for reviewing this methodology overview."
+    }
+  ]
+}

@@ -1,0 +1,338 @@
+[
+  {
+    "id": "w0",
+    "text": "Welcome",
+    "start": 0.259,
+    "end": 0.56
+  },
+  {
+    "id": "w1",
+    "text": "to",
+    "start": 0.599,
+    "end": 0.68
+  },
+  {
+    "id": "w2",
+    "text": "this",
+    "start": 0.74,
+    "end": 0.899
+  },
+  {
+    "id": "w3",
+    "text": "research",
+    "start": 0.959,
+    "end": 1.379
+  },
+  {
+    "id": "w4",
+    "text": "walkthrough",
+    "start": 1.439,
+    "end": 1.939
+  },
+  {
+    "id": "w5",
+    "text": "on",
+    "start": 1.979,
+    "end": 2.079
+  },
+  {
+    "id": "w6",
+    "text": "cognitive",
+    "start": 2.22,
+    "end": 2.639
+  },
+  {
+    "id": "w7",
+    "text": "attention",
+    "start": 2.679,
+    "end": 3.059
+  },
+  {
+    "id": "w8",
+    "text": "recovery",
+    "start": 3.139,
+    "end": 3.679
+  },
+  {
+    "id": "w9",
+    "text": "during",
+    "start": 3.72,
+    "end": 3.959
+  },
+  {
+    "id": "w10",
+    "text": "interrupted",
+    "start": 4.079,
+    "end": 4.659
+  },
+  {
+    "id": "w11",
+    "text": "analytical",
+    "start": 4.739,
+    "end": 5.239
+  },
+  {
+    "id": "w12",
+    "text": "work.",
+    "start": 5.339,
+    "end": 5.639
+  },
+  {
+    "id": "w13",
+    "text": "In",
+    "start": 5.92,
+    "end": 6.039
+  },
+  {
+    "id": "w14",
+    "text": "this",
+    "start": 6.079,
+    "end": 6.219
+  },
+  {
+    "id": "w15",
+    "text": "session",
+    "start": 6.259,
+    "end": 6.719
+  },
+  {
+    "id": "w16",
+    "text": "we",
+    "start": 6.779,
+    "end": 6.859
+  },
+  {
+    "id": "w17",
+    "text": "examine",
+    "start": 6.96,
+    "end": 7.399
+  },
+  {
+    "id": "w18",
+    "text": "physiological",
+    "start": 7.46,
+    "end": 8.179
+  },
+  {
+    "id": "w19",
+    "text": "baseline",
+    "start": 8.239,
+    "end": 8.679
+  },
+  {
+    "id": "w20",
+    "text": "tracking,",
+    "start": 8.739,
+    "end": 9.159
+  },
+  {
+    "id": "w21",
+    "text": "pupil",
+    "start": 9.519,
+    "end": 9.76
+  },
+  {
+    "id": "w22",
+    "text": "response,",
+    "start": 9.84,
+    "end": 10.679
+  },
+  {
+    "id": "w23",
+    "text": "and",
+    "start": 10.719,
+    "end": 10.86
+  },
+  {
+    "id": "w24",
+    "text": "task",
+    "start": 10.899,
+    "end": 11.179
+  },
+  {
+    "id": "w25",
+    "text": "resumption",
+    "start": 11.239,
+    "end": 11.699
+  },
+  {
+    "id": "w26",
+    "text": "intervals",
+    "start": 11.759,
+    "end": 12.239
+  },
+  {
+    "id": "w27",
+    "text": "across",
+    "start": 12.359,
+    "end": 12.68
+  },
+  {
+    "id": "w28",
+    "text": "diverse",
+    "start": 12.719,
+    "end": 13.139
+  },
+  {
+    "id": "w29",
+    "text": "participant",
+    "start": 13.199,
+    "end": 13.759
+  },
+  {
+    "id": "w30",
+    "text": "cohorts.",
+    "start": 13.819,
+    "end": 14.779
+  },
+  {
+    "id": "w31",
+    "text": "We",
+    "start": 14.88,
+    "end": 14.979
+  },
+  {
+    "id": "w32",
+    "text": "will",
+    "start": 15.019,
+    "end": 15.159
+  },
+  {
+    "id": "w33",
+    "text": "cover",
+    "start": 15.199,
+    "end": 15.44
+  },
+  {
+    "id": "w34",
+    "text": "the",
+    "start": 15.519,
+    "end": 15.559
+  },
+  {
+    "id": "w35",
+    "text": "sensor",
+    "start": 15.699,
+    "end": 16
+  },
+  {
+    "id": "w36",
+    "text": "apparatus,",
+    "start": 16.079,
+    "end": 16.76
+  },
+  {
+    "id": "w37",
+    "text": "the",
+    "start": 17.159,
+    "end": 17.219
+  },
+  {
+    "id": "w38",
+    "text": "recording",
+    "start": 17.279,
+    "end": 17.719
+  },
+  {
+    "id": "w39",
+    "text": "conditions",
+    "start": 17.76,
+    "end": 18.239
+  },
+  {
+    "id": "w40",
+    "text": "encountered",
+    "start": 18.26,
+    "end": 18.76
+  },
+  {
+    "id": "w41",
+    "text": "in",
+    "start": 18.779,
+    "end": 18.86
+  },
+  {
+    "id": "w42",
+    "text": "the",
+    "start": 18.879,
+    "end": 19.02
+  },
+  {
+    "id": "w43",
+    "text": "field,",
+    "start": 19.079,
+    "end": 19.42
+  },
+  {
+    "id": "w44",
+    "text": "our",
+    "start": 19.879,
+    "end": 20.02
+  },
+  {
+    "id": "w45",
+    "text": "data",
+    "start": 20.059,
+    "end": 20.34
+  },
+  {
+    "id": "w46",
+    "text": "sanitization",
+    "start": 20.399,
+    "end": 21.12
+  },
+  {
+    "id": "w47",
+    "text": "protocol,",
+    "start": 21.219,
+    "end": 21.76
+  },
+  {
+    "id": "w48",
+    "text": "and",
+    "start": 22.139,
+    "end": 22.239
+  },
+  {
+    "id": "w49",
+    "text": "the",
+    "start": 22.26,
+    "end": 22.42
+  },
+  {
+    "id": "w50",
+    "text": "final",
+    "start": 22.479,
+    "end": 22.819
+  },
+  {
+    "id": "w51",
+    "text": "composition",
+    "start": 22.859,
+    "end": 23.579
+  },
+  {
+    "id": "w52",
+    "text": "of",
+    "start": 23.619,
+    "end": 23.719
+  },
+  {
+    "id": "w53",
+    "text": "the",
+    "start": 23.739,
+    "end": 23.859
+  },
+  {
+    "id": "w54",
+    "text": "analyzed",
+    "start": 23.979,
+    "end": 24.499
+  },
+  {
+    "id": "w55",
+    "text": "cohort.",
+    "start": 24.579,
+    "end": 25.039
+  }
+]

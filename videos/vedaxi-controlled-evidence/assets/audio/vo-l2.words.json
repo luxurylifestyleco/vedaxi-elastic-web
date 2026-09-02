@@ -1,0 +1,518 @@
+[
+  {
+    "id": "w0",
+    "text": "Our",
+    "start": 0.119,
+    "end": 0.299
+  },
+  {
+    "id": "w1",
+    "text": "sensor",
+    "start": 0.34,
+    "end": 0.659
+  },
+  {
+    "id": "w2",
+    "text": "apparatus",
+    "start": 0.779,
+    "end": 1.439
+  },
+  {
+    "id": "w3",
+    "text": "utilized",
+    "start": 1.539,
+    "end": 2.119
+  },
+  {
+    "id": "w4",
+    "text": "dual",
+    "start": 2.159,
+    "end": 2.399
+  },
+  {
+    "id": "w5",
+    "text": "infrared",
+    "start": 2.519,
+    "end": 2.96
+  },
+  {
+    "id": "w6",
+    "text": "eye",
+    "start": 3.059,
+    "end": 3.159
+  },
+  {
+    "id": "w7",
+    "text": "trackers",
+    "start": 3.279,
+    "end": 3.779
+  },
+  {
+    "id": "w8",
+    "text": "combined",
+    "start": 4.079,
+    "end": 4.44
+  },
+  {
+    "id": "w9",
+    "text": "with",
+    "start": 4.48,
+    "end": 4.599
+  },
+  {
+    "id": "w10",
+    "text": "synchronized",
+    "start": 4.739,
+    "end": 5.339
+  },
+  {
+    "id": "w11",
+    "text": "EEG",
+    "start": 5.42,
+    "end": 5.899
+  },
+  {
+    "id": "w12",
+    "text": "capture",
+    "start": 6.019,
+    "end": 6.46
+  },
+  {
+    "id": "w13",
+    "text": "to",
+    "start": 6.5,
+    "end": 6.599
+  },
+  {
+    "id": "w14",
+    "text": "measure",
+    "start": 6.659,
+    "end": 6.96
+  },
+  {
+    "id": "w15",
+    "text": "cognitive",
+    "start": 7.059,
+    "end": 7.519
+  },
+  {
+    "id": "w16",
+    "text": "load",
+    "start": 7.579,
+    "end": 7.759
+  },
+  {
+    "id": "w17",
+    "text": "fluctuations",
+    "start": 7.859,
+    "end": 8.659
+  },
+  {
+    "id": "w18",
+    "text": "during",
+    "start": 9.019,
+    "end": 9.179
+  },
+  {
+    "id": "w19",
+    "text": "sustained",
+    "start": 9.279,
+    "end": 9.739
+  },
+  {
+    "id": "w20",
+    "text": "visual",
+    "start": 9.819,
+    "end": 10.139
+  },
+  {
+    "id": "w21",
+    "text": "search",
+    "start": 10.26,
+    "end": 10.479
+  },
+  {
+    "id": "w22",
+    "text": "tasks.",
+    "start": 10.599,
+    "end": 11.079
+  },
+  {
+    "id": "w23",
+    "text": "Eye",
+    "start": 11.359,
+    "end": 11.539
+  },
+  {
+    "id": "w24",
+    "text": "trackers",
+    "start": 11.599,
+    "end": 12.099
+  },
+  {
+    "id": "w25",
+    "text": "sampled",
+    "start": 12.179,
+    "end": 12.519
+  },
+  {
+    "id": "w26",
+    "text": "at",
+    "start": 12.579,
+    "end": 12.719
+  },
+  {
+    "id": "w27",
+    "text": "two",
+    "start": 12.819,
+    "end": 13.019
+  },
+  {
+    "id": "w28",
+    "text": "hundred",
+    "start": 13.079,
+    "end": 13.299
+  },
+  {
+    "id": "w29",
+    "text": "and",
+    "start": 13.359,
+    "end": 13.559
+  },
+  {
+    "id": "w30",
+    "text": "fifty",
+    "start": 13.599,
+    "end": 13.819
+  },
+  {
+    "id": "w31",
+    "text": "hertz,",
+    "start": 13.96,
+    "end": 14.439
+  },
+  {
+    "id": "w32",
+    "text": "with",
+    "start": 14.739,
+    "end": 14.84
+  },
+  {
+    "id": "w33",
+    "text": "a",
+    "start": 14.88,
+    "end": 14.96
+  },
+  {
+    "id": "w34",
+    "text": "nine",
+    "start": 15.039,
+    "end": 15.199
+  },
+  {
+    "id": "w35",
+    "text": "point",
+    "start": 15.38,
+    "end": 15.599
+  },
+  {
+    "id": "w36",
+    "text": "calibration",
+    "start": 15.679,
+    "end": 16.26
+  },
+  {
+    "id": "w37",
+    "text": "routine",
+    "start": 16.34,
+    "end": 16.759
+  },
+  {
+    "id": "w38",
+    "text": "performed",
+    "start": 16.819,
+    "end": 17.239
+  },
+  {
+    "id": "w39",
+    "text": "at",
+    "start": 17.279,
+    "end": 17.34
+  },
+  {
+    "id": "w40",
+    "text": "the",
+    "start": 17.379,
+    "end": 17.5
+  },
+  {
+    "id": "w41",
+    "text": "start",
+    "start": 17.579,
+    "end": 17.779
+  },
+  {
+    "id": "w42",
+    "text": "of",
+    "start": 17.819,
+    "end": 17.979
+  },
+  {
+    "id": "w43",
+    "text": "every",
+    "start": 18.079,
+    "end": 18.359
+  },
+  {
+    "id": "w44",
+    "text": "session",
+    "start": 18.44,
+    "end": 19.1
+  },
+  {
+    "id": "w45",
+    "text": "and",
+    "start": 19.139,
+    "end": 19.26
+  },
+  {
+    "id": "w46",
+    "text": "revalidated",
+    "start": 19.319,
+    "end": 20.079
+  },
+  {
+    "id": "w47",
+    "text": "at",
+    "start": 20.139,
+    "end": 20.239
+  },
+  {
+    "id": "w48",
+    "text": "the",
+    "start": 20.279,
+    "end": 20.359
+  },
+  {
+    "id": "w49",
+    "text": "midpoint.",
+    "start": 20.399,
+    "end": 20.959
+  },
+  {
+    "id": "w50",
+    "text": "Electroencephalography",
+    "start": 21.379,
+    "end": 22.6
+  },
+  {
+    "id": "w51",
+    "text": "was",
+    "start": 22.68,
+    "end": 22.799
+  },
+  {
+    "id": "w52",
+    "text": "recorded",
+    "start": 22.84,
+    "end": 23.26
+  },
+  {
+    "id": "w53",
+    "text": "across",
+    "start": 23.359,
+    "end": 23.68
+  },
+  {
+    "id": "w54",
+    "text": "thirty",
+    "start": 23.819,
+    "end": 24.119
+  },
+  {
+    "id": "w55",
+    "text": "two",
+    "start": 24.139,
+    "end": 24.239
+  },
+  {
+    "id": "w56",
+    "text": "channels,",
+    "start": 24.379,
+    "end": 24.84
+  },
+  {
+    "id": "w57",
+    "text": "referenced",
+    "start": 25.219,
+    "end": 25.68
+  },
+  {
+    "id": "w58",
+    "text": "to",
+    "start": 25.719,
+    "end": 25.779
+  },
+  {
+    "id": "w59",
+    "text": "linked",
+    "start": 25.899,
+    "end": 26.139
+  },
+  {
+    "id": "w60",
+    "text": "mastoids.",
+    "start": 26.219,
+    "end": 26.92
+  },
+  {
+    "id": "w61",
+    "text": "Both",
+    "start": 27.239,
+    "end": 27.459
+  },
+  {
+    "id": "w62",
+    "text": "streams",
+    "start": 27.599,
+    "end": 27.959
+  },
+  {
+    "id": "w63",
+    "text": "were",
+    "start": 28,
+    "end": 28.119
+  },
+  {
+    "id": "w64",
+    "text": "timestamped",
+    "start": 28.199,
+    "end": 28.84
+  },
+  {
+    "id": "w65",
+    "text": "against",
+    "start": 28.899,
+    "end": 29.139
+  },
+  {
+    "id": "w66",
+    "text": "a",
+    "start": 29.199,
+    "end": 29.319
+  },
+  {
+    "id": "w67",
+    "text": "shared",
+    "start": 29.379,
+    "end": 29.679
+  },
+  {
+    "id": "w68",
+    "text": "hardware",
+    "start": 29.739,
+    "end": 30.139
+  },
+  {
+    "id": "w69",
+    "text": "clock,",
+    "start": 30.219,
+    "end": 30.519
+  },
+  {
+    "id": "w70",
+    "text": "so",
+    "start": 30.959,
+    "end": 31.039
+  },
+  {
+    "id": "w71",
+    "text": "that",
+    "start": 31.079,
+    "end": 31.219
+  },
+  {
+    "id": "w72",
+    "text": "pupil",
+    "start": 31.299,
+    "end": 31.599
+  },
+  {
+    "id": "w73",
+    "text": "dilation",
+    "start": 31.679,
+    "end": 32.139
+  },
+  {
+    "id": "w74",
+    "text": "events",
+    "start": 32.219,
+    "end": 32.54
+  },
+  {
+    "id": "w75",
+    "text": "could",
+    "start": 32.579,
+    "end": 32.72
+  },
+  {
+    "id": "w76",
+    "text": "be",
+    "start": 32.739,
+    "end": 32.799
+  },
+  {
+    "id": "w77",
+    "text": "aligned",
+    "start": 32.939,
+    "end": 33.259
+  },
+  {
+    "id": "w78",
+    "text": "to",
+    "start": 33.279,
+    "end": 33.4
+  },
+  {
+    "id": "w79",
+    "text": "task",
+    "start": 33.439,
+    "end": 33.759
+  },
+  {
+    "id": "w80",
+    "text": "boundaries",
+    "start": 33.819,
+    "end": 34.299
+  },
+  {
+    "id": "w81",
+    "text": "within",
+    "start": 34.34,
+    "end": 34.54
+  },
+  {
+    "id": "w82",
+    "text": "a",
+    "start": 34.599,
+    "end": 34.719
+  },
+  {
+    "id": "w83",
+    "text": "single",
+    "start": 34.779,
+    "end": 35.139
+  },
+  {
+    "id": "w84",
+    "text": "sampling",
+    "start": 35.2,
+    "end": 35.619
+  },
+  {
+    "id": "w85",
+    "text": "window.",
+    "start": 35.659,
+    "end": 36.059
+  }
+]

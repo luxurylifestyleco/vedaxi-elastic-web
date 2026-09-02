@@ -1,0 +1,104 @@
+[
+  {
+    "id": "w0",
+    "text": "The",
+    "start": 0.119,
+    "end": 0.199
+  },
+  {
+    "id": "w1",
+    "text": "remaining",
+    "start": 0.219,
+    "end": 0.68
+  },
+  {
+    "id": "w2",
+    "text": "cohort",
+    "start": 0.74,
+    "end": 1.139
+  },
+  {
+    "id": "w3",
+    "text": "was",
+    "start": 1.179,
+    "end": 1.299
+  },
+  {
+    "id": "w4",
+    "text": "processed",
+    "start": 1.399,
+    "end": 1.919
+  },
+  {
+    "id": "w5",
+    "text": "through",
+    "start": 2.019,
+    "end": 2.319
+  },
+  {
+    "id": "w6",
+    "text": "our",
+    "start": 2.379,
+    "end": 2.44
+  },
+  {
+    "id": "w7",
+    "text": "attention",
+    "start": 2.5,
+    "end": 2.98
+  },
+  {
+    "id": "w8",
+    "text": "decay",
+    "start": 3.059,
+    "end": 3.379
+  },
+  {
+    "id": "w9",
+    "text": "pipeline.",
+    "start": 3.48,
+    "end": 4.059
+  },
+  {
+    "id": "w10",
+    "text": "Thank",
+    "start": 4.619,
+    "end": 4.819
+  },
+  {
+    "id": "w11",
+    "text": "you",
+    "start": 4.859,
+    "end": 4.96
+  },
+  {
+    "id": "w12",
+    "text": "for",
+    "start": 5.019,
+    "end": 5.119
+  },
+  {
+    "id": "w13",
+    "text": "reviewing",
+    "start": 5.159,
+    "end": 5.639
+  },
+  {
+    "id": "w14",
+    "text": "this",
+    "start": 5.659,
+    "end": 5.819
+  },
+  {
+    "id": "w15",
+    "text": "methodology",
+    "start": 5.879,
+    "end": 6.519
+  },
+  {
+    "id": "w16",
+    "text": "overview.",
+    "start": 6.619,
+    "end": 7.119
+  }
+]
