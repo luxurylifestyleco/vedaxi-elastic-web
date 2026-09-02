@@ -718,6 +718,28 @@ export function PaperApp({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const [tourStep, setTourStep] = useState<number | null>(null);
+
+  const startGuidedTour = () => {
+    const steps = [
+      { id: "paper-top", delay: 0 },
+      { id: "chapter-method", delay: 2500 },
+      { id: "chapter-video", delay: 6000 },
+      { id: "chapter-evidence", delay: 10000 },
+      { id: "chapter-decision", delay: 14000 }
+    ];
+    steps.forEach(({ id, delay }, idx) => {
+      setTimeout(() => {
+        setTourStep(idx + 1);
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+        if (idx === steps.length - 1) {
+          setTimeout(() => setTourStep(null), 4000);
+        }
+      }, delay);
+    });
+  };
+
   useEffect(() => {
     setStageRestored(false);
   }, [focus]);
@@ -738,6 +760,14 @@ export function PaperApp({
         </a>
         <p>Research Integrity Desk · Protocol Edition</p>
         <div className="masthead__actions">
+          <button
+            type="button"
+            className="tour-toggle-btn"
+            onClick={startGuidedTour}
+            aria-label="Start interactive 30 second tour"
+          >
+            {tourStep ? `✨ Tour: Beat ${tourStep}/5` : "✨ 30s Tour"}
+          </button>
           <button
             type="button"
             className="dev-console-toggle-btn"
