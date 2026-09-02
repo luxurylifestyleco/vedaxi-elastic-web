@@ -464,7 +464,246 @@ blockquote p { margin: 0; font-size: clamp(1.6rem, 3vw, 2.8rem) !important; line
 .search-suggestions button:hover { border-color: var(--color-paper); background: color-mix(in srgb, var(--color-paper) 9%, transparent); }
 .search-suggestions button[aria-pressed="true"] { border-color: var(--color-paper); background: var(--color-paper); color: var(--color-ink); }
 .search-message { min-height: 1.5em; color: var(--color-paper); opacity: 0.74; }
-.search-result { display: flex; justify-content: space-between; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-paper); text-decoration: none; }
+.search-result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  margin-top: var(--space-2);
+  border: 1px solid rgba(105, 233, 241, 0.4);
+  border-radius: 8px;
+  background: rgba(6, 18, 27, 0.6);
+  text-decoration: none;
+  color: #eff7f3;
+  transition: all 160ms ease;
+  min-height: 44px;
+}
+.search-result:hover {
+  border-color: #69e9f1;
+  background: rgba(105, 233, 241, 0.1);
+  transform: translateY(-1px);
+}
+.search-result__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+.search-result__title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #eff7f3;
+}
+.search-result__locator {
+  font-size: 0.8rem;
+  color: #69e9f1;
+}
+.search-result__excerpt {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  background: rgba(0, 0, 0, 0.25);
+  border-left: 3px solid #69e9f1;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #eff7f3;
+}
+.search-match {
+  background: #facc15;
+  color: #0f172a;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-weight: 700;
+}
+.search-result__meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+.search-result__open-cue {
+  color: #c5ff73;
+  font-weight: 700;
+}
+.edition-desk[data-theme="light"] .search-result {
+  background: #ffffff;
+  border-color: rgba(2, 132, 199, 0.35);
+  color: #0f172a;
+}
+.edition-desk[data-theme="light"] .search-result__title {
+  color: #0f172a;
+}
+.edition-desk[data-theme="light"] .search-result__locator {
+  color: #0284c7;
+}
+.edition-desk[data-theme="light"] .search-result__excerpt {
+  background: #f8fafc;
+  color: #1e293b;
+  border-left-color: #0284c7;
+}
+.edition-desk[data-theme="light"] .search-result__meta {
+  color: #475569;
+}
+.edition-desk[data-theme="light"] .search-result__open-cue {
+  color: #16a34a;
+}
+
+/* Universal Touch Target Minimum Height: >= 44px */
+button,
+a,
+input,
+summary,
+[role="button"] {
+  min-height: 44px;
+}
+.search-suggestions button {
+  min-height: 44px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem !important;
+}
+.stage-navigation-mobile a {
+  min-height: 44px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem !important;
+}
+.copilot-presets button {
+  min-height: 44px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.85rem !important;
+}
+.product-intro-btn {
+  min-height: 44px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.sim-run-btn {
+  min-height: 44px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.copilot-toggle-btn {
+  min-height: 44px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.protocol__probe-btn {
+  min-height: 44px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.judge-action-row a,
+.judge-action-row button {
+  min-height: 44px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copilot-prompt-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #eff7f3;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.edition-desk[data-theme="light"] .copilot-prompt-label {
+  color: #0f172a;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+.edition-desk[data-theme="light"] input::placeholder,
+.edition-desk[data-theme="light"] textarea::placeholder {
+  color: #475569 !important;
+  opacity: 1 !important;
+}
+.search-form input::placeholder {
+  color: rgba(235, 248, 244, 0.8) !important;
+  opacity: 1 !important;
+}
+.edition-desk[data-theme="light"] .search-form input::placeholder {
+  color: #475569 !important;
+  opacity: 1 !important;
+}
+
+.pilot-capture-card {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid rgba(105, 233, 241, 0.4);
+  background: rgba(12, 32, 39, 0.8);
+  border-radius: 10px;
+}
+.pilot-capture-card h4 {
+  margin: 0.25rem 0 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #eff7f3;
+}
+.pilot-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.pilot-form input {
+  flex: 1 1 240px;
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 1px solid rgba(235, 248, 244, 0.2);
+  border-radius: 6px;
+  background: rgba(6, 18, 27, 0.8);
+  color: #eff7f3;
+}
+.pilot-btn {
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border-radius: 6px;
+  border: 1px solid #c5ff73;
+  background: #c5ff73;
+  color: #06121b !important;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+.pilot-btn:hover {
+  background: #d8ff94;
+  box-shadow: 0 0 15px rgba(197, 255, 115, 0.4);
+}
+.edition-desk[data-theme="light"] .pilot-capture-card {
+  background: #ffffff;
+  border-color: rgba(2, 132, 199, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+.edition-desk[data-theme="light"] .pilot-capture-card h4 {
+  color: #0f172a;
+}
+.edition-desk[data-theme="light"] .pilot-form input {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.2);
+  color: #0f172a;
+}
+.edition-desk[data-theme="light"] .pilot-btn {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: #ffffff !important;
+}
+.edition-desk[data-theme="light"] .pilot-btn:hover {
+  background: #15803d;
+}
 
 footer { display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-4) clamp(1rem, 4vw, 4rem); border-top: 1px solid var(--color-rule); color: var(--color-muted); }
 .paper-outline-mobile { display: none; }

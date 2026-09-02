@@ -311,6 +311,27 @@ function getEvidenceAnchor(locator: string): string {
   return "#methods-participants";
 }
 
+function highlightMatch(text: string, query: string) {
+  if (!query.trim()) return text;
+  const terms = query
+    .trim()
+    .split(/\s+/)
+    .filter((t) => t.length > 1)
+    .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  if (terms.length === 0) return text;
+  const regex = new RegExp(`(${terms.join("|")})`, "gi");
+  const parts = text.split(regex);
+  return parts.map((part, i) =>
+    regex.test(part) ? (
+      <mark key={i} className="search-match">
+        {part}
+      </mark>
+    ) : (
+      part
+    )
+  );
+}
+
 function PaperSearch({ service }: { service: PaperEvidenceService }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<EvidenceSearchResult[] | null>(null);
@@ -433,9 +454,23 @@ function PaperSearch({ service }: { service: PaperEvidenceService }) {
           href={getEvidenceAnchor(evidence.locator)}
           key={evidence.id}
           ref={index === 0 ? firstResultRef : undefined}
+          onClick={() => {
+            const target = document.getElementById("methods-participants") || document.getElementById("chapter-evidence");
+            target?.scrollIntoView({ behavior: "smooth", block: "center" });
+            target?.focus();
+          }}
         >
-          <span>{evidence.title}</span>
-          <span className="mono">{evidence.locator} · {score} exact query terms</span>
+          <div className="search-result__header">
+            <span className="search-result__title">{evidence.title}</span>
+            <span className="mono search-result__locator">{evidence.locator} · {score} exact query terms</span>
+          </div>
+          <blockquote className="search-result__excerpt">
+            <p>{highlightMatch(evidence.excerpt, query)}</p>
+          </blockquote>
+          <div className="search-result__meta mono">
+            <span>Origin: {evidence.sourceOrigin}</span>
+            <span className="search-result__open-cue">Inspect evidence card →</span>
+          </div>
         </a>
       ))}
     </section>
@@ -739,6 +774,8 @@ export function PaperApp({
   }, []);
 
   const [tourStep, setTourStep] = useState<number | null>(null);
+  const [pilotEmail, setPilotEmail] = useState("");
+  const [pilotJoined, setPilotJoined] = useState(false);
 
   const startGuidedTour = () => {
     const steps = [
@@ -1031,6 +1068,9 @@ export function PaperApp({
               runAgentWorkflow(prompt);
             }}
           >
+            <label htmlFor="copilot-prompt" className="copilot-prompt-label">
+              Agent Research Query
+            </label>
             <div className="copilot-form__controls">
               <input
                 id="copilot-prompt"
@@ -1337,7 +1377,7 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
                 </p>
 
                 <h3>2.3 Cohort Accounting & Sample Allocation</h3>
-                <p id="methods-participants">
+                <p className="methods-cohort-paragraph">
                   Forty participants completed the study and were included in the final analysis.
                   Participant progression through enrollment, experimental allocation, and final computational evaluation was logged according to pre-specified protocol criteria.
                 </p>
@@ -1547,6 +1587,29 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
                     <button type="button" onClick={() => setStageRestored(!focusActive)}>
                       {focusActive ? "Restore full workspace" : "Review focused evidence"}
                     </button>
+                    <div className="pilot-capture-card">
+                      <span className="eyebrow">Continuous Pipeline Integrity</span>
+                      <h4>Join the VEDAXI Research Pilot</h4>
+                      <form
+                        className="pilot-form"
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          setPilotJoined(true);
+                        }}
+                      >
+                        <input
+                          type="email"
+                          required
+                          value={pilotEmail}
+                          onChange={(e) => setPilotEmail(e.target.value)}
+                          placeholder="Enter your institutional email…"
+                          aria-label="Research email for pilot access"
+                        />
+                        <button type="submit" className="pilot-btn">
+                          {pilotJoined ? "✓ Joined Pilot List!" : "Join the Pilot →"}
+                        </button>
+                      </form>
+                    </div>
                   </div>
                 )}
                 {publisherState.focusProposal && (
