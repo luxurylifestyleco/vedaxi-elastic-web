@@ -75,12 +75,12 @@ export function ProtocolStage3D({
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("touchstart", onTouchMove, { passive: true });
 
-    // 5 Key Protocol God Nodes - Tightened vertical spacing to prevent bottom clipping
+    // 5 Key Protocol God Nodes - Positioned to frame the Paper Hero title & masthead backdrop
     const baseGodNodes: Node3D[] = [
       {
-        x: -240,
-        y: -80,
-        z: 60,
+        x: -300,
+        y: -60,
+        z: 40,
         vx: 0,
         vy: 0,
         vz: 0,
@@ -91,9 +91,9 @@ export function ProtocolStage3D({
         targetId: "chapter-method",
       },
       {
-        x: 220,
-        y: 65,
-        z: -30,
+        x: 300,
+        y: 60,
+        z: -20,
         vx: 0,
         vy: 0,
         vz: 0,
@@ -105,8 +105,8 @@ export function ProtocolStage3D({
       },
       {
         x: 0,
-        y: -25,
-        z: 140,
+        y: -15,
+        z: 130,
         vx: 0,
         vy: 0,
         vz: 0,
@@ -117,9 +117,9 @@ export function ProtocolStage3D({
         targetId: "chapter-evidence",
       },
       {
-        x: 150,
-        y: -120,
-        z: 90,
+        x: 240,
+        y: -100,
+        z: 80,
         vx: 0,
         vy: 0,
         vz: 0,
@@ -130,9 +130,9 @@ export function ProtocolStage3D({
         targetId: "paper-top",
       },
       {
-        x: -140,
+        x: -210,
         y: 110,
-        z: 40,
+        z: 30,
         vx: 0,
         vy: 0,
         vz: 0,
@@ -207,7 +207,7 @@ export function ProtocolStage3D({
       const scale = fov / (fov + z2 + (isMobile ? 280 : 380));
       return {
         px: width / 2 + x1 * scale,
-        py: (height * 0.36) + y2 * scale,
+        py: (height * (isMobile ? 0.48 : 0.52)) + y2 * scale,
         scale,
         z2,
       };

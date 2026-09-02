@@ -359,13 +359,6 @@ function PaperSearch({ service }: { service: PaperEvidenceService }) {
 
   return (
     <section className="paper-search" aria-labelledby="paper-search-title">
-      <div className="paper-search__heading">
-        <div>
-          <p className="eyebrow">Human research path</p>
-          <h2 id="paper-search-title">Search this paper</h2>
-        </div>
-        <p className="paper-search__hint">Works independently of native agent tools.</p>
-      </div>
       <form className="search-form" onSubmit={submit}>
         <label htmlFor="paper-query">Paper evidence query</label>
         <div className="search-form__controls">
@@ -405,6 +398,13 @@ function PaperSearch({ service }: { service: PaperEvidenceService }) {
             {suggestion}
           </button>
         ))}
+      </div>
+      <div className="paper-search__heading">
+        <div>
+          <p className="eyebrow">Human research path</p>
+          <h2 id="paper-search-title">Search this paper</h2>
+        </div>
+        <p className="paper-search__hint">Works independently of native agent tools.</p>
       </div>
       <p className="search-message" aria-live="polite">{message}</p>
       {results?.map(({ evidence, score }, index) => (
