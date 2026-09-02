@@ -421,6 +421,14 @@ function PaperSearch({ service }: { service: PaperEvidenceService }) {
   );
 }
 
+interface ExecutionStep {
+  id: string;
+  kind: "query-paper" | "query-video" | "derivation" | "stage-focus" | "fail-closed";
+  title: string;
+  detail: string;
+  status: "pending" | "running" | "success" | "blocked";
+}
+
 export function PaperApp({
   fixture,
   service,

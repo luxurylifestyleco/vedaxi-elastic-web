@@ -5,9 +5,11 @@ export interface PaperEvidenceService {
 }
 
 export function createPaperEvidenceService(
-  evidence: EvidenceObject | readonly EvidenceObject[] | EvidenceObject[]
+  evidence: EvidenceObject | readonly EvidenceObject[]
 ): PaperEvidenceService {
-  const items = Array.isArray(evidence) ? [...evidence] : [evidence];
+  const items: EvidenceObject[] = Array.isArray(evidence)
+    ? [...(evidence as EvidenceObject[])]
+    : [evidence as EvidenceObject];
   return {
     search: (query) => searchEvidence(query, items)
   };

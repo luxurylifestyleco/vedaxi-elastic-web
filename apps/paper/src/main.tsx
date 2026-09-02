@@ -5,6 +5,7 @@ import type { PublisherStorage } from "@vedaxi/state";
 import { PaperApp } from "./paper/PaperApp";
 import {
   createDiscrepancyFocusTool,
+  createPaperCorpus,
   createPaperEvidenceService,
   createPaperEvidenceTool,
   createPaperFixture,
