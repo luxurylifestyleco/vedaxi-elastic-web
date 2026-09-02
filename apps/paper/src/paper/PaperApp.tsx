@@ -853,6 +853,45 @@ export function PaperApp({
             </div>
           </div>
 
+          <div className="webmcp-mission-card" aria-label="What VEDAXI WebMCP Solves">
+            <div className="webmcp-mission-header">
+              <span className="eyebrow">The Core Innovation</span>
+              <h2 className="webmcp-mission-title">What VEDAXI WebMCP Solves</h2>
+              <p className="webmcp-mission-subtitle">
+                Autonomous cross-origin truth verification for AI agents — eliminating single-source hallucinations across published literature and live multimedia.
+              </p>
+            </div>
+            <div className="webmcp-mission-grid">
+              <div className="webmcp-mission-step webmcp-mission-step--problem">
+                <div className="step-icon" aria-hidden="true">❌</div>
+                <div className="step-content">
+                  <h3>1. The Single-Source Flaw</h3>
+                  <p>
+                    Today’s AI agents (ChatGPT, Claude, Perplexity) only read static text from a single source. If a published PDF paper claims <strong>40 participants completed the trial</strong>, the AI blindly cites <strong>N = 40</strong> as absolute truth.
+                  </p>
+                </div>
+              </div>
+              <div className="webmcp-mission-step webmcp-mission-step--discovery">
+                <div className="step-icon" aria-hidden="true">⚡</div>
+                <div className="step-content">
+                  <h3>2. Cross-Origin WebMCP Protocol</h3>
+                  <p>
+                    VEDAXI introduces <strong>WebMCP (Web Model Context Protocol)</strong>, enabling the AI agent to query independent web origins. The agent inspects the author&rsquo;s conference talk (Origin B at 00:03:12) where they admit <strong>6 participants had sensor calibration drift</strong>.
+                  </p>
+                </div>
+              </div>
+              <div className="webmcp-mission-step webmcp-mission-step--resolution">
+                <div className="step-icon" aria-hidden="true">🛡️</div>
+                <div className="step-content">
+                  <h3>3. Fail-Closed Integrity Gate</h3>
+                  <p>
+                    VEDAXI flags the contradiction (<strong>40 ≠ 34</strong>), updates the true analysis cohort to <strong>34</strong>, and <strong>blocks automated citation</strong> until a human researcher explicitly reviews and authorizes the evidence.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <ProtocolStatus protocol={protocol} service={service} />
         </section>
 
@@ -1333,7 +1372,12 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
               <div className="edition-scene__frame" aria-hidden="true" />
               <div className="edition-scene__caption edition-scene__caption--reveal">
                 <p className="stage-chapter__index mono">Chapter 04 / Evidence</p>
+                <p className="section-kicker">Origin A · Verified Citation Passage</p>
                 <h2 id="evidence-title" tabIndex={-1}>{evidence.title}</h2>
+                <p className="lead">
+                  This isolated evidence record represents <strong>Origin A</strong>&rsquo;s formal published claim extracted from Section 2.3 of the Methods.
+                  It asserts full 40-participant retention, serving as the baseline citation claim that directly contradicts the author&rsquo;s video statement in Chapter 03.
+                </p>
                 <div className="evidence-row" id="methods-participants" tabIndex={-1}>
                   <blockquote cite={`${evidence.sourceOrigin}/#methods-participants`}>
                     <p>{evidence.excerpt}</p>
