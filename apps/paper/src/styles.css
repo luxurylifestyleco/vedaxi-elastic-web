@@ -858,21 +858,21 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
   color: #0f172a;
 }
 .edition-desk[data-theme="light"] .paper-hero {
-  background: radial-gradient(circle at 50% 25%, rgba(2, 132, 199, 0.12), transparent 55%), linear-gradient(135deg, #f8fafc, #e2e8f0);
-  border-bottom-color: rgba(15, 23, 42, 0.12);
+  background: transparent;
+  border-bottom: none;
 }
 .edition-desk[data-theme="light"] .paper-hero .display-title { color: #0f172a; }
 .edition-desk[data-theme="light"] .paper-hero .dek { color: #475569; }
 .edition-desk[data-theme="light"] .paper-hero .eyebrow { color: #0284c7; }
 .edition-desk[data-theme="light"] .paper-hero .authors,
 .edition-desk[data-theme="light"] .paper-hero__meta { color: #16a34a; }
-.edition-desk[data-theme="light"] .paper-search { background: rgba(255, 255, 255, 0.95); border-color: rgba(2, 132, 199, 0.3); color: #0f172a; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06); }
+.edition-desk[data-theme="light"] .paper-search { background: transparent; border: none; color: #0f172a; box-shadow: none; }
 .edition-desk[data-theme="light"] .paper-search h2 { color: #0f172a; }
 .edition-desk[data-theme="light"] .paper-search__heading .eyebrow { color: #0284c7; font-weight: 800; }
 .edition-desk[data-theme="light"] .paper-search__hint { color: #334155; font-weight: 600; }
 .edition-desk[data-theme="light"] .search-suggestions { color: #0f172a; font-weight: 700; }
 .edition-desk[data-theme="light"] .search-suggestions span { color: #0f172a; font-weight: 800; }
-.edition-desk[data-theme="light"] .search-suggestions button { background: #f1f5f9; border-color: rgba(2, 132, 199, 0.35); color: #0284c7; font-weight: 700; }
+.edition-desk[data-theme="light"] .search-suggestions button { background: rgba(255, 255, 255, 0.85); border-color: rgba(2, 132, 199, 0.35); color: #0284c7; font-weight: 700; backdrop-filter: blur(8px); }
 .edition-desk[data-theme="light"] .search-suggestions button:hover { background: #0284c7; color: #ffffff; }
 .edition-desk[data-theme="light"] .search-form input { background: #f8fafc; border-color: rgba(15, 23, 42, 0.2); color: #0f172a; }
 .edition-desk[data-theme="light"] .search-form button { background: #0284c7; color: #ffffff; }
@@ -1404,19 +1404,20 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
 .edition-desk .paper-search {
   position: relative;
   z-index: 10;
-  max-width: 1240px;
-  margin: 2.5rem auto 1.5rem;
-  padding: 1.75rem 2rem;
-  background: rgba(12, 32, 39, 0.95);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(235, 248, 244, 0.18);
-  border-radius: 12px;
+  max-width: 1100px;
+  margin: 2rem auto 2.5rem;
+  padding: 1.5rem 2rem;
+  background: rgba(8, 24, 32, 0.92);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(105, 233, 241, 0.25);
+  border-radius: 16px;
   color: #eff7f3;
-  box-shadow: 0 1rem 3rem rgba(6, 18, 27, 0.85);
+  box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.6);
 }
 .edition-desk[data-theme="light"] .paper-search {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(15, 23, 42, 0.15);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(2, 132, 199, 0.3);
+  color: #0f172a;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 .edition-desk .paper-search__heading {
@@ -1664,6 +1665,29 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
 
 @media (max-width: 600px) {
   .edition-desk .paper-hero .display-title { font-size: clamp(2.2rem, 9vw, 3rem); }
+}
+
+.edition-desk footer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  max-width: 1240px;
+  margin: 4rem auto 0;
+  padding: 2.5rem 2rem;
+  border-top: 1px solid rgba(235, 248, 244, 0.18);
+  color: #b6c6c2;
+  background: rgba(6, 18, 27, 0.9);
+  backdrop-filter: blur(14px);
+  border-radius: 12px 12px 0 0;
+}
+.edition-desk[data-theme="light"] footer {
+  background: rgba(255, 255, 255, 0.9);
+  border-top-color: rgba(15, 23, 42, 0.15);
+  color: #475569;
 }
 
 

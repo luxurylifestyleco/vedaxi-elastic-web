@@ -207,7 +207,7 @@ export function ProtocolStage3D({
       const scale = fov / (fov + z2 + (isMobile ? 280 : 380));
       return {
         px: width / 2 + x1 * scale,
-        py: height / 2 + y2 * scale,
+        py: (height * 0.36) + y2 * scale,
         scale,
         z2,
       };
