@@ -39,6 +39,11 @@ export function ProtocolStage3D({
       height = canvas.height = window.innerHeight;
     };
     window.addEventListener("resize", onResize);
+    let scrollY = typeof window !== "undefined" ? window.scrollY || 0 : 0;
+    const onScroll = () => {
+      scrollY = typeof window !== "undefined" ? window.scrollY || 0 : 0;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     const isLight = theme === "light";
     const isMobile = width < 768;
@@ -220,6 +225,12 @@ export function ProtocolStage3D({
       rotY += (targetRotY - rotY) * 0.06;
 
       ctx.clearRect(0, 0, width, height);
+      const scrollFade = Math.max(0, Math.min(1, 1 - (scrollY - 150) / 500));
+      if (scrollFade <= 0.01) {
+        currentProjectedGods = [];
+        animationFrameId = requestAnimationFrame(render);
+        return;
+      }
 
       const currentRotX = rotX + Math.sin(t * 0.5) * 0.06;
       const currentRotY = rotY + Math.cos(t * 0.35) * 0.09;
@@ -252,6 +263,7 @@ export function ProtocolStage3D({
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < maxConnectDist) {
             const alpha = (1 - dist / maxConnectDist) * (isLight ? 0.25 : 0.18) * Math.min(p1.scale, p2.scale);
+            ctx.globalAlpha = scrollFade;
             ctx.strokeStyle = isLight
               ? "rgba(2, 132, 199, " + alpha + ")"
               : "rgba(105, 233, 241, " + alpha + ")";
@@ -405,6 +417,7 @@ export function ProtocolStage3D({
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchstart", onTouchMove);
