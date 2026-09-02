@@ -200,9 +200,42 @@ function reviewHistoryCopy(event: PublisherState["auditEvents"][number]): string
   }
 }
 
-function ProtocolStatus({ protocol }: { protocol: PaperProtocolControls }) {
+function ProtocolStatus({
+  protocol,
+  service
+}: {
+  protocol: PaperProtocolControls;
+  service: PaperEvidenceService;
+}) {
   const isActive = protocol.status === "active";
   const isChecking = protocol.status === "checking";
+  const [simulationLog, setSimulationLog] = useState<{
+    ok: boolean;
+    query: string;
+    message: string;
+    timestamp: string;
+  } | null>(null);
+
+  const simulateAgentCall = () => {
+    const query = "final analyzed sample";
+    const timestamp = new Date().toLocaleTimeString();
+    if (protocol.status !== "active") {
+      setSimulationLog({
+        ok: false,
+        query,
+        message: "FAIL-CLOSED (403): Agent tool invocation rejected. Publisher has revoked WebMCP tool surface.",
+        timestamp
+      });
+    } else {
+      const results = service.search(query);
+      setSimulationLog({
+        ok: true,
+        query,
+        message: `200 OK: Agent retrieved passage: "${results[0]?.evidence.excerpt ?? "Evidence found"}"`,
+        timestamp
+      });
+    }
+  };
 
   return (
     <section className="protocol" aria-labelledby="protocol-title">
@@ -213,14 +246,55 @@ function ProtocolStatus({ protocol }: { protocol: PaperProtocolControls }) {
           {protocolStatusCopy(protocol.status)}
         </p>
       </div>
-      <button
-        className="text-button"
-        type="button"
-        disabled={isChecking}
-        onClick={isActive ? protocol.disable : protocol.enable}
-      >
-        {isChecking ? "Checking…" : isActive ? "Turn agent tools off" : "Check native tools"}
-      </button>
+
+      <div className="protocol__surface">
+        <p className="protocol__surface-label mono">
+          {isActive ? "Exposed WebMCP Tools (2)" : "Exposed WebMCP Tools (0 — Revoked)"}
+        </p>
+        <ul className="protocol__tool-list" aria-label="Live WebMCP tools">
+          <li className={isActive ? "tool-active" : "tool-revoked"}>
+            <code>paper.search_evidence</code>
+            <span className="tool-badge">{isActive ? "active" : "withdrawn"}</span>
+          </li>
+          <li className={isActive ? "tool-active" : "tool-revoked"}>
+            <code>paper.propose_focus</code>
+            <span className="tool-badge">{isActive ? "active" : "withdrawn"}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div className="protocol__actions">
+        <button
+          className="text-button"
+          type="button"
+          disabled={isChecking}
+          onClick={isActive ? protocol.disable : protocol.enable}
+        >
+          {isChecking ? "Checking…" : isActive ? "Turn agent tools off" : "Check native tools"}
+        </button>
+
+        <button
+          className="protocol__probe-btn"
+          type="button"
+          onClick={simulateAgentCall}
+        >
+          <span>▶ Simulate Agent Invocation</span>
+        </button>
+      </div>
+
+      {simulationLog && (
+        <div
+          className={`protocol__probe-result ${simulationLog.ok ? "probe-success" : "probe-blocked"}`}
+          role="status"
+          aria-live="polite"
+        >
+          <div className="probe-result__header mono">
+            <span>[Agent Probe at {simulationLog.timestamp}]</span>
+            <span>Query: &ldquo;{simulationLog.query}&rdquo;</span>
+          </div>
+          <p className="probe-result__body">{simulationLog.message}</p>
+        </div>
+      )}
     </section>
   );
 }
@@ -468,7 +542,7 @@ export function PaperApp({
             <p className="dek">{paper.dek}</p>
             <p className="authors">{paper.authors.join(" · ")}</p>
           </div>
-          <ProtocolStatus protocol={protocol} />
+          <ProtocolStatus protocol={protocol} service={service} />
         </section>
 
         <div className="paper-layout">

@@ -450,4 +450,32 @@ describe("M4 Semantic Focus Shift", () => {
     expect(markup).toContain('<h2 id="focus-decision-title" tabindex="-1">Focus decision</h2>');
     expect(markup).toContain('<h2 id="limitations-title">Limitations</h2>');
   });
+
+  it("renders live exposed WebMCP tool signatures and simulation probe button", () => {
+    const activeMarkup = renderToStaticMarkup(
+      <PaperApp
+        fixture={fixture}
+        service={service}
+        protocol={{ status: "active", enable: () => undefined, disable: () => undefined }}
+      />
+    );
+
+    expect(activeMarkup).toContain("Exposed WebMCP Tools (2)");
+    expect(activeMarkup).toContain("paper.search_evidence");
+    expect(activeMarkup).toContain("paper.propose_focus");
+    expect(activeMarkup).toContain("Simulate Agent Invocation");
+
+    const disabledMarkup = renderToStaticMarkup(
+      <PaperApp
+        fixture={fixture}
+        service={service}
+        protocol={{ status: "disabled", enable: () => undefined, disable: () => undefined }}
+      />
+    );
+
+    expect(disabledMarkup).toContain("Exposed WebMCP Tools (0 — Revoked)");
+    expect(disabledMarkup).toContain("tool-revoked");
+    expect(disabledMarkup).toContain("withdrawn");
+  });
 });
+
