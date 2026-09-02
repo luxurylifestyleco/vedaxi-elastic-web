@@ -692,8 +692,8 @@ export function PaperApp({
           </span>
           <span>VEDAXI</span>
         </a>
-        <p>Paper Integrity Desk</p>
-        <p className="mono">Five-chapter gallery</p>
+        <p>Research Integrity Desk · Protocol Edition</p>
+        <p className="mono">Two-Origin WebMCP Proof</p>
       </header>
 
       <main id="paper-content" tabIndex={-1}>
