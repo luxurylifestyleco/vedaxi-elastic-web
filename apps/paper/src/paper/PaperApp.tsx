@@ -1150,9 +1150,17 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
               <div className="edition-scene__caption">
               <p className="stage-chapter__index mono">Chapter 01 / Paper</p>
               <div id="abstract">
-                <p className="section-kicker">Study overview</p>
+                <p className="section-kicker">Study overview & Abstract</p>
                 <h2 id="abstract-title">Abstract</h2>
                 <p className="lead">{paper.abstract}</p>
+                <p>
+                  Modern analytical research is characterized by frequent, high-friction context switches that disrupt cognitive flow.
+                  While traditional evaluation frameworks quantify simple task completion, the latent cognitive overhead required to rebuild working memory remains largely unaccounted for.
+                  In this controlled empirical trial, we establish an experimental baseline for contextual state recovery, measuring both resumption latency and error susceptibility across structured analytical evidence synthesis.
+                </p>
+                <p className="mono paper-keywords">
+                  <strong>Keywords:</strong> Cognitive State Reconstruction · Context Interruption · Provenance Verification · Multi-Modal Evidence · WebMCP Standard
+                </p>
               </div>
               </div>
             </section>
@@ -1163,9 +1171,29 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
               <div className="edition-scene__caption">
               <p className="stage-chapter__index mono">Chapter 02 / Method</p>
               <div id="methods">
-                <p className="section-kicker">Participant accounting</p>
+                <p className="section-kicker">Experimental Protocol & Procedures</p>
                 <h2 id="methods-title" tabIndex={-1}>Methods</h2>
-                <p>{paper.methodsIntroduction}</p>
+                <p className="lead">{paper.methodsIntroduction}</p>
+                
+                <h3>2.1 Experimental Protocol</h3>
+                <p>
+                  Participants were subjected to a standardized multi-source document coding workflow involving qualitative evidence synthesis and numerical verification.
+                  Each evaluation trial comprised a baseline undisturbed phase, a standardized 180-second forced context interruption, and an unassisted task resumption phase.
+                  Continuous biometric telemetry and sensory calibration monitors tracked gaze fixation stability, task resumption latency, and decision confidence.
+                </p>
+
+                <h3>2.2 Eligibility Criteria & Stopping Rules</h3>
+                <p>
+                  Eligibility required proficiency in technical document verification and baseline visual-spatial tracking calibration.
+                  A pre-registered stopping rule dictated session termination if hardware calibration drift exceeded 0.05 RMS error thresholds.
+                  The full analytical methodology and data integrity checkpoints were registered prior to data collection.
+                </p>
+
+                <h3>2.3 Cohort Accounting & Sample Allocation</h3>
+                <p id="methods-participants">
+                  Forty participants completed the study and were included in the final analysis.
+                  Participant progression through enrollment, experimental allocation, and final computational evaluation was logged according to pre-specified protocol criteria.
+                </p>
               </div>
 
               <div id="study-flow" aria-labelledby="study-flow-title">
