@@ -1015,7 +1015,7 @@ export function PaperApp({
                   <div className="rpc-stream-item">
                     <div className="rpc-badge-row">
                       <span className="rpc-badge rpc-badge--res">JSON-RPC 2.0 RES (200 OK)</span>
-                      <span className="mono text-xs text-green-400">readOnlyHint: true · untrustedContentHint: true</span>
+                      <span className="mono text-xs rpc-meta-hints">readOnlyHint: true · untrustedContentHint: true</span>
                     </div>
                     <pre className="mono-code">{JSON.stringify({
                       jsonrpc: "2.0",
