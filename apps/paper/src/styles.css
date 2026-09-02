@@ -960,10 +960,13 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
 .edition-desk[data-theme="light"] .copilot-form input { background: #f8fafc; border-color: rgba(15, 23, 42, 0.2); color: #0f172a; }
 .edition-desk[data-theme="light"] .copilot-trace { background: #f8fafc; border-color: rgba(15, 23, 42, 0.12); color: #0f172a; }
 .edition-desk[data-theme="light"] .trace-step { background: rgba(15, 23, 42, 0.03); color: #0f172a; }
-.edition-desk[data-theme="light"] .edition-scene__caption { background: rgba(255, 255, 255, 0.95); border-color: rgba(15, 23, 42, 0.12); color: #0f172a; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
-.edition-desk[data-theme="light"] .embedded-video-card { background: #f8fafc; border-color: rgba(15, 23, 42, 0.12); color: #0f172a; }
 .edition-desk[data-theme="light"] .embedded-transcript-cue { background: rgba(22, 163, 74, 0.06); border-color: rgba(22, 163, 74, 0.25); }
 .edition-desk[data-theme="light"] .cue-body { color: #0f172a; }
+.edition-desk[data-theme="light"] .focus-derivation { color: #047857 !important; font-weight: 800; }
+.edition-desk[data-theme="light"] .focus-decision { border-top-color: #059669; }
+.edition-desk[data-theme="light"] .focus-actions button:last-child { background: transparent; color: #0f172a; border-color: rgba(15, 23, 42, 0.25); }
+.edition-desk[data-theme="light"] .discrepancy-note { background: #f8fafc; border-color: #059669; color: #0f172a; }
+.edition-desk[data-theme="light"] .discrepancy-note a { color: #0284c7; font-weight: 700; }
 
 .protocol-3d-stage {
   position: fixed;
