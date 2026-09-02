@@ -916,6 +916,94 @@ export function PaperApp({
             </div>
           </div>
 
+          {/* Interactive Simulation Switcher */}
+          <div className="simulation-showcase-box" aria-label="Interactive Simulation: With vs Without WebMCP">
+            <div className="simulation-showcase-header">
+              <span className="eyebrow">Interactive Live Experiment</span>
+              <h3 className="simulation-showcase-title">With WebMCP vs Without WebMCP Simulation</h3>
+              <p className="simulation-showcase-desc">
+                Select a mode below to test how an AI agent performs research with and without cross-origin truth verification:
+              </p>
+            </div>
+            <div className="simulation-cards-grid">
+              {/* Card A: Without WebMCP */}
+              <div
+                className={`simulation-mode-card ${isProtocolDisabled ? "simulation-mode-card--active-disabled" : ""}`}
+                role="button"
+                tabIndex={0}
+                onClick={() => {
+                  if (!isProtocolDisabled) protocol.disable();
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !isProtocolDisabled) protocol.disable();
+                }}
+              >
+                <div className="simulation-card-top">
+                  <span className="sim-badge sim-badge--danger mono">MODE A · WITHOUT WebMCP</span>
+                  <span className="sim-status-pill mono">{isProtocolDisabled ? "● SELECTED (Off)" : "Click to select"}</span>
+                </div>
+                <h4>Naive Single-Source AI</h4>
+                <p className="sim-desc">
+                  Agent reads only static paper text. It cannot query independent web origins.
+                </p>
+                <div className="sim-outcome sim-outcome--fail">
+                  <strong>❌ Result: False Citation (N = 40)</strong>
+                  <span>Blindly believes 40 participants were analyzed. Misses the 6 dropped sessions in the video talk.</span>
+                </div>
+                <button
+                  type="button"
+                  className="sim-run-btn sim-run-btn--danger"
+                  disabled={isExecuting}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (!isProtocolDisabled) protocol.disable();
+                    runAgentWorkflow("Without WebMCP: Search paper cohort");
+                  }}
+                >
+                  ▶ Simulate Naive AI (WebMCP Off)
+                </button>
+              </div>
+
+              {/* Card B: With WebMCP */}
+              <div
+                className={`simulation-mode-card ${!isProtocolDisabled ? "simulation-mode-card--active-enabled" : ""}`}
+                role="button"
+                tabIndex={0}
+                onClick={() => {
+                  if (isProtocolDisabled) protocol.enable();
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && isProtocolDisabled) protocol.enable();
+                }}
+              >
+                <div className="simulation-card-top">
+                  <span className="sim-badge sim-badge--success mono">MODE B · WITH WebMCP</span>
+                  <span className="sim-status-pill mono">{!isProtocolDisabled ? "● SELECTED (Active)" : "Click to select"}</span>
+                </div>
+                <h4>VEDAXI Cross-Origin Agent</h4>
+                <p className="sim-desc">
+                  Agent queries Paper + Video origins in real time using standardized WebMCP tools.
+                </p>
+                <div className="sim-outcome sim-outcome--success">
+                  <strong>✅ Result: True Cohort (40 − 6 = 34)</strong>
+                  <span>Catches video confession at 00:03:12. Derives 34, blocks citation, and engages Human Gate.</span>
+                </div>
+                <button
+                  type="button"
+                  className="sim-run-btn sim-run-btn--success"
+                  disabled={isExecuting}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (isProtocolDisabled) protocol.enable();
+                    runAgentWorkflow("Compare paper cohort with author video transcript");
+                  }}
+                >
+                  ▶ Simulate VEDAXI Agent (WebMCP On)
+                </button>
+              </div>
+            </div>
+          </div>
+
           <form
             className="copilot-form"
             onSubmit={(e) => {
@@ -1371,26 +1459,57 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
               <div className="edition-burn" aria-hidden="true" />
               <div className="edition-scene__frame" aria-hidden="true" />
               <div className="edition-scene__caption edition-scene__caption--reveal">
-                <p className="stage-chapter__index mono">Chapter 04 / Evidence</p>
-                <p className="section-kicker">Origin A · Verified Citation Passage</p>
-                <h2 id="evidence-title" tabIndex={-1}>{evidence.title}</h2>
+                <p className="stage-chapter__index mono">Chapter 04 / Evidence Dossier</p>
+                <p className="section-kicker">Multi-Origin Corroboration</p>
+                <h2 id="evidence-title" tabIndex={-1}>Cross-Origin Evidence Comparison</h2>
                 <p className="lead">
-                  This isolated evidence record represents <strong>Origin A</strong>&rsquo;s formal published claim extracted from Section 2.3 of the Methods.
-                  It asserts full 40-participant retention, serving as the baseline citation claim that directly contradicts the author&rsquo;s video statement in Chapter 03.
+                  VEDAXI independently extracts and contrasts evidence records from both the written publication (Origin A) and the live presentation talk (Origin B) to catch silent reporting contradictions.
                 </p>
-                <div className="evidence-row" id="methods-participants" tabIndex={-1}>
-                  <blockquote cite={`${evidence.sourceOrigin}/#methods-participants`}>
-                    <p>{evidence.excerpt}</p>
-                  </blockquote>
-                  <aside className="provenance" aria-label="Evidence provenance">
-                    <p className="eyebrow">Publisher evidence</p>
-                    <dl>
-                      <div><dt>Locator</dt><dd>{evidence.locator}</dd></div>
-                      <div><dt>Origin</dt><dd className="mono">{evidence.sourceOrigin}</dd></div>
-                      <div><dt>Evidence ID</dt><dd className="mono">{evidence.id}</dd></div>
-                      <div><dt>Provenance</dt><dd>{evidence.provenance}</dd></div>
-                    </dl>
-                  </aside>
+
+                <div className="evidence-dossier-grid">
+                  {/* Origin A */}
+                  <div className="evidence-card evidence-card--origin-a" id="methods-participants" tabIndex={-1}>
+                    <div className="evidence-card__badge mono">Origin A · Published Manuscript</div>
+                    <blockquote cite={`${evidence.sourceOrigin}/#methods-participants`}>
+                      <p>{evidence.excerpt}</p>
+                    </blockquote>
+                    <aside className="provenance" aria-label="Evidence provenance">
+                      <p className="eyebrow">Manuscript Provenance</p>
+                      <dl>
+                        <div><dt>Locator</dt><dd>{evidence.locator}</dd></div>
+                        <div><dt>Reported</dt><dd><strong>40 Analyzed (0 Excluded)</strong></dd></div>
+                        <div><dt>Origin</dt><dd className="mono">{evidence.sourceOrigin}</dd></div>
+                        <div><dt>Evidence ID</dt><dd className="mono">{evidence.id}</dd></div>
+                        <div><dt>Provenance</dt><dd>{evidence.provenance}</dd></div>
+                      </dl>
+                    </aside>
+                  </div>
+
+                  {/* Origin B */}
+                  <div className="evidence-card evidence-card--origin-b">
+                    <div className="evidence-card__badge evidence-card__badge--video mono">Origin B · Author Video Talk (00:03:12)</div>
+                    <blockquote cite="https://vedaxi-video-origin-teal.vercel.app/#00:03:12">
+                      <p>&ldquo;We recruited forty participants. Six sessions had calibration drift, so we removed them before modeling and did not replace them.&rdquo;</p>
+                    </blockquote>
+                    <aside className="provenance" aria-label="Origin B evidence provenance">
+                      <p className="eyebrow">Video Talk Provenance</p>
+                      <dl>
+                        <div><dt>Locator</dt><dd>Transcript Cue 00:03:12</dd></div>
+                        <div><dt>Admitted</dt><dd><strong>34 Analyzed (6 Excluded)</strong></dd></div>
+                        <div><dt>Origin</dt><dd className="mono">vedaxi-video-origin-teal.vercel.app</dd></div>
+                        <div><dt>Evidence ID</dt><dd className="mono">video.transcript.calibration-drift</dd></div>
+                      </dl>
+                    </aside>
+                  </div>
+                </div>
+
+                <div className="evidence-verdict-banner">
+                  <div className="verdict-tag mono">⚡ DISCREPANCY VERDICT: 40 ≠ 34</div>
+                  <p>
+                    <strong>Integrity Alert:</strong> The published paper silently omitted 6 excluded participants.
+                    An AI relying solely on the text would cite a false sample size of 40.
+                    VEDAXI’s WebMCP agent catches this 6-participant gap and requires human sign-off in Chapter 05 before any citation can proceed.
+                  </p>
                 </div>
               </div>
             </section>
