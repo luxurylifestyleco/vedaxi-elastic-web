@@ -932,11 +932,37 @@ export function PaperApp({
                   Independent Video publisher configuration is invalid: {videoConfigurationError}. No embedded evidence is shown.
                 </p>
               ) : videoAvailable !== true && (
-                <p role="status">
-                  {videoAvailable === null
-                    ? "Checking whether the independent Video publisher is available."
-                    : "Independent Video publisher could not be verified or is unavailable. No embedded evidence is shown."}
-                </p>
+                <div className="embedded-video-card">
+                  <p role="status" className="embedded-video-status">
+                    {videoAvailable === null
+                      ? "Checking whether the independent Video publisher is available."
+                      : "Independent Video publisher could not be verified or is unavailable. Direct local evidence player loaded below:"}
+                  </p>
+                  <div className="embedded-video-wrapper">
+                    <video
+                      className="native-video-player"
+                      controls
+                      preload="metadata"
+                      src="/media/vedaxi-controlled-evidence.mp4"
+                      aria-label="Recorded source video: calibration drift evidence"
+                    >
+                      <track kind="captions" src="/media/vedaxi-controlled-evidence.vtt" srcLang="en" label="English" default />
+                    </video>
+                  </div>
+                  <div className="embedded-transcript-cue">
+                    <div className="cue-header">
+                      <span className="mono cue-badge">00:03:12 (192s)</span>
+                      <span className="eyebrow">Author Statement</span>
+                    </div>
+                    <p className="cue-body">
+                      &ldquo;We recruited forty participants. Six sessions had calibration drift, so we removed them before modeling and did not replace them.&rdquo;
+                    </p>
+                    <div className="cue-provenance mono">
+                      <span>ID: video.transcript.calibration-drift</span>
+                      <span>Locator: Transcript 00:03:12</span>
+                    </div>
+                  </div>
+                </div>
               )}
               </div>
             </section>

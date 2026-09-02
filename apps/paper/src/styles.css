@@ -615,6 +615,70 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
 .paper-article[data-focus-state="focused"] .stage-chapter--video { grid-area: video; }
 .paper-article[data-focus-state="focused"] .stage-chapter--evidence { grid-area: evidence; }
 .paper-article[data-focus-state="focused"] .stage-chapter--decision { grid-area: decision; padding: var(--space-4); outline: 2px solid var(--color-protocol); outline-offset: var(--space-2); background: var(--color-paper); }
+.embedded-video-card {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--color-ink) 95%, transparent);
+  color: var(--color-paper);
+  border: 1px solid var(--color-rule);
+  border-radius: 8px;
+}
+.embedded-video-status {
+  margin: 0 0 var(--space-2);
+  font-size: 0.8rem;
+  color: #e8d7b6;
+  opacity: 0.85;
+}
+.embedded-video-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #000;
+}
+.native-video-player {
+  width: 100%;
+  max-height: 28rem;
+  display: block;
+  background: #000;
+}
+.embedded-transcript-cue {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+}
+.cue-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-1);
+}
+.cue-badge {
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--color-evidence);
+  color: var(--primitive-ink-950);
+  font-weight: 700;
+}
+.cue-body {
+  margin: var(--space-2) 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: #f6efe2;
+}
+.cue-provenance {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  opacity: 0.75;
+  padding-top: var(--space-1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .video-publisher { width: 100%; min-height: 34rem; margin-top: var(--space-4); border: 1px solid var(--color-ink); background: var(--color-ink); }
 .focus-decision { padding-top: var(--space-3); border-top: 3px solid var(--color-protocol); }
 .focus-derivation { font-family: var(--font-mono); font-size: clamp(1.4rem, 4vw, 2.5rem) !important; }
