@@ -797,7 +797,7 @@ export function PaperApp({
       );
       setSynthesisResult({
         mode: "augmented",
-        title: "✅ Clean Paper Verified (0% False Alarm)",
+        title: "✅ Clean Paper Verified (Zero False Alarms)",
         finding: `Verified Cohort: ${computedCohort} participants analyzed (100% Concordant).`,
         details: `INTEGRITY CONFIRMED: No unreplaced exclusions detected across independent origins. Citation is authorized without blocking.`
       });
