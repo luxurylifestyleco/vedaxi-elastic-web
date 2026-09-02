@@ -678,12 +678,39 @@ export function PaperApp({
     };
   }, [normalizedVideoOrigin]);
 
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        const saved = window.localStorage.getItem("vedaxi-theme");
+        if (saved === "light" || saved === "dark") return saved;
+        return window.matchMedia?.("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+    } catch {
+      return "dark";
+    }
+    return "dark";
+  });
+  const [isDevConsoleOpen, setIsDevConsoleOpen] = useState(false);
+  const [devConsoleTab, setDevConsoleTab] = useState<"rpc" | "schema" | "curl">("rpc");
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        window.localStorage.setItem("vedaxi-theme", next);
+      }
+    } catch {
+      // Ignore in restricted environments
+    }
+  };
+
   useEffect(() => {
     setStageRestored(false);
   }, [focus]);
 
   return (
-    <div className="edition-desk">
+    <div className="edition-desk" data-theme={theme}>
       <a className="skip-link" href="#paper-content">Skip to paper</a>
       <header className="masthead">
         <a className="identity" href="#paper-top" aria-label="VEDAXI Paper Integrity Desk home">
@@ -693,7 +720,25 @@ export function PaperApp({
           <span>VEDAXI</span>
         </a>
         <p>Research Integrity Desk · Protocol Edition</p>
-        <p className="mono">Two-Origin WebMCP Proof</p>
+        <div className="masthead__actions">
+          <button
+            type="button"
+            className="dev-console-toggle-btn"
+            onClick={() => setIsDevConsoleOpen(!isDevConsoleOpen)}
+            aria-expanded={isDevConsoleOpen}
+          >
+            {isDevConsoleOpen ? "Hide Dev Console" : "⚡ Dev Console"}
+          </button>
+          <button
+            type="button"
+            className="theme-toggle-btn"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          >
+            {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
+          </button>
+          <span className="mono">Two-Origin WebMCP Proof</span>
+        </div>
       </header>
 
       <main id="paper-content" tabIndex={-1}>
@@ -821,6 +866,141 @@ export function PaperApp({
             </button>
           </div>
         </section>
+
+        {isDevConsoleOpen && (
+          <section className="dev-console-card" aria-label="WebMCP Developer Console & Telemetry Inspector">
+            <div className="dev-console-header">
+              <div className="dev-console-title">
+                <span className="dev-console-icon">⚡</span>
+                <div>
+                  <h3>WebMCP Developer Console & Protocol Inspector</h3>
+                  <p className="mono-subtext">Live JSON-RPC 2.0 tool endpoints registered by WebMCP protocol surface</p>
+                </div>
+              </div>
+              <div className="dev-console-tabs">
+                <button
+                  type="button"
+                  className={`dev-tab-btn ${devConsoleTab === "rpc" ? "active" : ""}`}
+                  onClick={() => setDevConsoleTab("rpc")}
+                >
+                  Live JSON-RPC Stream
+                </button>
+                <button
+                  type="button"
+                  className={`dev-tab-btn ${devConsoleTab === "schema" ? "active" : ""}`}
+                  onClick={() => setDevConsoleTab("schema")}
+                >
+                  Tool Schemas
+                </button>
+                <button
+                  type="button"
+                  className={`dev-tab-btn ${devConsoleTab === "curl" ? "active" : ""}`}
+                  onClick={() => setDevConsoleTab("curl")}
+                >
+                  cURL / Agent Snippet
+                </button>
+              </div>
+            </div>
+
+            <div className="dev-console-body">
+              {devConsoleTab === "rpc" && (
+                <div className="dev-console-panel space-y-3">
+                  <div className="rpc-stream-item">
+                    <div className="rpc-badge-row">
+                      <span className="rpc-badge rpc-badge--req">JSON-RPC 2.0 REQ</span>
+                      <span className="mono text-xs opacity-75">tools/call: paper.search_evidence</span>
+                    </div>
+                    <pre className="mono-code">{JSON.stringify({
+                      jsonrpc: "2.0",
+                      id: "call-001",
+                      method: "tools/call",
+                      params: {
+                        name: "paper.search_evidence",
+                        arguments: { query: "cohort participants final analysis" }
+                      }
+                    }, null, 2)}</pre>
+                  </div>
+                  <div className="rpc-stream-item">
+                    <div className="rpc-badge-row">
+                      <span className="rpc-badge rpc-badge--res">JSON-RPC 2.0 RES (200 OK)</span>
+                      <span className="mono text-xs text-green-400">readOnlyHint: true · untrustedContentHint: true</span>
+                    </div>
+                    <pre className="mono-code">{JSON.stringify({
+                      jsonrpc: "2.0",
+                      id: "call-001",
+                      result: {
+                        id: "paper.methods.final-analysis",
+                        excerpt: "The cohort comprised forty participants (N = 40) across continuous tracking trials.",
+                        locator: "#methods-participants",
+                        readOnlyHint: true,
+                        untrustedContentHint: true
+                      }
+                    }, null, 2)}</pre>
+                  </div>
+                </div>
+              )}
+
+              {devConsoleTab === "schema" && (
+                <div className="dev-console-panel">
+                  <pre className="mono-code">{JSON.stringify({
+                    protocolRevision: "2026-03-01",
+                    capabilities: {
+                      tools: {
+                        listChanged: true
+                      }
+                    },
+                    tools: [
+                      {
+                        name: "paper.search_evidence",
+                        description: "Searches controlled paper corpus for participant cohort and methodology statements.",
+                        readOnlyHint: true,
+                        untrustedContentHint: true,
+                        parameters: {
+                          type: "object",
+                          required: ["query"],
+                          properties: {
+                            query: { type: "string", maxLength: 160 }
+                          }
+                        }
+                      },
+                      {
+                        name: "paper.propose_focus",
+                        description: "Stages cross-origin discrepancy focus for mandatory human citation confirmation.",
+                        readOnlyHint: false,
+                        untrustedContentHint: true,
+                        parameters: {
+                          type: "object",
+                          required: ["paperEvidenceId", "videoEvidenceId", "analyzedSample", "derivation"],
+                          properties: {
+                            paperEvidenceId: { type: "string", const: "paper.methods.final-analysis" },
+                            videoEvidenceId: { type: "string", const: "video.transcript.calibration-drift" },
+                            analyzedSample: { type: "integer", const: 34 },
+                            derivation: { type: "string", maxLength: 280 }
+                          }
+                        }
+                      }
+                    ]
+                  }, null, 2)}</pre>
+                </div>
+              )}
+
+              {devConsoleTab === "curl" && (
+                <div className="dev-console-panel space-y-3">
+                  <p className="mono-subtext">Invoke the live WebMCP evidence service directly from terminal or external AI orchestrators:</p>
+                  <pre className="mono-code">{`# 1. Query Paper Evidence Origin
+curl -X POST "https://vedaxi-integrity-desk.vercel.app/api/webmcp" \\
+  -H "Content-Type: application/json" \\
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"paper.search_evidence","arguments":{"query":"cohort"}}}'
+
+# 2. Query Video Transcript Origin (Cross-Origin Handshake at 00:03:12)
+curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
+  -H "Content-Type: application/json" \\
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"video.read_transcript","arguments":{"timestamp":"00:03:12"}}}'`}</pre>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
         {publisherError && (
           <div className="publisher-error" role="alert">
             <p>{publisherError}</p>
