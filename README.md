@@ -23,13 +23,14 @@ Local testing of Paper, Video, shared state, and the M2 media slot is finished. 
 
 ## Public hosting (Vercel)
 
-Drop in the live URLs when the sites are up. Do not invent them.
+The live production deployments are verified, aliased, and accessible:
 
-| Surface | URL |
-| --- | --- |
-| Vercel live URL | (to be provided) |
-| Paper origin (public) | (to be provided) |
-| Video origin (public) | (to be provided) |
+| Surface | Live Production URL | Description |
+| :--- | :--- | :--- |
+| **Research Integrity Desk** | **[https://vedaxi-integrity-desk.vercel.app](https://vedaxi-integrity-desk.vercel.app)** | Primary interactive WebMCP product, Dev Console, Light/Dark mode, and 3D Constellation |
+| **Protocol Edition Story Map** | **[https://vedaxi-protocol-edition.vercel.app](https://vedaxi-protocol-edition.vercel.app)** | Cinematic 3D GSAP pinned storytelling map & multi-origin matrix |
+| **Video Evidence Origin** | **[https://vedaxi-video-origin-teal.vercel.app](https://vedaxi-video-origin-teal.vercel.app)** | Independent Video publisher with timed evidence at `00:03:12` |
+| **Research Desk Alias** | **[https://vedaxi-research-desk.vercel.app](https://vedaxi-research-desk.vercel.app)** | Production alternative alias |
 
 Until those exist, run locally at `http://localhost:4173` (Paper) and `http://localhost:4174` (Video).
 
