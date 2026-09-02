@@ -1186,6 +1186,25 @@ curl -X POST "https://vedaxi-video-origin-teal.vercel.app/api/webmcp" \\
                   </div>
                   <figcaption>Figure 1. Participant accounting reported by this controlled paper fixture.</figcaption>
                 </figure>
+
+                <div className="study-flow-discrepancy" role="region" aria-label="Cross-Origin Discrepancy Analysis">
+                  <div className="study-flow-discrepancy__header">
+                    <span className="eyebrow">WebMCP Discrepancy Proof</span>
+                    <span className="discrepancy-badge mono">Contradiction: 40 ≠ 34</span>
+                  </div>
+                  <div className="study-flow-discrepancy__grid">
+                    <div className="study-flow-discrepancy__card">
+                      <span className="origin-label mono">Origin A · Written Paper</span>
+                      <strong className="math-statement">40 Enrolled → 0 Excluded → 40 Analyzed</strong>
+                      <p>The published text claims full 40-cohort analysis with zero reported exclusions.</p>
+                    </div>
+                    <div className="study-flow-discrepancy__card study-flow-discrepancy__card--warn">
+                      <span className="origin-label mono">Origin B · Author Video (00:03:12)</span>
+                      <strong className="math-statement">40 Enrolled − 6 Excluded = 34 Analyzed</strong>
+                      <p>Author explicitly admits: <em>&ldquo;Six sessions had calibration drift, so we removed them...&rdquo;</em></p>
+                    </div>
+                  </div>
+                </div>
               </div>
               </div>
             </section>
