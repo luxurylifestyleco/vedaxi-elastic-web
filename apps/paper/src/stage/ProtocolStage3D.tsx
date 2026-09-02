@@ -67,6 +67,9 @@ export function ProtocolStage3D({
     };
 
     const onMouseMove = (e: MouseEvent) => {
+      if (canvas) {
+        canvas.style.cursor = hoveredNode ? "pointer" : "default";
+      }
       updatePointer(e.clientX, e.clientY);
     };
 
@@ -83,7 +86,7 @@ export function ProtocolStage3D({
     // 5 Key Protocol God Nodes - Positioned to frame the Paper Hero title & masthead backdrop
     const baseGodNodes: Node3D[] = [
       {
-        x: -300,
+        x: -320,
         y: -60,
         z: 40,
         vx: 0,
@@ -91,12 +94,13 @@ export function ProtocolStage3D({
         vz: 0,
         colorDark: "#69e9f1",
         colorLight: "#0284c7",
-        size: 13,
+        size: 14,
         label: "ORIGIN A: PAPER",
-        targetId: "chapter-method",
+        subLabel: "Ch 01 · 40 Enrolled",
+        targetId: "abstract",
       },
       {
-        x: 300,
+        x: 320,
         y: 60,
         z: -20,
         vx: 0,
@@ -104,47 +108,51 @@ export function ProtocolStage3D({
         vz: 0,
         colorDark: "#f59e0b",
         colorLight: "#d97706",
-        size: 13,
-        label: "ORIGIN B: VIDEO (00:03:12)",
+        size: 14,
+        label: "ORIGIN B: VIDEO",
+        subLabel: "Ch 03 · 00:03:12 (6 Excluded)",
         targetId: "chapter-video",
       },
       {
         x: 0,
-        y: -15,
+        y: -20,
         z: 130,
         vx: 0,
         vy: 0,
         vz: 0,
         colorDark: "#c5ff73",
         colorLight: "#059669",
-        size: 16.5,
-        label: "DISCREPANCY (40 - 6 = 34)",
-        targetId: "chapter-evidence",
+        size: 18,
+        label: "DISCREPANCY (40 − 6 = 34)",
+        subLabel: "Contradiction: 40 ≠ 34",
+        targetId: "study-flow",
       },
       {
-        x: 240,
-        y: -100,
+        x: 260,
+        y: -110,
         z: 80,
         vx: 0,
         vy: 0,
         vz: 0,
-        colorDark: "#69e9f1",
+        colorDark: "#818cf8",
         colorLight: "#4f46e5",
-        size: 12,
+        size: 13,
         label: "WebMCP RUNTIME",
-        targetId: "paper-top",
+        subLabel: "Cross-Origin Verification",
+        targetId: "focus-preview-title",
       },
       {
-        x: -210,
+        x: -220,
         y: 110,
         z: 30,
         vx: 0,
         vy: 0,
         vz: 0,
-        colorDark: "#c5ff73",
+        colorDark: "#4ade80",
         colorLight: "#16a34a",
-        size: 14.5,
+        size: 15,
         label: "HUMAN GATE",
+        subLabel: "Ch 05 · Citation Lock",
         targetId: "chapter-decision",
       },
     ];
