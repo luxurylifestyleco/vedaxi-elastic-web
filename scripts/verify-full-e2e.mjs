@@ -90,7 +90,7 @@ async function run() {
   if (!synth2.includes("48 participants analyzed (100% Concordant)") || !synth2.includes("authorized without blocking")) {
     throw new Error("Synthesis assertion failed for Paper 2");
   }
-  console.log("✓ Synthesis assertion PASSED for Paper 2 (0% False Alarm)");
+  console.log("✓ Synthesis assertion PASSED for Paper 2 (Clean Paper Verified)");
 
 
   console.log("\n================================================================================");
