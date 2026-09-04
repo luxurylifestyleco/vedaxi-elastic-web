@@ -987,7 +987,6 @@ export function PaperApp({
 
   return (
     <div className="edition-desk" data-theme={theme}>
-      <ProtocolStage3D activeChapter={activeStageChapter} theme={theme} />
       <div className="page-progress" aria-hidden="true">
         <i style={{ width: `${scrollProgress}%` }} />
       </div>
@@ -1030,6 +1029,19 @@ export function PaperApp({
       </header>
 
       <main id="paper-content" tabIndex={-1}>
+        <section className="protocol-3d-section" id="protocol-3d-stage" aria-label="Interactive 3D Protocol Stage">
+          <div className="protocol-3d-section__header">
+            <span className="eyebrow">Interactive 3D Protocol Visualizer</span>
+            <h2>Two-Origin WebMCP Constellation</h2>
+            <p className="protocol-3d-section__desc">
+              Real-time spatial visualization of independent research origins (Paper & Video), WebMCP tool discovery, dynamic contradiction routing, and human-in-the-loop authorization. Click or tap any node to inspect evidence.
+            </p>
+          </div>
+          <div className="protocol-3d-stage-container">
+            <ProtocolStage3D activeChapter={activeStageChapter} theme={theme} />
+          </div>
+        </section>
+
         <PaperSearch service={service} />
 
         <section className="paper-hero" id="paper-top" aria-labelledby="paper-title">

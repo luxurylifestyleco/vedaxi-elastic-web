@@ -31,20 +31,16 @@ export function ProtocolStage3D({
     if (!ctx) return;
 
     let animationFrameId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let width = (canvas.width = canvas.parentElement?.clientWidth || canvas.clientWidth || 800);
+    let height = (canvas.height = canvas.parentElement?.clientHeight || canvas.clientHeight || 420);
 
     const onResize = () => {
       if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      width = canvas.width = canvas.parentElement?.clientWidth || canvas.clientWidth || 800;
+      height = canvas.height = canvas.parentElement?.clientHeight || canvas.clientHeight || 420;
     };
     window.addEventListener("resize", onResize);
-    let scrollY = typeof window !== "undefined" ? window.scrollY || 0 : 0;
-    const onScroll = () => {
-      scrollY = typeof window !== "undefined" ? window.scrollY || 0 : 0;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
+    onResize();
 
     const isLight = theme === "light";
     const isMobile = width < 768;
@@ -63,95 +59,99 @@ export function ProtocolStage3D({
       mouseY = clientY;
       const cx = width / 2;
       const cy = height / 2;
-      targetRotY = ((clientX - cx) / cx) * 0.45;
-      targetRotX = -((clientY - cy) / cy) * 0.35;
+      targetRotY = ((clientX - cx) / cx) * 0.55;
+      targetRotX = -((clientY - cy) / cy) * 0.45;
     };
 
     const onMouseMove = (e: MouseEvent) => {
-      if (canvas) {
-        canvas.style.cursor = hoveredNode ? "pointer" : "default";
-      }
-      updatePointer(e.clientX, e.clientY);
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.clientX - rect.left;
+      const clientY = e.clientY - rect.top;
+      canvas.style.cursor = hoveredNode ? "pointer" : "grab";
+      updatePointer(clientX, clientY);
     };
 
     const onTouchMove = (e: TouchEvent) => {
-      if (e.touches && e.touches[0]) {
-        updatePointer(e.touches[0].clientX, e.touches[0].clientY);
-      }
+      if (!canvas || !e.touches || !e.touches[0]) return;
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches[0].clientX - rect.left;
+      const clientY = e.touches[0].clientY - rect.top;
+      updatePointer(clientX, clientY);
     };
 
-    window.addEventListener("mousemove", onMouseMove, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
-    window.addEventListener("touchstart", onTouchMove, { passive: true });
+    canvas.addEventListener("mousemove", onMouseMove, { passive: true });
+    canvas.addEventListener("touchmove", onTouchMove, { passive: true });
+    canvas.addEventListener("touchstart", onTouchMove, { passive: true });
 
-    // 5 Key Protocol God Nodes - Positioned in the upper cosmic backdrop and wide perimeter
+    // 5 Key Protocol God Nodes - Full interactive 3D constellation
     const baseGodNodes: Node3D[] = [
       {
-        x: -500,
-        y: 120,
-        z: 30,
+        x: -320,
+        y: -40,
+        z: 40,
         vx: 0,
         vy: 0,
         vz: 0,
         colorDark: "#69e9f1",
         colorLight: "#0284c7",
-        size: 11,
+        size: 16,
         label: "ORIGIN A: PAPER",
         subLabel: "Ch 01 · 40 Enrolled",
         targetId: "abstract",
       },
       {
-        x: 500,
-        y: 130,
+        x: 320,
+        y: 40,
         z: -20,
         vx: 0,
         vy: 0,
         vz: 0,
         colorDark: "#f59e0b",
         colorLight: "#d97706",
-        size: 11,
+        size: 16,
         label: "ORIGIN B: VIDEO",
         subLabel: "Ch 03 · 00:03:12 (6 Excluded)",
         targetId: "chapter-video",
       },
       {
-        x: -280,
-        y: 40,
-        z: 70,
+        x: 0,
+        y: -20,
+        z: 110,
         vx: 0,
         vy: 0,
         vz: 0,
         colorDark: "#c5ff73",
         colorLight: "#059669",
-        size: 13,
+        size: 20,
         label: "DISCREPANCY (40 − 6 = 34)",
         subLabel: "Contradiction: 40 ≠ 34",
         targetId: "study-flow",
       },
       {
-        x: 280,
-        y: 40,
-        z: 60,
+        x: 250,
+        y: -90,
+        z: 70,
         vx: 0,
         vy: 0,
         vz: 0,
         colorDark: "#818cf8",
         colorLight: "#4f46e5",
-        size: 11,
+        size: 15,
         label: "WebMCP RUNTIME",
         subLabel: "Cross-Origin Verification",
         targetId: "focus-preview-title",
       },
       {
-        x: 0,
-        y: -10,
-        z: 90,
+        x: -210,
+        y: 90,
+        z: 30,
         vx: 0,
         vy: 0,
         vz: 0,
         colorDark: "#4ade80",
         colorLight: "#16a34a",
-        size: 12,
+        size: 16,
         label: "HUMAN GATE",
         subLabel: "Ch 05 · Citation Lock",
         targetId: "chapter-decision",
@@ -176,37 +176,39 @@ export function ProtocolStage3D({
     };
 
     const onClick = (e: MouseEvent) => {
-      handleTap(e.clientX, e.clientY);
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      handleTap(e.clientX - rect.left, e.clientY - rect.top);
     };
 
     const onTouchEnd = (e: TouchEvent) => {
-      if (e.changedTouches && e.changedTouches[0]) {
-        handleTap(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-      }
+      if (!canvas || !e.changedTouches || !e.changedTouches[0]) return;
+      const rect = canvas.getBoundingClientRect();
+      handleTap(e.changedTouches[0].clientX - rect.left, e.changedTouches[0].clientY - rect.top);
     };
 
-    window.addEventListener("click", onClick);
-    window.addEventListener("touchend", onTouchEnd);
+    canvas.addEventListener("click", onClick);
+    canvas.addEventListener("touchend", onTouchEnd);
 
     // Floating particle mesh
     const particles: Node3D[] = [];
-    const PARTICLE_COUNT = isMobile ? 24 : 45;
+    const PARTICLE_COUNT = isMobile ? 28 : 50;
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       particles.push({
-        x: (Math.random() - 0.5) * (isMobile ? 500 : 1100),
-        y: (Math.random() - 0.5) * (isMobile ? 350 : 600),
+        x: (Math.random() - 0.5) * (isMobile ? 500 : 900),
+        y: (Math.random() - 0.5) * (isMobile ? 320 : 500),
         z: (Math.random() - 0.5) * 400,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        vz: (Math.random() - 0.5) * 0.3,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        vz: (Math.random() - 0.5) * 0.35,
         colorDark: Math.random() > 0.4 ? "#69e9f1" : "#c5ff73",
         colorLight: Math.random() > 0.4 ? "#0284c7" : "#059669",
-        size: Math.random() * 1.8 + 1.0,
+        size: Math.random() * 2 + 1.2,
         label: "",
       });
     }
 
-    const project = (x: number, y: number, z: number, rx: number, ry: number, centerY: number) => {
+    const project = (x: number, y: number, z: number, rx: number, ry: number) => {
       const cosY = Math.cos(ry);
       const sinY = Math.sin(ry);
       const x1 = x * cosY - z * sinY;
@@ -217,11 +219,11 @@ export function ProtocolStage3D({
       const y2 = y * cosX - z1 * sinX;
       const z2 = z1 * cosX + y * sinX;
 
-      const fov = isMobile ? 550 : 800;
-      const scale = fov / (fov + z2 + (isMobile ? 300 : 400));
+      const fov = isMobile ? 550 : 700;
+      const scale = fov / (fov + z2 + (isMobile ? 260 : 340));
       return {
         px: width / 2 + x1 * scale,
-        py: centerY + y2 * scale,
+        py: height / 2 + y2 * scale,
         scale,
         z2,
       };
@@ -235,30 +237,11 @@ export function ProtocolStage3D({
 
       ctx.clearRect(0, 0, width, height);
 
-      const heroEl = document.getElementById("paper-top");
-      let centerY = height * 0.7;
-      let heroFade = 1.0;
-      if (heroEl) {
-        const rect = heroEl.getBoundingClientRect();
-        centerY = rect.top + Math.min(220, rect.height * 0.4);
-        if (rect.bottom < 50 || rect.top > height) {
-          heroFade = 0;
-        } else {
-          heroFade = Math.max(0, Math.min(1, (rect.bottom - 50) / 250));
-        }
-      }
-
-      if (heroFade <= 0.01) {
-        currentProjectedGods = [];
-        animationFrameId = requestAnimationFrame(render);
-        return;
-      }
-
       const currentRotX = rotX + Math.sin(t * 0.5) * 0.06;
       const currentRotY = rotY + Math.cos(t * 0.35) * 0.09;
 
-      const maxParticleX = isMobile ? 300 : 500;
-      const maxParticleY = isMobile ? 220 : 350;
+      const maxParticleX = isMobile ? 320 : 550;
+      const maxParticleY = isMobile ? 240 : 400;
 
       // Project ambient particles
       const projectedParticles = particles.map((p) => {
@@ -271,11 +254,11 @@ export function ProtocolStage3D({
         if (p.y > maxParticleY) p.y = -maxParticleY;
         if (p.z < -250) p.z = 250;
         if (p.z > 250) p.z = -250;
-        return { ...project(p.x, p.y, p.z, currentRotX, currentRotY, centerY), p };
+        return { ...project(p.x, p.y, p.z, currentRotX, currentRotY), p };
       });
 
       // Connect near particles
-      const maxConnectDist = isMobile ? 80 : 110;
+      const maxConnectDist = isMobile ? 80 : 115;
       for (let i = 0; i < projectedParticles.length; i++) {
         for (let j = i + 1; j < projectedParticles.length; j++) {
           const p1 = projectedParticles[i];
@@ -284,8 +267,8 @@ export function ProtocolStage3D({
           const dy = p1.py - p2.py;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < maxConnectDist) {
-            const alpha = (1 - dist / maxConnectDist) * (isLight ? 0.25 : 0.18) * Math.min(p1.scale, p2.scale);
-            ctx.globalAlpha = heroFade;
+            const alpha = (1 - dist / maxConnectDist) * (isLight ? 0.3 : 0.22) * Math.min(p1.scale, p2.scale);
+            ctx.globalAlpha = 1;
             ctx.strokeStyle = isLight
               ? "rgba(2, 132, 199, " + alpha + ")"
               : "rgba(105, 233, 241, " + alpha + ")";
@@ -302,19 +285,19 @@ export function ProtocolStage3D({
       projectedParticles.forEach(({ px, py, scale, p }) => {
         if (scale <= 0) return;
         ctx.fillStyle = isLight ? p.colorLight : p.colorDark;
-        ctx.globalAlpha = Math.max(isLight ? 0.35 : 0.15, Math.min(isLight ? 0.9 : 0.75, scale * (isLight ? 0.95 : 0.8))) * heroFade;
+        ctx.globalAlpha = Math.max(isLight ? 0.4 : 0.2, Math.min(isLight ? 0.95 : 0.85, scale * (isLight ? 0.95 : 0.85)));
         ctx.beginPath();
         ctx.arc(px, py, p.size * scale, 0, Math.PI * 2);
         ctx.fill();
       });
 
       // Project God Nodes with responsive scaling
-      const godPosScale = isMobile ? 0.65 : 0.95;
+      const godPosScale = isMobile ? 0.75 : 1.0;
       currentProjectedGods = baseGodNodes.map((g, idx) => {
         const floatY = (g.y * godPosScale) + Math.sin(t * 1.5 + idx * 1.3) * 8;
         const floatX = (g.x * godPosScale) + Math.cos(t * 1.2 + idx * 0.9) * 6;
         return {
-          ...project(floatX, floatY, g.z * godPosScale, currentRotX, currentRotY, centerY),
+          ...project(floatX, floatY, g.z * godPosScale, currentRotX, currentRotY),
           g,
         };
       });
