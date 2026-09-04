@@ -46,6 +46,7 @@ async function run() {
 
       await page.setViewportSize({ width: vp.width, height: vp.height });
       await page.goto("http://localhost:4182", { waitUntil: "networkidle" });
+      await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForSelector(".capability-drawer");
       await page.waitForSelector(".story-index-return");
 
@@ -92,6 +93,9 @@ async function run() {
       console.log(`✓ Horizontal Overflow Check: PASSED (scrollWidth === innerWidth === ${vp.width} at all scroll depths)`);
 
       // 3. Verify Floating Controls Spacing & Zero Overlap in Collapsed State
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.waitForTimeout(100);
+
       const collapsedControls = await page.evaluate(() => {
         const returnBtn = document.querySelector(".story-index-return");
         const drawer = document.querySelector(".capability-drawer");

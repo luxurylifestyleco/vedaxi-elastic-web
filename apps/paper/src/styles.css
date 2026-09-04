@@ -2201,6 +2201,11 @@ footer { display: flex; justify-content: space-between; gap: var(--space-4); pad
   border-color: rgba(2, 132, 199, 0.2);
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.04);
 }
+@media (max-width: 768px) {
+  .protocol-3d-stage-container {
+    height: 360px;
+  }
+}
 .protocol-3d-stage {
   position: absolute;
   inset: 0;

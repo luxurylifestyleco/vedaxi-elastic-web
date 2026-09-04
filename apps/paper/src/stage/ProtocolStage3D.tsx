@@ -422,12 +422,13 @@ export function ProtocolStage3D({
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", onResize);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("touchstart", onTouchMove);
-      window.removeEventListener("click", onClick);
-      window.removeEventListener("touchend", onTouchEnd);
+      if (canvas) {
+        canvas.removeEventListener("mousemove", onMouseMove);
+        canvas.removeEventListener("touchmove", onTouchMove);
+        canvas.removeEventListener("touchstart", onTouchMove);
+        canvas.removeEventListener("click", onClick);
+        canvas.removeEventListener("touchend", onTouchEnd);
+      }
     };
   }, [activeChapter, theme]);
 
